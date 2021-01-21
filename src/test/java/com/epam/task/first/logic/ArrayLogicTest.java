@@ -76,4 +76,16 @@ public class ArrayLogicTest {
         printer.print(array);
     }
 
+    //findMean
+    @Test
+    public void testFindMeanShouldFindMeanWhenNumbersApplied(){
+        //given
+        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
+
+        //when
+        double actual = arrayLogic.findMean(array);
+
+        //then
+        Assert.assertEquals(6.5, actual, 0.);
+    }
 }

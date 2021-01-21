@@ -34,5 +34,11 @@ public class ArrayLogic {
         }
     }
 
-
+    public double findMean(Array array){
+        double sum = 0;
+        for (int element : array.getElements()){
+            sum += element;
+        }
+        return sum / array.getElements().size();
+    }
 }
