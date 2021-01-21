@@ -101,4 +101,31 @@ public class ArrayLogicTest {
         //then
         Assert.assertEquals(52, actual);
     }
+
+    //findAmountOfPositiveElements
+    @Test
+    public void testFindAmountOfPositiveElementsShouldFindAmountOfPositiveElementsWhenNumbersApplied(){
+        //given
+        Array array = new Array(-1, -2, 3, -4, 12, -11, 10, -9);
+
+        //when
+        int actual = arrayLogic.findAmountOfPositiveElements(array);
+
+        //then
+        Assert.assertEquals(3, actual);
+    }
+
+    //findAmountOfNegativeElements
+    @Test
+    public void testFindAmountOfNegativeElementsShouldFindAmountOfNegativeElementsWhenNumbersApplied(){
+        //given
+        Array array = new Array(-1, -2, 3, 4, 12, -11, 10, -9);
+
+        //when
+        int actual = arrayLogic.findAmountOfNegativeElements(array);
+
+        //then
+        Assert.assertEquals(4, actual);
+    }
+
 }

@@ -50,4 +50,24 @@ public class ArrayLogic {
         return sum;
     }
 
+    public int findAmountOfPositiveElements(Array array){
+        int amount = 0;
+        for (int element : array.getElements()){
+            if (element > 0) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
+    public int findAmountOfNegativeElements(Array array){
+        int amount = 0;
+        for (int element : array.getElements()){
+            if (element < 0) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
 }
