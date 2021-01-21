@@ -1,6 +1,8 @@
 package com.epam.task.first.logic;
 
 import com.epam.task.first.entities.Array;
+import com.epam.task.first.view.ArrayPrinter;
+import com.epam.task.first.view.ConsoleArrayPrinter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +10,7 @@ public class ArrayLogicTest {
 
     private ArrayLogic arrayLogic = new ArrayLogic();
 
-    //FindMax
+    //findMax
     @Test
     public void testFindMaxShouldFindMaxWhenPositiveNumbersApplied(){
         //given
@@ -33,7 +35,7 @@ public class ArrayLogicTest {
         Assert.assertEquals(-5, actual);
     }
 
-    //FindMin
+    //findMin
     @Test
     public void testFindMinShouldFindMinWhenPositiveNumbersApplied(){
         //given
@@ -56,6 +58,22 @@ public class ArrayLogicTest {
 
         //then
         Assert.assertEquals(-18, actual);
+    }
+
+    //replacementEvenElements
+    @Test
+    public void testReplacementEvenElementsShouldReplacementEvenElementsWhenNumbersApplied(){
+        //given
+        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
+        ArrayPrinter printer = new ConsoleArrayPrinter();
+        printer.print(array);
+
+        //when
+        arrayLogic.replacementEvenElements(array);
+
+        //then
+        System.out.println();
+        printer.print(array);
     }
 
 }

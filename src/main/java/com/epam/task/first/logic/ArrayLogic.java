@@ -25,4 +25,14 @@ public class ArrayLogic {
         }
         return min;
     }
+
+    public void replacementEvenElements(Array array){
+        for (int i = 0; i < array.getElements().size(); i++){
+            if (array.getElements().get(i) % 2 == 0){
+                array.getElements().set(i, 0);
+            }
+        }
+    }
+
+
 }

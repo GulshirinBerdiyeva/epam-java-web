@@ -11,7 +11,6 @@ public class Main {
 
         ArrayPrinter printer = new ConsoleArrayPrinter();
         printer.print(array);
-
     }
 
 }
