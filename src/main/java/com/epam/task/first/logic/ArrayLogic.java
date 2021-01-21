@@ -41,4 +41,13 @@ public class ArrayLogic {
         }
         return sum / array.getElements().size();
     }
+
+    public int findSum(Array array){
+        int sum = 0;
+        for (int element : array.getElements()){
+            sum += element;
+        }
+        return sum;
+    }
+
 }

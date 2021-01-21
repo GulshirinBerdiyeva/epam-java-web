@@ -88,4 +88,17 @@ public class ArrayLogicTest {
         //then
         Assert.assertEquals(6.5, actual, 0.);
     }
+
+    //findSum
+    @Test
+    public void testFindSumShouldFindSumWhenNumbersApplied(){
+        //given
+        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
+
+        //when
+        int actual = arrayLogic.findSum(array);
+
+        //then
+        Assert.assertEquals(52, actual);
+    }
 }
