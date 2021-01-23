@@ -2,57 +2,69 @@ package com.epam.task.first.logic;
 
 import com.epam.task.first.entities.Array;
 
+import java.util.List;
+
 public class ArrayLogic {
 
     public int findMax(Array array){
-        int max = array.getElements().get(0);
+        List<Integer> elements = array.getElements();
+        int max = elements.get(0);
 
-        for (int newMax : array.getElements()){
-            if (max < newMax){
-                max = newMax;
+        for (int element : elements){
+            if (max < element){
+                max = element;
             }
         }
         return max;
     }
 
     public int findMin(Array array){
-        int min = array.getElements().get(0);
+        List<Integer> elements = array.getElements();
+        int min = elements.get(0);
 
-        for (int newMin : array.getElements()){
-            if (min > newMin){
-                min = newMin;
+        for (int element : elements){
+            if (min > element){
+                min = element;
             }
         }
         return min;
     }
 
     public void replacementEvenElements(Array array){
-        for (int i = 0; i < array.getElements().size(); i++){
-            if (array.getElements().get(i) % 2 == 0){
-                array.getElements().set(i, 0);
+        List<Integer> elements = array.getElements();
+
+        for (int i = 0; i < elements.size(); i++){
+            if (elements.get(i) % 2 == 0){
+                elements.set(i, 0);
             }
         }
     }
 
     public double findMean(Array array){
+        List<Integer> elements = array.getElements();
         double sum = 0;
-        for (int element : array.getElements()){
+
+        for (int element : elements){
             sum += element;
         }
-        return sum / array.getElements().size();
+        return sum / elements.size();
     }
 
     public int findSum(Array array){
+        List<Integer> elements = array.getElements();
         int sum = 0;
-        for (int element : array.getElements()){
+
+        for (int element : elements){
             sum += element;
         }
         return sum;
     }
 
     public int findAmountOfPositiveElements(Array array){
+        List<Integer> elements = array.getElements();
         int amount = 0;
-        for (int element : array.getElements()){
+
+        for (int element : elements){
             if (element > 0) {
                 amount++;
             }
@@ -61,8 +73,10 @@ public class ArrayLogic {
     }
 
     public int findAmountOfNegativeElements(Array array){
+        List<Integer> elements = array.getElements();
         int amount = 0;
-        for (int element : array.getElements()){
+
+        for (int element : elements){
             if (element < 0) {
                 amount++;
             }

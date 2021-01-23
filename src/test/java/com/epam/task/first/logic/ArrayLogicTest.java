@@ -86,7 +86,7 @@ public class ArrayLogicTest {
         double actual = arrayLogic.findMean(array);
 
         //then
-        Assert.assertEquals(6.5, actual, 0.);
+        Assert.assertEquals(6.5, actual, 0.001);
     }
 
     //findSum
