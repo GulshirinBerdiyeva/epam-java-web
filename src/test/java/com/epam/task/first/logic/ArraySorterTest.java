@@ -21,4 +21,5 @@ public class ArraySorterTest {
         //then
         printer.print(array);
     }
+
 }
