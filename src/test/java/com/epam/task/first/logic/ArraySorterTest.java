@@ -22,4 +22,18 @@ public class ArraySorterTest {
         printer.print(array);
     }
 
+    @Test
+    public void testBubbleSortShouldSortArrayByAscendingWhenUnsortedArrayApplied(){
+        //given
+        Array array = new Array(4, -5, 8, 0, -9, 4);
+        ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
+        printer.print(array);
+
+        //when
+        arraySorter.bubbleSort(array);
+
+        //then
+        printer.print(array);
+    }
+
 }

@@ -28,3 +28,4 @@ hs_err_pid*
 /.idea/compiler.xml
 /.idea/jarRepositories.xml
 /.idea/uiDesigner.xml
+/target/
