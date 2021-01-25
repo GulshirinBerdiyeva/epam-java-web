@@ -4,7 +4,7 @@ import com.epam.task.first.entities.Array;
 
 import java.util.List;
 
-public class ConsoleArrayPrinter implements ArrayPrinter{
+public class ConsoleArrayPrinter implements IArrayPrinter{
 
     public void print(final Array array) {
         List<Integer> elements = array.getElements();
@@ -12,6 +12,7 @@ public class ConsoleArrayPrinter implements ArrayPrinter{
         for (Integer element : elements){
             System.out.print(element + " ");
         }
+        System.out.println();
     }
 
 }
