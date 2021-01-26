@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TxtFileReader implements IFileReader {
 
-    public List<String> read(String filename) throws FileException{
+    public List<String> read(String filename) throws FileException {
         try {
             FileReader reader = new FileReader(filename);
             List<String> data = new ArrayList<String>();
@@ -22,7 +22,7 @@ public class TxtFileReader implements IFileReader {
             return data;
 
         } catch (IOException e) {
-            throw new FileException("File not found!", e.getCause());
+            throw new FileException("ERROR: File not found!", e.getCause());
         }
     };
 

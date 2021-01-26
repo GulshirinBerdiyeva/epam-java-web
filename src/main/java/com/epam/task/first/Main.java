@@ -4,6 +4,10 @@ import com.epam.task.first.entities.Array;
 import com.epam.task.first.view.IArrayPrinter;
 import com.epam.task.first.view.ConsoleArrayPrinter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {

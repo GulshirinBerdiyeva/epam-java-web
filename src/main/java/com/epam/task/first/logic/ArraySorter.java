@@ -8,6 +8,7 @@ public class ArraySorter {
 
     public void insertSort(Array array){
         List<Integer> elements = array.getElements();
+
         for (int i = 1; i < elements.size(); i++){
             int element = elements.get(i);
             int j = i - 1;
@@ -24,6 +25,7 @@ public class ArraySorter {
 
     public void bubbleSort(Array array){
         List<Integer> elements = array.getElements();
+
         for (int i = 1; i < elements.size(); i++){
             for (int j = elements.size() - 1; j >= 1; j--){
                 if (elements.get(j - 1) > elements.get(j)){
