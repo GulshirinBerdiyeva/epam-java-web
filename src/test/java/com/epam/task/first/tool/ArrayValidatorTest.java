@@ -1,4 +1,4 @@
-package com.epam.task.first.check;
+package com.epam.task.first.tool;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ public class ArrayValidatorTest {
     ArrayValidator validator = new ArrayValidator();
 
     @Test
-    public void testIsValidShouldReturnTrueWhenAppliedLineOfNumbers(){
+    public void testIsValidShouldReturnFalseWhenInvalidLineApplied(){
         //given
         String line = "2021:)";
 

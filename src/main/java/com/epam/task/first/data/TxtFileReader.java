@@ -19,11 +19,11 @@ public class TxtFileReader implements IFileReader {
             }
 
             data.add(buffer.toString());
+            reader.close();
             return data;
-
         } catch (IOException e) {
             throw new FileException("ERROR: File not found!", e.getCause());
         }
-    };
+    }
 
 }

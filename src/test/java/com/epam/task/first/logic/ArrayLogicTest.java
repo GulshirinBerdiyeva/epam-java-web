@@ -1,6 +1,6 @@
 package com.epam.task.first.logic;
 
-import com.epam.task.first.entities.Array;
+import com.epam.task.first.entity.Array;
 import com.epam.task.first.view.ConsoleArrayPrinter;
 import org.junit.Assert;
 import org.junit.Test;

@@ -9,36 +9,30 @@ public class TxtFileReaderTest {
     private TxtFileReader reader = new TxtFileReader();
 
     @Test
-    public void testReadShouldReadDataWhenAppliedFilePath(){
+    public void testReadShouldReadDataWhenValidFilePathApplied() throws FileException {
         //given
-        final String filename = "src/test/resources/input.txt";
+        final String FILE_NAME = "src/test/resources/input.txt";
 
         //when
-        List<String> data = null;
-        try {
-            data = reader.read(filename);
+        List<String> data = reader.read(FILE_NAME);
 
-            //then
-            System.out.println(data);
-        } catch (FileException e) {
-            e.printStackTrace();
-        }
+        //then
+        System.out.println(data);
     }
 
     @Test
-    public void testReadShouldThrowFileExceptionWhenAppliedInvalidFilePath(){
+    public void testReadShouldThrowFileExceptionWhenInvalidFilePathApplied() throws FileException {
         //given
-        final String filename = "src/test/resources/input";
+        final String FILE_NAME = "src/test/resources/input";
 
         //when
-        List<String> data = null;
         try {
-            data = reader.read(filename);
+            List<String> data = reader.read(FILE_NAME);
+        }
 
-            //then
-            System.out.println(data);
-        } catch (FileException e) {
-            e.printStackTrace();
+        //then
+        catch (FileException e){
+            new FileException("ERROR: File not found!", e.getCause());
         }
     }
 

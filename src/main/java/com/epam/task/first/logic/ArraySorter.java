@@ -1,6 +1,6 @@
 package com.epam.task.first.logic;
 
-import com.epam.task.first.entities.Array;
+import com.epam.task.first.entity.Array;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ public class ArraySorter {
         for (int i = 1; i < elements.size(); i++){
             int element = elements.get(i);
             int j = i - 1;
+
             while(element < elements.get(j)){
                 elements.set(j + 1, elements.get(j));
                 j--;
@@ -28,6 +29,7 @@ public class ArraySorter {
 
         for (int i = 1; i < elements.size(); i++){
             for (int j = elements.size() - 1; j >= 1; j--){
+
                 if (elements.get(j - 1) > elements.get(j)){
                     int element = elements.get(j - 1);
                     elements.set(j - 1, elements.get(j));

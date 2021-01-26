@@ -1,4 +1,4 @@
-package com.epam.task.first.check;
+package com.epam.task.first.tool;
 
 public class ArrayValidator {
 
