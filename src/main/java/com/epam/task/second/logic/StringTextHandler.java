@@ -76,13 +76,23 @@ public class StringTextHandler implements ITextHandler{
     public String removeAllWordsStartingWithConsonant(Text text, int length) {
         String[] words = split(text, "[^a-zA-z]");
         StringBuilder result = new StringBuilder();
+        String vowels = "aeiou";
 
         for (String word : words){
             int size = word.length();
-            if (size != length && size > 0){
-                result.append(word + " ");
-            }else {
-                LOGGER.info(word + " deleted");
+            if (size > 0){
+                if (size != length){
+                    result.append(word + " ");
+                }else {
+                    Character firstLetter = word.charAt(0);
+                    boolean isVowel = vowels.contains(firstLetter.toString());
+                    if (isVowel){
+                        LOGGER.info(word + " starts with vowel");
+                        result.append(word + " ");
+                    }else {
+                        LOGGER.info(word + " deleted");
+                    }
+                }
             }
         }
         return result.toString();

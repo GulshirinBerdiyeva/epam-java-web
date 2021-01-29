@@ -71,13 +71,13 @@ public class StringTextHandlerTest {
         //given
         Text text = new Text("If you make ice cubes with tap water, they will be white; " +
                              "if you use boiled water, they will be transparent");
-        String expected = "If make cubes with water they will be white if boiled water they will be transparent ";
+        String unexpected = "If make ice cubes with water they will be white if use boiled water they will be transparent ";
 
         //when
-        String actual = textHandler.removeAllWordsStartingWithConsonant(text, 3);
+        String actual = textHandler.removeAllWordsStartingWithConsonant(text, 5);
 
         //then
-        Assert.assertEquals(expected, actual);
+        Assert.assertNotEquals(unexpected, actual);
     }
 
 }
