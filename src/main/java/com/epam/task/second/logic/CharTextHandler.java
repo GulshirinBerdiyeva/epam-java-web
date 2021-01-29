@@ -4,18 +4,74 @@ import com.epam.task.second.entity.Text;
 import org.apache.log4j.Logger;
 
 public class CharTextHandler implements ITextHandler{
-
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
 
-    public String splitTextIntoWordsAndSpaces(Text text) {
-        String copyText = text.toString();
-        String regex = "[\\p{Punct}|\\d|\\s]";
-        String[] words = copyText.split(regex);
+    private boolean isValid(char symbol, char[] regex){
+        boolean valid = true;
+        for (int j = 0; j < regex.length; j++){
+            if (symbol == regex[j]){
+                valid = false;
+                break;
+            }
+        }
+        return valid;
+    }
+
+    private boolean isVowel(char symbol, char[] regex){
+        boolean vowel = false;
+        for (int j = 0; j < regex.length; j++){
+            if (symbol == regex[j]){
+                vowel = true;
+                break;
+            }
+        }
+        return vowel;
+    }
+
+    private StringBuilder splitIntoWords(Text text, char[] regex){
+        String tempCopy = text.toString();
+        char[] copyText = tempCopy.toCharArray();
         StringBuilder buffer = new StringBuilder();
+
+        for (int i = 0; i < copyText.length; i++){
+            boolean valid = isValid(copyText[i], regex);
+            if (valid){
+                buffer.append(copyText[i]);
+            }else {
+                valid = isValid(copyText[i - 1], regex);
+                if(valid){
+                    buffer.append(" ");
+                }
+            }
+        }
+        return buffer;
+    }
+
+    public String splitTextIntoWordsAndSpaces(Text text) {
+        char[] regex = {' ', ',', '.', '?', '!'};
+        StringBuilder buffer = splitIntoWords(text, regex);
+        String result = buffer.toString();
+        return result.trim();
+    }
+
+    public String removeAllWordsStartingWithConsonant(Text text, int length) {
+        char[] regex = {' ', ',', '.', '?', '!'};
+        char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+
+        String temp = splitIntoWords(text, regex).toString();
+        String[] words = temp.split(" ");
+        StringBuilder buffer = new StringBuilder();
+
         for (String word : words){
-            if (!word.isEmpty()){
+            if (word.length() == length){
+                boolean vowel = isVowel(word.charAt(0), vowels);
+                if(!vowel){
+                    LOGGER.info(word + " removed");
+                }else {
+                    buffer.append(word + " ");
+                }
+            }else {
                 buffer.append(word + " ");
-                LOGGER.info(word + " splitted");
             }
         }
         String result = buffer.toString();
@@ -34,7 +90,4 @@ public class CharTextHandler implements ITextHandler{
         return null;
     }
 
-    public String removeAllWordsStartingWithConsonant(Text text, int length) {
-        return null;
-    }
 }

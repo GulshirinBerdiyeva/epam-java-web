@@ -4,7 +4,6 @@ import com.epam.task.second.entity.Text;
 import org.apache.log4j.Logger;
 
 public class StringTextHandler implements ITextHandler{
-
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
 
     private String[] splitIntoWords(Text text, String regex){
@@ -65,7 +64,7 @@ public class StringTextHandler implements ITextHandler{
     }
 
     public String splitTextIntoWordsAndSpaces(Text text) {
-        String[] words = splitIntoWords(text, "[^a-zA-z]");
+        String[] words = splitIntoWords(text, "\\W");
         StringBuilder buffer = new StringBuilder();
 
         for (String word : words){

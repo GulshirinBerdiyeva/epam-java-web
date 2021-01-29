@@ -3,12 +3,10 @@ package com.epam.task.second.logic;
 import com.epam.task.second.entity.Text;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegExTextHandler implements ITextHandler{
-
     private final static Logger LOGGER = Logger.getLogger(RegExTextHandler.class);
 
     private Matcher splitIntoWords(Text text) {
@@ -31,16 +29,19 @@ public class RegExTextHandler implements ITextHandler{
     }
 
     public String replaceAllWords(Text text, int length, String replacement) {
-        String wordsTemp = splitTextIntoWordsAndSpaces(text);
-        String[]  words = wordsTemp.split("\\s");
+        Matcher matcher = splitIntoWords(text);
         StringBuilder buffer = new StringBuilder();
 
-        for (String word : words){
-            if (word.length() == length){
-                buffer.append(replacement + " ");
-                LOGGER.info(word + " replaced");
-            }else {
-                buffer.append(word + " ");
+        while (matcher.find()){
+            String temp = matcher.group();
+            temp = temp.trim();
+            if (!temp.isEmpty()){
+                if (temp.length() == length){
+                    buffer.append(replacement + " ");
+                    LOGGER.info(temp + " replaced");
+                }else {
+                    buffer.append(temp + " ");
+                }
             }
         }
         String result = buffer.toString();
@@ -54,8 +55,6 @@ public class RegExTextHandler implements ITextHandler{
     public String changeAll_PA_to_PO(Text text) {
         return null;
     }
-
-
 
     public String removeAllWordsStartingWithConsonant(Text text, int length) {
         return null;
