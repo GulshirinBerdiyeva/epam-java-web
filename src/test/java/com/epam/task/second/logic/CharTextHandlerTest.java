@@ -11,7 +11,7 @@ public class CharTextHandlerTest {
     public void testSplitTextIntoWordsAndSpacesShouldSplitTextIntoWordsAndSpacesWhenTextApplied(){
         //given
         Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
-        String expected = "Music in the soul can be heard by the universe ";
+        String expected = "Music in the soul can be heard by the universe";
 
         //when
         String actual = textHandler.splitTextIntoWordsAndSpaces(text);

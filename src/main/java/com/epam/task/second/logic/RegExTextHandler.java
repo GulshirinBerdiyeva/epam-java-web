@@ -14,15 +14,16 @@ public class RegExTextHandler implements ITextHandler{
         String copyText = text.toString();
         Pattern pattern = Pattern.compile("[^\\p{Punct}&&\\D]");
         Matcher matcher = pattern.matcher(copyText);
-        StringBuilder result = new StringBuilder();
+        StringBuilder buffer = new StringBuilder();
 
         while (matcher.find()){
             int start = matcher.start();
             int end = matcher.end();
-            result.append(copyText.substring(start, end));
+            buffer.append(copyText.substring(start, end));
         }
         LOGGER.info("Text splitted successfully by regex");
-        return result.toString();
+        String result = buffer.toString();
+        return result.trim();
     }
 
     public String replaceLetter(Text text, int index, char newChar) {

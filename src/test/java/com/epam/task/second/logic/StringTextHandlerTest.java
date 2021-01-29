@@ -11,7 +11,7 @@ public class StringTextHandlerTest {
     public void testReplaceLetterShouldReplaceLetterInEachWordIfItsLengthInRangeOfIndexWhenTextApplied(){
         //given
         Text text = new Text("North Korea and Cuba are the only1 places you can't buy Coca-Cola.");
-        String expected = "Nort$ Kore$ only$ plac$s ";
+        String expected = "Nort$ Kore$ only$ plac$s";
         char symbol = '$';
 
         //when
@@ -25,7 +25,7 @@ public class StringTextHandlerTest {
     public void testChangeAll_PA_to_POShouldChangeAll_PA_to_POWhenTextApplied(){
         //given
         Text text = new Text("apple respansibility impartant pop oppartunity");
-        String expected = "responsibility important opportunity ";
+        String expected = "responsibility important opportunity";
 
         //when
         String actual = textHandler.changeAll_PA_to_PO(text);
@@ -57,7 +57,7 @@ public class StringTextHandlerTest {
     public void testSplitTextIntoWordsAndSpacesShouldSplitTextIntoWordsAndSpacesWhenTextApplied(){
         //given
         Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
-        String expected = "Music in the soul can be heard by the universe ";
+        String expected = "Music in the soul can be heard by the universe";
 
         //when
         String actual = textHandler.splitTextIntoWordsAndSpaces(text);
@@ -71,14 +71,13 @@ public class StringTextHandlerTest {
         //given
         Text text = new Text("If you make ice cubes with tap water, they will be white; " +
                              "if you use boiled water, they will be transparent");
-        String unexpected = "If make ice cubes with water they will be white" +
-                            " if use boiled water they will be transparent ";
+        String expected = "If you make ice with tap they will be if you use boiled they will be transparent";
 
         //when
         String actual = textHandler.removeAllWordsStartingWithConsonant(text, 5);
 
         //then
-        Assert.assertNotEquals(unexpected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 }

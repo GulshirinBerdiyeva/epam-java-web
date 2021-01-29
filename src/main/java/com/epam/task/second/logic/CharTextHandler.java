@@ -11,14 +11,15 @@ public class CharTextHandler implements ITextHandler{
         String copyText = text.toString();
         String regex = "[\\p{Punct}|\\d|\\s]";
         String[] words = copyText.split(regex);
-        StringBuilder result = new StringBuilder();
+        StringBuilder buffer = new StringBuilder();
         for (String word : words){
-            if (word.length() > 0){
-                result.append(word + " ");
+            if (!word.isEmpty()){
+                buffer.append(word + " ");
                 LOGGER.info(word + " splitted");
             }
         }
-        return result.toString();
+        String result = buffer.toString();
+        return result.trim();
     }
 
     public String replaceAllWords(Text text, int length, String replacement) {
