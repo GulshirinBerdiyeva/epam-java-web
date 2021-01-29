@@ -7,7 +7,7 @@ public class CharTextHandler implements ITextHandler{
 
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
 
-    public String splitTextOnlyIntoWordsAndSpaces(Text text) {
+    public String splitTextIntoWordsAndSpaces(Text text) {
         String copyText = text.toString();
         String regex = "[\\p{Punct}|\\d|\\s]";
         String[] words = copyText.split(regex);

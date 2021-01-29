@@ -10,8 +10,8 @@ public class StringTextHandlerTest {
     @Test
     public void testReplaceLetterShouldReplaceLetterInEachWordIfItsLengthInRangeOfIndexWhenTextApplied(){
         //given
-        Text text = new Text("That's interesting: North Korea and Cuba are the only1 places you can't buy Coca-Cola.");
-        String expected = "inte$esting Nort$ Kore$ only$ plac$s ";
+        Text text = new Text("North Korea and Cuba are the only1 places you can't buy Coca-Cola.");
+        String expected = "Nort$ Kore$ only$ plac$s ";
         char symbol = '$';
 
         //when
@@ -35,7 +35,7 @@ public class StringTextHandlerTest {
     }
 
     @Test
-    public void testChangeReplaceAllWordsShouldChangeReplaceAllWordsWhenTextApplied(){
+    public void testReplaceAllWordsShouldReplaceAllWordsWhichLengthEqualsToGivenLengthWhenTextApplied(){
         //given
         Text text = new Text("Today, there are more than 700 different programming languages. " +
                             "Therefore, it is recommend for kids and programming beginners alike" +
@@ -54,13 +54,13 @@ public class StringTextHandlerTest {
     }
 
     @Test
-    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoWordsAndSpacesWhenTextApplied(){
+    public void testSplitTextIntoWordsAndSpacesShouldSplitTextIntoWordsAndSpacesWhenTextApplied(){
         //given
         Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
         String expected = "Music in the soul can be heard by the universe ";
 
         //when
-        String actual = textHandler.splitTextOnlyIntoWordsAndSpaces(text);
+        String actual = textHandler.splitTextIntoWordsAndSpaces(text);
 
         //then
         Assert.assertEquals(expected, actual);

@@ -8,13 +8,13 @@ public class CharTextHandlerTest {
     private CharTextHandler textHandler = new CharTextHandler();
 
     @Test
-    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoWordsAndSpacesWhenTextApplied(){
+    public void testSplitTextIntoWordsAndSpacesShouldSplitTextIntoWordsAndSpacesWhenTextApplied(){
         //given
         Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
         String expected = "Music in the soul can be heard by the universe ";
 
         //when
-        String actual = textHandler.splitTextOnlyIntoWordsAndSpaces(text);
+        String actual = textHandler.splitTextIntoWordsAndSpaces(text);
 
         //then
         Assert.assertEquals(expected, actual);

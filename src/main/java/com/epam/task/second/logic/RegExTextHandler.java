@@ -10,7 +10,7 @@ public class RegExTextHandler implements ITextHandler{
 
     private final static Logger LOGGER = Logger.getLogger(RegExTextHandler.class);
 
-    public String splitTextOnlyIntoWordsAndSpaces(Text text) {
+    public String splitTextIntoWordsAndSpaces(Text text) {
         String copyText = text.toString();
         Pattern pattern = Pattern.compile("[^\\p{Punct}&&\\D]");
         Matcher matcher = pattern.matcher(copyText);
@@ -21,6 +21,7 @@ public class RegExTextHandler implements ITextHandler{
             int end = matcher.end();
             result.append(copyText.substring(start, end));
         }
+        LOGGER.info("Text splitted successfully by regex");
         return result.toString();
     }
 

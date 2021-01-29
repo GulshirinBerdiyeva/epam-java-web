@@ -61,7 +61,7 @@ public class StringTextHandler implements ITextHandler{
         return result.toString();
     }
 
-    public String splitTextOnlyIntoWordsAndSpaces(Text text) {
+    public String splitTextIntoWordsAndSpaces(Text text) {
         String[] words = split(text, "[^a-zA-z]");
         StringBuilder result = new StringBuilder();
 
