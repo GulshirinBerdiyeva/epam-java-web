@@ -5,47 +5,19 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class RegExTextHandlerTest {
-    RegExTextHandler textHandler = new RegExTextHandler();
+    private RegExTextHandler textHandler = new RegExTextHandler();
 
     @Test
-    public void testReplaceLetterShouldThrowExceptionWhenEmptyTextApplied(){
+    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoWordsAndSpacesWhenTextApplied(){
         //given
-        Text text = new Text("inte$esting+* . Nort$ Kore$ on%ly$ plac$s");
-        char symbol = '$';
+        Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
+        String expected = "Music in the soul can be heard by the universe";
 
         //when
-        String actual = textHandler.replaceLetter(text, 4, symbol);
+        String actual = textHandler.splitTextOnlyIntoLettersAndSpaces(text);
 
         //then
-        Assert.assertEquals(null, actual);
-    }
-
-    @Test
-    public void testChangeAll_PA_to_POShouldChangeAll_PA_to_POWhenTextApplied(){
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    public void testChangeReplaceAllWordsShouldReplaceAllWordsWhenTextApplied(){
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoLettersAndSpacesWhenTextApplied(){
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    public void testRemoveAllWordsStartingWithConsonantShouldRemoveAllWordsStartingWithConsonantWhenTextApplied(){
-        //given
-        //when
-        //then
+        Assert.assertEquals(expected, actual);
     }
 
 }

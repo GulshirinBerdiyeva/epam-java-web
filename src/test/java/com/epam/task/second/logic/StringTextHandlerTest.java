@@ -54,7 +54,7 @@ public class StringTextHandlerTest {
     }
 
     @Test
-    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoLettersAndSpacesWhenTextApplied(){
+    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoWordsAndSpacesWhenTextApplied(){
         //given
         Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
         String expected = "Music in the soul can be heard by the universe ";
@@ -71,7 +71,8 @@ public class StringTextHandlerTest {
         //given
         Text text = new Text("If you make ice cubes with tap water, they will be white; " +
                              "if you use boiled water, they will be transparent");
-        String unexpected = "If make ice cubes with water they will be white if use boiled water they will be transparent ";
+        String unexpected = "If make ice cubes with water they will be white" +
+                            " if use boiled water they will be transparent ";
 
         //when
         String actual = textHandler.removeAllWordsStartingWithConsonant(text, 5);

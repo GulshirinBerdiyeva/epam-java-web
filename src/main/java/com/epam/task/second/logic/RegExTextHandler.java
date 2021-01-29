@@ -1,22 +1,30 @@
 package com.epam.task.second.logic;
 
 import com.epam.task.second.entity.Text;
+import org.apache.log4j.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegExTextHandler implements ITextHandler{
-    public String replaceLetter(Text text, int index, char newChar) {
+
+    private final static Logger LOGGER = Logger.getLogger(RegExTextHandler.class);
+
+    public String splitTextOnlyIntoLettersAndSpaces(Text text) {
         String copyText = text.toString();
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Pattern pattern = Pattern.compile("[^\\p{Punct}&&\\D]");
         Matcher matcher = pattern.matcher(copyText);
-        int begin = 0,
-            end = 0;
-        do {
-            begin=5;
-        }while (matcher.find());
+        StringBuilder result = new StringBuilder();
 
+        while (matcher.find()){
+            int start = matcher.start();
+            int end = matcher.end();
+            result.append(copyText.substring(start, end));
+        }
+        return result.toString();
+    }
 
+    public String replaceLetter(Text text, int index, char newChar) {
         return null;
     }
 
@@ -25,10 +33,6 @@ public class RegExTextHandler implements ITextHandler{
     }
 
     public String replaceAllWords(Text text, int length, String replacement) {
-        return null;
-    }
-
-    public String splitTextOnlyIntoLettersAndSpaces(Text text) {
         return null;
     }
 
