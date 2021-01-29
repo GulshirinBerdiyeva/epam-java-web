@@ -6,6 +6,6 @@ public interface ITextHandler {
     String replaceLetter(Text text, int index, char newChar);
     String changeAll_PA_to_PO(Text text);
     String replaceAllWords(Text text, int length, String replacement);
-    String splitTextOnlyIntoLettersAndSpaces(Text text);
+    String splitTextOnlyIntoWordsAndSpaces(Text text);
     String removeAllWordsStartingWithConsonant(Text text, int length);
 }

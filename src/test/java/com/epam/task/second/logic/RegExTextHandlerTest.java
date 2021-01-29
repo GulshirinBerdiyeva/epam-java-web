@@ -14,7 +14,7 @@ public class RegExTextHandlerTest {
         String expected = "Music in the soul can be heard by the universe";
 
         //when
-        String actual = textHandler.splitTextOnlyIntoLettersAndSpaces(text);
+        String actual = textHandler.splitTextOnlyIntoWordsAndSpaces(text);
 
         //then
         Assert.assertEquals(expected, actual);

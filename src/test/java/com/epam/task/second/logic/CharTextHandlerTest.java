@@ -1,42 +1,23 @@
 package com.epam.task.second.logic;
 
+import com.epam.task.second.entity.Text;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class CharTextHandlerTest {
+    private CharTextHandler textHandler = new CharTextHandler();
 
     @Test
-    public void testReplaceLetterShouldReplaceLetterWhenTextApplied(){
+    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoWordsAndSpacesWhenTextApplied(){
         //given
-        //when
-        //then
-    }
+        Text text = new Text("8Music in the @soul can be? heard by+ the #universe0");
+        String expected = "Music in the soul can be heard by the universe ";
 
-    @Test
-    public void testChangeAll_PA_to_POShouldChangeAll_PA_to_POWhenTextApplied(){
-        //given
         //when
-        //then
-    }
+        String actual = textHandler.splitTextOnlyIntoWordsAndSpaces(text);
 
-    @Test
-    public void testReplaceAllWordsShouldReplaceAllWordsWhenTextApplied(){
-        //given
-        //when
         //then
-    }
-
-    @Test
-    public void testSplitTextOnlyIntoLettersAndSpacesShouldSplitTextOnlyIntoLettersAndSpacesWhenTextApplied(){
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    public void testRemoveAllWordsStartingWithConsonantShouldRemoveAllWordsStartingWithConsonantWhenTextApplied(){
-        //given
-        //when
-        //then
+        Assert.assertEquals(expected, actual);
     }
 
 }
