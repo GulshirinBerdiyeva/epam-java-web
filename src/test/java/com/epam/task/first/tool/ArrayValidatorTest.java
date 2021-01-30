@@ -4,19 +4,16 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ArrayValidatorTest {
-
-    ArrayValidator validator = new ArrayValidator();
+    private ArrayValidator validator = new ArrayValidator();
+    private final String line = "2021:)";
 
     @Test
     public void testIsValidShouldReturnFalseWhenInvalidLineApplied(){
-        //given
-        String line = "2021:)";
-
         //when
         boolean actual = validator.isValid(line);
 
         //then
-        Assert.assertEquals(false, actual);
+        Assert.assertFalse(actual);
     }
 
 }

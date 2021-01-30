@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayCreator {
-
     private TxtFileReader reader;
     private ArrayValidator validator;
     private ArrayParser parser;

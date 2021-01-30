@@ -16,7 +16,6 @@ public class ArrayParser {
                 array.add(Integer.parseInt(stringArray[i]));
             }
         }
-
         Array result = new Array(array);
         return result;
     }

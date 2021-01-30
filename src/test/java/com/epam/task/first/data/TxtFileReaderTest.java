@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.util.List;
 
 public class TxtFileReaderTest {
-
     private TxtFileReader reader = new TxtFileReader();
 
     @Test
@@ -21,7 +20,7 @@ public class TxtFileReaderTest {
     }
 
     @Test
-    public void testReadShouldThrowFileExceptionWhenInvalidFilePathApplied() throws FileException {
+    public void testReadShouldThrowFileExceptionWhenInvalidFilePathApplied() {
         //given
         final String FILE_NAME = "src/test/resources/input";
 

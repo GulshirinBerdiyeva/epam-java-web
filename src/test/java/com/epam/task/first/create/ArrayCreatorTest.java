@@ -27,7 +27,6 @@ public class ArrayCreatorTest {
         final Array VALID_ARRAY2 = new Array(7, 77, 7);
         final Array VALID_ARRAY3 = new Array(01, 02, 03);
 
-        //when
         TxtFileReader reader = Mockito.mock(TxtFileReader.class);
         when(reader.read(anyString())).thenReturn(DATA);
 
@@ -37,6 +36,7 @@ public class ArrayCreatorTest {
         ArrayParser parser = Mockito.mock(ArrayParser.class);
         when(parser.parse(anyString())).thenReturn(VALID_ARRAY, VALID_ARRAY2, VALID_ARRAY3);
 
+        //when
         ArrayCreator creator = new ArrayCreator(reader, validator, parser);
         List<Array> arrayList = creator.create(anyString());
 

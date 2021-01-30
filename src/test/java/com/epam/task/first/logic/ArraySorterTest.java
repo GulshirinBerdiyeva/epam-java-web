@@ -2,38 +2,35 @@ package com.epam.task.first.logic;
 
 import com.epam.task.first.entity.Array;
 import com.epam.task.first.view.ConsoleArrayPrinter;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ArraySorterTest {
-
     private ArraySorter arraySorter = new ArraySorter();
+    private ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
+    private final Array actualArray = new Array(4, -5, 8, 0, -9, 4);
+    private final Array expectedArray = new Array(-9, -5, 0, 4, 4, 8 );
 
     @Test
     public void testInsertSortShouldSortArrayByAscendingWhenUnsortedArrayApplied(){
-        //given
-        Array array = new Array(4, -5, 8, 0, -9, 4);
-        ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
-        printer.print(array);
-
         //when
-        arraySorter.insertSort(array);
+        arraySorter.insertSort(actualArray);
 
         //then
-        printer.print(array);
+        Assert.assertEquals(expectedArray, actualArray);
+        printer.print(expectedArray);
+        printer.print(actualArray);
     }
 
     @Test
     public void testBubbleSortShouldSortArrayByAscendingWhenUnsortedArrayApplied(){
-        //given
-        Array array = new Array(4, -5, 8, 0, -9, 4);
-        ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
-        printer.print(array);
-
         //when
-        arraySorter.bubbleSort(array);
+        arraySorter.bubbleSort(actualArray);
 
         //then
-        printer.print(array);
+        Assert.assertEquals(expectedArray, actualArray);
+        printer.print(expectedArray);
+        printer.print(actualArray);
     }
 
 }

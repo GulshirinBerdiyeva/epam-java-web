@@ -17,7 +17,6 @@ public class TxtFileReader implements IFileReader {
                 char symbol = (char) reader.read();
                 buffer.append(symbol);
             }
-
             data.add(buffer.toString());
             reader.close();
             return data;

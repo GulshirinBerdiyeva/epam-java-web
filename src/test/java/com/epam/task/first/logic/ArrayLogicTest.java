@@ -6,15 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ArrayLogicTest {
-
     private ArrayLogic arrayLogic = new ArrayLogic();
+    private final Array array = new Array(7, 18, -1, 2, 6, -4, -5);
 
     //findMax
     @Test
-    public void testFindMaxShouldFindMaxWhenPositiveNumbersApplied(){
-        //given
-        Array array = new Array(7, 18, 5);
-
+    public void testFindMaxShouldFindMaxWhenNumbersApplied(){
         //when
         int actual = arrayLogic.findMax(array);
 
@@ -22,48 +19,20 @@ public class ArrayLogicTest {
         Assert.assertEquals(18, actual);
     }
 
+    //findMin
     @Test
-    public void testFindMaxShouldFindMaxWhenNegativeNumbersApplied(){
-        //given
-        Array array = new Array(-7, -18, -5);
-
+    public void testFindMinShouldFindMinWhenNumbersApplied(){
         //when
-        int actual = arrayLogic.findMax(array);
+        int actual = arrayLogic.findMin(array);
 
         //then
         Assert.assertEquals(-5, actual);
-    }
-
-    //findMin
-    @Test
-    public void testFindMinShouldFindMinWhenPositiveNumbersApplied(){
-        //given
-        Array array = new Array(7, 18, 5);
-
-        //when
-        int actual = arrayLogic.findMin(array);
-
-        //then
-        Assert.assertEquals(5, actual);
-    }
-
-    @Test
-    public void testFindMinShouldFindMinWhenDifferentSignedNumbersApplied(){
-        //given
-        Array array = new Array(7, -18, 5, -7, 2);
-
-        //when
-        int actual = arrayLogic.findMin(array);
-
-        //then
-        Assert.assertEquals(-18, actual);
     }
 
     //replacementEvenElements
     @Test
     public void testReplacementEvenElementsShouldReplacementEvenElementsWhenNumbersApplied(){
         //given
-        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
         ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
         printer.print(array);
 
@@ -77,53 +46,41 @@ public class ArrayLogicTest {
     //findMean
     @Test
     public void testFindMeanShouldFindMeanWhenNumbersApplied(){
-        //given
-        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
-
         //when
         double actual = arrayLogic.findMean(array);
 
         //then
-        Assert.assertEquals(6.5, actual, 0.001);
+        Assert.assertEquals(3.286, actual, 0.001);
     }
 
     //findSum
     @Test
     public void testFindSumShouldFindSumWhenNumbersApplied(){
-        //given
-        Array array = new Array(1, 2, 3, 4, 12, 11, 10, 9);
-
         //when
         int actual = arrayLogic.findSum(array);
 
         //then
-        Assert.assertEquals(52, actual);
+        Assert.assertEquals(23, actual);
     }
 
     //findAmountOfPositiveElements
     @Test
     public void testFindAmountOfPositiveElementsShouldFindAmountOfPositiveElementsWhenNumbersApplied(){
-        //given
-        Array array = new Array(-1, -2, 3, -4, 12, -11, 10, -9);
-
         //when
         int actual = arrayLogic.findAmountOfPositiveElements(array);
 
         //then
-        Assert.assertEquals(3, actual);
+        Assert.assertEquals(4, actual);
     }
 
     //findAmountOfNegativeElements
     @Test
     public void testFindAmountOfNegativeElementsShouldFindAmountOfNegativeElementsWhenNumbersApplied(){
-        //given
-        Array array = new Array(-1, -2, 3, 4, 12, -11, 10, -9);
-
         //when
         int actual = arrayLogic.findAmountOfNegativeElements(array);
 
         //then
-        Assert.assertEquals(4, actual);
+        Assert.assertEquals(3, actual);
     }
 
 }
