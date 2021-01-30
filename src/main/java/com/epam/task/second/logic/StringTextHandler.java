@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 public class StringTextHandler implements ITextHandler{
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
+    private final String vowels = "aeiou";
 
     private String[] splitIntoWords(Text text, String regex){
         String copyText = text.toString();
@@ -79,7 +80,6 @@ public class StringTextHandler implements ITextHandler{
     public String removeAllWordsStartingWithConsonant(Text text, int length) {
         String[] words = splitIntoWords(text, "[^a-zA-z]");
         StringBuilder buffer = new StringBuilder();
-        String vowels = "aeiou";
 
         for (String word : words){
             int wordLength = word.length();

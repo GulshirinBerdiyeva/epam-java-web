@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 
 public class CharTextHandler implements ITextHandler{
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
+    private final char[] regex = {' ', ',', '.', '?', '!'};
+    private final char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 
     private boolean isValid(char symbol, char[] regex){
         boolean valid = true;
@@ -48,16 +50,12 @@ public class CharTextHandler implements ITextHandler{
     }
 
     public String splitTextIntoWordsAndSpaces(Text text) {
-        char[] regex = {' ', ',', '.', '?', '!'};
         StringBuilder buffer = splitIntoWords(text, regex);
         String result = buffer.toString();
         return result.trim();
     }
 
     public String removeAllWordsStartingWithConsonant(Text text, int length) {
-        char[] regex = {' ', ',', '.', '?', '!'};
-        char[] vowels = {'a', 'e', 'i', 'o', 'u'};
-
         String temp = splitIntoWords(text, regex).toString();
         String[] words = temp.split(" ");
         StringBuilder buffer = new StringBuilder();
