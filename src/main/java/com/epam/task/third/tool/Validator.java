@@ -1,9 +1,12 @@
 package com.epam.task.third.tool;
 
+import org.apache.log4j.Logger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
+    private final static Logger LOGGER = Logger.getLogger(Validator.class);
     private final String DOUBLE_NUMBER = " *-?\\d+\\.\\d+ *";
     private final int NUMBERS_AMOUNT = 4;
 
@@ -19,8 +22,11 @@ public class Validator {
         }
 
         boolean isCorrectAmount = amount == NUMBERS_AMOUNT;
-        boolean isValid = line.contentEquals(buffer);
-        return isCorrectAmount && isValid;
+        boolean isEqual = line.contentEquals(buffer);
+        boolean isValid = isCorrectAmount && isEqual;
+
+        LOGGER.info("Line validation = " + isValid);
+        return isValid;
     }
 
 }

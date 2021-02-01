@@ -1,11 +1,14 @@
 package com.epam.task.third.tool;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private final static Logger LOGGER = Logger.getLogger(Parser.class);
     private final String DOUBLE_NUMBER = "-?\\d+\\.\\d+";
 
     public List<Double> parse(String line){
@@ -18,6 +21,7 @@ public class Parser {
             double number = Double.parseDouble(temp);
             result.add(number);
         }
+        LOGGER.info("Line parsed");
         return result;
     }
 

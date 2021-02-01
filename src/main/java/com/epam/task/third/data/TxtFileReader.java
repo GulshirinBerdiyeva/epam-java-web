@@ -21,7 +21,6 @@ public class TxtFileReader {
                 String line = reader.readLine();
                 data.add(line);
             }
-            LOGGER.info("Data read successfully");
             return data;
 
         } catch (IOException e) {
