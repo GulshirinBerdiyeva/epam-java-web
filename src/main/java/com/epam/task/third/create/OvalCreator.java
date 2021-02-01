@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OvalCreator {
@@ -32,13 +33,12 @@ public class OvalCreator {
         for (String line : lines){
             boolean valid = validator.isValid(line);
             if (valid){
-                List<Double> points = new ArrayList<Double>();
-                points = parser.parse(line);
+                List<Double> points = parser.parse(line);
                 Point point1 = new Point(points.get(0), points.get(1));
                 Point point2 = new Point(points.get(2), points.get(3));
+
                 Oval oval = new Oval(point1, point2);
                 ovals.add(oval);
-                points.clear();
             }
         }
         return ovals;
