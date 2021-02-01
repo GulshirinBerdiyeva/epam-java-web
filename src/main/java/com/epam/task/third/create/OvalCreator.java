@@ -6,18 +6,15 @@ import com.epam.task.third.entity.Oval;
 import com.epam.task.third.entity.Point;
 import com.epam.task.third.tool.Parser;
 import com.epam.task.third.tool.Validator;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OvalCreator {
-    private final static Logger LOGGER = Logger.getLogger(OvalCreator.class);
-    private TxtFileReader reader = new TxtFileReader();
-    private Validator validator = new Validator();
-    private Parser parser = new Parser();
+    private TxtFileReader reader;
+    private Validator validator;
+    private Parser parser;
 
     public OvalCreator(TxtFileReader reader, Validator validator, Parser parser) {
         this.reader = reader;
@@ -28,7 +25,6 @@ public class OvalCreator {
     public List<Oval> create(String fileName) throws DataException, IOException {
         List<Oval> ovals = new ArrayList<Oval>();
         List<String> lines = reader.read(fileName);
-        LOGGER.info("Data read successfully");
 
         for (String line : lines){
             boolean valid = validator.isValid(line);
@@ -43,4 +39,5 @@ public class OvalCreator {
         }
         return ovals;
     }
+
 }

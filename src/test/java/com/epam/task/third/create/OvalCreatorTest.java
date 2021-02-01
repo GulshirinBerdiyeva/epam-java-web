@@ -26,6 +26,7 @@ public class OvalCreatorTest {
                           INVALID = false;
     private final List<Double> LIST1 = Arrays.asList(5.0, 3.0, 0.0, 5.0);
     private final List<Double> LIST2 = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
+
     private final Point POINT1 = new Point(5.0, 3.0);
     private final Point POINT2 = new Point(0.0, 5.0);
     private final Point POINT3 = new Point(-2.0, -1.0);
