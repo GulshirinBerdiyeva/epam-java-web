@@ -38,6 +38,7 @@ public class OvalCreator {
                 Point point2 = new Point(points.get(2), points.get(3));
                 Oval oval = new Oval(point1, point2);
                 ovals.add(oval);
+                points.clear();
             }
         }
         return ovals;
