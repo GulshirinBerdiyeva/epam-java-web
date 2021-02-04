@@ -20,20 +20,21 @@ import static org.mockito.Mockito.when;
 public class OvalCreatorTest {
     private final List<String> DATA = Arrays.asList("5.0 3.0 0.0 5.0",
                                                     "2.n -4 4",
+                                                    "-6.0 2.5 3.0 4.0",
                                                     "6 2.5 0 ?",
-                                                    "-2.0 -1.0 1.0 -5.0");
-    private final Boolean VALID = true,
-                          INVALID = false;
+                                                    "-2.0 -1.0 1.0 -5.0",
+                                                    "7.0 3.5 -2.0 5.5");
+    private final Boolean VALID = true;
+    private final Boolean INVALID = false;
     private final List<Double> LIST1 = Arrays.asList(5.0, 3.0, 0.0, 5.0);
-    private final List<Double> LIST2 = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
+    private final List<Double> LIST2 = Arrays.asList(-6.0, 2.5, 3.0, 4.0);
+    private final List<Double> LIST3 = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
+    private final List<Double> LIST4 = Arrays.asList(7.0, 3.5, -2.0, 5.5);
 
-    private final Point POINT1 = new Point(5.0, 3.0);
-    private final Point POINT2 = new Point(0.0, 5.0);
-    private final Point POINT3 = new Point(-2.0, -1.0);
-    private final Point POINT4 = new Point(1.0, -5.0);
-    private final Oval OVAL1 = new Oval(POINT1, POINT2);
-    private final Oval OVAL2 = new Oval(POINT3, POINT4);
-    private final List<Oval> EXPECTED = Arrays.asList(OVAL1, OVAL2);
+    private final List<Oval> EXPECTED = Arrays.asList(new Oval(42, new Point(5.0, 3.0), new Point(0.0, 5.0)),
+                                                      new Oval(42, new Point(-6.0, 2.5), new Point(3.0, 4.0)),
+                                                      new Oval(42, new Point(-2.0, -1.0), new Point(1.0, -5.0)),
+                                                      new Oval(42, new Point(7.0, 3.5), new Point(-2.0, 5.5)));
 
     @Test
     public void testCreateShouldCreateValidOvalsWhenFileNameApplied() throws DataException, IOException {
@@ -41,10 +42,10 @@ public class OvalCreatorTest {
         when(reader.read(anyString())).thenReturn(DATA);
 
         Validator validator = Mockito.mock(Validator.class);
-        when(validator.isValid(anyString())).thenReturn(VALID, INVALID, INVALID, VALID);
+        when(validator.isValid(anyString())).thenReturn(VALID,INVALID, VALID, INVALID, VALID, VALID);
 
         Parser parser = Mockito.mock(Parser.class);
-        when(parser.parse(anyString())).thenReturn(LIST1, LIST2);
+        when(parser.parse(anyString())).thenReturn(LIST1, LIST2, LIST3, LIST4);
 
         OvalCreator creator = new OvalCreator(reader, validator, parser);
         List<Oval> actual = creator.create(anyString());
