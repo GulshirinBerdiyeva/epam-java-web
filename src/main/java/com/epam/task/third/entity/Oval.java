@@ -1,7 +1,7 @@
 package com.epam.task.third.entity;
 
 public class Oval {
-    private Integer ID;
+    private final Integer ID;
     private Point point1,
                   point2;
 
