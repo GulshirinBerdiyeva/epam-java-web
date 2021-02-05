@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OvalObserver implements IObserver {
-    private final static OvalObserver INSTANCE = new OvalObserver();
+    private final static OvalObserver OBSERVER = new OvalObserver();
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
     private Map<Integer, OvalParameters> parametersMap = new HashMap<Integer, OvalParameters>();
 
     private OvalObserver(){}
 
-    public static OvalObserver getINSTANCE() {
-        return INSTANCE;
+    public static OvalObserver getOBSERVER() {
+        return OBSERVER;
     }
 
     public Map<Integer, OvalParameters> getParametersMap() {
