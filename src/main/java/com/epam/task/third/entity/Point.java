@@ -1,8 +1,8 @@
 package com.epam.task.third.entity;
 
 public class Point {
-    private double x,
-                   y;
+    private double x;
+    private double y;
 
     public Point(double x, double y) {
         this.x = x;

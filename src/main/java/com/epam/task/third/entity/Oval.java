@@ -2,8 +2,8 @@ package com.epam.task.third.entity;
 
 public class Oval {
     private final Integer ID;
-    private Point point1,
-                  point2;
+    private Point point1;
+    private Point point2;
 
     public Oval(Integer ID, Point point1, Point point2) {
         this.ID = ID;
