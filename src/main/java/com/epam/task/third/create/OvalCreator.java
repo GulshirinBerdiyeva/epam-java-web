@@ -33,7 +33,8 @@ public class OvalCreator {
                 Point point1 = new Point(points.get(0), points.get(1));
                 Point point2 = new Point(points.get(2), points.get(3));
 
-                Oval oval = new Oval(point1, point2);
+                int id = (int) (Math.random() * 42);
+                Oval oval = new Oval(id, point1, point2);
                 ovals.add(oval);
             }
         }
