@@ -23,7 +23,7 @@
         <attribute name="id" use="required">
             <simpleType>
                 <restriction base="ID">
-                    <pattern value="[md]\d{1,2}" ></pattern>
+                    <pattern value="[mdr]\d{1,2}" ></pattern>
                 </restriction>
             </simpleType>
         </attribute>
@@ -76,11 +76,21 @@
             </extension>
         </complexContent>
     </complexType>
+    
+    
+    <complexType name="Rosacea">
+        <complexContent>
+            <extension base="tns:Dicot">
+                <attribute name="thorns" type="boolean" use="optional" default="false"></attribute>
+            </extension>
+        </complexContent>
+    </complexType>
 
 
     <element name="plant" type="tns:AbstractPlant" abstract="true"></element>
     <element name="monocot" type="tns:Monocot" substitutionGroup="tns:plant" ></element>
     <element name="dicot" type="tns:Dicot" substitutionGroup="tns:plant"></element>
+    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant"></element>
 
 
 </schema>

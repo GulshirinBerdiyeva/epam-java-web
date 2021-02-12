@@ -63,5 +63,35 @@
         </growing-tips>
         <cotyledons>2</cotyledons>
     </dicot>
+    
+    <rosacea id="r01" thorns="true">
+        <name>rose-hip</name>
+        <visual-parameters>
+            <length>150</length>
+            <floralParts>5</floralParts>
+            <color>purple</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>18</temperature>
+            <watering>1000</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>2</cotyledons>
+    </rosacea>
+
+    <rosacea id="r02">
+        <name>neillia</name>
+        <visual-parameters>
+            <length>80</length>
+            <floralParts>5</floralParts>
+            <color>light-pink</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>15</temperature>
+            <watering>700</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>2</cotyledons>
+    </rosacea>
 
 </orangery>
