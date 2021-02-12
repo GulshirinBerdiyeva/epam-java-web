@@ -1,12 +1,14 @@
 package com.epam.task.fourth.entity;
 
 public abstract class AbstractPlant {
-    private final int ID;
+    private String ID;
     private String name;
     private PlantVisualParameters visualParameters;
     private PlantGrowingTips growingTips;
 
-    public AbstractPlant(int ID, String name,
+    public AbstractPlant() {}
+
+    public AbstractPlant(String ID, String name,
                          PlantVisualParameters visualParameters,
                          PlantGrowingTips growingTips) {
         this.ID = ID;
@@ -15,20 +17,36 @@ public abstract class AbstractPlant {
         this.growingTips = growingTips;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public PlantVisualParameters getVisualParameters() {
         return visualParameters;
     }
 
+    public void setVisualParameters(PlantVisualParameters visualParameters) {
+        this.visualParameters = visualParameters;
+    }
+
     public PlantGrowingTips getGrowingTips() {
         return growingTips;
+    }
+
+    public void setGrowingTips(PlantGrowingTips growingTips) {
+        this.growingTips = growingTips;
     }
 
     @Override
@@ -38,7 +56,7 @@ public abstract class AbstractPlant {
 
         AbstractPlant that = (AbstractPlant) o;
 
-        if (ID != that.ID) return false;
+        if (ID != null ? !ID.equals(that.ID) : that.ID != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (visualParameters != null ? !visualParameters.equals(that.visualParameters) : that.visualParameters != null)
             return false;
@@ -47,7 +65,7 @@ public abstract class AbstractPlant {
 
     @Override
     public int hashCode() {
-        int result = ID;
+        int result = ID != null ? ID.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (visualParameters != null ? visualParameters.hashCode() : 0);
         result = 31 * result + (growingTips != null ? growingTips.hashCode() : 0);
@@ -57,7 +75,7 @@ public abstract class AbstractPlant {
     @Override
     public String toString() {
         return "AbstractPlant{" +
-                "ID=" + ID +
+                "ID='" + ID + '\'' +
                 ", name='" + name + '\'' +
                 ", visualParameters=" + visualParameters +
                 ", growingTips=" + growingTips +

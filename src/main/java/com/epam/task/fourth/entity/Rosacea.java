@@ -3,7 +3,9 @@ package com.epam.task.fourth.entity;
 public class Rosacea extends Dicot{
     private boolean thorns;
 
-    public Rosacea(int ID, String name,
+    public Rosacea() {}
+
+    public Rosacea(String ID, String name,
                    PlantVisualParameters visualParameters,
                    PlantGrowingTips growingTips, boolean thorns) {
         super(ID, name, visualParameters, growingTips);

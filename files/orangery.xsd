@@ -33,11 +33,11 @@
     <complexType name="PlantVisualParameters">
         <sequence>
             <element name="length" type="positiveInteger" />
-            <element name="floralParts" type="positiveInteger" />
+            <element name="floral-parts" type="positiveInteger" />
             <element name="color" type="string" />
         </sequence>
     </complexType>
-    
+
 
     <complexType name="PlantGrowingTips">
         <sequence>
