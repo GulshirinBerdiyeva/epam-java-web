@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<orangery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.example.com/orangery"
+          xsi:schemaLocation="http://www.example.com/orangery orangery.xsd">
+
+
+    <monocot id="m01">
+        <name>lily</name>
+        <visual-parameters>
+            <length>40</length>
+            <floralParts>3</floralParts>
+            <color>pink</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>10</temperature>
+            <watering>100</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>1</cotyledons>
+    </monocot>
+
+    <monocot id="m02">
+        <name>tulip</name>
+        <visual-parameters>
+            <length>20</length>
+            <floralParts>1</floralParts>
+            <color>yellow</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>15</temperature>
+            <watering>200</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>1</cotyledons>
+    </monocot>
+
+    <dicot id="d01">
+        <name>rose</name>
+        <visual-parameters>
+            <length>50</length>
+            <floralParts>5</floralParts>
+            <color>red</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>10</temperature>
+            <watering>100</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>2</cotyledons>
+    </dicot>
+
+    <dicot id="d02">
+        <name>spirea</name>
+        <visual-parameters>
+            <length>150</length>
+            <floralParts>7</floralParts>
+            <color>white</color>
+        </visual-parameters>
+        <growing-tips>
+            <temperature>13</temperature>
+            <watering>500</watering>
+            <lighting>light_loving</lighting>
+        </growing-tips>
+        <cotyledons>2</cotyledons>
+    </dicot>
+
+</orangery>

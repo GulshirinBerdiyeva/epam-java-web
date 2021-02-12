@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/orangery"
+        xmlns:tns="http://www.example.com/orangery"
+        elementFormDefault="qualified">
+
+
+    <element name="orangery">
+            <complexType>
+                    <sequence>
+                        <element ref="tns:plant" minOccurs="2" maxOccurs="unbounded" />
+                    </sequence>
+            </complexType>
+    </element>
+
+
+    <complexType name="AbstractPlant">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="visual-parameters" type="tns:PlantVisualParameters" />
+            <element name="growing-tips" type="tns:PlantGrowingTips" />
+        </sequence>
+        <attribute name="id" use="required">
+            <simpleType>
+                <restriction base="ID">
+                    <pattern value="[md]\d{1,2}" ></pattern>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+
+
+    <complexType name="PlantVisualParameters">
+        <sequence>
+            <element name="length" type="positiveInteger" />
+            <element name="floralParts" type="positiveInteger" />
+            <element name="color" type="string" />
+        </sequence>
+    </complexType>
+    
+
+    <complexType name="PlantGrowingTips">
+        <sequence>
+            <element name="temperature" type="positiveInteger" />
+            <element name="watering" type="positiveInteger" />
+            <element name="lighting" type="tns:ELighting" />
+        </sequence>
+    </complexType>
+
+
+    <simpleType name="ELighting">
+        <restriction base="string">
+            <enumeration value="light_loving" ></enumeration>
+            <enumeration value="non_light_loving" ></enumeration>
+        </restriction>
+    </simpleType>
+
+
+    <complexType name="Monocot">
+        <complexContent>
+            <extension base="tns:AbstractPlant">
+                <sequence>
+                    <element name="cotyledons" fixed="1" ></element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <complexType name="Dicot">
+        <complexContent>
+            <extension base="tns:AbstractPlant">
+                <sequence>
+                    <element name="cotyledons" fixed="2" ></element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <element name="plant" type="tns:AbstractPlant" abstract="true"></element>
+    <element name="monocot" type="tns:Monocot" substitutionGroup="tns:plant" ></element>
+    <element name="dicot" type="tns:Dicot" substitutionGroup="tns:plant"></element>
+
+
+</schema>
