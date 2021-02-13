@@ -8,18 +8,18 @@ import org.junit.Test;
 public class ArrayParserTest {
     private ArrayParser parser = new ArrayParser();
     private ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
-    private final String line = "01  42 4 056  18 -9";
-    private final Array expectedArray = new Array(1, 42, 4, 56, 18, -9);
+    private final String LINE = "01  42 4 056  18 -9";
+    private final Array EXPECTED_ARRAY = new Array(1, 42, 4, 56, 18, -9);
 
     @Test
     public void testParseShouldParseStringToArrayWhenValidLineApplied(){
         //when
-        Array actualArray = parser.parse(line);
+        Array actualArray = parser.parse(LINE);
 
         //then
-        Assert.assertEquals(expectedArray, actualArray);
+        Assert.assertEquals(EXPECTED_ARRAY, actualArray);
         printer.print(actualArray);
-        printer.print(expectedArray);
+        printer.print(EXPECTED_ARRAY);
     }
 
 }

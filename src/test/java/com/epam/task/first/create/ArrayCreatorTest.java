@@ -16,17 +16,15 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class ArrayCreatorTest {
+    private final List<String> DATA = Arrays.asList("12 45 78", "23v 56s 89!", "7 77 7", "01 02 03");
+    private final Boolean VALID = true;
+    private final Boolean INVALID = false;
+    private final Array VALID_ARRAY = new Array(12, 45, 78);
+    private final Array VALID_ARRAY2 = new Array(7, 77, 7);
+    private final Array VALID_ARRAY3 = new Array(01, 02, 03);
 
     @Test
     public void testCreateShouldCreateListArrayWhenDataApplied() throws FileException {
-        //given
-        final List<String> DATA = Arrays.asList("12 45 78", "23v 56s 89!", "7 77 7", "01 02 03");
-        final Boolean VALID = true,
-                      INVALID = false;
-        final Array VALID_ARRAY = new Array(12, 45, 78);
-        final Array VALID_ARRAY2 = new Array(7, 77, 7);
-        final Array VALID_ARRAY3 = new Array(01, 02, 03);
-
         TxtFileReader reader = Mockito.mock(TxtFileReader.class);
         when(reader.read(anyString())).thenReturn(DATA);
 

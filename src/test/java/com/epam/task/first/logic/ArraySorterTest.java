@@ -8,29 +8,29 @@ import org.junit.Test;
 public class ArraySorterTest {
     private ArraySorter arraySorter = new ArraySorter();
     private ConsoleArrayPrinter printer = new ConsoleArrayPrinter();
-    private final Array actualArray = new Array(4, -5, 8, 0, -9, 4);
-    private final Array expectedArray = new Array(-9, -5, 0, 4, 4, 8 );
+    private final Array ACTUAL_ARRAY = new Array(4, -5, 8, 0, -9, 4);
+    private final Array EXPECTED_ARRAY = new Array(-9, -5, 0, 4, 4, 8 );
 
     @Test
     public void testInsertSortShouldSortArrayByAscendingWhenUnsortedArrayApplied(){
         //when
-        arraySorter.insertSort(actualArray);
+        arraySorter.insertSort(ACTUAL_ARRAY);
 
         //then
-        Assert.assertEquals(expectedArray, actualArray);
-        printer.print(expectedArray);
-        printer.print(actualArray);
+        Assert.assertEquals(EXPECTED_ARRAY, ACTUAL_ARRAY);
+        printer.print(EXPECTED_ARRAY);
+        printer.print(ACTUAL_ARRAY);
     }
 
     @Test
     public void testBubbleSortShouldSortArrayByAscendingWhenUnsortedArrayApplied(){
         //when
-        arraySorter.bubbleSort(actualArray);
+        arraySorter.bubbleSort(ACTUAL_ARRAY);
 
         //then
-        Assert.assertEquals(expectedArray, actualArray);
-        printer.print(expectedArray);
-        printer.print(actualArray);
+        Assert.assertEquals(EXPECTED_ARRAY, ACTUAL_ARRAY);
+        printer.print(EXPECTED_ARRAY);
+        printer.print(ACTUAL_ARRAY);
     }
 
 }

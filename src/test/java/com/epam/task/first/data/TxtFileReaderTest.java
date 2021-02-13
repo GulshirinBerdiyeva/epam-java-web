@@ -6,14 +6,15 @@ import java.util.List;
 
 public class TxtFileReaderTest {
     private TxtFileReader reader = new TxtFileReader();
+    private final String VALID_FILE = "src/test/resources/input.txt";
+    private final String INVALID_FILE = "src/test/resources/input";
+
+
 
     @Test
     public void testReadShouldReadDataWhenValidFilePathApplied() throws FileException {
-        //given
-        final String FILE_NAME = "src/test/resources/input.txt";
-
         //when
-        List<String> data = reader.read(FILE_NAME);
+        List<String> data = reader.read(VALID_FILE);
 
         //then
         System.out.println(data);
@@ -21,17 +22,14 @@ public class TxtFileReaderTest {
 
     @Test
     public void testReadShouldThrowFileExceptionWhenInvalidFilePathApplied() {
-        //given
-        final String FILE_NAME = "src/test/resources/input";
-
         //when
         try {
-            List<String> data = reader.read(FILE_NAME);
+            List<String> data = reader.read(INVALID_FILE);
         }
 
         //then
         catch (FileException e){
-            new FileException("ERROR: File not found!", e.getCause());
+            new FileException("ERROR: File not found!", e);
         }
     }
 

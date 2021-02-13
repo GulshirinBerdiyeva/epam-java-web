@@ -20,8 +20,12 @@ public class Array {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Array)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Array)) {
+            return false;
+        }
 
         Array array = (Array) o;
 
@@ -31,6 +35,13 @@ public class Array {
     @Override
     public int hashCode() {
         return ELEMENTS != null ? ELEMENTS.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Array{" +
+                "ELEMENTS=" + ELEMENTS +
+                '}';
     }
 
 }

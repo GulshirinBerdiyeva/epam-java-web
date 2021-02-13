@@ -5,12 +5,12 @@ import org.junit.Test;
 
 public class ArrayValidatorTest {
     private ArrayValidator validator = new ArrayValidator();
-    private final String line = "2021:)";
+    private final String LINE = "2021:)";
 
     @Test
     public void testIsValidShouldReturnFalseWhenInvalidLineApplied(){
         //when
-        boolean actual = validator.isValid(line);
+        boolean actual = validator.isValid(LINE);
 
         //then
         Assert.assertFalse(actual);
