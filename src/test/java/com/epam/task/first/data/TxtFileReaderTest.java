@@ -9,8 +9,6 @@ public class TxtFileReaderTest {
     private final String VALID_FILE = "src/test/resources/input.txt";
     private final String INVALID_FILE = "src/test/resources/input";
 
-
-
     @Test
     public void testReadShouldReadDataWhenValidFilePathApplied() throws FileException {
         //when
