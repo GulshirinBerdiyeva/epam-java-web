@@ -1,14 +1,15 @@
 package com.epam.task.fourth.entity;
 
-public class Rosacea extends Dicot{
+public class Rosacea extends Plant{
     private boolean thorns;
 
-    public Rosacea() {}
+    public Rosacea() {
+        super();
+        this.thorns = false;
+    }
 
-    public Rosacea(String ID, String name,
-                   PlantVisualParameters visualParameters,
-                   PlantGrowingTips growingTips, boolean thorns) {
-        super(ID, name, visualParameters, growingTips);
+    public Rosacea(String id, String name, PlantVisualParameters visualParameters, boolean thorns) {
+        super(id, name, visualParameters);
         this.thorns = thorns;
     }
 
@@ -22,9 +23,15 @@ public class Rosacea extends Dicot{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Rosacea)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Rosacea)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         Rosacea rosacea = (Rosacea) o;
 

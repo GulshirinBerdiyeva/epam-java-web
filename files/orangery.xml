@@ -4,65 +4,23 @@
           xsi:schemaLocation="http://www.example.com/orangery orangery.xsd">
 
 
-    <monocot id="m01">
-        <name>lily</name>
-        <visual-parameters>
-            <length>40</length>
-            <floral-parts>3</floral-parts>
-            <color>pink</color>
-        </visual-parameters>
-        <growing-tips>
-            <temperature>10</temperature>
-            <watering>100</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>1</cotyledons>
-    </monocot>
-
-    <monocot id="m02">
+    <plant id="p01">
         <name>tulip</name>
         <visual-parameters>
             <length>20</length>
             <floral-parts>1</floral-parts>
             <color>yellow</color>
         </visual-parameters>
-        <growing-tips>
-            <temperature>15</temperature>
-            <watering>200</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>1</cotyledons>
-    </monocot>
+    </plant>
 
-    <dicot id="d01">
+    <plant id="p02">
         <name>chamomile</name>
         <visual-parameters>
             <length>15</length>
             <floral-parts>7</floral-parts>
             <color>blue</color>
         </visual-parameters>
-        <growing-tips>
-            <temperature>20</temperature>
-            <watering>500</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>2</cotyledons>
-    </dicot>
-
-    <dicot id="d02">
-        <name>dahlia</name>
-        <visual-parameters>
-            <length>50</length>
-            <floral-parts>5</floral-parts>
-            <color>orange</color>
-        </visual-parameters>
-        <growing-tips>
-            <temperature>22</temperature>
-            <watering>500</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>2</cotyledons>
-    </dicot>
+    </plant>
 
     <rosacea id="r01" thorns="true">
         <name>rose</name>
@@ -71,12 +29,6 @@
             <floral-parts>5</floral-parts>
             <color>red</color>
         </visual-parameters>
-        <growing-tips>
-            <temperature>10</temperature>
-            <watering>100</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>2</cotyledons>
     </rosacea>
 
     <rosacea id="r02">
@@ -86,12 +38,6 @@
             <floral-parts>7</floral-parts>
             <color>white</color>
         </visual-parameters>
-        <growing-tips>
-            <temperature>13</temperature>
-            <watering>500</watering>
-            <lighting>light_loving</lighting>
-        </growing-tips>
-        <cotyledons>2</cotyledons>
     </rosacea>
 
 </orangery>

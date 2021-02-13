@@ -15,10 +15,14 @@ import java.io.IOException;
 
 public class XmlValidator {
     private final static Logger LOGGER = LogManager.getLogger(XmlValidator.class);
+    private final String xsdFile;
 
-    public Boolean isValid(String xsdFile, String xmlFile){
-        String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-        SchemaFactory factory = SchemaFactory.newInstance(language);
+    public XmlValidator(String xsdFile) {
+        this.xsdFile = xsdFile;
+    }
+
+    public Boolean isValid(String xmlFile) {
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         File schemaLocation = new File(xsdFile);
 
         try {
@@ -29,11 +33,8 @@ public class XmlValidator {
 
             LOGGER.info(xmlFile + " is valid");
             return true;
-        } catch (SAXException e) {
-            LOGGER.error("validation " + xmlFile + " isn't valid because " + e.getMessage());
-            return false;
-        } catch (IOException e) {
-            LOGGER.error(xmlFile + " isn't valid because " + e.getMessage());
+        } catch (SAXException | IOException e) {
+            LOGGER.error(e.getMessage(), e);
             return false;
         }
     }

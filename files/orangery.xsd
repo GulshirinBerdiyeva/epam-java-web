@@ -14,16 +14,15 @@
     </element>
 
 
-    <complexType name="AbstractPlant">
+    <complexType name="Plant">
         <sequence>
             <element name="name" type="string" />
             <element name="visual-parameters" type="tns:PlantVisualParameters" />
-            <element name="growing-tips" type="tns:PlantGrowingTips" />
         </sequence>
         <attribute name="id" use="required">
             <simpleType>
                 <restriction base="ID">
-                    <pattern value="[mdr]\d{1,2}" ></pattern>
+                    <pattern value="[pr]\d{1,2}" ></pattern>
                 </restriction>
             </simpleType>
         </attribute>
@@ -38,58 +37,17 @@
         </sequence>
     </complexType>
 
-
-    <complexType name="PlantGrowingTips">
-        <sequence>
-            <element name="temperature" type="positiveInteger" />
-            <element name="watering" type="positiveInteger" />
-            <element name="lighting" type="tns:ELighting" />
-        </sequence>
-    </complexType>
-
-
-    <simpleType name="ELighting">
-        <restriction base="string">
-            <enumeration value="light_loving" ></enumeration>
-            <enumeration value="non_light_loving" ></enumeration>
-        </restriction>
-    </simpleType>
-
-
-    <complexType name="Monocot">
-        <complexContent>
-            <extension base="tns:AbstractPlant">
-                <sequence>
-                    <element name="cotyledons" fixed="1" ></element>
-                </sequence>
-            </extension>
-        </complexContent>
-    </complexType>
-
-
-    <complexType name="Dicot">
-        <complexContent>
-            <extension base="tns:AbstractPlant">
-                <sequence>
-                    <element name="cotyledons" fixed="2" ></element>
-                </sequence>
-            </extension>
-        </complexContent>
-    </complexType>
-    
     
     <complexType name="Rosacea">
         <complexContent>
-            <extension base="tns:Dicot">
+            <extension base="tns:Plant">
                 <attribute name="thorns" type="boolean" use="optional" default="false"></attribute>
             </extension>
         </complexContent>
     </complexType>
 
 
-    <element name="plant" type="tns:AbstractPlant" abstract="true"></element>
-    <element name="monocot" type="tns:Monocot" substitutionGroup="tns:plant" ></element>
-    <element name="dicot" type="tns:Dicot" substitutionGroup="tns:plant"></element>
+    <element name="plant" type="tns:Plant" ></element>
     <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant"></element>
 
 

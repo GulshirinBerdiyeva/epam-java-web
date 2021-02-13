@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class XmlValidatorTest {
-    private XmlValidator validator = new XmlValidator();
     private final String XSD_FILE = "files/orangery.xsd";
+    private XmlValidator validator = new XmlValidator(XSD_FILE);
     private final String VALID_XML_FILE = "files/orangery.xml";
     private final String INVALID_XML_FILE = "files/orange.xml";
 
@@ -15,7 +15,7 @@ public class XmlValidatorTest {
         boolean expected = true;
 
         //when
-        boolean actual = validator.isValid(XSD_FILE, VALID_XML_FILE);
+        boolean actual = validator.isValid(VALID_XML_FILE);
 
         //then
         Assert.assertEquals(expected, actual);
@@ -27,7 +27,7 @@ public class XmlValidatorTest {
         boolean expected = false;
 
         //when
-        boolean actual = validator.isValid(XSD_FILE, INVALID_XML_FILE);
+        boolean actual = validator.isValid(INVALID_XML_FILE);
 
         //then
         Assert.assertEquals(expected, actual);
