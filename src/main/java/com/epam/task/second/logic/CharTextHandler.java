@@ -4,9 +4,9 @@ import com.epam.task.second.entity.Text;
 import org.apache.log4j.Logger;
 
 public class CharTextHandler implements ITextHandler{
-    private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
-    private final char[] regex = {' ', ',', '.', '?', '!'};
-    private final char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+    private final static Logger LOGGER = Logger.getLogger(CharTextHandler.class);
+    private final char[] REGEX = {' ', ',', '.', '?', '!'};
+    private final char[] VOWELS = {'a', 'e', 'i', 'o', 'u'};
 
     private boolean isValid(char symbol, char[] regex){
         boolean valid = true;
@@ -50,19 +50,19 @@ public class CharTextHandler implements ITextHandler{
     }
 
     public String splitTextIntoWordsAndSpaces(Text text) {
-        StringBuilder buffer = splitIntoWords(text, regex);
+        StringBuilder buffer = splitIntoWords(text, REGEX);
         String result = buffer.toString();
         return result.trim();
     }
 
     public String removeAllWordsStartingWithConsonant(Text text, int length) {
-        String temp = splitIntoWords(text, regex).toString();
+        String temp = splitIntoWords(text, REGEX).toString();
         String[] words = temp.split(" ");
         StringBuilder buffer = new StringBuilder();
 
         for (String word : words){
             if (word.length() == length){
-                boolean vowel = isVowel(word.charAt(0), vowels);
+                boolean vowel = isVowel(word.charAt(0), VOWELS);
                 if(!vowel){
                     LOGGER.info(word + " removed");
                 }else {

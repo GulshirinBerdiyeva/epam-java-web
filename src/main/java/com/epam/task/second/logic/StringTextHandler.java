@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 
 public class StringTextHandler implements ITextHandler{
     private final static Logger LOGGER = Logger.getLogger(StringTextHandler.class);
-    private final String vowels = "aeiou";
+    private final String VOWELS = "aeiou";
 
     private String[] splitIntoWords(Text text, String regex){
         String copyText = text.toString();
@@ -86,7 +86,7 @@ public class StringTextHandler implements ITextHandler{
             boolean isEqual = wordLength == length;
             if (!word.isEmpty() && isEqual){
                 Character firstLetter = word.charAt(0);
-                boolean isVowel = vowels.contains(firstLetter.toString());
+                boolean isVowel = VOWELS.contains(firstLetter.toString());
                 if (isVowel){
                     LOGGER.info(word + " starts with vowel");
                     buffer.append(word + " ");
