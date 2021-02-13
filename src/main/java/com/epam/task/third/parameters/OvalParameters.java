@@ -19,12 +19,18 @@ public class OvalParameters {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OvalParameters)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof OvalParameters)) {
+            return false;
+        }
 
         OvalParameters that = (OvalParameters) o;
 
-        if (Double.compare(that.perimeter, perimeter) != 0) return false;
+        if (Double.compare(that.perimeter, perimeter) != 0) {
+            return false;
+        }
         return Double.compare(that.area, area) == 0;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class ParserTest {
     protected Parser parser = new Parser();
     private final String VALID_LINE = "-2.0 -1.0 1.0 -5.0";
-    private final List<Double> expected = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
+    private final List<Double> EXPECTED = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
 
     @Test
     public void testParseShouldParseLineToDoubleListWhenValidLineApplied(){
@@ -17,7 +17,7 @@ public class ParserTest {
         List<Double> actual = parser.parse(VALID_LINE);
 
         //then
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(EXPECTED, actual);
     }
 
 }

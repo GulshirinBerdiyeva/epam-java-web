@@ -33,13 +33,21 @@ public class Oval {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Oval)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Oval)) {
+            return false;
+        }
 
         Oval oval = (Oval) o;
 
-        if (ID != null ? !ID.equals(oval.ID) : oval.ID != null) return false;
-        if (point1 != null ? !point1.equals(oval.point1) : oval.point1 != null) return false;
+        if (ID != null ? !ID.equals(oval.ID) : oval.ID != null) {
+            return false;
+        }
+        if (point1 != null ? !point1.equals(oval.point1) : oval.point1 != null) {
+            return false;
+        }
         return point2 != null ? point2.equals(oval.point2) : oval.point2 == null;
     }
 
