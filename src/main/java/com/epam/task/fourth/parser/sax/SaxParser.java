@@ -26,7 +26,7 @@ public class SaxParser implements XmlParser {
             reader.parse(xmlFile);
             plants = plantHandler.getPlants();
 
-            LOGGER.info(xmlFile + " parsed");
+            LOGGER.info(xmlFile + " parsed by SaxParser");
             return plants;
         } catch (SAXException | IOException e) {
             throw new XmlException(e.getMessage(), e);

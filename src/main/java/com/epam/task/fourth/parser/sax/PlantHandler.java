@@ -3,6 +3,7 @@ package com.epam.task.fourth.parser.sax;
 import com.epam.task.fourth.entity.Plant;
 import com.epam.task.fourth.entity.PlantVisualParameters;
 import com.epam.task.fourth.entity.Rosacea;
+import com.epam.task.fourth.parser.XmlTagsConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
@@ -12,20 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlantHandler extends DefaultHandler {
+public class PlantHandler extends DefaultHandler implements XmlTagsConstants {
     private final static Logger LOGGER = LogManager.getLogger(PlantHandler.class);
     private List<Plant> plants = new ArrayList<>();
     private Plant currentPlant = new Plant();
     private String currentTag = null;
 
-    private final String PLANT = "plant";
-    private final String ROSACEA = "rosacea";
-    private final String ID = "id";
-    private final String THORNS = "thorns";
-    private final String NAME = "name";
-    private final String LENGTH = "length";
-    private final String FLORAL_PARTS = "floral-parts";
-    private final String COLOR = "color";
     private final List<String> INFO_TAGS = Arrays.asList(NAME, LENGTH, FLORAL_PARTS, COLOR);
 
     public List<Plant> getPlants() {

@@ -31,6 +31,7 @@ public abstract class AbstractXmlParserTest {
         List<Plant> actual = parser.parse(VALID_XML_FILE);
 
         //then
+        System.out.println(actual);
         Assert.assertEquals(EXPECTED, actual);
     }
 

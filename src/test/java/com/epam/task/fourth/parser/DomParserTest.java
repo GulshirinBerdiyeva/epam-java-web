@@ -1,10 +1,10 @@
 package com.epam.task.fourth.parser;
 
 import com.epam.task.fourth.exception.XmlException;
-import com.epam.task.fourth.parser.sax.SaxParser;
+import com.epam.task.fourth.parser.dom.DomParser;
 
-public class SaxParserTest extends AbstractXmlParserTest{
-    private SaxParser parser = new SaxParser();
+public class DomParserTest extends AbstractXmlParserTest{
+    private DomParser parser = new DomParser();
 
     @Override
     public void testParseShouldReturnParsedPlantsWhenValidXmlFileApplied() throws XmlException {
