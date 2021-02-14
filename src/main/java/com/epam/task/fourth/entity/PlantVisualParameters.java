@@ -2,13 +2,15 @@ package com.epam.task.fourth.entity;
 
 public class PlantVisualParameters {
     private String color;
-    private int length;
     private int floralParts;
+    private int length;
 
-    public PlantVisualParameters(String color, int length, int floralParts) {
+    public PlantVisualParameters() {}
+
+    public PlantVisualParameters(String color, int floralParts, int length) {
         this.color = color;
-        this.length = length;
         this.floralParts = floralParts;
+        this.length = length;
     }
 
     public String getColor() {
@@ -19,20 +21,20 @@ public class PlantVisualParameters {
         this.color = color;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
     public int getFloralParts() {
         return floralParts;
     }
 
     public void setFloralParts(int floralParts) {
         this.floralParts = floralParts;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     @Override
@@ -46,10 +48,10 @@ public class PlantVisualParameters {
 
         PlantVisualParameters that = (PlantVisualParameters) o;
 
-        if (length != that.length) {
+        if (floralParts != that.floralParts) {
             return false;
         }
-        if (floralParts != that.floralParts) {
+        if (length != that.length) {
             return false;
         }
         return color != null ? color.equals(that.color) : that.color == null;
@@ -58,18 +60,16 @@ public class PlantVisualParameters {
     @Override
     public int hashCode() {
         int result = color != null ? color.hashCode() : 0;
-        result = 31 * result + length;
         result = 31 * result + floralParts;
+        result = 31 * result + length;
         return result;
     }
 
     @Override
     public String toString() {
-        return "PlantVisualParameters{" +
-                "color='" + color + '\'' +
-                ", length=" + length +
-                ", floralParts=" + floralParts +
-                '}';
+        return "\n\tcolor: " + color +
+                "\n\tfloral-parts: " + floralParts +
+                "\n\tlength: " + length;
     }
 
 }

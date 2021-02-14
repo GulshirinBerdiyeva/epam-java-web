@@ -7,36 +7,36 @@
     <plant id="p01">
         <name>tulip</name>
         <visual-parameters>
-            <length>20</length>
-            <floral-parts>1</floral-parts>
             <color>yellow</color>
+            <floral-parts>1</floral-parts>
+            <length>20</length>
         </visual-parameters>
     </plant>
 
     <plant id="p02">
         <name>chamomile</name>
         <visual-parameters>
-            <length>15</length>
-            <floral-parts>7</floral-parts>
             <color>blue</color>
+            <floral-parts>7</floral-parts>
+            <length>15</length>
         </visual-parameters>
     </plant>
 
     <rosacea id="r01" thorns="true">
         <name>rose</name>
         <visual-parameters>
-            <length>50</length>
-            <floral-parts>5</floral-parts>
             <color>red</color>
+            <floral-parts>5</floral-parts>
+            <length>50</length>
         </visual-parameters>
     </rosacea>
 
     <rosacea id="r02">
         <name>spirea</name>
         <visual-parameters>
-            <length>150</length>
-            <floral-parts>7</floral-parts>
             <color>white</color>
+            <floral-parts>7</floral-parts>
+            <length>100</length>
         </visual-parameters>
     </rosacea>
 

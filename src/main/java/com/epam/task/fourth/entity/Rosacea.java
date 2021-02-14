@@ -5,7 +5,6 @@ public class Rosacea extends Plant{
 
     public Rosacea() {
         super();
-        this.thorns = false;
     }
 
     public Rosacea(String id, String name, PlantVisualParameters visualParameters, boolean thorns) {
@@ -47,9 +46,8 @@ public class Rosacea extends Plant{
 
     @Override
     public String toString() {
-        return "Rosacea{" +
-                "thorns=" + thorns +
-                '}';
+        return super.toString() +
+                "\nthorns: " + thorns;
     }
 
 }

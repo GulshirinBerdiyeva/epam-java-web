@@ -22,7 +22,7 @@
         <attribute name="id" use="required">
             <simpleType>
                 <restriction base="ID">
-                    <pattern value="[pr]\d{1,2}" ></pattern>
+                    <pattern value="[pr]\d{1,2}" />
                 </restriction>
             </simpleType>
         </attribute>
@@ -31,9 +31,9 @@
 
     <complexType name="PlantVisualParameters">
         <sequence>
-            <element name="length" type="positiveInteger" />
-            <element name="floral-parts" type="positiveInteger" />
             <element name="color" type="string" />
+            <element name="floral-parts" type="positiveInteger" />
+            <element name="length" type="positiveInteger" />
         </sequence>
     </complexType>
 
@@ -41,14 +41,14 @@
     <complexType name="Rosacea">
         <complexContent>
             <extension base="tns:Plant">
-                <attribute name="thorns" type="boolean" use="optional" default="false"></attribute>
+                <attribute name="thorns" type="boolean" use="optional" default="false" />
             </extension>
         </complexContent>
     </complexType>
 
 
-    <element name="plant" type="tns:Plant" ></element>
-    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant"></element>
+    <element name="plant" type="tns:Plant" />
+    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant" />
 
 
 </schema>

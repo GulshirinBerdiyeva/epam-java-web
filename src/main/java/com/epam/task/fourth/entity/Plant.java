@@ -3,7 +3,7 @@ package com.epam.task.fourth.entity;
 public class Plant {
     private String id;
     private String name;
-    private PlantVisualParameters visualParameters;
+    private PlantVisualParameters visualParameters = new PlantVisualParameters();
 
     public Plant() {}
 
@@ -67,11 +67,9 @@ public class Plant {
 
     @Override
     public String toString() {
-        return "Plant{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", visualParameters=" + visualParameters +
-                '}';
+        return "\nid: " + id +
+                "\nname: " + name +
+                "\nvisual-parameters: " + visualParameters;
     }
 
 }
