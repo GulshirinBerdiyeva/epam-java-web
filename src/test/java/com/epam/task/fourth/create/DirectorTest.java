@@ -1,6 +1,6 @@
-package com.epam.task.fourth;
+package com.epam.task.fourth.create;
 
-import com.epam.task.fourth.director.Director;
+import com.epam.task.fourth.creator.Director;
 import com.epam.task.fourth.entity.Plant;
 import com.epam.task.fourth.entity.PlantVisualParameters;
 import com.epam.task.fourth.entity.Rosacea;
@@ -18,7 +18,6 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 public class DirectorTest {
-    private final String XSD_FILE = "files/orangery.xsd";
     private final String VALID_XML_FILE = "files/orangery.xml";
     private final String INVALID_XML_FILE = "files/orange.xml";
 
