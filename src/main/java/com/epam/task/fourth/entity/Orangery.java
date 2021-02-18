@@ -1,5 +1,5 @@
-package com.epam.task.fourth.entity;
 
+package com.epam.task.fourth.entity;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,10 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(namespace = "http://www.example.com/orangery")
 public class Orangery {
-    @XmlAnyElement
+    @XmlElements({
+            @XmlElement(name = "plant", type = Plant.class, namespace = "http://www.example.com/orangery"),
+            @XmlElement(name = "rosacea", type = Rosacea.class, namespace = "http://www.example.com/orangery")
+    })
     private List<Plant> plants = new ArrayList<>();
 
     public void setPlants(List<Plant> plants) {

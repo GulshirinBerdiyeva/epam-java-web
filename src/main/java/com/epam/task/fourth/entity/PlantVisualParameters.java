@@ -5,14 +5,16 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType
 public class PlantVisualParameters {
-    @XmlElement
+    @XmlElement(namespace = "http://www.example.com/orangery")
     private String color;
-    @XmlElement(name = "floral-parts")
+    @XmlElement(name = "floral-parts", namespace = "http://www.example.com/orangery")
     private int floralParts;
-    @XmlElement
+    @XmlElement(namespace = "http://www.example.com/orangery")
     private int length;
 
-    public PlantVisualParameters() {}
+    public PlantVisualParameters() {
+        super();
+    }
 
     public PlantVisualParameters(String color, int floralParts, int length) {
         this.color = color;

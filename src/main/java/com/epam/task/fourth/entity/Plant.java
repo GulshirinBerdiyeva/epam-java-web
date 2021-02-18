@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 @XmlType
 @XmlSeeAlso(Rosacea.class)
 public class Plant {
-    @XmlElement
+    @XmlElement(namespace = "http://www.example.com/orangery")
     private String name;
-    @XmlElement(name = "visual-parameters")
+    @XmlElement(name = "visual-parameters", namespace = "http://www.example.com/orangery")
     private PlantVisualParameters visualParameters = new PlantVisualParameters();
     @XmlAttribute(required = true)
     @XmlID

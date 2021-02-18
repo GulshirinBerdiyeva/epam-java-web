@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 @XmlType
 public class Rosacea extends Plant{
     @XmlAttribute
-    private boolean thorns;
+    protected boolean thorns;
 
     public Rosacea() {
         super();
