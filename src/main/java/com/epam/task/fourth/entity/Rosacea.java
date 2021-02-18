@@ -1,6 +1,11 @@
 package com.epam.task.fourth.entity;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType
 public class Rosacea extends Plant{
+    @XmlAttribute
     private boolean thorns;
 
     public Rosacea() {

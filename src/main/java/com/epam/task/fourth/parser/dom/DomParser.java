@@ -65,7 +65,8 @@ public class DomParser implements XmlParser, XmlTagsConstants {
         String tagName = plantElement.getTagName();
         if (ROSACEA.equals(tagName)){
             Rosacea rosacea = new Rosacea();
-            boolean thorns = Boolean.parseBoolean(plantElement.getAttribute(THORNS));
+            String temp = plantElement.getAttribute(THORNS);
+            boolean thorns = Boolean.parseBoolean(temp);
             rosacea.setThorns(thorns);
             plant = rosacea;
         }
@@ -94,7 +95,7 @@ public class DomParser implements XmlParser, XmlTagsConstants {
         NodeList nodeList = plantElement.getElementsByTagName(tagName);
         Node node = nodeList.item(0);
         String text = node.getTextContent();
-        return node.getTextContent();
+        return text;
     }
 
 }

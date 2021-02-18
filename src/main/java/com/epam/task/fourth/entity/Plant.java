@@ -1,9 +1,18 @@
 package com.epam.task.fourth.entity;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType
+@XmlSeeAlso(Rosacea.class)
 public class Plant {
-    private String id;
+    @XmlElement
     private String name;
+    @XmlElement(name = "visual-parameters")
     private PlantVisualParameters visualParameters = new PlantVisualParameters();
+    @XmlAttribute(required = true)
+    @XmlID
+    private String id;
 
     public Plant() {}
 

@@ -1,8 +1,15 @@
 package com.epam.task.fourth.entity;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType
 public class PlantVisualParameters {
+    @XmlElement
     private String color;
+    @XmlElement(name = "floral-parts")
     private int floralParts;
+    @XmlElement
     private int length;
 
     public PlantVisualParameters() {}

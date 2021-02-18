@@ -5,6 +5,10 @@
         elementFormDefault="qualified">
 
 
+    <element name="plant" type="tns:Plant" />
+    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant" />
+
+
     <element name="orangery">
             <complexType>
                     <sequence>
@@ -45,10 +49,6 @@
             </extension>
         </complexContent>
     </complexType>
-
-
-    <element name="plant" type="tns:Plant" />
-    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant" />
 
 
 </schema>

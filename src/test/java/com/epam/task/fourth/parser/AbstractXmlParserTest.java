@@ -12,8 +12,8 @@ import java.util.List;
 
 public abstract class AbstractXmlParserTest {
     private XmlParser parser;
-    private final String VALID_XML_FILE = "files/orangery.xml";
-    private final String INVALID_XML_FILE = "files/orange.xml";
+    private final String VALID_XML_FILE = "src/main/resources/orangery.xml";
+    private final String INVALID_XML_FILE = "src/main/resources/orange.xml";
 
     private final List<Plant> EXPECTED = Arrays.asList(new Plant("p01","tulip", new PlantVisualParameters("yellow", 1, 20)),
                                                        new Plant("p02","chamomile", new PlantVisualParameters("blue", 7, 15)),

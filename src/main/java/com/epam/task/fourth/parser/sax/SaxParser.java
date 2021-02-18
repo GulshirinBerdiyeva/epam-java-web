@@ -14,14 +14,13 @@ import java.util.List;
 
 public class SaxParser implements XmlParser {
     private final static Logger LOGGER = LogManager.getLogger(SaxParser.class);
-    private List<Plant> plants;
-    private PlantHandler plantHandler = new PlantHandler();
-    private XMLReader reader;
 
     @Override
     public List<Plant> parse(String xmlFile) throws XmlException{
+        List<Plant> plants;
         try {
-            reader = XMLReaderFactory.createXMLReader();
+            PlantHandler plantHandler = new PlantHandler();
+            XMLReader reader = XMLReaderFactory.createXMLReader();
             reader.setContentHandler(plantHandler);
             reader.parse(xmlFile);
             plants = plantHandler.getPlants();
