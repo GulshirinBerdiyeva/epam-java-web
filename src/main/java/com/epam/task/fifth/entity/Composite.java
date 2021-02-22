@@ -18,7 +18,7 @@ public class Composite implements Component{
     public int countElements() {
         int count = 0;
         for (Component component : text){
-            count += component.countElements();
+            count += 1;
         }
         return count;
     }
@@ -39,7 +39,6 @@ public class Composite implements Component{
         if (!(o instanceof Composite)) {
             return false;
         }
-
 
         Composite composite = (Composite) o;
 
@@ -64,4 +63,5 @@ public class Composite implements Component{
                 ", text=" + text +
                 '}';
     }
+
 }

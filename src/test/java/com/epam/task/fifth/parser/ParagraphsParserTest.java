@@ -22,11 +22,10 @@ public class ParagraphsParserTest {
                                                                     "more-or-less normal distribution of letters, " +
                                                                     "as opposed to using (Content here), " +
                                                                     "content here, making it look like readable English.");
-
     private final Composite EXPECTED = new Composite();
 
     @Test
-    public void testParseShouldReturnSentencesCompositeWhenParagraphApplied(){
+    public void testParseShouldReturnSentencesWhenParagraphApplied(){
         //given
         EXPECTED.add(SENTENCES_1);
         EXPECTED.add(SENTENCES_2);

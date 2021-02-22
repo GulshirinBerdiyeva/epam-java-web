@@ -2,7 +2,6 @@ package com.epam.task.fifth.parser;
 
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
-import com.epam.task.fifth.entity.Lexeme;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -43,7 +42,7 @@ public class TextParserTest {
     private final Composite EXPECTED = new Composite();
 
     @Test
-    public void testParseShouldReturnParagraphsCompositeWhenTextApplied(){
+    public void testParseShouldReturnParagraphsWhenTextApplied(){
         //given
         EXPECTED.add(PARAGRAPH_1);
         EXPECTED.add(PARAGRAPH_2);

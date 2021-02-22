@@ -2,9 +2,9 @@ package com.epam.task.fifth.entity;
 
 public class Lexeme implements Component{
     private String lexeme;
-    private String type;
+    private LexemeType type;
 
-    public Lexeme(String content, String type) {
+    public Lexeme(String content, LexemeType type) {
         this.lexeme = content;
         this.type = type;
     }
@@ -13,7 +13,7 @@ public class Lexeme implements Component{
         return lexeme;
     }
 
-    public String getType() {
+    public LexemeType getType() {
         return type;
     }
 
@@ -31,12 +31,13 @@ public class Lexeme implements Component{
             return false;
         }
 
-        Lexeme lexemes = (Lexeme) o;
+        Lexeme lexeme1 = (Lexeme) o;
 
-        if (lexeme != null ? !lexeme.equals(lexemes.lexeme) : lexemes.lexeme != null) {
+        if (lexeme != null ? !lexeme.equals(lexeme1.lexeme) : lexeme1.lexeme != null) {
             return false;
         }
-        return type != null ? type.equals(lexemes.type) : lexemes.type == null;
+
+        return type == lexeme1.type;
     }
 
     @Override
@@ -48,6 +49,10 @@ public class Lexeme implements Component{
 
     @Override
     public String toString() {
-        return lexeme;
+        return "Lexeme{" +
+                "lexeme='" + lexeme + '\'' +
+                ", type=" + type +
+                '}';
     }
+
 }
