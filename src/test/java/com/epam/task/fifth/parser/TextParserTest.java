@@ -2,11 +2,10 @@ package com.epam.task.fifth.parser;
 
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
+import com.epam.task.fifth.entity.Lexeme;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.util.Arrays;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -44,7 +43,7 @@ public class TextParserTest {
     private final Composite EXPECTED = new Composite();
 
     @Test
-    public void testParseShouldReturnParagraphsCompositeWhenFileWithTextApplied(){
+    public void testParseShouldReturnParagraphsCompositeWhenTextApplied(){
         //given
         EXPECTED.add(PARAGRAPH_1);
         EXPECTED.add(PARAGRAPH_2);
