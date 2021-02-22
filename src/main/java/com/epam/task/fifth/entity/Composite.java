@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component{
+    private String component;
     private List<Component> text = new ArrayList<>();
+
+    public Composite() {
+    }
+
+    public Composite(String component) {
+        this.component = component;
+    }
 
     @Override
     public int countElements() {
@@ -32,21 +40,28 @@ public class Composite implements Component{
             return false;
         }
 
+
         Composite composite = (Composite) o;
+
+        if (component != null ? !component.equals(composite.component) : composite.component != null) {
+            return false;
+        }
 
         return text != null ? text.equals(composite.text) : composite.text == null;
     }
 
     @Override
     public int hashCode() {
-        return text != null ? text.hashCode() : 0;
+        int result = component != null ? component.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "Composite{" +
-                "text=" + text +
+                "component='" + component + '\'' +
+                ", text=" + text +
                 '}';
     }
-
 }
