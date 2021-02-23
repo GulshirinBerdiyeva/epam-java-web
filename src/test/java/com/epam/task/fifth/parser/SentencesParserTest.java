@@ -9,25 +9,25 @@ import org.junit.Test;
 
 public class SentencesParserTest {
     private final String SENTENCE = "It has survived - not only [5 20 5 + /] centuries.";
-    private final Component WORD_1 = new Lexeme("It", LexemeType.WORD);
-    private final Component WORD_2 = new Lexeme("has", LexemeType.WORD);
-    private final Component WORD_3 = new Lexeme("survived", LexemeType.WORD);
-    private final Component WORD_4 = new Lexeme("not", LexemeType.WORD);
-    private final Component WORD_5 = new Lexeme("only", LexemeType.WORD);
-    private final Component WORD_6 = new Lexeme("[5 20 5 + /]", LexemeType.EXPRESSION);
-    private final Component WORD_7 = new Lexeme("centuries", LexemeType.WORD);
+    private final Component LEXEME_1 = new Lexeme("It", LexemeType.WORD);
+    private final Component LEXEME_2 = new Lexeme("has", LexemeType.WORD);
+    private final Component LEXEME_3 = new Lexeme("survived", LexemeType.WORD);
+    private final Component LEXEME_4 = new Lexeme("not", LexemeType.WORD);
+    private final Component LEXEME_5 = new Lexeme("only", LexemeType.WORD);
+    private final Component LEXEME_6 = new Lexeme("[5 20 5 + /]", LexemeType.EXPRESSION);
+    private final Component LEXEME_7 = new Lexeme("centuries", LexemeType.WORD);
     private final Composite EXPECTED = new Composite();
 
     @Test
     public void testParseShouldReturnLexemesWhenSentenceApplied(){
         //given
-        EXPECTED.add(WORD_1);
-        EXPECTED.add(WORD_2);
-        EXPECTED.add(WORD_3);
-        EXPECTED.add(WORD_4);
-        EXPECTED.add(WORD_5);
-        EXPECTED.add(WORD_6);
-        EXPECTED.add(WORD_7);
+        EXPECTED.add(LEXEME_1);
+        EXPECTED.add(LEXEME_2);
+        EXPECTED.add(LEXEME_3);
+        EXPECTED.add(LEXEME_4);
+        EXPECTED.add(LEXEME_5);
+        EXPECTED.add(LEXEME_6);
+        EXPECTED.add(LEXEME_7);
         SentencesParser parser = new SentencesParser(null);
 
         //when

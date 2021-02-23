@@ -58,10 +58,9 @@ public class Composite implements Component{
 
     @Override
     public String toString() {
-        return "Composite{" +
-                "component='" + component + '\'' +
-                ", text=" + text +
-                '}';
+        return !text.isEmpty() ?
+                "Composite{ text = '" + text + "' }" :
+                "Composite{ component = '" + component + "' }";
     }
 
 }

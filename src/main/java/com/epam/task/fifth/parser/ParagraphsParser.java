@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class ParagraphsParser extends AbstractParser {
     private final static Logger LOGGER = LogManager.getLogger(ParagraphsParser.class);
-    private final String SPLITTER = "[.!?] +";
+    private final String SPLITTER = "[.!?] *";
 
     public ParagraphsParser(Parser successor) {
         super(successor);

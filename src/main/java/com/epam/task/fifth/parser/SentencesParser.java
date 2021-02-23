@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 public class SentencesParser extends AbstractParser{
     private final static Logger LOGGER = LogManager.getLogger(SentencesParser.class);
-    private final Pattern PATTERN = Pattern.compile("(\\w+)|(\\[.+\\])");
+    private final Pattern PATTERN = Pattern.compile("(\\w+)|(\\[[\\d [\\+\\-\\*\\/]]+\\])");
+    private final String BRACKET = "[";
 
     public SentencesParser(Parser successor) {
         super(successor);
@@ -32,7 +33,7 @@ public class SentencesParser extends AbstractParser{
         Composite text = new Composite();
         list.stream()
                 .forEach(lexeme -> {
-                    if (lexeme.startsWith("[")) {
+                    if (lexeme.startsWith(BRACKET)) {
                         text.add(new Lexeme(lexeme, LexemeType.EXPRESSION));
                     } else {
                         text.add(new Lexeme(lexeme, LexemeType.WORD));

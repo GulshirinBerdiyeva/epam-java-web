@@ -15,10 +15,10 @@ public class ParagraphsParserTest {
                                     "when looking at its layout. The point of using [42 6 / 3 +] " +
                                     "Ipsum is that it has a more-or-less normal distribution of letters, " +
                                     "as opposed to using (Content here), content here, making it look like readable English.";
-    private final Component SENTENCES_1 = new Composite("It is a long established fact that a reader " +
+    private final Component SENTENCE_1 = new Composite("It is a long established fact that a reader " +
                                                                 "will be distracted by the readable content " +
                                                                 "of a page when looking at its layout.");
-    private final Component SENTENCES_2 = new Composite("The point of using [42 6 / 3 +] Ipsum is that it has a " +
+    private final Component SENTENCE_2 = new Composite("The point of using [42 6 / 3 +] Ipsum is that it has a " +
                                                                     "more-or-less normal distribution of letters, " +
                                                                     "as opposed to using (Content here), " +
                                                                     "content here, making it look like readable English.");
@@ -27,11 +27,11 @@ public class ParagraphsParserTest {
     @Test
     public void testParseShouldReturnSentencesWhenParagraphApplied(){
         //given
-        EXPECTED.add(SENTENCES_1);
-        EXPECTED.add(SENTENCES_2);
+        EXPECTED.add(SENTENCE_1);
+        EXPECTED.add(SENTENCE_2);
         SentencesParser nextParser = Mockito.mock(SentencesParser.class);
         when(nextParser.getSuccessor()).thenReturn(nextParser);
-        when(nextParser.parse(anyString())).thenReturn(SENTENCES_1, SENTENCES_2);
+        when(nextParser.parse(anyString())).thenReturn(SENTENCE_1, SENTENCE_2);
         ParagraphsParser parser = new ParagraphsParser(nextParser);
 
         //when

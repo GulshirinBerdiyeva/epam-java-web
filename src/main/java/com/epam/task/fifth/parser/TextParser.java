@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class TextParser extends AbstractParser{
     private final static Logger LOGGER = LogManager.getLogger(TextParser.class);
-    private final String SPLITTER = "(\t)|( {4}?)";
+    private final String SPLITTER = "(\t)|( {4})";
 
     public TextParser(Parser successor) {
         super(successor);

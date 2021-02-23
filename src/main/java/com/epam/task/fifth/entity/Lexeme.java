@@ -4,8 +4,8 @@ public class Lexeme implements Component{
     private String lexeme;
     private LexemeType type;
 
-    public Lexeme(String content, LexemeType type) {
-        this.lexeme = content;
+    public Lexeme(String lexeme, LexemeType type) {
+        this.lexeme = lexeme;
         this.type = type;
     }
 
@@ -49,10 +49,8 @@ public class Lexeme implements Component{
 
     @Override
     public String toString() {
-        return "Lexeme{" +
-                "lexeme='" + lexeme + '\'' +
-                ", type=" + type +
-                '}';
+        return "lexeme='" + lexeme +
+                "', type='" + type + "'";
     }
 
 }
