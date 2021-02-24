@@ -12,26 +12,23 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SentencesParser extends AbstractParser{
+public class SentencesParser implements Parser{
     private final static Logger LOGGER = LogManager.getLogger(SentencesParser.class);
     private final Pattern PATTERN = Pattern.compile("(\\w+)|(\\[[\\d [\\+\\-\\*\\/]]+\\])");
     private final String BRACKET = "[";
 
-    public SentencesParser(Parser successor) {
-        super(successor);
-    }
-
     @Override
     public Component parse(String input) {
         Matcher matcher = PATTERN.matcher(input);
-        List<String> list = new ArrayList<>();
+        List<String> lexemes = new ArrayList<>();
 
         while (matcher.find()){
-            list.add(matcher.group());
+            lexemes.add(matcher.group());
         }
 
         Composite text = new Composite();
-        list.stream()
+
+        lexemes.stream()
                 .forEach(lexeme -> {
                     if (lexeme.startsWith(BRACKET)) {
                         text.add(new Lexeme(lexeme, LexemeType.EXPRESSION));

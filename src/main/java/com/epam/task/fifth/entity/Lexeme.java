@@ -18,11 +18,6 @@ public class Lexeme implements Component{
     }
 
     @Override
-    public int countElements() {
-        return 1;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -49,8 +44,7 @@ public class Lexeme implements Component{
 
     @Override
     public String toString() {
-        return "lexeme='" + lexeme +
-                "', type='" + type + "'";
+        return lexeme;
     }
 
 }

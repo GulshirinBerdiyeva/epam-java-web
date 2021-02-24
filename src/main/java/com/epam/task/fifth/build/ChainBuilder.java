@@ -8,7 +8,7 @@ import com.epam.task.fifth.parser.TextParser;
 public class ChainBuilder {
 
     public Parser build(){
-        return new TextParser(new ParagraphsParser(new SentencesParser(null)));
+        return new TextParser(new ParagraphsParser(new SentencesParser()));
     }
 
 }
