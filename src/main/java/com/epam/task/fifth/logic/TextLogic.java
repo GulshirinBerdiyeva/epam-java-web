@@ -2,6 +2,9 @@ package com.epam.task.fifth.logic;
 
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
+import com.epam.task.fifth.entity.Lexeme;
+import com.epam.task.fifth.entity.LexemeType;
+import com.epam.task.fifth.interpreter.ExpressionCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +49,12 @@ public class TextLogic {
         return sortedSentence;
     }
 
-    public Component calculate(Component expression){
+    public Component calculate(Component expression, ExpressionCalculator calculator){
+        String expressionCopy = ((Lexeme)expression).getLexeme();
 
-        return null;
+        Double result = (Double) calculator.calculate(expressionCopy);
+
+        return new Lexeme(result.toString(), LexemeType.EXPRESSION);
     }
 
     public String restore(Composite sentence){
