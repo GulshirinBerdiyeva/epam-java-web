@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component{
-    private List<Component> text = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
 
     public Composite() {
     }
 
-    public Composite(List<Component> text) {
-        this.text = text;
+    public Composite(List<Component> components) {
+        this.components = components;
     }
 
     public void add(Component component){
-        text.add(component);
+        components.add(component);
     }
 
     public void remove(Component component){
-        text.remove(component);
+        components.remove(component);
     }
 
     public int componentsCount() {
         int count = 0;
-        for (Component component : text){
+        for (Component component : components){
             count += 1;
         }
         return count;
     }
 
     public Component getChild(int index) {
-        return index <= this.componentsCount() ? text.get(index) : null;
+        return index <= this.componentsCount() ? components.get(index) : null;
     }
 
     @Override
@@ -44,17 +44,17 @@ public class Composite implements Component{
 
         Composite composite = (Composite) o;
 
-        return text != null ? text.equals(composite.text) : composite.text == null;
+        return components != null ? components.equals(composite.components) : composite.components == null;
     }
 
     @Override
     public int hashCode() {
-        return text != null ? text.hashCode() : 0;
+        return components != null ? components.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(text);
+        return String.valueOf(components);
     }
 
 }

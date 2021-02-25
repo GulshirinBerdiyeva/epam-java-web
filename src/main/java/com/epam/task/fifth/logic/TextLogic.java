@@ -26,9 +26,9 @@ public class TextLogic {
 
         Composite sortedParagraphs = new Composite(paragraphs.stream()
                 .sorted((first, second) -> {
-                    List<Component> firstChild = getChildren((Composite) first);
-                    List<Component> secondChild = getChildren((Composite) second);
-                    return secondChild.size() - firstChild.size();
+                    List<Component> firstParagraph = getChildren((Composite) first);
+                    List<Component> secondParagraph = getChildren((Composite) second);
+                    return secondParagraph.size() - firstParagraph.size();
                 })
                 .collect(Collectors.toList()));
 
