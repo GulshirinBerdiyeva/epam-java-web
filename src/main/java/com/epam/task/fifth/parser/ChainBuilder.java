@@ -1,4 +1,4 @@
-package com.epam.task.fifth.build;
+package com.epam.task.fifth.parser;
 
 import com.epam.task.fifth.parser.ParagraphsParser;
 import com.epam.task.fifth.parser.Parser;

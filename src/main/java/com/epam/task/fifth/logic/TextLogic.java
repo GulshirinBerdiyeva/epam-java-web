@@ -2,7 +2,6 @@ package com.epam.task.fifth.logic;
 
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
-import com.epam.task.fifth.entity.Lexeme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class TextLogic {
 
-    protected List<Component> getChildren(Composite text){
+    private List<Component> getChildren(Composite text){
         List<Component> children = new ArrayList<>();
         for (int i = 0; i < text.componentsCount(); i++){
             Component child = text.getChild(i);
