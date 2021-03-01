@@ -3,7 +3,6 @@ package com.epam.task.fifth.parser;
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
 import com.epam.task.fifth.entity.Lexeme;
-import com.epam.task.fifth.entity.LexemeType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,13 +16,13 @@ public class TextParserTest {
     private final String TEXT = "\tKeep it simple. " +
                                 "\tKeep it real!";
     private final Component PARAGRAPH_1 = new Composite(Arrays.asList(
-                                                                new Lexeme("Keep", LexemeType.WORD),
-                                                                new Lexeme("it", LexemeType.WORD),
-                                                                new Lexeme("simple", LexemeType.WORD)));
+                                                                Lexeme.word("Keep"),
+                                                                Lexeme.word("it"),
+                                                                Lexeme.word("simple")));
     private final Component PARAGRAPH_2 = new Composite(Arrays.asList(
-                                                                new Lexeme("Keep", LexemeType.WORD),
-                                                                new Lexeme("it", LexemeType.WORD),
-                                                                new Lexeme("real", LexemeType.WORD)));
+                                                                Lexeme.word("Keep"),
+                                                                Lexeme.word("it"),
+                                                                Lexeme.word("real")));
     private final Composite EXPECTED = new Composite();
 
     @Test

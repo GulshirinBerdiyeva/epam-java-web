@@ -1,12 +1,23 @@
 package com.epam.task.fifth.entity;
 
 public class Lexeme implements Component{
+    private enum LexemeType {
+        WORD, EXPRESSION
+    }
     private String lexeme;
     private LexemeType type;
 
-    public Lexeme(String lexeme, LexemeType type) {
+    private Lexeme(String lexeme, LexemeType type) {
         this.lexeme = lexeme;
         this.type = type;
+    }
+
+    public static Lexeme word(String lexeme) {
+        return new Lexeme(lexeme, LexemeType.WORD);
+    }
+
+    public static Lexeme expression(String lexeme) {
+        return new Lexeme(lexeme, LexemeType.EXPRESSION);
     }
 
     public String getLexeme() {

@@ -3,7 +3,6 @@ package com.epam.task.fifth.parser;
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
 import com.epam.task.fifth.entity.Lexeme;
-import com.epam.task.fifth.entity.LexemeType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,9 +30,9 @@ public class SentencesParser implements Parser{
         lexemes.stream()
                 .forEach(lexeme -> {
                     if (lexeme.startsWith(BRACKET)) {
-                        text.add(new Lexeme(lexeme, LexemeType.EXPRESSION));
+                        text.add(Lexeme.expression(lexeme));
                     } else {
-                        text.add(new Lexeme(lexeme, LexemeType.WORD));
+                        text.add(Lexeme.word(lexeme));
                     }
                 });
 

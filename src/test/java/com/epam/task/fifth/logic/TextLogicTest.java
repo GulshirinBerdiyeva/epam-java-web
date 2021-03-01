@@ -3,7 +3,6 @@ package com.epam.task.fifth.logic;
 import com.epam.task.fifth.entity.Component;
 import com.epam.task.fifth.entity.Composite;
 import com.epam.task.fifth.entity.Lexeme;
-import com.epam.task.fifth.entity.LexemeType;
 import com.epam.task.fifth.interpreter.ExpressionCalculator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,24 +17,24 @@ public class TextLogicTest {
     private final TextLogic textLogic = new TextLogic();
     private final Component PARAGRAPH_1 = new Composite(Arrays.asList(
                                                         new Composite(Arrays.asList(
-                                                                new Lexeme("Keep", LexemeType.WORD),
-                                                                new Lexeme("it", LexemeType.WORD),
-                                                                new Lexeme("simple", LexemeType.WORD))),
+                                                                Lexeme.word("Keep"),
+                                                                Lexeme.word("it"),
+                                                                Lexeme.word("simple"))),
                                                         new Composite(Arrays.asList(
-                                                                new Lexeme("Keep", LexemeType.WORD),
-                                                                new Lexeme("it", LexemeType.WORD),
-                                                                new Lexeme("real", LexemeType.WORD)))));
+                                                                Lexeme.word("Keep"),
+                                                                Lexeme.word("it"),
+                                                                Lexeme.word("real")))));
     private final Component PARAGRAPH_2 = new Composite(Arrays.asList(
-                                                                new Lexeme("Keep", LexemeType.WORD),
-                                                                new Lexeme("it", LexemeType.WORD),
-                                                                new Lexeme("simple", LexemeType.WORD)));
-    private final Component LEXEME_1 = new Lexeme("Solve", LexemeType.WORD);
-    private final Component LEXEME_2 = new Lexeme("it", LexemeType.WORD);
-    private final Component LEXEME_3 = new Lexeme("[5 20 5 + /]", LexemeType.EXPRESSION);
+                                                                Lexeme.word("Keep"),
+                                                                Lexeme.word("it"),
+                                                                Lexeme.word("simple")));
+    private final Component LEXEME_1 = Lexeme.word("Solve");
+    private final Component LEXEME_2 = Lexeme.word("it");
+    private final Component LEXEME_3 = Lexeme.expression("[5 20 5 + /]");
     private final String EXPECTED_TEXT = "Solve it [5 20 5 + /]";
-    private final Component EXPRESSION = new Lexeme("6 7 49 / * ", LexemeType.EXPRESSION);
+    private final Component EXPRESSION = Lexeme.expression("6 7 49 / * ");
     private final Double RESULT = 42.0;
-    private final Component EXPECTED_EXPRESSION = new Lexeme(RESULT.toString(), LexemeType.EXPRESSION);
+    private final Component EXPECTED_EXPRESSION = Lexeme.expression(RESULT.toString());
 
     @Test
     public void testSortParagraphsShouldReturnAscendingSortedParagraphsWhenTextApplied(){
