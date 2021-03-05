@@ -1,6 +1,14 @@
 package com.epam.task.sixth.entity;
 
+import com.epam.task.sixth.logic.Base;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.TimeUnit;
+
 public class Van implements Runnable{
+    private final static Logger LOGGER = LogManager.getLogger(Van.class);
+    private final static Base BASE = Base.getInstance();
     private int id;
     private boolean isLoaded;
     private boolean isUrgent;
@@ -31,7 +39,17 @@ public class Van implements Runnable{
 
     @Override
     public void run() {
+        if (!this.getIsUrgent()){
+            try {
+                TimeUnit.SECONDS.sleep(1);
 
+            } catch (InterruptedException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
+        }
+
+        BASE.process(this);
+        LOGGER.info(Thread.currentThread().getPriority() + " " + this.toString());
     }
 
     @Override
