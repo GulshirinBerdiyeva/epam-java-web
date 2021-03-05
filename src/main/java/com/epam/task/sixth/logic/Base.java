@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Base {
     private final static Logger LOGGER = LogManager.getLogger(Base.class);
     private final static AtomicReference<Base> INSTANCE = new AtomicReference<>();
-    private final static AtomicBoolean isInstanceCreated = new AtomicBoolean();
+    private final static AtomicBoolean IS_INSTANCE_CREATED = new AtomicBoolean();
     private final static int TERMINALS_NUMBER = 5;
     private final static Semaphore SEMAPHORE = new Semaphore(TERMINALS_NUMBER);
     private static Lock lock = new ReentrantLock();
@@ -21,12 +21,12 @@ public class Base {
     private Base(){}
 
     public static Base getInstance(){
-        if (!isInstanceCreated.get()){
+        if (!IS_INSTANCE_CREATED.get()){
             lock.lock();
             try{
-                if (!isInstanceCreated.get()){
+                if (!IS_INSTANCE_CREATED.get()){
                     INSTANCE.set(new Base());
-                    isInstanceCreated.set(true);
+                    IS_INSTANCE_CREATED.set(true);
 
                     LOGGER.info("Created Base instance");
                 }

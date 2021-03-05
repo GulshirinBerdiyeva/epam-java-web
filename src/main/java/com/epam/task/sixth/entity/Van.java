@@ -49,7 +49,7 @@ public class Van implements Runnable{
         }
 
         BASE.process(this);
-        LOGGER.info(Thread.currentThread().getPriority() + " " + this.toString());
+        LOGGER.info(this.toString());
     }
 
     @Override
