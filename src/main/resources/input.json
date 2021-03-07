@@ -2,53 +2,53 @@
   "vans": [
     {
       "id": 1,
-      "isLoaded": true,
-      "isUrgent": false
+      "isUrgent": false,
+      "isLoaded": true
     },
     {
       "id": 2,
-      "isLoaded": false,
-      "isUrgent": true
+      "isUrgent": true,
+      "isLoaded": false
     },
     {
       "id": 3,
-      "isLoaded": true,
-      "isUrgent": false
+      "isUrgent": false,
+      "isLoaded": true
     },
     {
       "id": 4,
-      "isLoaded": false,
-      "isUrgent": true
+      "isUrgent": true,
+      "isLoaded": false
     },
     {
       "id": 5,
-      "isLoaded": true,
-      "isUrgent": false
+      "isUrgent": false,
+      "isLoaded": true
     },
     {
       "id": 6,
-      "isLoaded": false,
-      "isUrgent": true
+      "isUrgent": true,
+      "isLoaded": false
     },
     {
       "id": 7,
-      "isLoaded": true,
-      "isUrgent": false
+      "isUrgent": false,
+      "isLoaded": true
     },
     {
       "id": 8,
-      "isLoaded": false,
-      "isUrgent": true
+      "isUrgent": true,
+      "isLoaded": false
     },
     {
       "id": 9,
-      "isLoaded": true,
-      "isUrgent": false
+      "isUrgent": false,
+      "isLoaded": true
     },
     {
       "id": 10,
-      "isLoaded": false,
-      "isUrgent": true
+      "isUrgent": true,
+      "isLoaded": false
     }
   ]
 }

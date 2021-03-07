@@ -24,16 +24,15 @@ public class Main {
         vans.stream().forEach(System.out::println);
 
         ExecutorService executorService = Executors.newFixedThreadPool(vans.size());
-
         List<Future<?>> futures = vans.stream()
                                         .map(van -> executorService.submit(van))
                                         .collect(Collectors.toList());
+        executorService.shutdown();
 
         for (Future<?> future : futures){
             future.get();
         }
 
-        executorService.shutdown();
     }
 
 }
