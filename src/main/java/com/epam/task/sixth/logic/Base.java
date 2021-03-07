@@ -18,7 +18,7 @@ public class Base {
 
     private final static AtomicReference<Base> INSTANCE = new AtomicReference<>();
     private static AtomicBoolean isInstanceCreated = new AtomicBoolean();
-    private final static Lock instanceLock = new ReentrantLock();
+    private final static Lock INSTANCE_LOCK = new ReentrantLock();
 
     private final static int TERMINALS_NUMBER = 5;
     private final static Semaphore SEMAPHORE = new Semaphore(TERMINALS_NUMBER);
@@ -40,7 +40,7 @@ public class Base {
 
     public static Base getInstance(){
         if (!isInstanceCreated.get()){
-            instanceLock.lock();
+            INSTANCE_LOCK.lock();
             try{
                 if (!isInstanceCreated.get()){
                     Base base = new Base();
@@ -51,7 +51,7 @@ public class Base {
                 }
 
             } finally {
-                instanceLock.unlock();
+                INSTANCE_LOCK.unlock();
             }
         }
 
@@ -64,10 +64,15 @@ public class Base {
 
             vanLock.lock();
             vans.add(van);
-            Van currentVan = vans.poll();
+            vanLock.unlock();
 
             terminalLock.lock();
             Terminal terminal = terminals.remove(0);
+
+            vanLock.lock();
+            Van currentVan = vans.poll();
+            vanLock.unlock();
+
             terminal.process(currentVan);
             terminals.add(terminal);
 
@@ -76,7 +81,6 @@ public class Base {
 
         } finally {
             SEMAPHORE.release();
-            vanLock.unlock();
             terminalLock.unlock();
         }
     }
