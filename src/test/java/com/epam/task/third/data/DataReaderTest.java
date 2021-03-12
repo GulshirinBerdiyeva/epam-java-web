@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DataReaderTest {
     private DataReader reader = new DataReader();
-    private final String FILE_NAME = "src/test/resources/input.txt";
-    private final String WRONG_FILE_NAME = "src/test/resources/input";
-    private final List<String> EXPECTED = Arrays.asList("5.0 3.0 0.0 5.0",
+    private final static String FILE_NAME = "src/test/resources/input.txt";
+    private final static String WRONG_FILE_NAME = "src/test/resources/input";
+    private final static List<String> EXPECTED = Arrays.asList("5.0 3.0 0.0 5.0",
                                                         "2.n -4 4",
                                                         "-6.0 2.5 3.0 4.0",
                                                         "6 2.5 0 ?",

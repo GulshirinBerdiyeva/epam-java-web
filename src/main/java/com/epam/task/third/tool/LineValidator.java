@@ -7,11 +7,12 @@ import java.util.regex.Pattern;
 
 public class LineValidator {
     private final static Logger LOGGER = Logger.getLogger(LineValidator.class);
-    private final String DOUBLE_NUMBER = " *-?\\d+\\.\\d+ *";
-    private final int NUMBERS_AMOUNT = 4;
+
+    private final String doubleNumber = " *-?\\d+\\.\\d+ *";
+    private final int numbersAmount = 4;
 
     public Boolean isValid(String line){
-        Pattern pattern = Pattern.compile(DOUBLE_NUMBER);
+        Pattern pattern = Pattern.compile(doubleNumber);
         Matcher matcher = pattern.matcher(line);
         StringBuilder buffer = new StringBuilder();
         int amount = 0;
@@ -21,7 +22,7 @@ public class LineValidator {
             amount++;
         }
 
-        boolean isCorrectAmount = amount == NUMBERS_AMOUNT;
+        boolean isCorrectAmount = amount == numbersAmount;
         boolean isEqual = line.contentEquals(buffer);
         boolean isValid = isCorrectAmount && isEqual;
 

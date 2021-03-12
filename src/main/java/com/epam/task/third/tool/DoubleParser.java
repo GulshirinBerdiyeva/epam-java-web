@@ -9,11 +9,12 @@ import java.util.regex.Pattern;
 
 public class DoubleParser {
     private final static Logger LOGGER = Logger.getLogger(DoubleParser.class);
-    private final String DOUBLE_NUMBER = "-?\\d+\\.\\d+";
+
+    private final String doubleNumber = "-?\\d+\\.\\d+";
 
     public List<Double> parse(String line){
         List<Double> result = new ArrayList<Double>();
-        Pattern pattern = Pattern.compile(DOUBLE_NUMBER);
+        Pattern pattern = Pattern.compile(doubleNumber);
         Matcher matcher = pattern.matcher(line);
 
         while (matcher.find()){

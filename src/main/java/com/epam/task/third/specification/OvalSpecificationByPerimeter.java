@@ -4,8 +4,8 @@ import com.epam.task.third.entity.Oval;
 import com.epam.task.third.logic.OvalParametersCalculator;
 
 public class OvalSpecificationByPerimeter implements Specification {
-    private double perimeter;
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
+    private double perimeter;
 
     public OvalSpecificationByPerimeter(double perimeter) {
         this.perimeter = perimeter;

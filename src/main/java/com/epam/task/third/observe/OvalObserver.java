@@ -9,7 +9,9 @@ import java.util.*;
 
 public class OvalObserver implements Observer {
     private final static Logger LOGGER = Logger.getLogger(OvalObserver.class);
+
     private final static OvalObserver INSTANCE = new OvalObserver();
+
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
     private Map<Integer, OvalParameters> parametersMap = new HashMap<Integer, OvalParameters>();
 

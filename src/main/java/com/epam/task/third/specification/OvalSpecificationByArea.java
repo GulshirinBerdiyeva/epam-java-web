@@ -4,8 +4,8 @@ import com.epam.task.third.entity.Oval;
 import com.epam.task.third.logic.OvalParametersCalculator;
 
 public class OvalSpecificationByArea implements Specification {
-    private double area;
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
+    private double area;
 
     public OvalSpecificationByArea(double area) {
         this.area = area;

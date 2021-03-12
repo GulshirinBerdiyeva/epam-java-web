@@ -8,6 +8,7 @@ import java.util.*;
 
 public class OvalRepository implements Repository, Sorter {
     private final static OvalRepository INSTANCE = new OvalRepository();
+
     private Map<Integer, Oval> ovalsMap = new HashMap<Integer, Oval>();
 
     private OvalRepository(){}
