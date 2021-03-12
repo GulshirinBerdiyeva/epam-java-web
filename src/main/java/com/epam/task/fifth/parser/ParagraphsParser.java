@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 
 public class ParagraphsParser extends AbstractParser {
     private final static Logger LOGGER = LogManager.getLogger(ParagraphsParser.class);
-    private final Pattern PATTERN = Pattern.compile("\\p{Upper}.[^\\.!?]+");
+
+    private final static Pattern PATTERN = Pattern.compile("\\p{Upper}.[^\\.!?]+");
 
     public ParagraphsParser(Parser successor) {
         super(successor);

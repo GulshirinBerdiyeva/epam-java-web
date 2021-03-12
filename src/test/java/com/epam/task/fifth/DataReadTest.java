@@ -8,8 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class DataReadTest {
-    private final String VALID_FILE = "src/test/resources/input.txt";
-    private final String EXPECTED = "    It has survived - not only [5 20 5 + /] centuries, " +
+    private final static String VALID_FILE = "src/test/resources/input.txt";
+    private final static String EXPECTED_DATA = "    It has survived - not only [5 20 5 + /] centuries, " +
                                     "but also the leap into [6 7 *] electronic typesetting, " +
                                     "remaining essentially [2 3 + 10 *] unchanged. " +
                                     "It was popularised in the [+ 2 5 - 3] with the release of " +
@@ -34,7 +34,7 @@ public class DataReadTest {
              .forEach(string -> actual.append(string));
 
         //then
-        Assert.assertEquals(EXPECTED, actual.toString());
+        Assert.assertEquals(EXPECTED_DATA, actual.toString());
     }
 
 }

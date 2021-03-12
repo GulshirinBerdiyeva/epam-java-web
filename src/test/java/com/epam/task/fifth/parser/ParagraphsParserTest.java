@@ -13,32 +13,32 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class ParagraphsParserTest {
-    private final String PARAGRAPH = "Keep it simple. Keep it real!";
-    private final Component SENTENCE_1 = new Composite(Arrays.asList(
+    private final static String PARAGRAPH = "Keep it simple. Keep it real!";
+    private final static Component FIRST_SENTENCE = new Composite(Arrays.asList(
                                                             Lexeme.word("Keep"),
                                                             Lexeme.word("it"),
                                                             Lexeme.word("simple")));
-    private final Component SENTENCE_2 = new Composite(Arrays.asList(
+    private final static Component SECOND_SENTENCE = new Composite(Arrays.asList(
                                                             Lexeme.word("Keep"),
                                                             Lexeme.word("it"),
                                                             Lexeme.word("real")));
-    private final Composite EXPECTED = new Composite();
 
     @Test
     public void testParseShouldReturnSentencesWhenParagraphApplied(){
         //given
-        EXPECTED.add(SENTENCE_1);
-        EXPECTED.add(SENTENCE_2);
+        Composite expected = new Composite();
+        expected.add(FIRST_SENTENCE);
+        expected.add(SECOND_SENTENCE);
 
         SentencesParser nextParser = Mockito.mock(SentencesParser.class);
-        when(nextParser.parse(anyString())).thenReturn(SENTENCE_1, SENTENCE_2);
+        when(nextParser.parse(anyString())).thenReturn(FIRST_SENTENCE, SECOND_SENTENCE);
         ParagraphsParser parser = new ParagraphsParser(nextParser);
 
         //when
         Component actual = parser.parse(PARAGRAPH);
 
         //then
-        Assert.assertEquals(EXPECTED, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 }

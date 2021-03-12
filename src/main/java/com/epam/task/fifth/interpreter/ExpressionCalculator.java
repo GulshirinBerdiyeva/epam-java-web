@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ExpressionCalculator {
     private List<Interpreter> listExpression = new ArrayList<>();
-    private final String REGEX = "\\p{Blank}+";
+    private final static String REGEX = "\\p{Blank}+";
 
     public Number calculate(String expression) {
         parse(expression);

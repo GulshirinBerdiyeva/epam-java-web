@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 
 public class TextParser extends AbstractParser{
     private final static Logger LOGGER = LogManager.getLogger(TextParser.class);
-    private final Pattern PATTERN = Pattern.compile("[^\\t]+");
+
+    private final static Pattern PATTERN = Pattern.compile("[^\\t]+");
 
     public TextParser(Parser successor) {
         super(successor);

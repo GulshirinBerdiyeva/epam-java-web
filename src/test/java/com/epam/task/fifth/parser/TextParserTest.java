@@ -13,27 +13,27 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class TextParserTest {
-    private final String TEXT = "\tKeep it simple. " +
-                                "\tKeep it real!";
-    private final Component PARAGRAPH_1 = new Composite(Arrays.asList(
+    private final static String TEXT = "\tKeep it simple. " +
+                                        "\tKeep it real!";
+    private final static Component FIRST_PARAGRAPH = new Composite(Arrays.asList(
                                                                 Lexeme.word("Keep"),
                                                                 Lexeme.word("it"),
                                                                 Lexeme.word("simple")));
-    private final Component PARAGRAPH_2 = new Composite(Arrays.asList(
+    private final static Component SECOND_PARAGRAPH = new Composite(Arrays.asList(
                                                                 Lexeme.word("Keep"),
                                                                 Lexeme.word("it"),
                                                                 Lexeme.word("real")));
-    private final Composite EXPECTED = new Composite();
 
     @Test
     public void testParseShouldReturnParagraphsWhenTextApplied(){
         //given
-        EXPECTED.add(PARAGRAPH_1);
-        EXPECTED.add(PARAGRAPH_2);
+        Composite expected = new Composite();
+        expected.add(FIRST_PARAGRAPH);
+        expected.add(SECOND_PARAGRAPH);
 
         ParagraphsParser nextParser = Mockito.mock(ParagraphsParser.class);
         when(nextParser.getSuccessor()).thenReturn(nextParser);
-        when(nextParser.parse(anyString())).thenReturn(PARAGRAPH_1, PARAGRAPH_2);
+        when(nextParser.parse(anyString())).thenReturn(FIRST_PARAGRAPH, SECOND_PARAGRAPH);
 
         TextParser parser = new TextParser(nextParser);
 
@@ -41,7 +41,7 @@ public class TextParserTest {
         Component actual = parser.parse(TEXT);
 
         //then
-        Assert.assertEquals(EXPECTED, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 }

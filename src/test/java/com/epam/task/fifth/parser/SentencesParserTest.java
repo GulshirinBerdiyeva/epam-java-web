@@ -9,8 +9,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class SentencesParserTest {
-    private final String SENTENCE = "Solve it - [5 20 5 + /] please...";
-    private final Component EXPECTED = new Composite(Arrays.asList(
+    private final static String SENTENCE = "Solve it - [5 20 5 + /] please...";
+    private final static Component EXPECTED = new Composite(Arrays.asList(
                                                             Lexeme.word("Solve"),
                                                             Lexeme.word("it"),
                                                             Lexeme.expression("[5 20 5 + /]"),

@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
 
 public class SentencesParser implements Parser{
     private final static Logger LOGGER = LogManager.getLogger(SentencesParser.class);
-    private final Pattern PATTERN = Pattern.compile("(\\w+)|(\\[[\\d [\\+\\-\\*\\/]]+\\])");
-    private final String BRACKET = "[";
+
+    private final static Pattern PATTERN = Pattern.compile("(\\w+)|(\\[[\\d [\\+\\-\\*\\/]]+\\])");
+    private final static String BRACKET = "[";
 
     @Override
     public Component parse(String input) {
