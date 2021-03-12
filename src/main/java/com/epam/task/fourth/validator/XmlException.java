@@ -1,4 +1,4 @@
-package com.epam.task.fourth.exception;
+package com.epam.task.fourth.validator;
 
 public class XmlException extends Exception{
     public XmlException() {

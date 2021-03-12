@@ -1,4 +1,4 @@
-package com.epam.task.fourth.exception;
+package com.epam.task.fourth.creator;
 
 public class ParserTypeException extends Exception{
     public ParserTypeException() {

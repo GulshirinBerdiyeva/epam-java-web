@@ -15,14 +15,15 @@ import java.util.List;
 
 public class PlantHandler extends DefaultHandler implements XmlTagsConstants {
     private final static Logger LOGGER = LogManager.getLogger(PlantHandler.class);
+
     private List<Plant> plants = new ArrayList<>();
     private Plant currentPlant = new Plant();
-    private String currentTag = null;
-
-    private final List<String> INFO_TAGS = Arrays.asList(NAME, LENGTH, FLORAL_PARTS, COLOR);
+    private String currentTag;
+    private final static List<String> INFO_TAGS = Arrays.asList(NAME, LENGTH, FLORAL_PARTS, COLOR);
 
     public List<Plant> getPlants() {
-        return plants;
+        List<Plant> plantsCopy = new ArrayList<>(plants);
+        return plantsCopy;
     }
 
     public void startElement(String uri, String localName, String qName, Attributes attributes) {

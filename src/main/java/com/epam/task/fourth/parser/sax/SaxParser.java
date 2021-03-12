@@ -1,7 +1,7 @@
 package com.epam.task.fourth.parser.sax;
 
 import com.epam.task.fourth.entity.Plant;
-import com.epam.task.fourth.exception.XmlException;
+import com.epam.task.fourth.validator.XmlException;
 import com.epam.task.fourth.parser.XmlParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,13 +17,12 @@ public class SaxParser implements XmlParser {
 
     @Override
     public List<Plant> parse(String xmlFile) throws XmlException{
-        List<Plant> plants;
         try {
             PlantHandler plantHandler = new PlantHandler();
             XMLReader reader = XMLReaderFactory.createXMLReader();
             reader.setContentHandler(plantHandler);
             reader.parse(xmlFile);
-            plants = plantHandler.getPlants();
+            List<Plant> plants = plantHandler.getPlants();
 
             LOGGER.info(xmlFile + " parsed by SaxParser");
             return plants;

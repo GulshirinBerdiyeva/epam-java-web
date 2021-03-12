@@ -1,11 +1,11 @@
 package com.epam.task.fourth.parser;
 
-import com.epam.task.fourth.exception.XmlException;
+import com.epam.task.fourth.validator.XmlException;
 import com.epam.task.fourth.parser.jaxb.JaxbParser;
 
 public class JaxbParserTest extends AbstractXmlParserTest{
-    private final String XSD_FILE = "src/main/resources/orangery.xsd";
     private JaxbParser parser = new JaxbParser();
+    private final static String XSD_FILE = "src/main/resources/orangery.xsd";
 
     @Override
     public void testParseShouldReturnParsedPlantsWhenValidXmlFileApplied() throws XmlException {

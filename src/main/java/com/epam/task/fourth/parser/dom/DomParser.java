@@ -3,7 +3,7 @@ package com.epam.task.fourth.parser.dom;
 import com.epam.task.fourth.entity.Plant;
 import com.epam.task.fourth.entity.PlantVisualParameters;
 import com.epam.task.fourth.entity.Rosacea;
-import com.epam.task.fourth.exception.XmlException;
+import com.epam.task.fourth.validator.XmlException;
 import com.epam.task.fourth.parser.XmlParser;
 import com.epam.task.fourth.parser.XmlTagsConstants;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +23,7 @@ import java.util.List;
 
 public class DomParser implements XmlParser, XmlTagsConstants {
     private final static Logger LOGGER = LogManager.getLogger(DomParser.class);
+
     private List<Plant> plants = new ArrayList<>();
 
     @Override

@@ -1,6 +1,6 @@
 package com.epam.task.fourth.parser;
 
-import com.epam.task.fourth.exception.XmlException;
+import com.epam.task.fourth.validator.XmlException;
 import com.epam.task.fourth.parser.dom.DomParser;
 
 public class DomParserTest extends AbstractXmlParserTest{

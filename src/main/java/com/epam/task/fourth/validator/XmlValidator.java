@@ -1,6 +1,5 @@
 package com.epam.task.fourth.validator;
 
-import com.epam.task.fourth.exception.XmlException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
@@ -16,15 +15,16 @@ import java.io.IOException;
 
 public class XmlValidator {
     private final static Logger LOGGER = LogManager.getLogger(XmlValidator.class);
-    private final String XSD_FILE;
+
+    private final String xsdFile;
 
     public XmlValidator(String xsdFile) {
-        this.XSD_FILE = xsdFile;
+        this.xsdFile = xsdFile;
     }
 
     public Boolean isValid(String xmlFile) throws XmlException{
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        File schemaLocation = new File(XSD_FILE);
+        File schemaLocation = new File(xsdFile);
 
         try {
             Schema schema = factory.newSchema(schemaLocation);

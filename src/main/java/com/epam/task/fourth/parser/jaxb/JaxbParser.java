@@ -2,7 +2,7 @@ package com.epam.task.fourth.parser.jaxb;
 
 import com.epam.task.fourth.entity.Plant;
 import com.epam.task.fourth.entity.Orangery;
-import com.epam.task.fourth.exception.XmlException;
+import com.epam.task.fourth.validator.XmlException;
 import com.epam.task.fourth.parser.XmlParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 
 public class JaxbParser implements XmlParser {
     private final static Logger LOGGER = LogManager.getLogger(JaxbParser.class);
+
     private String xsdFile;
 
     public void setXsdFile(String xsdFile) {

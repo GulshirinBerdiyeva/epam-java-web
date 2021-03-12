@@ -1,6 +1,5 @@
 package com.epam.task.fourth.creator;
 
-import com.epam.task.fourth.exception.ParserTypeException;
 import com.epam.task.fourth.parser.XmlParser;
 import com.epam.task.fourth.parser.dom.DomParser;
 import com.epam.task.fourth.parser.jaxb.JaxbParser;
