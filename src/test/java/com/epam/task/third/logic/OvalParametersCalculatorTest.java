@@ -7,10 +7,11 @@ import org.junit.Test;
 
 public class OvalParametersCalculatorTest {
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
-    private final Oval OVAL = new Oval(42, new Point(0.0, 3.0), new Point(5.0, 5.0));
-    private final double EXPECTED_P = 11.963;
-    private final double EXPECTED_A = 7.854;
-    private final double DELTA = 0.001;
+    private final static Oval OVAL = new Oval(42, new Point(0.0, 3.0),
+                                                      new Point(5.0, 5.0));
+    private final double expectedPerimeter = 11.963;
+    private final double expectedArea = 7.854;
+    private final double delta = 0.001;
 
     @Test
     public void testCalculatePerimeterShouldReturnPerimeterWhenOvalApplied(){
@@ -18,7 +19,7 @@ public class OvalParametersCalculatorTest {
         double actual = calculator.calculatePerimeter(OVAL);
 
         //then
-        Assert.assertEquals(EXPECTED_P, actual, DELTA);
+        Assert.assertEquals(expectedPerimeter, actual, delta);
     }
 
     @Test
@@ -27,7 +28,7 @@ public class OvalParametersCalculatorTest {
         double actual = calculator.calculateArea(OVAL);
 
         //then
-        Assert.assertEquals(EXPECTED_A, actual, DELTA);
+        Assert.assertEquals(expectedArea, actual, delta);
     }
 
 }

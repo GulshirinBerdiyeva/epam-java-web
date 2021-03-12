@@ -6,9 +6,10 @@ import java.util.Comparator;
 
 public class OvalSortByID implements Comparator<Oval> {
 
-    public int compare(Oval o1, Oval o2) {
-        int ID1 = o1.getID();
-        int ID2 = o2.getID();
-        return ID1 > ID2 ? 1 : ID1 < ID2 ? -1 : 0;
+    public int compare(Oval firstOval, Oval secondOval) {
+        int firstId = firstOval.getId();
+        int secondId = secondOval.getId();
+        return firstId > secondId ? 1 : firstId < secondId ? -1 : 0;
     }
+
 }

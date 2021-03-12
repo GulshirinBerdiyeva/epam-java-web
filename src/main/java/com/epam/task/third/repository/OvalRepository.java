@@ -1,56 +1,58 @@
 package com.epam.task.third.repository;
 
 import com.epam.task.third.entity.Oval;
-import com.epam.task.third.sort.ISort;
-import com.epam.task.third.specification.ISpecification;
+import com.epam.task.third.sort.Sorter;
+import com.epam.task.third.specification.Specification;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class OvalRepository implements IRepository, ISort {
-    private final static OvalRepository REPOSITORY = new OvalRepository();
-    private List<Oval> list = new ArrayList<Oval>();
+public class OvalRepository implements Repository, Sorter {
+    private final static OvalRepository INSTANCE = new OvalRepository();
+    private Map<Integer, Oval> ovalsMap = new HashMap<Integer, Oval>();
 
     private OvalRepository(){}
 
-    public static OvalRepository getREPOSITORY() {
-        return REPOSITORY;
+    public static OvalRepository getInstance() {
+        return INSTANCE;
     }
 
     public List<Oval> getList() {
-        return list;
+        List<Oval> ovals = new ArrayList<Oval>(ovalsMap.values());
+        return ovals;
     }
 
     public void addOval(Oval oval) {
-        list.add(oval);
+        ovalsMap.put(oval.getId(), oval);
     }
 
     public void removeOval(Oval oval) {
-        list.remove(oval);
+        ovalsMap.remove(oval.getId());
     }
 
     public void updateOval(Oval newOval) {
-        int ID = newOval.getID();
-        for (Oval oval : list){
-            if (ID == oval.getID()){
-                list.remove(oval);
-                list.add(newOval);
-            }
+        int id = newOval.getId();
+        if (ovalsMap.containsKey(id)){
+            ovalsMap.remove(id);
+            ovalsMap.put(id, newOval);
         }
     }
 
-    public List<Oval> query(ISpecification specification) {
+    public List<Oval> query(Specification specification) {
         List<Oval> newList = new ArrayList<Oval>();
-        for (Oval oval : list){
-            if (specification.specified(oval)){
-                newList.add(oval);
+
+        for (Map.Entry<Integer, Oval> oval : ovalsMap.entrySet()){
+            if (specification.specified(oval.getValue())){
+                newList.add(oval.getValue());
             }
         }
+
         return newList;
     }
 
-    public void sort(Comparator comparator) {
-        list.sort(comparator);
+    public List<Oval> sort(Comparator comparator) {
+        List<Oval> ovals = new ArrayList<Oval>(ovalsMap.values());
+        ovals.sort(comparator);
+        return ovals;
     }
+
 }

@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator {
-    private final static Logger LOGGER = Logger.getLogger(Validator.class);
+public class LineValidator {
+    private final static Logger LOGGER = Logger.getLogger(LineValidator.class);
     private final String DOUBLE_NUMBER = " *-?\\d+\\.\\d+ *";
     private final int NUMBERS_AMOUNT = 4;
 

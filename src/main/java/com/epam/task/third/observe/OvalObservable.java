@@ -6,36 +6,36 @@ import com.epam.task.third.entity.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OvalObservable extends Oval implements IObservable {
-    private List<IObserver> observers = new ArrayList<IObserver>();
+public class OvalObservable extends Oval implements Observable {
+    private List<Observer> observers = new ArrayList<Observer>();
 
-    public OvalObservable(Integer ID, Point point1, Point point2) {
-        super(ID, point1, point2);
+    public OvalObservable(int id, Point firstPoint, Point secondPoint) {
+        super(id, firstPoint, secondPoint);
     }
 
     @Override
-    public void setPoint1(Point point1) {
-        super.setPoint1(point1);
+    public void setFirstPoint(Point firstPoint) {
+        super.setFirstPoint(firstPoint);
         notifyObservers();
     }
 
     @Override
-    public void setPoint2(Point point2) {
-        super.setPoint2(point2);
+    public void setSecondPoint(Point secondPoint) {
+        super.setSecondPoint(secondPoint);
         notifyObservers();
     }
 
-    public void addObserver(IObserver observer) {
+    public void addObserver(Observer observer) {
         observers.add(observer);
         notifyObservers();
     }
 
-    public void removeObserver(IObserver observer) {
+    public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
     public void notifyObservers() {
-        for (IObserver observer : observers){
+        for (Observer observer : observers){
             observer.update(this);
         }
     }

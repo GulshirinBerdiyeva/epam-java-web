@@ -1,34 +1,34 @@
 package com.epam.task.third.entity;
 
 public class Oval {
-    private final Integer ID;
-    private Point point1;
-    private Point point2;
+    private final int id;
+    private Point firstPoint;
+    private Point secondPoint;
 
-    public Oval(Integer ID, Point point1, Point point2) {
-        this.ID = ID;
-        this.point1 = point1;
-        this.point2 = point2;
+    public Oval(int id, Point firstPoint, Point secondPoint) {
+        this.id = id;
+        this.firstPoint = firstPoint;
+        this.secondPoint = secondPoint;
     }
 
-    public Integer getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public Point getPoint1() {
-        return point1;
+    public Point getFirstPoint() {
+        return firstPoint;
     }
 
-    public Point getPoint2() {
-        return point2;
+    public Point getSecondPoint() {
+        return secondPoint;
     }
 
-    public void setPoint1(Point point1) {
-        this.point1 = point1;
+    public void setFirstPoint(Point firstPoint) {
+        this.firstPoint = firstPoint;
     }
 
-    public void setPoint2(Point point2) {
-        this.point2 = point2;
+    public void setSecondPoint(Point secondPoint) {
+        this.secondPoint = secondPoint;
     }
 
     @Override
@@ -42,29 +42,29 @@ public class Oval {
 
         Oval oval = (Oval) o;
 
-        if (ID != null ? !ID.equals(oval.ID) : oval.ID != null) {
+        if (id != oval.id) {
             return false;
         }
-        if (point1 != null ? !point1.equals(oval.point1) : oval.point1 != null) {
+        if (firstPoint != null ? !firstPoint.equals(oval.firstPoint) : oval.firstPoint != null) {
             return false;
         }
-        return point2 != null ? point2.equals(oval.point2) : oval.point2 == null;
+        return secondPoint != null ? secondPoint.equals(oval.secondPoint) : oval.secondPoint == null;
     }
 
     @Override
     public int hashCode() {
-        int result = ID != null ? ID.hashCode() : 0;
-        result = 31 * result + (point1 != null ? point1.hashCode() : 0);
-        result = 31 * result + (point2 != null ? point2.hashCode() : 0);
+        int result = id;
+        result = 31 * result + (firstPoint != null ? firstPoint.hashCode() : 0);
+        result = 31 * result + (secondPoint != null ? secondPoint.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Oval{" +
-                "ID=" + ID +
-                ", point1=" + point1 +
-                ", point2=" + point2 +
+                "id=" + id +
+                ", firstPoint=" + firstPoint +
+                ", secondPoint=" + secondPoint +
                 '}';
     }
 

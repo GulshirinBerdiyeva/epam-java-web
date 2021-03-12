@@ -6,10 +6,11 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParserTest {
-    protected Parser parser = new Parser();
-    private final String VALID_LINE = "-2.0 -1.0 1.0 -5.0";
-    private final List<Double> EXPECTED = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
+public class DoubleParserTest {
+    protected DoubleParser parser = new DoubleParser();
+
+    private final static String VALID_LINE = "-2.0 -1.0 1.0 -5.0";
+    private final static List<Double> EXPECTED = Arrays.asList(-2.0, -1.0, 1.0, -5.0);
 
     @Test
     public void testParseShouldParseLineToDoubleListWhenValidLineApplied(){

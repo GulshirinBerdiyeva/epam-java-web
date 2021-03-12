@@ -7,29 +7,23 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 
-public class OvalObserver implements IObserver {
-    private final static OvalObserver OBSERVER = new OvalObserver();
+public class OvalObserver implements Observer {
+    private final static Logger LOGGER = Logger.getLogger(OvalObserver.class);
+    private final static OvalObserver INSTANCE = new OvalObserver();
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
     private Map<Integer, OvalParameters> parametersMap = new HashMap<Integer, OvalParameters>();
-    private final static Logger LOGGER = Logger.getLogger(OvalObserver.class);
 
     private OvalObserver(){}
 
-    public static OvalObserver getOBSERVER() {
-        return OBSERVER;
+    public static OvalObserver getInstance() {
+        return INSTANCE;
     }
 
-    public OvalParameters getParametersMap(Integer ID) {
-        Set<Map.Entry<Integer, OvalParameters>> set = parametersMap.entrySet();
-        Iterator<Map.Entry<Integer, OvalParameters>> elements = set.iterator();
-
-        while (elements.hasNext()){
-            Map.Entry<Integer, OvalParameters> element = elements.next();
-            if (element.getKey() == ID){
-                return element.getValue();
-            }
+    public OvalParameters getParametersMap(int id) {
+        if (parametersMap.containsKey(id)){
+            return parametersMap.get(id);
         }
-        LOGGER.info("Element with ID = " + ID + "is missing");
+        LOGGER.info("Element with id = " + id + "is missing");
         return null;
     }
 
@@ -37,7 +31,7 @@ public class OvalObserver implements IObserver {
         double perimeter = calculator.calculatePerimeter(oval);
         double area = calculator.calculateArea(oval);
         OvalParameters parameters = new OvalParameters(perimeter, area);
-        parametersMap.put(oval.getID(), parameters);
+        parametersMap.put(oval.getId(), parameters);
     }
 
 }

@@ -3,12 +3,14 @@ package com.epam.task.third.tool;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ValidatorTest {
-    private Validator validator = new Validator();
-    private final String VALID_LINE = "-2.0 -1.0 1.0 -5.0";
-    private final Boolean EXPECTED_TRUE = true;
-    private final String INVALID_LINE = "-?.0 -1.0 1.s -5.0";
-    private final Boolean EXPECTED_FALSE = false;
+public class LineValidatorTest {
+    private LineValidator validator = new LineValidator();
+
+    private final static String VALID_LINE = "-2.0 -1.0 1.0 -5.0";
+    private final boolean expectedTrue = true;
+
+    private final static String INVALID_LINE = "-?.0 -1.0 1.s -5.0";
+    private final boolean expectedFalse = false;
 
     @Test
     public void testISValidShouldReturnTrueWhenValidLineApplied(){
@@ -16,7 +18,7 @@ public class ValidatorTest {
         Boolean actual = validator.isValid(VALID_LINE);
 
         //then
-        Assert.assertEquals(EXPECTED_TRUE, actual);
+        Assert.assertEquals(expectedTrue, actual);
     }
 
     @Test
@@ -25,7 +27,7 @@ public class ValidatorTest {
         Boolean actual = validator.isValid(INVALID_LINE);
 
         //then
-        Assert.assertEquals(EXPECTED_FALSE, actual);
+        Assert.assertEquals(expectedFalse, actual);
     }
 
 }

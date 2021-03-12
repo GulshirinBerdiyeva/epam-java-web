@@ -1,8 +1,8 @@
 package com.epam.task.third.parameters;
 
 public class OvalParameters {
-    private double perimeter,
-                   area;
+    private double perimeter;
+    private double area;
 
     public OvalParameters(double perimeter, double area) {
         this.perimeter = perimeter;
@@ -52,4 +52,5 @@ public class OvalParameters {
                 ", area=" + area +
                 '}';
     }
+
 }

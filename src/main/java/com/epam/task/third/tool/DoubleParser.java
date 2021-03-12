@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
-    private final static Logger LOGGER = Logger.getLogger(Parser.class);
+public class DoubleParser {
+    private final static Logger LOGGER = Logger.getLogger(DoubleParser.class);
     private final String DOUBLE_NUMBER = "-?\\d+\\.\\d+";
 
     public List<Double> parse(String line){

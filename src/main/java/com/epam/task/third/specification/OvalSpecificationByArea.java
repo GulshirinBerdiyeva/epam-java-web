@@ -3,7 +3,7 @@ package com.epam.task.third.specification;
 import com.epam.task.third.entity.Oval;
 import com.epam.task.third.logic.OvalParametersCalculator;
 
-public class OvalSpecificationByArea implements ISpecification {
+public class OvalSpecificationByArea implements Specification {
     private double area;
     private OvalParametersCalculator calculator = new OvalParametersCalculator();
 
@@ -15,4 +15,5 @@ public class OvalSpecificationByArea implements ISpecification {
         double area = calculator.calculateArea(oval);
         return area >= this.area ;
     }
+
 }

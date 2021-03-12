@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TxtFileReader {
-    private final static Logger LOGGER = Logger.getLogger(TxtFileReader.class);
+public class DataReader {
+    private final static Logger LOGGER = Logger.getLogger(DataReader.class);
 
-    public List<String> read(String fileName) throws DataException, IOException {
+    public List<String> read(String fileName) throws DataException {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(fileName));
@@ -25,13 +25,15 @@ public class TxtFileReader {
             return data;
 
         } catch (IOException e) {
-            LOGGER.fatal(e.getMessage(), e);
             throw new DataException(e.getMessage(), e);
 
         } finally {
             if (reader != null){
-                reader.close();
+                try {
+                    reader.close();
+                } catch (IOException e) { }
             }
+
         }
     }
 
