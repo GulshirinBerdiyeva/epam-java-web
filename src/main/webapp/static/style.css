@@ -1,0 +1,209 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/*login-page*/
+.login-body-background-gray{
+    background-color: dimgray;
+    background-size: cover;
+}
+
+.login-header{
+    width: 100%;
+    height: 50px;
+    background-color: darkslategray;
+}
+
+.login-header .russian button{
+    top: 10px;
+    right: 0;
+}
+
+.login-header .english button{
+    top: 10px;
+    right: 35px;
+}
+
+.login-form{
+    width: 400px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    color: #fff;
+    margin: auto;
+    border-radius: 25px;
+    background-color: dimgray;
+}
+
+.login-form h1{
+    font-size: 40px;
+    color: darkseagreen;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 40px 0;
+}
+
+.login-form h2{
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
+
+.login-form input{
+    font-size: 20px;
+    width: 100%;
+    padding: 15px 10px;
+    border: 0;
+    outline: none;
+    border-radius: 20px;
+}
+
+.login-form button{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 80px 0;
+    padding: 10px 15px;
+    width: 50%;
+    border-radius: 50px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    background-color: darkslategray;
+}
+
+.login-form button:hover{
+    background-color: darkseagreen;
+}
+
+/*header*/
+.header-wrapper{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: dimgray;
+}
+
+.header-wrapper h1{
+    padding-left: 20px;
+    padding-block-start: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: darkseagreen;
+    display: block;
+}
+
+.russian button{
+    top: 20%;
+    right: 75px;
+    width: 30px;
+    height: 25px;
+    border: 20px;
+    border-radius: 10px;
+    position: absolute;
+    background: url("https://www.countryflags.io/ru/flat/32.png") center;
+}
+
+.russian button:hover{
+    background-color: darkseagreen;
+}
+
+.english button{
+    top: 20%;
+    right: 110px;
+    width: 30px;
+    height: 25px;
+    border: 20px;
+    border-radius: 10px;
+    position: absolute;
+    background: url("https://www.countryflags.io/gb/flat/32.png") center;
+}
+
+.english button:hover{
+    background-color: darkseagreen;
+}
+
+.logout button{
+    top: 15%;
+    right: 0;
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+    background-color: darkslategray;
+}
+
+.logout button:hover{
+    background-color: darkseagreen;
+}
+
+/*menu*/
+.menu-wrapper{
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    left: 0;
+    background-color: darkslategray;
+}
+
+.menu-wrapper a {
+    padding: 50px 10px 10px 50px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    text-transform: uppercase;
+    color: white;
+}
+
+.menu-wrapper a:hover{
+    color: darkseagreen;
+}
+
+/*imageSlider*/
+
+.col{
+    padding-top: 50px;
+    padding-left: 200px;
+    background-color: black;
+}
+
+.card{
+    width: 550px;
+    height: 740px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 10px 10px 10px 70px;
+    overflow: hidden;
+    border: darkslategray 5px solid;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card img{
+    width: 550px;
+    height: 700px;
+    display: block;
+}
+
+.card img:hover{
+    margin-top: -20px;
+}
+
+.card h2{
+    font-size: 20px;
+    text-align: center;
+    color: darkslategray;
+}
