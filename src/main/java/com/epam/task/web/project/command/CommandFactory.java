@@ -1,9 +1,11 @@
 package com.epam.task.web.project.command;
 
+import com.epam.task.web.project.dao.DaoHelperFactory;
+import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.UserService;
 
 public class CommandFactory {
-    private static final String LOGIN_PAGE = "/index.jsp";
+
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String ALBUMS_PAGE = "/WEB-INF/view/fragments/albums.jsp";
     private static final String PLAYLISTS_PAGE = "/WEB-INF/view/fragments/playlists.jsp";
@@ -12,12 +14,12 @@ public class CommandFactory {
     private static final String ENGLISH = "english";
     private static final String RUSSIAN = "russian";
 
-    public static Command create(String type){
+    public static Command create(String type) {
         switch (type){
             case "login":
-                return new LoginCommand(new UserService());
+                return new LoginCommand(new UserService(new DaoHelperFactory()), new MusicService(new DaoHelperFactory()));
             case "logout":
-                return new ShowPageCommand(LOGIN_PAGE);
+                return new LogoutCommand();
             case "main":
                 return new ShowPageCommand(MAIN_PAGE);
             case "albums":
@@ -31,7 +33,8 @@ public class CommandFactory {
             case "russian":
                 return new ChangeLocaleCommand(RUSSIAN);
             default:
-                throw new IllegalArgumentException("Unknown type of command '" + type + "'");
+                throw new IllegalArgumentException("Unknown type of command!");
         }
     }
+
 }

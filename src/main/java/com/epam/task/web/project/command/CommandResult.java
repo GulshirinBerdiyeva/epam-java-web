@@ -1,6 +1,7 @@
 package com.epam.task.web.project.command;
 
 public class CommandResult {
+
     private final String page;
     private final boolean isRedirect;
 
@@ -24,4 +25,5 @@ public class CommandResult {
     public boolean isRedirect() {
         return isRedirect;
     }
+
 }

@@ -4,18 +4,18 @@ import com.epam.task.web.project.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class ShowPageCommand implements Command{
+public class LogoutCommand implements Command{
 
-    private final String page;
-
-    public ShowPageCommand(String page) {
-        this.page = page;
-    }
+    private static final String LOGIN_PAGE = "/index.jsp";
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        return CommandResult.forward(page);
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+
+        return CommandResult.forward(LOGIN_PAGE);
     }
 
 }
