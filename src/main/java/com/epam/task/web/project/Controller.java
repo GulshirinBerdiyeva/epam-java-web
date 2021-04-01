@@ -45,7 +45,6 @@ public class Controller extends HttpServlet {
             isRedirect = result.isRedirect();
 
             request.getSession(true).setAttribute(CURRENT_PAGE, page);
-            LOGGER.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         } catch (Exception e){
             request.setAttribute(ERROR_COMMAND, e.getMessage());
             page = ERROR_PAGE;

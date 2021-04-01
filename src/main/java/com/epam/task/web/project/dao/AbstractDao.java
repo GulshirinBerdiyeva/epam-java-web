@@ -18,6 +18,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
     private final String tableName;
 
     protected static final String SELECT_ALL = "SELECT * FROM ";
+    protected static final String WHERE_ID = " WHERE id = ";
 
     public AbstractDao(ProxyConnection proxyConnection, RowMapper<T> mapper, String tableName) {
         this.proxyConnection = proxyConnection;
@@ -68,7 +69,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
     @Override
     public Optional<T> getById(Long id) throws DaoException {
-        return Optional.empty();
+        return executeForSingleResult(SELECT_ALL + tableName + WHERE_ID + id);
     }
 
     @Override

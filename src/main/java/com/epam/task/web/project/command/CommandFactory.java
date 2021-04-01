@@ -32,6 +32,10 @@ public class CommandFactory {
                 return new ChangeLocaleCommand(ENGLISH);
             case "russian":
                 return new ChangeLocaleCommand(RUSSIAN);
+            case "purchase":
+                return new PurchaseCommand(new UserService(new DaoHelperFactory()));
+            case "createAlbum":
+                return new CreateAlbumCommand();
             default:
                 throw new IllegalArgumentException("Unknown type of command!");
         }

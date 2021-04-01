@@ -21,7 +21,7 @@ public class ConnectionPool {
     private Queue<ProxyConnection> availableConnections = new ArrayDeque<>();
     private Queue<ProxyConnection> connectionsInUse = new ArrayDeque<>();
 
-    private final Lock CONNECTIONS_LOCK = new ReentrantLock();
+    private final Lock connectionsLock = new ReentrantLock();
     private static final int SEMAPHORE_SIZE = 10;
     private static final Semaphore SEMAPHORE = new Semaphore(SEMAPHORE_SIZE);
 
@@ -52,7 +52,7 @@ public class ConnectionPool {
     public ProxyConnection getConnection() {
         try {
             SEMAPHORE.acquire();
-            CONNECTIONS_LOCK.lock();
+            connectionsLock.lock();
 
             ProxyConnection proxyConnection = availableConnections.remove();
             connectionsInUse.add(proxyConnection);
@@ -63,21 +63,20 @@ public class ConnectionPool {
             throw new ConnectionException(e);
 
         } finally {
-            CONNECTIONS_LOCK.unlock();
+            connectionsLock.unlock();
         }
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
-        CONNECTIONS_LOCK.lock();
+        connectionsLock.lock();
         try {
-
             if (connectionsInUse.contains(proxyConnection)) {
                 connectionsInUse.remove(proxyConnection);
                 availableConnections.add(proxyConnection);
             }
 
         } finally {
-            CONNECTIONS_LOCK.unlock();
+            connectionsLock.unlock();
             SEMAPHORE.release();
         }
     }

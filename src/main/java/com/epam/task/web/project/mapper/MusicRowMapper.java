@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MusicRowMapper implements RowMapper<Music>{
+
     public static final String ID = "id";
     public static final String TITLE = "title";
     public static final String ARTIST = "artist";

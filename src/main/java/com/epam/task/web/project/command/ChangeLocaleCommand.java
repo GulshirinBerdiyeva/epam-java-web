@@ -29,6 +29,7 @@ public class ChangeLocaleCommand implements Command{
         boolean isRussianLanguage = RUSSIAN.equals(locale);
         if (isRussianLanguage) {
             session.setAttribute(LOCALE, RUSSIAN_LOCALE);
+
         } else {
             session.setAttribute(LOCALE, ENGLISH_LOCALE);
         }

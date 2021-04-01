@@ -8,8 +8,7 @@ public class Music implements Entity{
     private String audioPath;
     private String imagePath;
 
-    public Music(Long id, String title, String artist,
-                 String audioPath, String imagePath) {
+    public Music(Long id, String title, String artist, String audioPath, String imagePath) {
         this.id = id;
         this.title = title;
         this.artist = artist;

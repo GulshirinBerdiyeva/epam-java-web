@@ -10,15 +10,15 @@
 
 <head>
     <meta name="viewport" content="width-device-width, initial-scale-1.0" />
-    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="static/styles.css">
     <title>Error</title>
 </head>
 
-<body>
+<body class="error-body">
 
-<div class="unknown-command">
+<div class="error-wrapper">
     <c:if test="${errorCommand != null}">
-        <h2>${commandError}</h2>
+        <h2>${errorCommand}</h2>
     </c:if>
 </div>
 

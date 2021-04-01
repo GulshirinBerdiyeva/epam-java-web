@@ -9,10 +9,10 @@
 
 <head>
     <meta name="viewport" content="width-device-width, initial-scale-1.0" />
-    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/static/styles.css" />
 </head>
 
-<body>
+<body class="albums-body">
 
 <nav>
     <jsp:include page="header.jsp" />
@@ -20,6 +20,43 @@
 <nav>
     <jsp:include page="menu.jsp" />
 </nav>
+
+<main class="albums-main">
+
+    <form class="create-album" action="${pageContext.request.contextPath}/controller?command=createAlbum" method="post">
+        <c:if test="${admin != null}">
+            <button type="submit">Create album</button>
+
+            <c:if test="${selectMusic != null}">
+                <div class="choice-wrapper">
+                    <table id="table">
+                        <thead>
+                        <tr>
+                            <th id="thead-number">№</th>
+                            <th>Artist</th>
+                            <th>Title</th>
+                            <th>Add</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${musics}" var="music" varStatus="i">
+                        <tr>
+                            <th id="body-number">${i.index+1}</th>
+                            <th>${music.artist}</th>
+                            <th>${music.title}</th>
+                            <th> <input type="checkbox" name="selected"> </th>
+                        </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:if>
+
+        </c:if>
+    </form>
+
+
+</main>
 
 </body>
 

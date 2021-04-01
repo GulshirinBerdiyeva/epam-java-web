@@ -2,6 +2,7 @@ package com.epam.task.web.project.mapper;
 
 import com.epam.task.web.project.entity.Admin;
 import com.epam.task.web.project.entity.Client;
+import com.epam.task.web.project.entity.Role;
 import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
@@ -26,17 +27,19 @@ public class UserRowMapper implements RowMapper<User>{
         String name = resultSet.getString(NAME);
         String login = resultSet.getString(LOGIN);
         String password = resultSet.getString(PASSWORD);
+        String tempRole = (String) resultSet.getString(ROLE);
+        Role role = null;
 
-        String role = (String) resultSet.getObject(ROLE);
+        if (ADMIN.equals(tempRole)) {
+            role = Role.ADMIN;
+            return new Admin(id, name, login, password, role);
 
-        if (ADMIN.equals(role)) {
-
-            return new Admin(id, name, login, password);
         } else {
+            role = Role.CLIENT;
             BigDecimal cash = resultSet.getBigDecimal(CASH);
             int musicAmount = resultSet.getInt(MUSIC_AMOUNT);
 
-            return new Client(id, name, login, password, cash, musicAmount);
+            return new Client(id, name, login, password, role, cash, musicAmount);
         }
 
     }

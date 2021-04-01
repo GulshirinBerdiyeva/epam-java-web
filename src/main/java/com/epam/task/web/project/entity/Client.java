@@ -7,9 +7,8 @@ public class Client extends User{
     private BigDecimal cash;
     private int musicAmount;
 
-    public Client(Long id, String name, String login, String password, BigDecimal cash, int musicAmount) {
-        super(id, name, login, password);
-        setRole(Role.CLIENT);
+    public Client(Long id, String name, String login, String password, Role role, BigDecimal cash, int musicAmount) {
+        super(id, name, login, password, role);
 
         this.cash = cash;
         this.musicAmount = musicAmount;

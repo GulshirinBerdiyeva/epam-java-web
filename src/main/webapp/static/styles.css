@@ -4,10 +4,31 @@
     font-family: sans-serif;
 }
 
-/*login-page*/
-.login-body-background-gray{
+/*error-page*/
+.error-body{
     background-color: dimgray;
-    background-size: cover;
+}
+
+.error-wrapper{
+    width: 400px;
+    height: 450px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.error-wrapper h2{
+    font-size: 20px;
+    color: red;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/*index-page*/
+.index-body{
+    background-color: dimgray;
 }
 
 .login-header{
@@ -31,34 +52,34 @@
     height: 450px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    color: #fff;
     margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: #fff;
     border-radius: 25px;
-    background-color: dimgray;
+    background-color: grey;
 }
 
 .login-form h1{
+    margin: 40px 0;
     font-size: 40px;
     color: darkseagreen;
     text-align: center;
     text-transform: uppercase;
-    margin: 40px 0;
 }
 
 .login-form h2{
-    font-size: 18px;
     text-align: center;
+    font-size: 18px;
     color: red;
 }
 
 .login-form input{
-    font-size: 20px;
-    width: 100%;
     padding: 15px 10px;
-    border: 0;
+    width: 100%;
+    font-size: 20px;
     outline: none;
+    border: none;
     border-radius: 20px;
 }
 
@@ -68,7 +89,8 @@
     margin: 80px 0;
     padding: 10px 15px;
     width: 50%;
-    border-radius: 50px;
+    border: none;
+    border-radius: 10px;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -84,10 +106,11 @@
 .header-wrapper{
     width: 100%;
     height: 50px;
+    display: block;
     position: fixed;
+    z-index: 2;
     top: 0;
     left: 0;
-    display: block;
     background-color: dimgray;
 }
 
@@ -97,7 +120,6 @@
     font-size: 30px;
     font-weight: bold;
     color: darkseagreen;
-    display: block;
 }
 
 .russian button{
@@ -152,7 +174,7 @@
     height: 100%;
     width: 200px;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 50px;
     left: 0;
     background-color: darkslategray;
@@ -172,38 +194,154 @@
     color: darkseagreen;
 }
 
-/*imageSlider*/
-
-.col{
-    padding-top: 50px;
-    padding-left: 200px;
+/*musicSlider*/
+.main-body{
     background-color: black;
 }
 
+.col{
+    padding-top: 60px;
+    padding-left: 200px;
+}
+
 .card{
-    width: 550px;
-    height: 740px;
+    width: 500px;
+    height: 600px;
+    position: relative;
     display: inline-block;
     box-sizing: border-box;
-    margin: 10px 10px 10px 70px;
-    overflow: hidden;
+    margin: 10px 10px 10px 80px;
     border: darkslategray 5px solid;
     border-radius: 10px;
     cursor: pointer;
+    z-index: 1;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
 }
 
 .card img{
-    width: 550px;
-    height: 700px;
+    width: 500px;
+    height: 600px;
+    border-radius: 10px;
     display: block;
 }
 
-.card img:hover{
-    margin-top: -20px;
+.description{
+    position:absolute;
+    top: 0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(255,255,255, 0.7);
+    display:none;
+    z-index: 1;
 }
 
-.card h2{
-    font-size: 20px;
-    text-align: center;
+.description h2{
+    padding-top: 200px;
+    size: 22px;
+    text-transform: uppercase;
     color: darkslategray;
+}
+
+.description button{
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.description button:hover{
+    color: white;
+    background-color: darkslategray;
+}
+
+.card:hover .description{
+    display: block;
+}
+
+/*albums-page*/
+.albums-body{
+    background-color: black;
+}
+
+.albums-main{
+    padding-top: 50px;
+    padding-left: 200px;
+}
+
+.create-album{
+    width: 100%;
+    height: 200px;
+    background-color: steelblue;
+}
+
+.create-album button{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 80px 0;
+    padding: 10px 15px;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    background-color: darkslategray;
+}
+
+.create-album button:hover{
+    background-color: darkseagreen;
+}
+
+.choice-wrapper{
+    padding-top: 20px;
+    width: calc(100% - 200px);
+}
+
+.choice-wrapper table{
+    padding-left: 200px;
+
+}
+
+.choice-wrapper thead{
+    background-color: steelblue;
+}
+
+#thead-number{
+    width: 50px;
+    height: 50px;
+    align-self: center;
+}
+
+#body-number{
+    width: 50px;
+    height: 50px;
+    align-self: center;
+}
+
+.choice-wrapper th{
+    width: 200px;
+    align-self: center;
+}
+
+/* Нечетные строки */
+#table tbody tr:nth-child(odd){
+    background: white;
+}
+
+/* Четные строки */
+#table tbody tr:nth-child(even){
+    background: cornflowerblue;
+}
+
+/*playlists-page*/
+.playlists-body{
+    background-color: black;
+}
+
+/*search-page*/
+.search-body{
+    background-color: black;
 }

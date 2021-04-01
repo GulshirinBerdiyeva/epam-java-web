@@ -19,8 +19,8 @@ public class ConnectionFactory {
     private String data_base;
     private String user;
     private String password;
-    private int connectionsAmount;
 
+    private int connectionsAmount;
     private ConnectionPool pool;
 
     public ConnectionFactory (ConnectionPool pool, int connectionsAmount) {
@@ -60,7 +60,6 @@ public class ConnectionFactory {
         data_base = properties.getProperty("dataBase");
         user = properties.getProperty("user");
         password = properties.getProperty("password");
-
     }
 
 }
