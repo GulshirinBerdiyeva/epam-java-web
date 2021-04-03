@@ -2,19 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.locale}" />
-<fmt:setBundle basename="locale" var="loc" />
-<fmt:message bundle="${loc}" key="login" var="login" />
-<fmt:message bundle="${loc}" key="errorLogin" var="loginError" />
-<fmt:message bundle="${loc}" key="userLogin" var="userLogin" />
-<fmt:message bundle="${loc}" key="password" var="password" />
-<fmt:message bundle="${loc}" key="loginButton" var="loginButton" />
+<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setBundle basename="local" var="local" />
+
+<fmt:message bundle="${local}" key="local.title.order.music" var="orderMusic" />
+<fmt:message bundle="${local}" key="local.login" var="login" />
+<fmt:message bundle="${local}" key="local.username" var="username" />
+<fmt:message bundle="${local}" key="local.password" var="password" />
+<fmt:message bundle="${local}" key="local.button.login" var="loginButton" />
+<fmt:message bundle="${local}" key="local.error.message.errorLogin" var="errorLoginMessage" />
+
 
 <html>
 
 <head>
     <meta name="viewport" content="width-device-width, initial-scale-1.0" />
     <link rel="stylesheet" href="static/styles.css" />
+    <title>${orderMusic}</title>
 </head>
 
 <body class="index-body">
@@ -22,6 +26,12 @@
 <header class="login-header">
     <div class="english">
         <form action="${pageContext.request.contextPath}/controller?command=english" method="post" >
+            <button type="submit" />
+        </form>
+    </div>
+
+    <div class="france">
+        <form action="${pageContext.request.contextPath}/controller?command=france" method="post" >
             <button type="submit" />
         </form>
     </div>
@@ -36,12 +46,14 @@
 <main class="login-form">
     <form action="${pageContext.request.contextPath}/controller?command=login" method="post" >
         <h1>${login}</h1>
+
         <c:if test="${errorLogin != null}">
             <br/>
-            <h2>${loginError}</h2>
+            <h2>${errorLoginMessage}</h2>
         </c:if>
         <br/>
-        <input type="text" name="login" placeholder="${userLogin}"/>
+
+        <input type="text" name="username" placeholder="${username}"/>
         <br/>
         <br/>
         <input type="password" name="password" placeholder="${password}"/>

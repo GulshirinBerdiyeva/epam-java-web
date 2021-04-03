@@ -22,16 +22,19 @@
             <div class="description">
                 <h2><b>${music.artist}<br>${music.title}</b></h2>
                 <br>
-                <a href="${pageContext.request.contextPath}/controller?command=purchase">
-                    <c:if test="${admin != null}">
-                        <audio controls controlsList="nodownload">
-                            <source src="${music.audioPath}" type="audio/mpeg">
-                        </audio>
-                    </c:if>
-                    <c:if test="${admin == null}">
-                        <button type="submit">${buy}</button>
-                    </c:if>
-                </a>
+
+                <c:if test="${admin != null}">
+                    <audio controls controlsList="nodownload">
+                        <source src="${music.audioPath}" type="audio/mpeg">
+                    </audio>
+                </c:if>
+
+                <c:if test="${admin == null}">
+                <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post" >
+                    <button type="submit" name="selectedMusic" value="${music.title}">Want to buy</button>
+                </form>
+                </c:if>
+
             </div>
         </div>
     </c:forEach>

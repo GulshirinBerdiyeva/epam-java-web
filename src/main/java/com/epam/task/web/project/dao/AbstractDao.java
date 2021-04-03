@@ -2,7 +2,7 @@ package com.epam.task.web.project.dao;
 
 import com.epam.task.web.project.connection.ProxyConnection;
 import com.epam.task.web.project.entity.Entity;
-import com.epam.task.web.project.mapper.RowMapper;
+import com.epam.task.web.project.mapper.Mapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +14,26 @@ import java.util.Optional;
 public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
     private final ProxyConnection proxyConnection;
-    private final RowMapper<T> mapper;
+    private final Mapper<T> mapper;
     private final String tableName;
 
     protected static final String SELECT_ALL = "SELECT * FROM ";
     protected static final String WHERE_ID = " WHERE id = ";
 
-    public AbstractDao(ProxyConnection proxyConnection, RowMapper<T> mapper, String tableName) {
+    public AbstractDao(ProxyConnection proxyConnection, Mapper<T> mapper, String tableName) {
         this.proxyConnection = proxyConnection;
         this.mapper = mapper;
         this.tableName = tableName;
+    }
+
+    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
+        PreparedStatement statement = proxyConnection.prepareStatement(query);
+
+        for (int i = 1; i <= params.length; i++){
+            statement.setObject(i, params[i-1]);
+        }
+
+        return statement;
     }
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException{
@@ -43,14 +53,31 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
         }
     }
 
-    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
-        PreparedStatement statement = proxyConnection.prepareStatement(query);
+    protected boolean existExecuteQuery(String query, Object... params) throws DaoException{
+        try(PreparedStatement statement = createStatement(query, params);
+            ResultSet resultSet = statement.executeQuery()) {
 
-        for (int i = 1; i <= params.length; i++){
-            statement.setObject(i, params[i-1]);
+            int result = 0;
+            while (resultSet.next()){
+               result = resultSet.getInt(1);
+            }
+
+            return result == 1;
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
 
-        return statement;
+    }
+
+    protected void executeUpdate(String query, Object... params) throws DaoException{
+        try(PreparedStatement statement = createStatement(query, params)) {
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException{
@@ -79,7 +106,6 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
     @Override
     public void save(T item) throws DaoException {
-
     }
 
     @Override

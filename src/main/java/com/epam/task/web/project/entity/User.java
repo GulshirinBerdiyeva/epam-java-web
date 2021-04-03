@@ -1,27 +1,47 @@
 package com.epam.task.web.project.entity;
 
-public abstract class User implements Entity{
+import java.math.BigDecimal;
 
-    private final Long id;
-    private String name;
-    private String login;
+public class User implements Entity{
+
+    private Long id;
+    private String username;
     private String password;
     private Role role;
+    private BigDecimal cash;
+    private int musicAmount;
 
-    public User(Long id, String name, String login, String password, Role role) {
+    private User(Long id, String username, String password, Role role) {
         this.id = id;
-        this.name = name;
-        this.login = login;
+        this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    private User(Long id, String username, String password, Role role, BigDecimal cash, int musicAmount) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.cash = cash;
+        this.musicAmount = musicAmount;
     }
 
-    public String getLogin() {
-        return login;
+    public static User getAdmin(Long id, String username, String password) {
+        return new User(id, username, password, Role.ADMIN);
+    }
+
+    public static User getClient(Long id, String username, String password, BigDecimal cash, int musicAmount) {
+        return new User(id, username, password, Role.CLIENT, cash, musicAmount);
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -32,8 +52,12 @@ public abstract class User implements Entity{
         return role;
     }
 
-    @Override
-    public Long getId() {
-        return id;
+    public BigDecimal getCash() {
+        return cash;
     }
+
+    public int getMusicAmount() {
+        return musicAmount;
+    }
+
 }

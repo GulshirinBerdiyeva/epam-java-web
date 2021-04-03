@@ -1,8 +1,5 @@
 package com.epam.task.web.project.connection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -12,8 +9,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-
     private static final AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
     private static AtomicBoolean isInstanceCreated = new AtomicBoolean();
     private static final Lock INSTANCE_LOCK = new ReentrantLock();
@@ -40,7 +35,7 @@ public class ConnectionPool {
                     INSTANCE.set(pool);
                     isInstanceCreated.set(true);
 
-                    LOGGER.info("Created ConnectionPool instance");
+                   //LOGGER.info("Created ConnectionPool instance");
                 }
             } finally {
                 INSTANCE_LOCK.unlock();

@@ -1,8 +1,9 @@
 package com.epam.task.web.project.command;
 
-import com.epam.task.web.project.entity.User;
+import com.epam.task.web.project.entity.Music;
+import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
-import com.epam.task.web.project.service.UserService;
+import com.epam.task.web.project.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,24 +11,26 @@ import java.util.Optional;
 
 public class PurchaseCommand implements Command{
 
-    private UserService userService;
+    private MusicService musicService;
 
-    public PurchaseCommand(UserService userService) {
-        this.userService = userService;
+    private static final String SEARCH_PAGE = "/WEB-INF/view/fragments/search.jsp";
+    private static final String SELECTED_MUSIC = "selectedMusic";
+
+    public PurchaseCommand(ServiceFactory serviceFactory) {
+        this.musicService = (MusicService) serviceFactory.create("music");
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession(false).getAttribute("user");
-        String role = String.valueOf(user.getRole());
-//
-//        if (ro)
-//
-//        Optional<User> optionalUser = userService.login(login, password);
-//
-//        if (optionalUser.isPresent()){
-//
-//
-            return null;
+        String musicTitle = request.getParameter(SELECTED_MUSIC);
+
+        Optional<Music> optionalMusic = musicService.getSelectedMusic(musicTitle);
+
+        if (optionalMusic.isPresent()) {
+            Music music = optionalMusic.get();
+            request.getSession(false).setAttribute(SELECTED_MUSIC, music);
+        }
+
+        return CommandResult.forward(SEARCH_PAGE);
     }
 }

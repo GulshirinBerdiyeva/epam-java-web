@@ -7,7 +7,7 @@ import com.epam.task.web.project.entity.User;
 
 import java.util.Optional;
 
-public class UserService {
+public class UserService implements Service{
 
     private final DaoHelperFactory daoHelperFactory;
 
@@ -15,16 +15,16 @@ public class UserService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public Optional<User> login(String login, String password) throws ServiceException {
+    public Optional<User> login(String username, String password) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()){
             UserDao userDao = daoHelper.createUserDao();
 
-            return userDao.findUserByLoginAndPassword(login, password);
+            return userDao.findUserByUsernameAndPassword(username, password);
 
         } catch (Exception e) {
             throw new ServiceException(e);
         }
     }
 
-//    public Optional<Music>
+
 }

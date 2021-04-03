@@ -20,6 +20,14 @@ public class DaoHelper implements AutoCloseable{
         return new MusicDao(proxyConnection);
     }
 
+    public MusicOrderDao createMusicOrderDao() {
+        return new MusicOrderDao(proxyConnection);
+    }
+
+    public PlaylistDao createPlaylistDao() {
+        return new PlaylistDao(proxyConnection);
+    }
+
     public void startTransaction() throws DaoException {
         try {
             proxyConnection.setAutoCommit(false);
