@@ -41,6 +41,10 @@ public class Music implements Entity{
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     @Override
     public Long getId() {
         return id;

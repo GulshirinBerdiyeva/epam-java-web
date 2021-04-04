@@ -1,6 +1,5 @@
 package com.epam.task.web.project.mapper;
 
-import com.epam.task.web.project.entity.Role;
 import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;

@@ -129,7 +129,7 @@
 
 .russian button{
     top: 20%;
-    right: 75px;
+    right: 135px;
     width: 30px;
     height: 25px;
     border: 20px;
@@ -144,7 +144,7 @@
 
 .france button{
     top: 20%;
-    right: 110px;
+    right: 170px;
     width: 30px;
     height: 25px;
     border: 20px;
@@ -159,7 +159,7 @@
 
 .english button{
     top: 20%;
-    right: 145px;
+    right: 205px;
     width: 30px;
     height: 25px;
     border: 20px;
@@ -175,7 +175,7 @@
 .logout button{
     top: 15%;
     right: 0;
-    width: 70px;
+    width: 130px;
     height: 30px;
     position: absolute;
     font-size: 16px;
@@ -373,6 +373,12 @@
     background-color: steelblue;
 }
 
+.search-main h2{
+    text-align: center;
+    size: 18px;
+    color: steelblue;
+}
+
 .search-main form {
     width: 300px;
     margin: 0 auto;
@@ -394,7 +400,7 @@
     position: absolute;
     font-size: 10px;
     font-weight: bold;
-    width: 42px;
+    width: 50px;
     height: 42px;
     border: none;
     color: white;

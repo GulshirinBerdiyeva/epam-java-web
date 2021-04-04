@@ -7,8 +7,8 @@
 
 <fmt:message bundle="${local}" key="local.title.order.music" var="orderMusic" />
 <fmt:message bundle="${local}" key="local.login" var="login" />
-<fmt:message bundle="${local}" key="local.username" var="username" />
-<fmt:message bundle="${local}" key="local.password" var="password" />
+<fmt:message bundle="${local}" key="local.placeholder.username" var="username" />
+<fmt:message bundle="${local}" key="local.placeholder.password" var="password" />
 <fmt:message bundle="${local}" key="local.button.login" var="loginButton" />
 <fmt:message bundle="${local}" key="local.error.message.errorLogin" var="errorLoginMessage" />
 
@@ -47,7 +47,7 @@
     <form action="${pageContext.request.contextPath}/controller?command=login" method="post" >
         <h1>${login}</h1>
 
-        <c:if test="${errorLogin != null}">
+        <c:if test="${requestScope.errorLogin != null}">
             <br/>
             <h2>${errorLoginMessage}</h2>
         </c:if>

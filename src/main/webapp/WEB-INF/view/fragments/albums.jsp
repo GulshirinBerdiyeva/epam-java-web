@@ -1,9 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.epam.task.web.project.entity.Role" %>
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
+
+<fmt:message bundle="${local}" key="local.button.create.album" var="buttonCreateAlbum" />
 
 <html>
 
@@ -24,8 +27,8 @@
 <main class="albums-main">
 
     <form class="create-album" action="${pageContext.request.contextPath}/controller?command=createAlbum" method="post">
-        <c:if test="${admin != null}">
-            <button type="submit">Create album</button>
+        <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}">
+            <button type="submit">${buttonCreateAlbum}</button>
 
             <c:if test="${selectMusic != null}">
                 <div class="choice-wrapper">

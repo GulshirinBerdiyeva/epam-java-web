@@ -20,6 +20,8 @@ public class ServiceFactory {
                 return new MusicOrderService(daoHelperFactory);
             case "playlist":
                 return new PlaylistService(daoHelperFactory);
+            case "albums":
+                return new AlbumsService(daoHelperFactory);
             default:
                 throw  new IllegalArgumentException("Unknown type of service!");
         }

@@ -8,6 +8,7 @@ public class CommandFactory {
     private static final DaoHelperFactory DAO_HELPER_FACTORY = new DaoHelperFactory();
     private static final ServiceFactory SERVICE_FACTORY = new ServiceFactory(DAO_HELPER_FACTORY);
 
+    private static final String LOGIN_PAGE = "/index.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String ALBUMS_PAGE = "/WEB-INF/view/fragments/albums.jsp";
     private static final String PLAYLIST_PAGE = "/WEB-INF/view/fragments/playlist.jsp";
@@ -27,19 +28,33 @@ public class CommandFactory {
                 return new ChangeLocalCommand(RUSSIAN);
             case "login":
                 return new LoginCommand(SERVICE_FACTORY);
+            case "loginPage":
+                return new ShowPageCommand(LOGIN_PAGE);
             case "logout":
                 return new LogoutCommand();
             case "main":
+                return new MainCommand(SERVICE_FACTORY);
+            case "mainPage":
                 return new ShowPageCommand(MAIN_PAGE);
             case "albums":
+                return new AlbumsCommand(SERVICE_FACTORY);
+            case "albumsPage":
                 return new ShowPageCommand(ALBUMS_PAGE);
             case "playlist":
+                return new PlaylistCommand(SERVICE_FACTORY);
+            case "playlistPage":
                 return new ShowPageCommand(PLAYLIST_PAGE);
             case "search":
                 return new ShowPageCommand(SEARCH_PAGE);
-            case "purchase":
-                return new PurchaseCommand(SERVICE_FACTORY);
+            case "selectMusic":
+                return new SelectMusicCommand(SERVICE_FACTORY);
             case "buy":
+                return new BuyCommand(SERVICE_FACTORY);
+            case "confirm":
+                return new ShowPageCommand(LOGIN_PAGE);
+            case "cancel":
+                return new BuyCommand(SERVICE_FACTORY);
+            case "edit":
                 return new BuyCommand(SERVICE_FACTORY);
             case "createAlbum":
                 return new CreateAlbumCommand();

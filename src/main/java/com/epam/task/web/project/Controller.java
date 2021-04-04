@@ -29,7 +29,7 @@ public class Controller extends HttpServlet {
     }
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         String page;
         boolean isRedirect = false;

@@ -16,6 +16,7 @@ public class UserService implements Service{
     }
 
     public Optional<User> login(String username, String password) throws ServiceException {
+
         try (DaoHelper daoHelper = daoHelperFactory.create()){
             UserDao userDao = daoHelper.createUserDao();
 
@@ -24,7 +25,7 @@ public class UserService implements Service{
         } catch (Exception e) {
             throw new ServiceException(e);
         }
-    }
 
+    }
 
 }

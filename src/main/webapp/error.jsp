@@ -18,7 +18,7 @@
 <body class="error-body">
 
 <div class="error-wrapper">
-    <c:if test="${error != null}">
+    <c:if test="${requestScope.error != null}">
         <h2>${error}</h2>
     </c:if>
 </div>

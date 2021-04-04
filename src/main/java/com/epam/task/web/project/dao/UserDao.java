@@ -22,8 +22,7 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public void save(User item) throws DaoException {
-        User user = (User) item;
-        executeUpdate(UPDATE_USER_CASH_AND_MUSIC_AMOUNT, user.getCash(), user.getMusicAmount(), user.getId());
+        executeUpdate(UPDATE_USER_CASH_AND_MUSIC_AMOUNT, item.getCash(), item.getMusicAmount(), item.getId());
     }
 
 }

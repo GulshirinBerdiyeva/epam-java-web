@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.epam.task.web.project.entity.Role" %>
 
-<fmt:setLocale value="${sessionScope.locale}" />
-<fmt:setBundle basename="locale" var="loc" />
-<fmt:message bundle="${loc}" key="buy" var="buy" />
+<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setBundle basename="local" var="local" />
+
+<fmt:message bundle="${local}" key="local.button.want.to.buy" var="buttonWantToBuy" />
 
 <html>
 
@@ -16,25 +18,24 @@
 <body>
 
 <main class="col">
-    <c:forEach items="${musics}" var="music">
+    <c:forEach items="${sessionScope.musics}" var="music">
         <div class="card">
             <img src="${music.imagePath}" alt="">
             <div class="description">
                 <h2><b>${music.artist}<br>${music.title}</b></h2>
                 <br>
 
-                <c:if test="${admin != null}">
+                <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}">
                     <audio controls controlsList="nodownload">
                         <source src="${music.audioPath}" type="audio/mpeg">
                     </audio>
                 </c:if>
 
-                <c:if test="${admin == null}">
-                <form action="${pageContext.request.contextPath}/controller?command=purchase" method="post" >
-                    <button type="submit" name="selectedMusic" value="${music.title}">Want to buy</button>
+                <c:if test="${Role.CLIENT.equals(sessionScope.user.role)}">
+                <form action="${pageContext.request.contextPath}/controller?command=selectMusic" method="post" >
+                    <button type="submit" name="selectedMusicTitle" value="${music.title}">${buttonWantToBuy}</button>
                 </form>
                 </c:if>
-
             </div>
         </div>
     </c:forEach>
