@@ -12,14 +12,13 @@ import java.util.List;
 public class MainCommand implements Command {
 
     private final MusicService musicService;
-    private static final String SERVICE_TYPE = "music";
 
     private static final String MUSICS = "musics";
 
-    private static final String MAIN_PAGE_COMMAND = "?command=mainPage";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     public MainCommand(ServiceFactory serviceFactory) {
-        this.musicService = (MusicService) serviceFactory.create(SERVICE_TYPE);
+        this.musicService = (MusicService) serviceFactory.create(Music.class);
     }
 
     @Override
@@ -27,6 +26,6 @@ public class MainCommand implements Command {
         List<Music> musics = musicService.getAllMusics();
         request.getSession(true).setAttribute(MUSICS, musics);
 
-        return CommandResult.redirect(request.getRequestURI() + MAIN_PAGE_COMMAND);
+        return CommandResult.forward(MAIN_PAGE);
     }
 }

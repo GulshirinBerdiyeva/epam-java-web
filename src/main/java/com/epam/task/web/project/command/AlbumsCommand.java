@@ -1,5 +1,6 @@
 package com.epam.task.web.project.command;
 
+import com.epam.task.web.project.entity.Albums;
 import com.epam.task.web.project.service.AlbumsService;
 import com.epam.task.web.project.service.ServiceException;
 import com.epam.task.web.project.service.ServiceFactory;
@@ -11,10 +12,8 @@ public class AlbumsCommand implements Command {
 
     private final AlbumsService albumsService;
 
-    private static final String ALBUMS = "albums";
-
     public AlbumsCommand(ServiceFactory serviceFactory) {
-        this.albumsService = (AlbumsService) serviceFactory.create(ALBUMS);
+        this.albumsService = (AlbumsService) serviceFactory.create(Albums.class);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.epam.task.web.project.entity;
 
 public class Playlist implements Entity{
 
-    private final Long id;
+    private Long id;
     private final Long userId;
     private final Long musicId;
 
@@ -10,6 +10,16 @@ public class Playlist implements Entity{
         this.id = id;
         this.userId = userId;
         this.musicId = musicId;
+    }
+
+    public Playlist(Long userId, Long musicId) {
+        this.userId = userId;
+        this.musicId = musicId;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 
     public Long getUserId() {
@@ -20,8 +30,4 @@ public class Playlist implements Entity{
         return musicId;
     }
 
-    @Override
-    public Long getId() {
-        return null;
-    }
 }

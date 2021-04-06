@@ -18,6 +18,7 @@
 <body>
 
 <main class="col">
+
     <c:forEach items="${sessionScope.musics}" var="music">
         <div class="card">
             <img src="${music.imagePath}" alt="">
@@ -39,6 +40,7 @@
             </div>
         </div>
     </c:forEach>
+
 </main>
 
 </body>

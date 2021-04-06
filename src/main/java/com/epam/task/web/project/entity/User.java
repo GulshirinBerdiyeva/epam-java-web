@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class User implements Entity{
 
-    private Long id;
+    private final Long id;
     private String username;
     private String password;
     private Role role;
@@ -56,8 +56,15 @@ public class User implements Entity{
         return cash;
     }
 
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
+    }
+
     public int getMusicAmount() {
         return musicAmount;
     }
 
+    public void setMusicAmount(int musicAmount) {
+        this.musicAmount = musicAmount;
+    }
 }

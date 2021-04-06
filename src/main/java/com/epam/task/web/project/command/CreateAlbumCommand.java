@@ -11,7 +11,6 @@ public class CreateAlbumCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        request.getSession(false).setAttribute("selectMusic", true);
 
         return CommandResult.forward(ALBUMS_PAGE);
     }

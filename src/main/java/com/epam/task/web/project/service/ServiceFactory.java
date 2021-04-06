@@ -1,6 +1,7 @@
 package com.epam.task.web.project.service;
 
 import com.epam.task.web.project.dao.DaoHelperFactory;
+import com.epam.task.web.project.entity.*;
 
 public class ServiceFactory {
 
@@ -10,21 +11,25 @@ public class ServiceFactory {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public Service create(String type) {
-        switch (type) {
-            case "user":
-                return new UserService(daoHelperFactory);
-            case "music":
-                return new MusicService(daoHelperFactory);
-            case "musicOrder":
-                return new MusicOrderService(daoHelperFactory);
-            case "playlist":
-                return new PlaylistService(daoHelperFactory);
-            case "albums":
-                return new AlbumsService(daoHelperFactory);
-            default:
-                throw  new IllegalArgumentException("Unknown type of service!");
+    public <T extends Entity> Service create(Class<T> classType) {
+        if (classType == User.class) {
+            return new UserService(daoHelperFactory);
         }
+        if (classType == Music.class) {
+            return new MusicService(daoHelperFactory);
+        }
+        if (classType == MusicOrder.class) {
+            return new MusicOrderService(daoHelperFactory);
+        }
+        if (classType == Playlist.class) {
+            return new PlaylistService(daoHelperFactory);
+        }
+        if (classType == Albums.class) {
+            return new AlbumsService(daoHelperFactory);
+        }
+
+        throw  new IllegalArgumentException("Unknown type of service!");
+
     }
 
 }

@@ -10,7 +10,7 @@ public class UserDao extends AbstractDao<User> {
 
     private static final String TABLE_NAME = "user";
     private static final String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM user WHERE username = ? AND password = MD5(?)";
-    private static final String UPDATE_USER_CASH_AND_MUSIC_AMOUNT = "UPDATE user SET cash = ? AND music_amount = ? WHERE id = ?";
+    private static final String UPDATE_USER_CASH_AND_MUSIC_AMOUNT = "UPDATE user SET cash = ?, music_amount = ? WHERE id = ?";
 
     public UserDao(ProxyConnection proxyConnection) {
         super(proxyConnection, new UserMapper(), TABLE_NAME);

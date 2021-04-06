@@ -24,7 +24,7 @@ CREATE TABLE music_order (
      user_id BIGINT,
      FOREIGN KEY(music_id) REFERENCES music(id),
      FOREIGN KEY(user_id) REFERENCES user(id),
-     date DATETIME DEFAULT CURRENT_TIMESTAMP,
+     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      discount INT,
      CHECK (discount>=0 AND discount<100),
      final_price DECIMAL(9,2),
@@ -53,5 +53,5 @@ CREATE TABLE comment (
     user_id BIGINT,
     FOREIGN KEY(user_id) REFERENCES user(id),
     comment VARCHAR(100),
-    date DATETIME DEFAULT CURRENT_TIMESTAMP
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

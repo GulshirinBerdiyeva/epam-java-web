@@ -1,28 +1,19 @@
 package com.epam.task.web.project.entity;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 public class MusicOrder implements Entity{
 
     private Long id;
     private final Long musicId;
     private final Long userId;
-    private String date;
+    private Timestamp date;
     private int discount;
     private BigDecimal finalPrice;
     private boolean payment;
 
-
-    public MusicOrder(Long userId, Long musicId, int discount, BigDecimal finalPrice, boolean payment) {
-        this.userId = userId;
-        this.musicId = musicId;
-        this.discount = discount;
-        this.finalPrice = finalPrice;
-        this.payment = payment;
-    }
-
-    public MusicOrder(Long id, Long musicId, Long userId,
-                      String date, int discount, BigDecimal finalPrice, boolean payment) {
+    public MusicOrder(Long id, Long musicId, Long userId, Timestamp date, int discount, BigDecimal finalPrice, boolean payment) {
         this.id = id;
         this.musicId = musicId;
         this.userId = userId;
@@ -30,6 +21,19 @@ public class MusicOrder implements Entity{
         this.discount = discount;
         this.finalPrice = finalPrice;
         this.payment = payment;
+    }
+
+    public MusicOrder(Long musicId, Long userId, int discount, BigDecimal finalPrice, boolean payment) {
+        this.musicId = musicId;
+        this.userId = userId;
+        this.discount = discount;
+        this.finalPrice = finalPrice;
+        this.payment = payment;
+    }
+
+    @Override
+    public Long getId() {
+        return null;
     }
 
     public Long getMusicId() {
@@ -40,7 +44,7 @@ public class MusicOrder implements Entity{
         return userId;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
@@ -56,8 +60,7 @@ public class MusicOrder implements Entity{
         return payment;
     }
 
-    @Override
-    public Long getId() {
-        return null;
+    public void setPayment(boolean payment) {
+        this.payment = payment;
     }
 }

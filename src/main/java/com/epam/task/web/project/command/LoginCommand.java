@@ -12,7 +12,6 @@ import java.util.Optional;
 public class LoginCommand implements Command{
 
     private final UserService userService;
-    private static final String SERVICE_TYPE = "user";
 
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
@@ -24,7 +23,7 @@ public class LoginCommand implements Command{
     private static final String MAIN_COMMAND = "?command=main";
 
     public LoginCommand(ServiceFactory serviceFactory) {
-        this.userService = (UserService) serviceFactory.create(SERVICE_TYPE);
+        this.userService = (UserService) serviceFactory.create(User.class);
     }
 
     @Override

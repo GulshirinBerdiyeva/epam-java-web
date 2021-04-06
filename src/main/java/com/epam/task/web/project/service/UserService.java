@@ -7,7 +7,7 @@ import com.epam.task.web.project.entity.User;
 
 import java.util.Optional;
 
-public class UserService implements Service{
+public class UserService implements Service {
 
     private final DaoHelperFactory daoHelperFactory;
 

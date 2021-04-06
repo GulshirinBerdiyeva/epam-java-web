@@ -8,11 +8,12 @@ public class CommandFactory {
     private static final DaoHelperFactory DAO_HELPER_FACTORY = new DaoHelperFactory();
     private static final ServiceFactory SERVICE_FACTORY = new ServiceFactory(DAO_HELPER_FACTORY);
 
-    private static final String LOGIN_PAGE = "/index.jsp";
-    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String ALBUMS_PAGE = "/WEB-INF/view/fragments/albums.jsp";
     private static final String PLAYLIST_PAGE = "/WEB-INF/view/fragments/playlist.jsp";
     private static final String SEARCH_PAGE = "/WEB-INF/view/fragments/search.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
+    private static final String EDIT_PAGE = "/WEB-INF/view/fragments/edit.jsp";
+    private static final String PAYED_PAGE = "/WEB-INF/view/fragments/payed.jsp";
 
     private static final String ENGLISH = "english";
     private static final String FRANCE = "france";
@@ -28,32 +29,36 @@ public class CommandFactory {
                 return new ChangeLocalCommand(RUSSIAN);
             case "login":
                 return new LoginCommand(SERVICE_FACTORY);
-            case "loginPage":
-                return new ShowPageCommand(LOGIN_PAGE);
             case "logout":
                 return new LogoutCommand();
             case "main":
                 return new MainCommand(SERVICE_FACTORY);
-            case "mainPage":
-                return new ShowPageCommand(MAIN_PAGE);
-            case "albums":
-                return new AlbumsCommand(SERVICE_FACTORY);
-            case "albumsPage":
-                return new ShowPageCommand(ALBUMS_PAGE);
-            case "playlist":
-                return new PlaylistCommand(SERVICE_FACTORY);
-            case "playlistPage":
-                return new ShowPageCommand(PLAYLIST_PAGE);
             case "search":
                 return new ShowPageCommand(SEARCH_PAGE);
             case "selectMusic":
                 return new SelectMusicCommand(SERVICE_FACTORY);
             case "buy":
                 return new BuyCommand(SERVICE_FACTORY);
+            case "musicOrder":
+                return new MusicOrderCommand();
+            case "purchasePage":
+                return new ShowPageCommand(PURCHASE_PAGE);
             case "confirm":
-                return new ShowPageCommand(LOGIN_PAGE);
+                return new ConfirmCommand(SERVICE_FACTORY);
+            case "payedPage":
+                return new ShowPageCommand(PAYED_PAGE);
             case "cancel":
-                return new BuyCommand(SERVICE_FACTORY);
+                return new CancelCommand(SERVICE_FACTORY);
+            case "playlist":
+                return new PlaylistCommand(SERVICE_FACTORY);
+            case "playlistPage":
+                return new ShowPageCommand(PLAYLIST_PAGE);
+            case "albums":
+                return new AlbumsCommand(SERVICE_FACTORY);
+            case "albumsPage":
+                return new ShowPageCommand(ALBUMS_PAGE);
+            case "editPage":
+                return new ShowPageCommand(EDIT_PAGE);
             case "edit":
                 return new BuyCommand(SERVICE_FACTORY);
             case "createAlbum":

@@ -1,15 +1,37 @@
 package com.epam.task.web.project.logic;
 
+import com.epam.task.web.project.entity.Music;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CurrencyConverter {
+
+    private static final String LOCAL = "local";
+
+    private static final String SELECTED_MUSIC_PRICE = "selectedMusicPrice";
 
     private static final String FRANCE_LOCAL = "FR";
     private static final String RUSSIAN_LOCAL = "RU";
 
     private static final BigDecimal EURO_EXCHANGE_RATE = new BigDecimal(0.85);
     private static final BigDecimal RUBLE_EXCHANGE_RATE = new BigDecimal(76.5);
+
+    public void convertPrice(HttpServletRequest request, BigDecimal price) {
+        HttpSession session = request.getSession(false);
+        String localType = (String) session.getAttribute(LOCAL);
+
+        if (localType == null) {
+            localType = "EN";
+        }
+
+        BigDecimal result = convert(localType, price);
+
+        request.getSession(false).setAttribute(SELECTED_MUSIC_PRICE, result);
+    }
+
 
     public BigDecimal convert(String localType, BigDecimal currency) {
 

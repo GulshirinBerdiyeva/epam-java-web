@@ -47,16 +47,16 @@
     <form action="${pageContext.request.contextPath}/controller?command=login" method="post" >
         <h1>${login}</h1>
 
-        <c:if test="${requestScope.errorLogin != null}">
+        <c:if test="${requestScope.errorLogin}">
             <br/>
             <h2>${errorLoginMessage}</h2>
         </c:if>
         <br/>
 
-        <input type="text" name="username" placeholder="${username}"/>
+        <input type="text" name="username" placeholder="${username}" />
         <br/>
         <br/>
-        <input type="password" name="password" placeholder="${password}"/>
+        <input type="password" name="password" placeholder="${password}" />
         <button type="submit">${loginButton}</button>
     </form>
 </main>

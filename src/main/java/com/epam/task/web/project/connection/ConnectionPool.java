@@ -20,7 +20,7 @@ public class ConnectionPool {
     private static final int SEMAPHORE_SIZE = 10;
     private static final Semaphore SEMAPHORE = new Semaphore(SEMAPHORE_SIZE);
 
-    private ConnectionFactory connectionFactory = new ConnectionFactory(this, SEMAPHORE_SIZE);
+    private final ConnectionFactory connectionFactory = new ConnectionFactory(this, SEMAPHORE_SIZE);
 
     private ConnectionPool() {
         availableConnections.addAll(connectionFactory.create());

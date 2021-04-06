@@ -1,5 +1,6 @@
 package com.epam.task.web.project.command;
 
+import com.epam.task.web.project.entity.Playlist;
 import com.epam.task.web.project.service.PlaylistService;
 import com.epam.task.web.project.service.ServiceException;
 import com.epam.task.web.project.service.ServiceFactory;
@@ -11,10 +12,8 @@ public class PlaylistCommand implements Command {
 
     private final PlaylistService playlistService;
 
-    private static final String PLAYLIST = "playlist";
-
     public PlaylistCommand(ServiceFactory serviceFactory) {
-        this.playlistService = (PlaylistService) serviceFactory.create(PLAYLIST);
+        this.playlistService = (PlaylistService) serviceFactory.create(Playlist.class);
     }
 
     @Override

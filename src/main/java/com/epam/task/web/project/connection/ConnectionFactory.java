@@ -16,7 +16,7 @@ public class ConnectionFactory {
     private static final String FILE_NAME = "connection.properties";
 
     private String url;
-    private String data_base;
+    private String dataBase;
     private String user;
     private String password;
 
@@ -34,7 +34,7 @@ public class ConnectionFactory {
 
             List<ProxyConnection> connections = new ArrayList<>();
             for (int i = 0; i < connectionsAmount; i++) {
-                Connection connection = DriverManager.getConnection(url+data_base, user, password);
+                Connection connection = DriverManager.getConnection(url + dataBase, user, password);
 
                 ProxyConnection proxyConnection = new ProxyConnection(connection, pool);
 
@@ -57,7 +57,7 @@ public class ConnectionFactory {
         properties.load(inputStream);
 
         url = properties.getProperty("url");
-        data_base = properties.getProperty("dataBase");
+        dataBase = properties.getProperty("dataBase");
         user = properties.getProperty("user");
         password = properties.getProperty("password");
     }

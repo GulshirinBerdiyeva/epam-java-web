@@ -1,11 +1,12 @@
 package com.epam.task.web.project.service;
 
 import com.epam.task.web.project.dao.*;
-import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.entity.MusicOrder;
+import com.epam.task.web.project.entity.Playlist;
 import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MusicOrderService implements Service {
 
@@ -15,85 +16,57 @@ public class MusicOrderService implements Service {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public void buy(User user, Music music) throws ServiceException, DaoException {
-        DaoHelper daoHelper = daoHelperFactory.create();
-        try {
-            MusicOrderDao musicOrderDao = daoHelper.createMusicOrderDao();
+    public void confirmMusicOrder(MusicOrder musicOrder, User user, Long musicId) throws ServiceException{
+
+        try (DaoHelper daoHelper = daoHelperFactory.create()) {
             UserDao userDao = daoHelper.createUserDao();
+            MusicOrderDao musicOrderDao = daoHelper.createMusicOrderDao();
+            PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
-            BigDecimal price = music.getPrice();
-            BigDecimal cash = user.getCash();
-
-            int enoughCash = price.compareTo(cash);
-            if (enoughCash == 0 || enoughCash == -1) {
-
-                int musicAmount = user.getMusicAmount();
-                int discount = getDiscount(musicAmount);
-
-                BigDecimal finalPrice;
-                if (discount > 0) {
-                    finalPrice = getFinalPrice(price, discount);
-                } else {
-                    finalPrice = price;
-                }
+            if (musicOrder != null || user != null) {
 
                 daoHelper.startTransaction();
 
-                MusicOrder musicOrder = new MusicOrder(user.getId(), music.getId(), discount, finalPrice, true);
+                user.setCash(updateUserCash(musicOrder, user));
+                user.setMusicAmount(user.getMusicAmount() + 1);
+
+                musicOrder.setPayment(true);
+
+                Playlist playlist = new Playlist(user.getId(), musicId);
+
+                userDao.save(user);
                 musicOrderDao.save(musicOrder);
-
-                BigDecimal updateCash = user.getCash().subtract(finalPrice);
-                int updateMusicAmount = user.getMusicAmount() + 1;
-
-                User updateUser = User.getClient(user.getId(), user.getUsername(), user.getPassword(), updateCash, updateMusicAmount);
-                userDao.save(updateUser);
+                playlistDao.save(playlist);
 
                 daoHelper.commit();
-
-            } else {
-                MusicOrder musicOrder = new MusicOrder(user.getId(), music.getId(), 0, price, false);
-                musicOrderDao.save(musicOrder);
-
             }
+
         } catch (Exception e) {
-            daoHelper.rollback();
             throw new ServiceException(e);
-
-        } finally {
-            closeConnection(daoHelper);
         }
 
     }
 
-    private int getDiscount(int musicAmount) {
-        if (musicAmount >= 3 && musicAmount < 7) {
-            return 10;
-        }
+    private BigDecimal updateUserCash(MusicOrder musicOrder, User user) {
+        BigDecimal userCash = user.getCash();
+        BigDecimal paymentPrice = musicOrder.getFinalPrice();
 
-        if (musicAmount >= 7 && musicAmount < 10) {
-            return 20;
-        }
-
-        if (musicAmount >= 10) {
-            return 30;
-        }
-
-        return 0;
+        return userCash.subtract(paymentPrice).setScale(2, RoundingMode.HALF_UP);
     }
 
-    private BigDecimal getFinalPrice(BigDecimal price, int discountValue) {
-        BigDecimal discount = new BigDecimal(discountValue);
-        BigDecimal hundred = new BigDecimal(100);
+    public void cancelMusicOrder(MusicOrder musicOrder) throws ServiceException {
 
-        return price.subtract((price.multiply(discount)).divide(hundred));
-    }
+        try (DaoHelper daoHelper = daoHelperFactory.create()) {
+            MusicOrderDao musicOrderDao = daoHelper.createMusicOrderDao();
 
-    private void closeConnection(DaoHelper daoHelper) throws DaoException {
-        try {
-            daoHelper.close();
+            if (musicOrder != null) {
+                musicOrderDao.save(musicOrder);
+            }
+
         } catch (Exception e) {
-            throw new DaoException(e);
+            throw new ServiceException(e);
         }
+
     }
 
 }

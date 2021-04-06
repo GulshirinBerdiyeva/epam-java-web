@@ -26,6 +26,7 @@ public class MusicMapper implements Mapper<Music> {
         BigDecimal price = resultSet.getBigDecimal(PRICE);
 
         return new Music(id, title, artist, audioPath, imagePath, price);
+
     }
 
 }

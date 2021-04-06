@@ -5,10 +5,6 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
-<fmt:message bundle="${local}" key="local.placeholder.search.song" var="searchSong"/>
-<fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
-<fmt:message bundle="${local}" key="local.error.message.songIsAbsent" var="songIsAbsentMessage" />
-
 <html>
 
 <head>
@@ -26,21 +22,19 @@
 </nav>
 
 <main class="search-main">
+    <div class="purchase-wrapper">
 
-    <div class="search-wrapper">
-        <form action="${pageContext.request.contextPath}/controller?command=selectMusic" method="post" >
-            <input type="text" name="selectedMusicTitle" placeholder="${searchSong}" />
-            <button type="submit">${buttonSearch}</button>
-        </form>
+        <jsp:include page="perform.jsp" />
+
+        <audio controls controlsList="nodownload">
+            <source src="${sessionScope.selectedMusic.audioPath}" type="audio/mpeg">
+        </audio>
     </div>
-
-    <c:if test="${requestScope.songIsAbsent != null}" >
-        <br/>
-        <h2>${songIsAbsentMessage}</h2>
-    </c:if>
-
 </main>
 
 </body>
 
 </html>
+
+
+
