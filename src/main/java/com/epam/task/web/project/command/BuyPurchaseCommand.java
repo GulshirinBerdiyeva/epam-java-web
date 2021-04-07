@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 
-public class BuyCommand implements Command{
+public class BuyPurchaseCommand implements Command{
 
     private final PlaylistService playlistService;
 
@@ -22,7 +22,7 @@ public class BuyCommand implements Command{
     private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
     private static final String MUSIC_ORDER_COMMAND = "?command=musicOrder";
 
-    public BuyCommand(ServiceFactory serviceFactory) {
+    public BuyPurchaseCommand(ServiceFactory serviceFactory) {
         this.playlistService = (PlaylistService) serviceFactory.create(Playlist.class);
     }
 

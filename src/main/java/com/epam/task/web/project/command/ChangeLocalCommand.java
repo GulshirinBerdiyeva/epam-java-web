@@ -13,7 +13,7 @@ public class ChangeLocalCommand implements Command{
     private static final String FRANCE = "france";
     private static final String RUSSIAN = "russian";
 
-    private static final String ENGLISH_LOCAL = "EN";
+    private static final String ENGLISH_LOCAL = "US";
     private static final String FRANCE_LOCAL = "FR";
     private static final String RUSSIAN_LOCAL = "RU";
 

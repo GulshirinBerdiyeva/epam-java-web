@@ -12,6 +12,7 @@ public class ServiceFactory {
     }
 
     public <T extends Entity> Service create(Class<T> classType) {
+
         if (classType == User.class) {
             return new UserService(daoHelperFactory);
         }
@@ -24,8 +25,11 @@ public class ServiceFactory {
         if (classType == Playlist.class) {
             return new PlaylistService(daoHelperFactory);
         }
-        if (classType == Albums.class) {
-            return new AlbumsService(daoHelperFactory);
+        if (classType == Album.class) {
+            return new AlbumService(daoHelperFactory);
+        }
+        if (classType == Comment.class) {
+            return new CommentService(daoHelperFactory);
         }
 
         throw  new IllegalArgumentException("Unknown type of service!");

@@ -115,7 +115,6 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
     @Override
     public void removeById(Long id) throws DaoException {
-
     }
 
 }

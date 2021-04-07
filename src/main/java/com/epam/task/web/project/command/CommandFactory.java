@@ -8,12 +8,10 @@ public class CommandFactory {
     private static final DaoHelperFactory DAO_HELPER_FACTORY = new DaoHelperFactory();
     private static final ServiceFactory SERVICE_FACTORY = new ServiceFactory(DAO_HELPER_FACTORY);
 
-    private static final String ALBUMS_PAGE = "/WEB-INF/view/fragments/albums.jsp";
-    private static final String PLAYLIST_PAGE = "/WEB-INF/view/fragments/playlist.jsp";
-    private static final String SEARCH_PAGE = "/WEB-INF/view/fragments/search.jsp";
+    private static final String ALBUMS_PAGE = "/WEB-INF/view/albums.jsp";
+    private static final String PLAYLIST_PAGE = "/WEB-INF/view/playlist.jsp";
+    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
     private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
-    private static final String EDIT_PAGE = "/WEB-INF/view/fragments/edit.jsp";
-    private static final String PAYED_PAGE = "/WEB-INF/view/fragments/payed.jsp";
 
     private static final String ENGLISH = "english";
     private static final String FRANCE = "france";
@@ -38,17 +36,15 @@ public class CommandFactory {
             case "selectMusic":
                 return new SelectMusicCommand(SERVICE_FACTORY);
             case "buy":
-                return new BuyCommand(SERVICE_FACTORY);
+                return new BuyPurchaseCommand(SERVICE_FACTORY);
             case "musicOrder":
                 return new MusicOrderCommand();
             case "purchasePage":
                 return new ShowPageCommand(PURCHASE_PAGE);
-            case "confirm":
-                return new ConfirmCommand(SERVICE_FACTORY);
-            case "payedPage":
-                return new ShowPageCommand(PAYED_PAGE);
-            case "cancel":
-                return new CancelCommand(SERVICE_FACTORY);
+            case "confirmPurchase":
+                return new ConfirmPurchaseCommand(SERVICE_FACTORY);
+            case "cancelPurchase":
+                return new CancelPurchaseCommand(SERVICE_FACTORY);
             case "playlist":
                 return new PlaylistCommand(SERVICE_FACTORY);
             case "playlistPage":
@@ -57,12 +53,12 @@ public class CommandFactory {
                 return new AlbumsCommand(SERVICE_FACTORY);
             case "albumsPage":
                 return new ShowPageCommand(ALBUMS_PAGE);
-            case "editPage":
-                return new ShowPageCommand(EDIT_PAGE);
-            case "edit":
-                return new BuyCommand(SERVICE_FACTORY);
             case "createAlbum":
                 return new CreateAlbumCommand();
+            case "comments":
+                return new CommentsCommand(SERVICE_FACTORY);
+            case "createComment":
+                return new CreateCommentCommand(SERVICE_FACTORY);
             default:
                 throw new IllegalArgumentException("Unknown type of command!");
         }

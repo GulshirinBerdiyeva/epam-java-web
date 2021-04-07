@@ -15,18 +15,16 @@
 </head>
 
 <body>
-<main>
-    <div class="purchase-image">
-        <img src="${sessionScope.selectedMusic.imagePath}">
-    </div>
+<main class="music-inform-wrapper">
 
-    <div class="purchase-text">
+    <img src="${sessionScope.selectedMusic.imagePath}">
+
+    <div class="music-text-inform">
         <h2>${sessionScope.selectedMusic.artist}</h2>
         <h2>${sessionScope.selectedMusic.title}</h2>
-        <c:if test="${!sessionScope.musicOrder.payment}" >
-            <h2>${currencyUnit} ${sessionScope.selectedMusicPrice}</h2>
-        </c:if>
+        <h2>${currencyUnit} ${sessionScope.selectedMusicPrice}</h2>
     </div>
+
 </main>
 </body>
 

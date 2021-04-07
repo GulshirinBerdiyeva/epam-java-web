@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CreateAlbumCommand implements Command{
 
-    private static final String ALBUMS_PAGE = "/WEB-INF/view/fragments/albums.jsp";
+    private static final String ALBUMS_PAGE = "/WEB-INF/view/albums.jsp";
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {

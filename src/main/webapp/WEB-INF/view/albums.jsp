@@ -18,10 +18,10 @@
 <body class="albums-body">
 
 <nav>
-    <jsp:include page="header.jsp" />
+    <jsp:include page="fragments/header.jsp" />
 </nav>
 <nav>
-    <jsp:include page="menu.jsp" />
+    <jsp:include page="fragments/menu.jsp" />
 </nav>
 
 <main class="albums-main">

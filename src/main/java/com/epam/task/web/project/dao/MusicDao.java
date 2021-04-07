@@ -9,6 +9,7 @@ import java.util.Optional;
 public class MusicDao extends AbstractDao<Music>{
 
     private static final String TABLE_NAME = "music";
+
     private static final String FIND_BY_TITLE = "SELECT * FROM music WHERE title = ?";
 
     public MusicDao(ProxyConnection proxyConnection) {

@@ -23,12 +23,12 @@ public class MusicOrderMapper implements Mapper<MusicOrder> {
         Long id = resultSet.getLong(ID);
         Long userId = resultSet.getLong(USER_ID);
         Long musicId = resultSet.getLong(MUSIC_ID);
-        Timestamp timestamp = resultSet.getTimestamp(DATE);
+        Timestamp date = resultSet.getTimestamp(DATE);
         int discount = resultSet.getInt(DISCOUNT);
         BigDecimal finalPrice = resultSet.getBigDecimal(FINAL_PRICE);
         boolean payment = resultSet.getBoolean(PAYMENT);
 
-        return new MusicOrder(id, userId, musicId, timestamp, discount, finalPrice, payment);
+        return new MusicOrder(id, userId, musicId, date, discount, finalPrice, payment);
 
     }
 

@@ -1,8 +1,6 @@
 package com.epam.task.web.project.command;
 
 import com.epam.task.web.project.entity.Music;
-import com.epam.task.web.project.entity.Role;
-import com.epam.task.web.project.entity.User;
 import com.epam.task.web.project.logic.CurrencyConverter;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
@@ -17,14 +15,12 @@ public class SelectMusicCommand implements Command{
     private final MusicService musicService;
 
     private static final String SELECTED_MUSIC_TITLE = "selectedMusicTitle";
-    private static final String USER = "user";
     private static final String SONG_IS_ABSENT = "songIsAbsent";
 
     private static final String SELECTED_MUSIC = "selectedMusic";
 
-    private static final String SEARCH_PAGE = "/WEB-INF/view/fragments/search.jsp";
-    private static final String PURCHASE_PAGE_COMMAND = "?command=purchasePage";
-    private static final String EDIT_PAGE_COMMAND = "?command=editPage";
+    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+    private static final String COMMENTS_COMMAND = "?command=comments";
 
     public SelectMusicCommand(ServiceFactory serviceFactory) {
         this.musicService = (MusicService) serviceFactory.create(Music.class);
@@ -46,12 +42,7 @@ public class SelectMusicCommand implements Command{
 
             request.getSession(false).setAttribute(SELECTED_MUSIC, music);
 
-            User user = (User) request.getSession(false).getAttribute(USER);
-            Role userRole = user.getRole();
-
-            return (Role.ADMIN == userRole) ?
-                    CommandResult.redirect(request.getRequestURI() + EDIT_PAGE_COMMAND) :
-                        CommandResult.redirect(request.getRequestURI() + PURCHASE_PAGE_COMMAND);
+            return CommandResult.redirect(request.getRequestURI() + COMMENTS_COMMAND);
 
         } else {
             request.setAttribute(SONG_IS_ABSENT, true);
@@ -60,6 +51,5 @@ public class SelectMusicCommand implements Command{
         }
 
     }
-
 
 }

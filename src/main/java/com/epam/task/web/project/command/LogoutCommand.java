@@ -12,7 +12,6 @@ public class LogoutCommand implements Command{
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         request.getSession(false).invalidate();
-
         return CommandResult.forward(LOGIN_PAGE);
     }
 

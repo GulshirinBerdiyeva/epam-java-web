@@ -1,7 +1,5 @@
 package com.epam.task.web.project.logic;
 
-import com.epam.task.web.project.entity.Music;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -15,16 +13,17 @@ public class CurrencyConverter {
 
     private static final String FRANCE_LOCAL = "FR";
     private static final String RUSSIAN_LOCAL = "RU";
+    private static final String ENGLISH_LOCAL = "US";
 
-    private static final BigDecimal EURO_EXCHANGE_RATE = new BigDecimal(0.85);
-    private static final BigDecimal RUBLE_EXCHANGE_RATE = new BigDecimal(76.5);
+    private static final BigDecimal EURO_EXCHANGE_RATE = new BigDecimal("0.85");
+    private static final BigDecimal RUBLE_EXCHANGE_RATE = new BigDecimal("76.5");
 
     public void convertPrice(HttpServletRequest request, BigDecimal price) {
         HttpSession session = request.getSession(false);
         String localType = (String) session.getAttribute(LOCAL);
 
         if (localType == null) {
-            localType = "EN";
+            localType = ENGLISH_LOCAL;
         }
 
         BigDecimal result = convert(localType, price);
@@ -34,7 +33,6 @@ public class CurrencyConverter {
 
 
     public BigDecimal convert(String localType, BigDecimal currency) {
-
         switch (localType) {
             case FRANCE_LOCAL:
                 return currency.multiply(EURO_EXCHANGE_RATE).setScale(2, RoundingMode.HALF_UP);
@@ -43,7 +41,6 @@ public class CurrencyConverter {
             default:
                 return currency;
         }
-
     }
 
 }

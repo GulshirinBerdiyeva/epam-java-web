@@ -28,6 +28,10 @@ public class DaoHelper implements AutoCloseable{
         return new PlaylistDao(proxyConnection);
     }
 
+    public CommentDao createCommentDao() {
+        return new CommentDao(proxyConnection);
+    }
+
     public void startTransaction() throws DaoException {
         try {
             proxyConnection.setAutoCommit(false);

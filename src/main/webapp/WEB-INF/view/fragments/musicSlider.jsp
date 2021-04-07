@@ -7,6 +7,7 @@
 <fmt:setBundle basename="local" var="local" />
 
 <fmt:message bundle="${local}" key="local.button.want.to.buy" var="buttonWantToBuy" />
+<fmt:message bundle="${local}" key="local.button.comments" var="buttonComments" />
 
 <html>
 

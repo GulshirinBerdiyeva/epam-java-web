@@ -24,6 +24,7 @@ public class MainCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Music> musics = musicService.getAllMusics();
+
         request.getSession(true).setAttribute(MUSICS, musics);
 
         return CommandResult.forward(MAIN_PAGE);

@@ -33,7 +33,7 @@ public class MusicOrder implements Entity{
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     public Long getMusicId() {
