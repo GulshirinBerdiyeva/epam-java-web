@@ -12,14 +12,32 @@
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/static/styles.css" />
 </head>
 
-<body class="playlists-body">
+<body class="playlist-body">
 
-<nav>
+<header>
     <jsp:include page="fragments/header.jsp" />
-</nav>
+</header>
+
 <nav>
     <jsp:include page="fragments/menu.jsp" />
 </nav>
+
+<main>
+    <div class="container">
+        <div class="music-container">
+            <c:forEach items="${sessionScope.playlists}" var="playlist" >
+                <div class="box">
+                    <div class="image">
+                        <img src="${playlist.music.imagePath}" alt="">
+                    </div>
+                    <div class="music">
+                        <audio src="${playlist.music.audioPath}" controls />
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</main>
 
 </body>
 

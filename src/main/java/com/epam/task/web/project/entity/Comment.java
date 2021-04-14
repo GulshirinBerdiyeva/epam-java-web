@@ -11,7 +11,9 @@ public class Comment implements Entity{
     private Timestamp date;
     private String comment;
 
-    public Comment(Long id, Long userId, String username, Long musicId, Timestamp date, String comment) {
+    public Comment(Long id, Long userId, String username,
+                   Long musicId, Timestamp date, String comment) {
+
         this.id = id;
         this.userId = userId;
         this.username = username;

@@ -6,7 +6,9 @@ CREATE TABLE user (
     password VARCHAR(32),
     role ENUM('admin', 'client'),
     cash DECIMAL(9,2),
-    music_amount INT
+    music_amount INT,
+    discount INT,
+    CHECK (discount>=0 AND discount<=100),
 );
 
 CREATE TABLE music (
@@ -26,7 +28,7 @@ CREATE TABLE music_order (
      FOREIGN KEY(user_id) REFERENCES user(id),
      date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      discount INT,
-     CHECK (discount>=0 AND discount<100),
+     CHECK (discount>=0 AND discount<=100),
      final_price DECIMAL(9,2),
      payment BOOLEAN
 );
@@ -43,7 +45,7 @@ CREATE TABLE album (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     music_id BIGINT,
     FOREIGN KEY(music_id) REFERENCES music(id),
-    title VARCHAR(25)
+    album_title VARCHAR(25)
 );
 
 CREATE TABLE comment (

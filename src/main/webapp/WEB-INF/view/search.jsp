@@ -5,9 +5,12 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
-<fmt:message bundle="${local}" key="local.placeholder.search.song" var="searchSong"/>
+<fmt:message bundle="${local}" key="local.placeholder.search.musicByTitle" var="musicByTitle"/>
+<fmt:message bundle="${local}" key="local.placeholder.search.musicByArtist" var="musicByArtist"/>
 <fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
-<fmt:message bundle="${local}" key="local.error.message.songIsAbsent" var="songIsAbsentMessage" />
+<fmt:message bundle="${local}" key="local.error.message.musicIsAbsent" var="musicIsAbsent" />
+<fmt:message bundle="${local}" key="local.error.message.enterParameters" var="enterParameters" />
+<fmt:message bundle="${local}" key="local.error.message.musicRemoved" var="musicRemoved" />
 
 <html>
 
@@ -18,9 +21,10 @@
 
 <body class="search-body">
 
-<nav>
+<header>
     <jsp:include page="fragments/header.jsp" />
-</nav>
+</header>
+
 <nav>
     <jsp:include page="fragments/menu.jsp" />
 </nav>
@@ -28,15 +32,31 @@
 <main class="search-main">
 
     <div class="search-wrapper">
-        <form action="${pageContext.request.contextPath}/controller?command=selectMusic" method="post" >
-            <input type="text" name="selectedMusicTitle" placeholder="${searchSong}" />
-            <button type="submit">${buttonSearch}</button>
+        <form action="${pageContext.request.contextPath}/controller?command=searchMusic" method="post" >
+            <div id="search-by-artist" class="search-input-button-wrapper" >
+                <input type="text" name="artist" placeholder="${musicByArtist}" />
+                <button type="submit">${buttonSearch}</button>
+            </div>
+            <div id="search-by-title" class="search-input-button-wrapper" >
+                <input type="text" name="title" placeholder="${musicByTitle}" />
+                <button type="submit">${buttonSearch}</button>
+            </div>
         </form>
     </div>
 
-    <c:if test="${requestScope.songIsAbsent != null}" >
+    <c:if test="${requestScope.musicIsAbsent}" >
         <br/>
-        <h2>${songIsAbsentMessage}</h2>
+        <h2>${musicIsAbsent}</h2>
+    </c:if>
+
+    <c:if test="${requestScope.emptyParameters}" >
+        <br/>
+        <h2>${enterParameters}</h2>
+    </c:if>
+
+    <c:if test="${requestScope.musicRemoved}" >
+        <br/>
+        <h2>${musicRemoved}</h2>
     </c:if>
 
 </main>

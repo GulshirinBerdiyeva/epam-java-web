@@ -3,7 +3,6 @@ package com.epam.task.web.project.command;
 import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
-import com.epam.task.web.project.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,11 +13,11 @@ public class MainCommand implements Command {
     private final MusicService musicService;
 
     private static final String MUSICS = "musics";
-
+    private static final String SHOW_MUSICS = "showMusics";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
-    public MainCommand(ServiceFactory serviceFactory) {
-        this.musicService = (MusicService) serviceFactory.create(Music.class);
+    public MainCommand(MusicService musicService) {
+        this.musicService = musicService;
     }
 
     @Override
@@ -26,7 +25,9 @@ public class MainCommand implements Command {
         List<Music> musics = musicService.getAllMusics();
 
         request.getSession(true).setAttribute(MUSICS, musics);
+        request.setAttribute(SHOW_MUSICS, true);
 
         return CommandResult.forward(MAIN_PAGE);
     }
+
 }

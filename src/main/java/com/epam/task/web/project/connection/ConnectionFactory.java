@@ -13,15 +13,18 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String FILE_NAME = "connection.properties";
-
     private String url;
     private String dataBase;
     private String user;
     private String password;
-
     private int connectionsAmount;
     private ConnectionPool pool;
+
+    private static final String FILE_NAME = "connection.properties";
+    private static final String URL = "url";
+    private static final String DATA_BASE = "dataBase";
+    private static final String USER = "user";
+    private static final String PASSWORD = "password";
 
     public ConnectionFactory (ConnectionPool pool, int connectionsAmount) {
         this.pool = pool;
@@ -42,11 +45,9 @@ public class ConnectionFactory {
             }
 
             return connections;
-
         } catch (SQLException | IOException e) {
             throw new ConnectionException("Couldn't get access to the database!", e);
         }
-
     }
 
     private void getProperties() throws SQLException, IOException {
@@ -56,10 +57,10 @@ public class ConnectionFactory {
         Properties properties = new Properties();
         properties.load(inputStream);
 
-        url = properties.getProperty("url");
-        dataBase = properties.getProperty("dataBase");
-        user = properties.getProperty("user");
-        password = properties.getProperty("password");
+        url = properties.getProperty(URL);
+        dataBase = properties.getProperty(DATA_BASE);
+        user = properties.getProperty(USER);
+        password = properties.getProperty(PASSWORD);
     }
 
 }

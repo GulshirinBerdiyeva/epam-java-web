@@ -5,12 +5,6 @@ import com.epam.task.web.project.command.CommandFactory;
 import com.epam.task.web.project.command.CommandResult;
 
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +14,9 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
-   // private static final Logger LOGGER = LogManager.getLogger(Controller.class);
-
     private static final String COMMAND = "command";
     private static final String CURRENT_PAGE = "currentPage";
     private static final String ERROR = "error";
-
     private static final String ERROR_PAGE = "/error.jsp";
 
     @Override
@@ -39,10 +30,8 @@ public class Controller extends HttpServlet {
     }
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BasicConfigurator.configure();
         request.setCharacterEncoding("UTF-8");
-
-//        BasicConfigurator.configure();
-//        LOGGER.info("!!!!!!!!!!!");
 
         String page;
         boolean isRedirect = false;

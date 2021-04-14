@@ -9,9 +9,11 @@
 <fmt:message bundle="${local}" key="local.login" var="login" />
 <fmt:message bundle="${local}" key="local.placeholder.username" var="username" />
 <fmt:message bundle="${local}" key="local.placeholder.password" var="password" />
-<fmt:message bundle="${local}" key="local.button.login" var="loginButton" />
+<fmt:message bundle="${local}" key="local.button.logIn" var="buttonLogin"/>
 <fmt:message bundle="${local}" key="local.error.message.errorLogin" var="errorLoginMessage" />
-
+<fmt:message bundle="${local}" key="local.signUp" var="signUp" />
+<fmt:message bundle="${local}" key="local.button.signIn" var="buttonSignIn" />
+<fmt:message bundle="${local}" key="local.error.message.errorSignIn" var="errorSignIn" />
 
 <html>
 
@@ -21,44 +23,48 @@
     <title>${orderMusic}</title>
 </head>
 
-<body class="index-body">
+<body class="main-body">
 
-<header class="login-header">
-    <div class="english">
-        <form action="${pageContext.request.contextPath}/controller?command=english" method="post" >
-            <button type="submit" />
-        </form>
-    </div>
-
-    <div class="france">
-        <form action="${pageContext.request.contextPath}/controller?command=france" method="post" >
-            <button type="submit" />
-        </form>
-    </div>
-
-    <div class="russian">
-        <form action="${pageContext.request.contextPath}/controller?command=russian" method="post" >
-            <button type="submit" />
-        </form>
-    </div>
+<header>
+    <jsp:include page="WEB-INF/view/fragments/header.jsp" />
 </header>
 
 <main class="login-form">
-    <form action="${pageContext.request.contextPath}/controller?command=login" method="post" >
-        <h1>${login}</h1>
+    <c:if test="${!requestScope.signUp}" >
+        <form action="${pageContext.request.contextPath}/controller?command=login" method="post" >
+            <h1>${login}</h1>
 
-        <c:if test="${requestScope.errorLogin}">
+            <c:if test="${requestScope.errorLogin}">
+                <br/>
+                <h2>${errorLoginMessage}</h2>
+            </c:if>
             <br/>
-            <h2>${errorLoginMessage}</h2>
-        </c:if>
-        <br/>
 
-        <input type="text" name="username" placeholder="${username}" />
-        <br/>
-        <br/>
-        <input type="password" name="password" placeholder="${password}" />
-        <button type="submit">${loginButton}</button>
-    </form>
+            <input type="text" name="username" placeholder="${username}" />
+            <br/>
+            <br/>
+            <input type="password" name="password" placeholder="${password}" />
+            <button type="submit">${buttonLogin}</button>
+        </form>
+    </c:if>
+
+    <c:if test="${requestScope.signUp}" >
+        <form action="${pageContext.request.contextPath}/controller?command=signIn" method="post" >
+            <h1>${signUp}</h1>
+
+            <c:if test="${requestScope.errorSignIn}">
+                <br/>
+                <h2>${errorSignIn}</h2>
+            </c:if>
+            <br/>
+
+            <input type="text" name="username" placeholder="${username}" />
+            <br/>
+            <br/>
+            <input type="password" name="password" placeholder="${password}" />
+            <button type="submit">${buttonSignIn}</button>
+        </form>
+    </c:if>
 </main>
 
 </body>

@@ -17,7 +17,6 @@ public class MusicMapper implements Mapper<Music> {
 
     @Override
     public Music map(ResultSet resultSet) throws SQLException {
-
         Long id = resultSet.getLong(ID);
         String title = resultSet.getString(TITLE);
         String artist = resultSet.getString(ARTIST);
@@ -26,7 +25,6 @@ public class MusicMapper implements Mapper<Music> {
         BigDecimal price = resultSet.getBigDecimal(PRICE);
 
         return new Music(id, title, artist, audioPath, imagePath, price);
-
     }
 
 }

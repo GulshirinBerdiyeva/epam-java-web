@@ -7,9 +7,13 @@
 <fmt:setBundle basename="local" var="local" />
 
 <fmt:message bundle="${local}" key="local.menu.main" var="main" />
+<fmt:message bundle="${local}" key="local.menu.search" var="search" />
 <fmt:message bundle="${local}" key="local.menu.albums" var="albums" />
 <fmt:message bundle="${local}" key="local.menu.playlist" var="playlist" />
-<fmt:message bundle="${local}" key="local.menu.search" var="search" />
+<fmt:message bundle="${local}" key="local.menu.profile" var="profile" />
+<fmt:message bundle="${local}" key="local.menu.createAlbum" var="createAlbum" />
+<fmt:message bundle="${local}" key="local.menu.addMusic" var="addNewMusic" />
+<fmt:message bundle="${local}" key="local.menu.clients" var="clients" />
 
 <html>
 
@@ -22,11 +26,17 @@
 
 <nav class="menu-wrapper">
     <a href="${pageContext.request.contextPath}/controller?command=main">${main}</a>
+    <a href="${pageContext.request.contextPath}/controller?command=search">${search}</a>
     <a href="${pageContext.request.contextPath}/controller?command=albums">${albums}</a>
     <c:if test="${Role.CLIENT.equals(sessionScope.user.role)}" >
         <a href="${pageContext.request.contextPath}/controller?command=playlist">${playlist}</a>
+        <a href="${pageContext.request.contextPath}/controller?command=profile">${profile}</a>
     </c:if>
-    <a href="${pageContext.request.contextPath}/controller?command=search">${search}</a>
+    <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}" >
+        <a href="${pageContext.request.contextPath}/controller?command=addNewMusic">${addNewMusic}</a>
+        <a href="${pageContext.request.contextPath}/controller?command=createAlbum">${createAlbum}</a>
+        <a href="${pageContext.request.contextPath}/controller?command=clients">${clients}</a>
+    </c:if>
 </nav>
 
 </body>

@@ -4,13 +4,25 @@
     font-family: sans-serif;
 }
 
-/*error-page*/
-.error-body{
-    background-color: dimgray;
+a:hover{
+    background-color: firebrick;
 }
 
+/*error-page*/
 .error-wrapper{
     width: 100%;
+}
+
+.error-wrapper h2{
+    font-size: 20px;
+    color: darkred;
+    text-align: center;
+}
+
+/*index-page*/
+.login-form,
+.error-wrapper{
+    width: 470px;
     height: 500px;
     top: 50%;
     left: 50%;
@@ -19,92 +31,88 @@
     transform: translate(-50%, -50%);
 }
 
-.error-wrapper h2{
-    font-size: 20px;
-    color: darkred;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-/*index-page*/
-.index-body{
-    background-color: dimgray;
-}
-
-.login-header{
-    width: 100%;
-    height: 50px;
-    background-color: darkslategray;
-}
-
-.login-header .russian button{
-    top: 10px;
-    right: 0;
-}
-
-.login-header .france button{
-    top: 10px;
-    right: 35px;
-}
-
-.login-header .english button{
-    top: 10px;
-    right: 70px;
-}
-
 .login-form{
-    width: 400px;
-    height: 450px;
-    top: 50%;
-    left: 50%;
-    margin: auto;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    color: #fff;
     border-radius: 25px;
-    background-color: grey;
+    background-color: black;
 }
 
 .login-form h1{
     margin: 40px 0;
     font-size: 40px;
-    color: darkseagreen;
+    color: antiquewhite;
     text-align: center;
     text-transform: uppercase;
 }
 
 .login-form h2{
-    text-align: center;
-    font-size: 18px;
+    font-size: 17px;
     color: red;
+    text-align: center;
 }
 
-.login-form input{
+.login-form input,
+.search-wrapper input,
+.comments-wrapper input,
+.add-nem-music input,
+.profile-input-button-wrapper input,
+.edit-price input,
+.albumTitle-button-wrapper input{
+    outline: none;
+    border: 2px solid antiquewhite;
+}
+
+.login-form input,
+.add-nem-music input{
     padding: 15px 10px;
     width: 100%;
     font-size: 20px;
-    outline: none;
-    border: none;
     border-radius: 20px;
 }
 
-.login-form button{
-    font-size: 20px;
+.login-form button,
+.logout button,
+.signIn button,
+.description button,
+.search-wrapper button,
+.purchase-buttons button,
+.comments-wrapper button,
+.profile-input-button-wrapper button,
+.albumTitle-button-wrapper button,
+#edit-price,
+#delete,
+#submit{
     font-weight: bold;
-    margin: 80px 0;
-    padding: 10px 15px;
-    width: 50%;
-    border: none;
-    border-radius: 10px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
-    background-color: darkslategray;
+    cursor: pointer;
+    color: antiquewhite;
 }
 
-.login-form button:hover{
-    background-color: darkseagreen;
+.login-form button:hover,
+.logout button:hover,
+.signIn button:hover,
+.description button:hover,
+.search-wrapper button:hover,
+.purchase-buttons button:hover,
+.comments-wrapper button:hover,
+.profile-input-button-wrapper button:hover,
+.albumTitle-button-wrapper button:hover,
+#edit-price:hover,
+#delete:hover,
+#submit:hover{
+    background-color: firebrick;
+}
+
+.login-form button,
+#submit{
+    left: 50%;
+    padding: 10px 15px;
+    margin: 80px 0;
+    width: 50%;
+    transform: translate(-50%, 0);
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #292929;
 }
 
 /*header*/
@@ -116,77 +124,53 @@
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: dimgray;
+    background-color: black;
 }
 
 .header-wrapper h1{
     padding-left: 20px;
     padding-block-start: 10px;
-    font-size: 30px;
+    font-size: 26px;
     font-weight: bold;
-    color: darkseagreen;
+    color: antiquewhite;
+}
+
+.russian button,
+.france button,
+.english button{
+    top: 20%;
+    width: 30px;
+    height: 25px;
+    border: 20px;
+    border-radius: 10px;
+    position: absolute;
 }
 
 .russian button{
-    top: 20%;
     right: 135px;
-    width: 30px;
-    height: 25px;
-    border: 20px;
-    border-radius: 10px;
-    position: absolute;
     background: url("https://www.countryflags.io/ru/flat/32.png") center;
 }
 
-.russian button:hover{
-    background-color: darkseagreen;
-}
-
 .france button{
-    top: 20%;
     right: 170px;
-    width: 30px;
-    height: 25px;
-    border: 20px;
-    border-radius: 10px;
-    position: absolute;
     background: url("https://www.countryflags.io/fr/flat/32.png") center;
 }
 
-.france button:hover{
-    background-color: darkseagreen;
-}
-
 .english button{
-    top: 20%;
     right: 205px;
-    width: 30px;
-    height: 25px;
-    border: 20px;
-    border-radius: 10px;
-    position: absolute;
     background: url("https://www.countryflags.io/gb/flat/32.png") center;
 }
 
-.english button:hover{
-    background-color: darkseagreen;
-}
-
-.logout button{
+.logout button,
+.signIn button{
     top: 15%;
     right: 0;
     width: 130px;
     height: 30px;
     position: absolute;
-    font-size: 16px;
-    font-weight: bold;
     border-radius: 10px;
-    color: white;
-    background-color: darkslategray;
-}
-
-.logout button:hover{
-    background-color: darkseagreen;
+    font-size: 16px;
+    background-color: black;
 }
 
 /*menu*/
@@ -197,28 +181,29 @@
     z-index: 2;
     top: 50px;
     left: 0;
-    background-color: darkslategray;
+    background-color: #292929;
 }
 
-.menu-wrapper a {
-    padding: 50px 10px 10px 50px;
-    text-decoration: none;
-    font-size: 25px;
+.menu-wrapper a{
+    padding-top: 45px;
+    padding-bottom: 45px;
+    justify-content: center;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
+    text-decoration: none;
     text-transform: uppercase;
-    color: white;
+    color: antiquewhite;
 }
 
-.menu-wrapper a:hover{
-    color: darkseagreen;
+/*main-page*/
+.main-body,
+.search-body,
+.playlist-body{
+    background-color: antiquewhite;
 }
 
 /*musicSlider*/
-.main-body{
-    background-color: black;
-}
-
 .col{
     padding-top: 60px;
     padding-left: 200px;
@@ -231,7 +216,7 @@
     display: inline-block;
     box-sizing: border-box;
     margin: 10px 10px 10px 80px;
-    border: darkslategray 5px solid;
+    border: black 5px solid;
     border-radius: 10px;
     cursor: pointer;
     z-index: 1;
@@ -260,20 +245,16 @@
 
 .description h2{
     padding-top: 200px;
-    size: 22px;
+    size: 20px;
     text-transform: uppercase;
-    color: darkslategray;
+    font-weight: bold;
 }
 
 .description button{
     width: 100px;
     height: 50px;
     border-radius: 10px;
-}
-
-.description button:hover{
-    color: white;
-    background-color: darkslategray;
+    background-color: black;
 }
 
 .card:hover .description{
@@ -281,52 +262,22 @@
 }
 
 /*albums-page*/
-.albums-body{
-    background-color: black;
-}
-
-.albums-main{
-    padding-top: 50px;
-    padding-left: 200px;
-}
-
-.create-album{
+#table{
     width: 100%;
-    height: 200px;
-    background-color: steelblue;
-}
-
-.create-album button{
-    font-size: 20px;
-    font-weight: bold;
-    margin: 80px 0;
-    padding: 10px 15px;
-    width: 200px;
-    border: none;
-    border-radius: 10px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
-    background-color: darkslategray;
-}
-
-.create-album button:hover{
-    background-color: darkseagreen;
-}
-
-.choice-wrapper{
     padding-top: 20px;
-    width: calc(100% - 200px);
-}
-
-.choice-wrapper table{
     padding-left: 200px;
-
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: black;
+    color: antiquewhite;
 }
 
-.choice-wrapper thead{
-    background-color: steelblue;
+#table tbody{
+    color: black;
 }
 
 #thead-number{
@@ -341,76 +292,105 @@
     align-self: center;
 }
 
-.choice-wrapper th{
-    width: 200px;
-    align-self: center;
-}
-
 #table tbody tr:nth-child(odd){
     background: white;
 }
 
 #table tbody tr:nth-child(even){
-    background: cornflowerblue;
+    background: wheat;
 }
 
-/*playlists-page*/
-.playlists-body{
-    background-color: black;
+.albumTitle-button-wrapper{
+    padding-top: 50px;
+    padding-left: 200px;
+}
+
+.albumTitle-button-wrapper input{
+
+}
+
+.albumTitle-button-wrapper button{
+
+}
+
+.albums{
+    width: 100%;
+    height: 200px;
+}
+
+.albums button{
+    width: 100%;
+    height: 100%;
+    background-color: rosybrown;
+    color: antiquewhite;
+    font-size: 100px;
+    font-weight: bold;
 }
 
 /*search-page*/
-.search-body{
-    background-color: black;
+.search-body,
+.add-nem-music,
+.album-main{
     padding-top: 50px;
     padding-left: 200px;
 }
 
 .search-wrapper{
     padding-top: 20px;
-    width: 100%;
-    height: 60px;
-    background-color: steelblue;
-}
-
-.search-main form {
-    width: 300px;
-    margin: 0 auto;
-}
-
-.search-main input {
+    padding-bottom: 20px;
     width: 100%;
     height: 50px;
-    padding-left: 10px;
-    border: 2px solid #7BA7AB;
-    border-radius: 5px;
-    outline: none;
-    background: #F9F0DA;
-    font-size: 14px;
-    color: black;
+    margin: 0 auto;
+    background-color: rosybrown;
 }
 
-.search-wrapper button {
-    position: absolute;
-    font-size: 10px;
-    font-weight: bold;
+.search-input-button-wrapper,
+.profile-input-button-wrapper,
+.albumTitle-button-wrapper{
+    width: 280px;
+    height: 50px;
+}
+
+.search-wrapper input,
+.comments-wrapper input,
+.profile-input-button-wrapper input,
+.edit-price input,
+.albumTitle-button-wrapper input{
+    height: 50px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-wrapper input{
+    width: 230px;
+}
+
+#search-by-artist{
+    float: left;
+}
+
+#search-by-title{
+    float: right;
+}
+
+.search-wrapper button,
+.profile-input-button-wrapper button,
+.edit-price button,
+.albumTitle-button-wrapper button,
+#edit-price,
+#delete{
     width: 50px;
     height: 50px;
+    position: absolute;
     border: none;
-    color: white;
-    background-color: darkslategray;
     border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-.search-wrapper button:hover{
-    background-color: darkseagreen;
+    font-size: 10px;
+    background-color: black;
 }
 
 .search-main h2{
     text-align: center;
     size: 18px;
-    color: steelblue;
 }
 
 /*comments-page*/
@@ -418,39 +398,25 @@
     padding-top: 110px;
     padding-left: 200px;
     height: 100%;
-    background-color: wheat;
+    background-color: darkgray;
 }
 
-.comments-wrapper form {
+.comments-wrapper form{
     width: calc(100% - 60px);
 }
 
-.comments-wrapper input {
+.comments-wrapper input{
     width: 100%;
-    height: 40px;
-    border: 2px solid #7BA7AB;
-    border-radius: 5px;
-    outline: none;
-    background: #F9F0DA;
-    font-size: 14px;
-    color: black;
 }
 
-.comments-wrapper button {
-    position: absolute;
-    font-size: 10px;
-    font-weight: bold;
+.comments-wrapper button{
     width: 60px;
-    height: 40px;
+    height: 50px;
+    position: absolute;
     border: none;
-    color: white;
-    background-color: darkslategray;
     border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-.comments-wrapper button:hover{
-    background-color: darkseagreen;
+    font-size: 10px;
+    background-color: black;
 }
 
 .comments-wrapper h1{
@@ -473,26 +439,25 @@
 .music-inform-wrapper{
     padding-top: 110px;
     height: 100%;
-    background-color: burlywood;
+    background-color: rosybrown;
 }
 
 .music-inform-wrapper img{
     padding-left: 10px;
+    padding-right: 10px;
     width: 250px;
     height: 250px;
     float: left;
 }
 
-.music-inform-wrapper .music-text-inform{
+.music-inform-wrapper
+.music-text-inform{
+    margin-top: 60px;
     text-align: center;
     font-size: 14px;
 }
 
 /*purchase-page*/
-.purchase-body{
-    background-color: black;
-}
-
 .purchase-table{
     width: 100%;
     height: 100%;
@@ -503,7 +468,7 @@
 }
 
 #comment{
-    width: 30%;
+    width: 40%;
 }
 
 #purchase{
@@ -515,33 +480,162 @@
 }
 
 .purchase-buttons{
-    padding-top: 110px;
+    padding-top: 100px;
     width: 100%;
     height: 100%;
-    background-color: #7BA7AB;
+    background-color: darkgray;
 }
 
 .purchase-buttons button{
     margin-top: 20px;
-    align-self: center;
     width: 100px;
     height: 50px;
     border-radius: 10px;
     font-size: 20px;
-    color: white;
-    background-color: darkslategray;
+    background-color: black;
 }
 
-.purchase-buttons button:hover{
-    background-color: darkseagreen;
+.confirm-cancel,
+.editPrice-delete-wrapper{
+    height: 50px;
+    width: 100%;
+    align-items: center;
 }
 
-.purchase-buttons button #confirm{
+.edit-price{
     float: left;
-    margin-left: 15%;
 }
 
-.purchase-buttons button #cancel{
+.edit-price input{
+    margin-top: 20px;
+}
+
+#confirm{
+    float: left;
+    margin-left: 40px;
+}
+
+#cancel{
     float: right;
-    margin-right: 15%
+    margin-right: 40px
+}
+
+/*playlists-page*/
+.playlist-body{
+    box-sizing: border-box;
+}
+
+.container .music-container{
+    padding-top: 50px;
+    padding-left: 150px;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.container .music-container .box{
+    height: 16rem;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background: gray;
+    border-radius: 1rem;
+    box-shadow: 0 .5rem 1rem #000;
+    overflow: hidden;
+    margin: 2rem;
+}
+
+.container .music-container .box .image{
+    height: 100%;
+    width: 25%;
+}
+
+.container .music-container .box .image img{
+    height: 100%;
+    width: 100%;
+}
+
+.container .music-container .box .music{
+    width: 75%;
+}
+
+.container .music-container .box .music audio{
+    width: 100%;
+    outline: none;
+}
+
+/*addNewMusic-page*/
+.add-nem-music form{
+    width: 500px;
+    height: 550px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-30%, -50%);
+    color: #fff;
+    border-radius: 25px;
+    background-color: rosybrown;
+}
+
+.add-nem-music input{
+    margin-top: 20px;
+}
+
+/*profile-page*/
+.profile-wrapper{
+    width: 500px;
+    height: 550px;
+    padding-top: 30px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-30%, -50%);
+    border-radius: 25px;
+    background-color: rosybrown;
+}
+
+.profile-left{
+    float: left;
+    width: 250px;
+    height: 250px;
+}
+
+.profile-right{
+    float: right;
+    width: 250px;
+    height: 250px;
+}
+
+.profile-wrapper h1{
+    padding-bottom: 40px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profile-wrapper h2, h3{
+    padding-top: 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profile-input-button-wrapper{
+    margin: auto;
+}
+
+.profile-input-button-wrapper input{
+    margin-top: 50px;
+    width: 200px;
+    height: 50px;
+}
+
+.profile-input-button-wrapper button{
+    margin-top: 50px;
+    width: 60px;
+    height: 50px;
 }

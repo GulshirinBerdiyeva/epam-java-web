@@ -1,11 +1,9 @@
 package com.epam.task.web.project.command;
 
-import com.epam.task.web.project.entity.Comment;
 import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.entity.User;
 import com.epam.task.web.project.service.CommentService;
 import com.epam.task.web.project.service.ServiceException;
-import com.epam.task.web.project.service.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,26 +18,19 @@ public class CreateCommentCommand implements Command{
 
     private static final String COMMENTS_COMMAND = "?command=comments";
 
-    public CreateCommentCommand(ServiceFactory serviceFactory) {
-        this.commentService = (CommentService) serviceFactory.create(Comment.class);
+    public CreateCommentCommand(CommentService commentService) {
+        this.commentService = commentService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-
         User user = (User) request.getSession(false).getAttribute(USER);
         Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
         String newComment = request.getParameter(NEW_COMMENT);
 
-        Long userId = user.getId();
-        Long musicId = music.getId();
-
-        Comment comment = new Comment(userId, musicId, newComment);
-
-        commentService.save(comment);
+        commentService.save(user, music, newComment);
 
         return CommandResult.redirect(request.getRequestURI() + COMMENTS_COMMAND);
-
     }
 
 }

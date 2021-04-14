@@ -37,7 +37,6 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
     }
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException{
-
         try(PreparedStatement statement = createStatement(query, params);
             ResultSet resultSet = statement.executeQuery()) {
 
@@ -48,44 +47,12 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
             }
 
             return entities;
-
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-
-    }
-
-    protected boolean isExistQuery(String query, Object... params) throws DaoException{
-
-        try(PreparedStatement statement = createStatement(query, params);
-            ResultSet resultSet = statement.executeQuery()) {
-
-            int result = 0;
-            while (resultSet.next()){
-               result = resultSet.getInt(1);
-            }
-
-            return result == 1;
-
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-
-    }
-
-    protected void executeUpdate(String query, Object... params) throws DaoException{
-
-        try(PreparedStatement statement = createStatement(query, params)) {
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException{
-
         List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             return Optional.of(items.get(0));
@@ -96,7 +63,29 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
         } else {
             return Optional.empty();
         }
+    }
 
+    protected void executeUpdate(String query, Object... params) throws DaoException{
+        try(PreparedStatement statement = createStatement(query, params)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    protected boolean isExistQuery(String query, Object... params) throws DaoException{
+        try(PreparedStatement statement = createStatement(query, params);
+            ResultSet resultSet = statement.executeQuery()) {
+
+            int result = 0;
+            while (resultSet.next()){
+               result = resultSet.getInt(1);
+            }
+
+            return result == 1;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

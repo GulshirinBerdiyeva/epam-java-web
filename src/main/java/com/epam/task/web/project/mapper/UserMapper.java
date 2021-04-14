@@ -16,10 +16,10 @@ public class UserMapper implements Mapper<User> {
     public static final String ROLE = "role";
     public static final String CASH = "cash";
     public static final String MUSIC_AMOUNT = "music_amount";
+    public static final String DISCOUNT = "discount";
 
     @Override
     public User map(ResultSet resultSet) throws SQLException {
-
         Long id = resultSet.getLong(ID);
         String username = resultSet.getString(USERNAME);
         String password = resultSet.getString(PASSWORD);
@@ -31,10 +31,10 @@ public class UserMapper implements Mapper<User> {
         } else {
             BigDecimal cash = resultSet.getBigDecimal(CASH);
             int musicAmount = resultSet.getInt(MUSIC_AMOUNT);
+            int discount = resultSet.getInt(DISCOUNT);
 
-            return User.getClient(id, username, password, cash, musicAmount);
+            return User.getClient(id, username, password, cash, musicAmount, discount);
         }
-
     }
 
 }

@@ -1,8 +1,9 @@
 package com.epam.task.web.project.command;
 
 import com.epam.task.web.project.entity.Music;
-import com.epam.task.web.project.entity.Playlist;
+import com.epam.task.web.project.entity.MusicOrder;
 import com.epam.task.web.project.entity.User;
+import com.epam.task.web.project.logic.CurrencyConverter;
 import com.epam.task.web.project.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,53 +13,58 @@ import java.math.BigDecimal;
 public class BuyPurchaseCommand implements Command{
 
     private final PlaylistService playlistService;
+    private final MusicOrderService musicOrderService;
+    private final UserService userService;
 
     private  static final String USER = "user";
+    private  static final String LOCAL = "local";
     private  static final String SELECTED_MUSIC = "selectedMusic";
-
     private  static final String EXIST_IN_PLAYLIST = "existInPlaylist";
     private  static final String NOT_ENOUGH_MONEY = "notEnoughMoney";
+    private  static final String CAN_BUY = "canBuy";
+    private  static final String MUSIC_ORDER = "musicOrder";
+    private  static final String FINAL_PRICE = "finalPrice";
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
-    private static final String MUSIC_ORDER_COMMAND = "?command=musicOrder";
 
-    public BuyPurchaseCommand(ServiceFactory serviceFactory) {
-        this.playlistService = (PlaylistService) serviceFactory.create(Playlist.class);
+    public BuyPurchaseCommand(UserService userService,
+                              MusicOrderService musicOrderService,
+                              PlaylistService playlistService) {
+
+        this.userService = userService;
+        this.musicOrderService = musicOrderService;
+        this.playlistService = playlistService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-
         User user = (User) request.getSession(false).getAttribute(USER);
         Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
 
-        if (!canBuy(request, user, music)) {
+        boolean isExistInPlaylist = playlistService.isExist(user.getId(), music.getId());
+        if (isExistInPlaylist) {
+            request.setAttribute(EXIST_IN_PLAYLIST, true);
             return CommandResult.forward(PURCHASE_PAGE);
         }
 
-        return CommandResult.redirect(request.getRequestURI() + MUSIC_ORDER_COMMAND);
-    }
-
-    private boolean canBuy(HttpServletRequest request, User user, Music music) throws ServiceException {
-
-        Long userId = user.getId();
-        Long musicId = music.getId();
-        boolean isExistInPlaylist = playlistService.isExist(userId, musicId);
-
-        if (isExistInPlaylist) {
-            request.setAttribute(EXIST_IN_PLAYLIST, true);
-            return false;
-        }
-
-        BigDecimal userCash = user.getCash();
-        BigDecimal musicPrice = music.getPrice();
-
-        if (musicPrice.compareTo(userCash) == 1) {
+        boolean isEnoughCash = userService.isEnoughCash(user, music);
+        if (!isEnoughCash) {
             request.setAttribute(NOT_ENOUGH_MONEY, true);
-            return false;
+            return CommandResult.forward(PURCHASE_PAGE);
         }
 
-        return true;
+        MusicOrder musicOrder = musicOrderService.createOrder(user, music);
+
+        String local = (String) request.getSession(false).getAttribute(LOCAL);
+        CurrencyConverter currencyConverter = new CurrencyConverter();
+        BigDecimal convertedPrice = currencyConverter.convertPrice(local, musicOrder.getFinalPrice());
+
+        request.setAttribute(CAN_BUY, true);
+        request.getSession(false).setAttribute(FINAL_PRICE, convertedPrice);
+        request.getSession(false).setAttribute(MUSIC_ORDER, musicOrder);
+
+        return CommandResult.forward(PURCHASE_PAGE);
     }
 
 }
+

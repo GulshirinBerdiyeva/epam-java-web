@@ -7,7 +7,8 @@
 
 <fmt:message bundle="${local}" key="local.title.order.music" var="orderMusic" />
 <fmt:message bundle="${local}" key="local.heading.music" var="music" />
-<fmt:message bundle="${local}" key="local.button.logout" var="logoutButton" />
+<fmt:message bundle="${local}" key="local.button.logout" var="buttonLogout"/>
+<fmt:message bundle="${local}" key="local.button.signUp" var="buttonSignUp" />
 
 <html>
 
@@ -23,28 +24,38 @@
     <h1>${music}</h1>
 
     <div class="english">
-        <form action="${pageContext.request.contextPath}/controller?command=english" method="post" >
-            <button type="submit" />
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button name="language" value="english" type="submit" />
         </form>
     </div>
 
     <div class="france">
-        <form action="${pageContext.request.contextPath}/controller?command=france" method="post" >
-            <button type="submit" />
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button  name="language" value="france" type="submit" />
         </form>
     </div>
 
     <div class="russian">
-        <form action="${pageContext.request.contextPath}/controller?command=russian" method="post" >
-            <button type="submit" />
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button name="language" value="russian" type="submit" />
         </form>
     </div>
 
-    <div class="logout">
-        <form action="${pageContext.request.contextPath}/controller?command=logout" method="post" >
-            <button type="submit">${logoutButton}</button>
-        </form>
-    </div>
+    <c:if test="${sessionScope.user == null}" >
+        <div class="signIn">
+            <form action="${pageContext.request.contextPath}/controller?command=signUp" method="post" >
+                <button type="submit">${buttonSignUp}</button>
+            </form>
+        </div>
+    </c:if>
+
+    <c:if test="${sessionScope.user != null}" >
+        <div class="logout">
+            <form action="${pageContext.request.contextPath}/controller?command=logout" method="post" >
+                <button type="submit">${buttonLogout}</button>
+            </form>
+        </div>
+    </c:if>
 </div>
 
 </body>

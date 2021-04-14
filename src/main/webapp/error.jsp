@@ -15,7 +15,7 @@
     <title>${titleError}</title>
 </head>
 
-<body class="error-body">
+<body>
 
 <div class="error-wrapper">
     <c:if test="${requestScope.error != null}">

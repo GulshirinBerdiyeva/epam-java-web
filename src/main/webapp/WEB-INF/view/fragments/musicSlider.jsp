@@ -8,6 +8,7 @@
 
 <fmt:message bundle="${local}" key="local.button.want.to.buy" var="buttonWantToBuy" />
 <fmt:message bundle="${local}" key="local.button.comments" var="buttonComments" />
+<fmt:message bundle="${local}" key="local.button.edit" var="buttonEdit" />
 
 <html>
 
@@ -20,7 +21,19 @@
 
 <main class="col">
 
-    <c:forEach items="${sessionScope.musics}" var="music">
+    <c:if test="${requestScope.showMusics}" >
+        <c:set var="musics" value="${sessionScope.musics}" />
+    </c:if>
+
+    <c:if test="${requestScope.showAlbum}" >
+        <c:set var="musics" value="${requestScope.album}" />
+    </c:if>
+
+    <c:if test="${requestScope.showSearchingMusics}" >
+        <c:set var="musics" value="${sessionScope.searchingMusics}" />
+    </c:if>
+
+    <c:forEach items="${musics}" var="music" >
         <div class="card">
             <img src="${music.imagePath}" alt="">
             <div class="description">
@@ -31,11 +44,17 @@
                     <audio controls controlsList="nodownload">
                         <source src="${music.audioPath}" type="audio/mpeg">
                     </audio>
+
+                    <br/>
+                    <br/>
+                    <form action="${pageContext.request.contextPath}/controller?command=selectMusic" method="post" >
+                        <button type="submit" name="selectedMusicId" value="${music.id}">${buttonEdit}</button>
+                    </form>
                 </c:if>
 
                 <c:if test="${Role.CLIENT.equals(sessionScope.user.role)}">
                 <form action="${pageContext.request.contextPath}/controller?command=selectMusic" method="post" >
-                    <button type="submit" name="selectedMusicTitle" value="${music.title}">${buttonWantToBuy}</button>
+                    <button type="submit" name="selectedMusicId" value="${music.id}">${buttonWantToBuy}</button>
                 </form>
                 </c:if>
             </div>

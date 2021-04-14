@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 
 public class User implements Entity{
 
-    private final Long id;
+    private Long id;
     private String username;
     private String password;
     private Role role;
     private BigDecimal cash;
     private int musicAmount;
+    private int discount;
 
     private User(Long id, String username, String password, Role role) {
         this.id = id;
@@ -18,21 +19,43 @@ public class User implements Entity{
         this.role = role;
     }
 
-    private User(Long id, String username, String password, Role role, BigDecimal cash, int musicAmount) {
+    private User(Long id, String username, String password,
+                 BigDecimal cash, int musicAmount,int discount, Role role) {
+
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
         this.cash = cash;
         this.musicAmount = musicAmount;
+        this.discount = discount;
+        this.role = role;
+    }
+
+    private User(String username, String password,
+                 BigDecimal cash, int musicAmount,int discount, Role role) {
+
+        this.username = username;
+        this.password = password;
+        this.cash = cash;
+        this.musicAmount = musicAmount;
+        this.discount = discount;
+        this.role = role;
     }
 
     public static User getAdmin(Long id, String username, String password) {
         return new User(id, username, password, Role.ADMIN);
     }
 
-    public static User getClient(Long id, String username, String password, BigDecimal cash, int musicAmount) {
-        return new User(id, username, password, Role.CLIENT, cash, musicAmount);
+    public static User getClient(Long id, String username, String password,
+                                 BigDecimal cash, int musicAmount, int discount) {
+
+        return new User(id, username, password, cash, musicAmount, discount, Role.CLIENT);
+    }
+
+    public static User getClient(String username, String password,
+                                 BigDecimal cash, int musicAmount, int discount) {
+
+        return new User(username, password, cash, musicAmount, discount, Role.CLIENT);
     }
 
     @Override
@@ -67,4 +90,13 @@ public class User implements Entity{
     public void setMusicAmount(int musicAmount) {
         this.musicAmount = musicAmount;
     }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
 }

@@ -32,6 +32,10 @@ public class DaoHelper implements AutoCloseable{
         return new CommentDao(proxyConnection);
     }
 
+    public AlbumDao createAlbumDao() {
+        return new AlbumDao(proxyConnection);
+    }
+
     public void startTransaction() throws DaoException {
         try {
             proxyConnection.setAutoCommit(false);
