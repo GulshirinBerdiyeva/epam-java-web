@@ -5,6 +5,7 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
+<fmt:message bundle="${local}" key="local.addNewMusic" var="addNewMusic" />
 <fmt:message bundle="${local}" key="local.placeholder.title" var="title" />
 <fmt:message bundle="${local}" key="local.placeholder.artist" var="artist" />
 <fmt:message bundle="${local}" key="local.placeholder.price" var="price" />
@@ -31,6 +32,8 @@
 
 <main class="add-nem-music">
     <form action="${pageContext.request.contextPath}/controller?command=addMusic" method="post" enctype="multipart/form-data">
+        <h1>${addNewMusic}</h1>
+        <hr/>
         <input type="text" name="title" placeholder="${title}" />
         <input type="text" name="artist" placeholder="${artist}" />
         <input type="text" name="price" placeholder="${price}" />

@@ -3,19 +3,22 @@ package com.epam.task.web.project.command;
 import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
+import com.epam.task.web.project.validator.InputParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchMusicCommand implements Command{
 
     private final MusicService musicService;
+    private InputParameterValidator inputParameterValidator = new InputParameterValidator();
 
     private static final String ARTIST = "artist";
     private static final String TITLE = "title";
     private static final String SEARCHING_MUSICS = "searchingMusics";
-    private static final String EMPTY_PARAMETERS = "emptyParameters";
+    private static final String EMPTY_INPUT_PARAMETERS = "emptyInputParameters";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
     private static final String SHOW_SEARCHING_MUSICS = "showSearchingMusics";
 
@@ -28,19 +31,22 @@ public class SearchMusicCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String artist = request.getParameter(ARTIST);
-        String title = request.getParameter(TITLE);
+        String artistValue = request.getParameter(ARTIST);
+        String titleValue = request.getParameter(TITLE);
 
-        if (artist.isEmpty() && title.isEmpty()) {
-            request.setAttribute(EMPTY_PARAMETERS, true);
+        boolean isValidArtistValue = inputParameterValidator.isValid(artistValue);
+        boolean isValidTitleValue = inputParameterValidator.isValid(titleValue);
+        if (!isValidArtistValue && !isValidTitleValue) {
+            request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(SEARCH_PAGE);
         }
 
-        List<Music> musics;
-        if (!artist.isEmpty()) {
-            musics = musicService.findMusicsBySearchParameter(ARTIST, artist);
-        } else {
-            musics = musicService.findMusicsBySearchParameter(TITLE, title);
+        List<Music> musics = new ArrayList<>();
+        if (isValidArtistValue) {
+            musics = musicService.findMusicsBySearchParameter(ARTIST, artistValue);
+        }
+        if (isValidTitleValue) {
+            musics = musicService.findMusicsBySearchParameter(TITLE, titleValue);
         }
 
         if (musics.isEmpty()) {
@@ -49,7 +55,7 @@ public class SearchMusicCommand implements Command{
         }
 
         request.setAttribute(SHOW_SEARCHING_MUSICS, true);
-        request.getSession(false).setAttribute(SEARCHING_MUSICS, musics);
+        request.getSession().setAttribute(SEARCHING_MUSICS, musics);
 
         return CommandResult.forward(MAIN_PAGE);
     }

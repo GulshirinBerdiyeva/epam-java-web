@@ -24,8 +24,8 @@ CREATE TABLE music_order (
      id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
      music_id BIGINT,
      user_id BIGINT,
-     FOREIGN KEY(music_id) REFERENCES music(id),
-     FOREIGN KEY(user_id) REFERENCES user(id),
+     FOREIGN KEY(music_id) REFERENCES music(id) ON DELETE CASCADE,
+     FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE,
      date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      discount INT,
      CHECK (discount>=0 AND discount<=100),
@@ -36,24 +36,24 @@ CREATE TABLE music_order (
 CREATE TABLE playlist (
       id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       music_id BIGINT,
-      FOREIGN KEY(music_id) REFERENCES music(id),
+      FOREIGN KEY(music_id) REFERENCES music(id) ON DELETE CASCADE,
       user_id BIGINT,
-      FOREIGN KEY(user_id) REFERENCES user(id)
+      FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE album (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     music_id BIGINT,
-    FOREIGN KEY(music_id) REFERENCES music(id),
+    FOREIGN KEY(music_id) REFERENCES music(id) ON DELETE CASCADE,
     album_title VARCHAR(25)
 );
 
 CREATE TABLE comment (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     music_id BIGINT,
-    FOREIGN KEY(music_id) REFERENCES music(id),
+    FOREIGN KEY(music_id) REFERENCES music(id) ON DELETE CASCADE,
     user_id BIGINT,
-    FOREIGN KEY(user_id) REFERENCES user(id),
+    FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE,
     comment VARCHAR(100),
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

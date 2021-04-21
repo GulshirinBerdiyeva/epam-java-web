@@ -34,7 +34,7 @@ public class LoginCommand implements Command{
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
             request.getSession(true).setAttribute(USER, user);
-            return CommandResult.redirect(request.getRequestURI() + MAIN_COMMAND);
+            return CommandResult.redirect(MAIN_COMMAND);
         } else {
             request.setAttribute(ERROR_LOGIN, true);
             return CommandResult.forward(LOGIN_PAGE);

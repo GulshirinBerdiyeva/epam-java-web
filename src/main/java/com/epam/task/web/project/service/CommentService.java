@@ -1,12 +1,14 @@
 package com.epam.task.web.project.service;
 
 import com.epam.task.web.project.dao.CommentDao;
+import com.epam.task.web.project.dao.DaoException;
 import com.epam.task.web.project.dao.DaoHelper;
 import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.entity.Comment;
 import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.entity.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommentService {
@@ -22,7 +24,7 @@ public class CommentService {
             CommentDao commentDao = daoHelper.createCommentDao();
 
             return commentDao.findCommentByMusicId(id);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -33,7 +35,7 @@ public class CommentService {
 
             Comment comment = new Comment(user.getId(), music.getId(), newComment);
             commentDao.save(comment);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }

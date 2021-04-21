@@ -26,14 +26,14 @@ public class UserMapper implements Mapper<User> {
         String role = resultSet.getString(ROLE);
 
         if (ADMIN.equals(role)) {
-            return User.getAdmin(id, username, password);
+            return User.createAdmin(id, username, password);
 
         } else {
             BigDecimal cash = resultSet.getBigDecimal(CASH);
             int musicAmount = resultSet.getInt(MUSIC_AMOUNT);
             int discount = resultSet.getInt(DISCOUNT);
 
-            return User.getClient(id, username, password, cash, musicAmount, discount);
+            return User.createClient(id, username, password, cash, musicAmount, discount);
         }
     }
 

@@ -2,6 +2,7 @@ package com.epam.task.web.project.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class MusicOrder implements Entity{
 
@@ -15,7 +16,6 @@ public class MusicOrder implements Entity{
 
     public MusicOrder(Long id, Long userId, Long musicId, Timestamp date,
                       int discount, BigDecimal finalPrice, boolean payment) {
-
         this.id = id;
         this.userId = userId;
         this.musicId = musicId;
@@ -27,7 +27,6 @@ public class MusicOrder implements Entity{
 
     public MusicOrder(Long userId, Long musicId, int discount,
                       BigDecimal finalPrice, boolean payment) {
-
         this.userId = userId;
         this.musicId = musicId;
         this.discount = discount;

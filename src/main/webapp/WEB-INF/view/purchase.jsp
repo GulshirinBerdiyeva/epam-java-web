@@ -20,6 +20,7 @@
 <fmt:message bundle="${local}" key="local.placeholder.price" var="price" />
 <fmt:message bundle="${local}" key="local.button.editPrice" var="buttonEditPrice" />
 <fmt:message bundle="${local}" key="local.button.delete" var="buttonDelete" />
+<fmt:message bundle="${local}" key="local.error.message.invalidNumberFormat" var="invalidNumberFormat" />
 
 <html>
 
@@ -31,18 +32,18 @@
 <body class="main-body">
 
 <header>
-    <jsp:include page="header.jsp" />
+    <jsp:include page="fragments/header.jsp" />
 </header>
 
 <nav>
-    <jsp:include page="menu.jsp" />
+    <jsp:include page="fragments/menu.jsp" />
 </nav>
 
 <main>
     <table class="purchase-table">
         <tr>
-            <th id="comment"><jsp:include page="comments.jsp" /></th>
-            <th id="purchase"><jsp:include page="perform.jsp" /></th>
+            <th id="comment"><jsp:include page="fragments/comments.jsp" /></th>
+            <th id="purchase"><jsp:include page="fragments/perform.jsp" /></th>
             <th id="control">
                 <div class="purchase-buttons">
                     <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}" >
@@ -54,6 +55,11 @@
                         <form action="${pageContext.request.contextPath}/controller?command=editMusic" method="post" >
                             <button type="submit">${buttonEdit}</button>
                         </form>
+
+                        <c:if test="${requestScope.invalidNumberFormat}" >
+                            <br/>
+                            <h2 id="error-message-editPrice">${invalidNumberFormat}</h2>
+                        </c:if>
 
                         <c:if test="${requestScope.canEdit}" >
                             <div class="editPrice-delete-wrapper">

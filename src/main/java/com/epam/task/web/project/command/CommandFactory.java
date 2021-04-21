@@ -5,78 +5,91 @@ import com.epam.task.web.project.service.*;
 
 public class CommandFactory {
 
+    private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
     private static final String PROFILE_PAGE = "/WEB-INF/view/profile.jsp";
-    private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String ADD_NEW_MUSIC_PAGE = "/WEB-INF/view/addNewMusic.jsp";
     private static final String CREATE_ALBUM_PAGE = "/WEB-INF/view/createAlbum.jsp";
 
-    public static Command create(String type) {
+    private final UserService userService;
+    private final MusicService musicService;
+    private final MusicOrderService musicOrderService;
+    private final PlaylistService playlistService;
+    private final AlbumService albumService;
+    private final CommentService commentService;
+
+    public CommandFactory(DaoHelperFactory daoHelperFactory) {
+        this.userService = new UserService(daoHelperFactory);
+        this.musicService = new MusicService(daoHelperFactory);
+        this.musicOrderService = new MusicOrderService(daoHelperFactory);
+        this.playlistService = new PlaylistService(daoHelperFactory);
+        this.albumService = new AlbumService(daoHelperFactory);
+        this.commentService = new CommentService(daoHelperFactory);
+    }
+
+    public Command create(String type) {
         switch (type){
             case "changeLanguage":
                 return new ChangeLanguageCommand();
             case "login":
-                return new LoginCommand(new UserService(new DaoHelperFactory()));
+                return new LoginCommand(userService);
             case "signUp":
-                return new SignUpCommand();
+                return new ShowPageCommand(REGISTRATION_PAGE);
             case "signIn":
-                return new SignInCommand(new UserService(new DaoHelperFactory()));
+                return new SignInCommand(userService);
             case "logout":
                 return new LogoutCommand();
             case "main":
-                return new MainCommand(new MusicService(new DaoHelperFactory()));
+                return new MainCommand(musicService);
             case "search":
                 return new ShowPageCommand(SEARCH_PAGE);
             case "searchMusic":
-                return new SearchMusicCommand(new MusicService(new DaoHelperFactory()));
+                return new SearchMusicCommand(musicService);
             case "selectMusic":
-                return new SelectMusicCommand(new MusicService(new DaoHelperFactory()));
+                return new SelectMusicCommand(musicService);
             case "purchasePage":
                 return new ShowPageCommand(PURCHASE_PAGE);
             case "buy":
-                return new BuyPurchaseCommand(new UserService(new DaoHelperFactory()),
-                                              new MusicOrderService(new DaoHelperFactory()),
-                                              new PlaylistService(new DaoHelperFactory()));
+                return new BuyPurchaseCommand(userService, musicOrderService, playlistService);
             case "confirmPurchase":
-                return new ConfirmPurchaseCommand(new MusicOrderService(new DaoHelperFactory()),
-                                                  new PlaylistService(new DaoHelperFactory()));
+                return new ConfirmPurchaseCommand(musicOrderService, playlistService);
             case "cancelPurchase":
-                return new CancelPurchaseCommand(new MusicOrderService(new DaoHelperFactory()));
+                return new CancelPurchaseCommand(musicOrderService);
             case"editMusic":
-                return new EditMusicCommand(new MusicService(new DaoHelperFactory()));
+                return new EditMusicCommand(musicService);
             case"editPrice":
-                return new EditPriceCommand(new MusicService(new DaoHelperFactory()));
+                return new EditPriceCommand(musicService);
             case"deleteMusic":
-                return new DeleteMusicCommand(new MusicService(new DaoHelperFactory()),
-                                              new UserService(new DaoHelperFactory()));
+                return new DeleteMusicCommand(musicService, userService);
             case "playlist":
-                return new PlaylistCommand(new PlaylistService(new DaoHelperFactory()));
+                return new PlaylistCommand(playlistService);
             case "albums":
-                return new AlbumsCommand(new AlbumService(new DaoHelperFactory()));
+                return new AlbumsCommand(albumService);
             case "createAlbum":
                 return new ShowPageCommand(CREATE_ALBUM_PAGE);
             case "albumMusics":
-                return new AlbumMusicsCommand(new AlbumService(new DaoHelperFactory()));
-            case "submitAlbum":
-                return new SubmitAlbumCommand(new AlbumService(new DaoHelperFactory()));
+                return new AlbumMusicsCommand(albumService);
+            case "addAlbum":
+                return new AddAlbumCommand(albumService);
             case "addMusic":
-                return new AddMusicCommand(new MusicService(new DaoHelperFactory()));
+                return new AddMusicCommand(musicService);
             case "addNewMusic":
                 return new ShowPageCommand(ADD_NEW_MUSIC_PAGE);
             case "comments":
-                return new CommentsCommand(new CommentService(new DaoHelperFactory()));
+                return new CommentsCommand(commentService);
             case "createComment":
-                return new CreateCommentCommand(new CommentService(new DaoHelperFactory()));
+                return new CreateCommentCommand(commentService);
             case "profile":
                 return new ShowPageCommand(PROFILE_PAGE);
-            case "topUpBalance":
-                return new TopUpBalanceCommand(new UserService(new DaoHelperFactory()));
+            case "fillBalance":
+                return new FillBalanceCommand(userService);
             case "clients":
-                return new ClientsCommand(new UserService(new DaoHelperFactory()));
+                return new ClientsCommand(userService);
             case "applyDiscount":
-                return new ApplyDiscountCommand(new UserService(new DaoHelperFactory()));
+                return new ApplyDiscountCommand(userService);
             default:
-                throw new IllegalArgumentException("Unknown type of command!");
+                throw new IllegalArgumentException("Unknown type of command!" + type);
         }
     }
 

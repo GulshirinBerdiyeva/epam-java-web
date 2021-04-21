@@ -15,7 +15,6 @@ public class Music implements Entity{
 
     public Music(Long id, String title, String artist,
                  String audioPath, String imagePath, BigDecimal price) {
-
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -27,6 +26,10 @@ public class Music implements Entity{
     @Override
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

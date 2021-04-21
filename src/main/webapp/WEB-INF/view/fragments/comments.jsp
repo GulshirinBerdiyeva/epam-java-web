@@ -8,6 +8,7 @@
 <fmt:message bundle="${local}" key="local.button.comments" var="comments" />
 <fmt:message bundle="${local}" key="local.placeholder.typeYourComment" var="typeYourComment" />
 <fmt:message bundle="${local}" key="local.button.comment" var="buttonComment" />
+<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
 
 <html>
 
@@ -21,6 +22,13 @@
 <main class="comments-wrapper">
 
     <h1>${comments}</h1>
+
+    <c:if test="${requestScope.emptyInputParameters}" >
+        <br/>
+        <h2 id="error-message-editPrice">${enterInputParameters}</h2>
+    </c:if>
+
+    <br/>
     <form action="${pageContext.request.contextPath}/controller?command=createComment" method="post" >
         <input type="text" name="newComment" placeholder="${typeYourComment}" />
         <button type="submit">${buttonComment}</button>
@@ -28,6 +36,7 @@
 
     <c:forEach items="${sessionScope.selectedMusicComments}" var="comment">
         <h5>${comment.username}    ${comment.date}</h5>
+        <br/>
         <p>${comment.comment}</p>
         <hr>
     </c:forEach>

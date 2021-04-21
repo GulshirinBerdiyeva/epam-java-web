@@ -19,7 +19,7 @@ public class ConfirmPurchaseCommand implements Command{
     private static final String PAYED = "payed";
     private  static final String EXIST_IN_PLAYLIST = "existInPlaylist";
 
-    private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
 
     public ConfirmPurchaseCommand(MusicOrderService musicOrderService, PlaylistService playlistService) {
         this.musicOrderService = musicOrderService;
@@ -28,19 +28,19 @@ public class ConfirmPurchaseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession(false).getAttribute(USER);
-        Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
-        MusicOrder musicOrder = (MusicOrder) request.getSession(false).getAttribute(MUSIC_ORDER);
+        User user = (User) request.getSession().getAttribute(USER);
+        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        MusicOrder musicOrder = (MusicOrder) request.getSession().getAttribute(MUSIC_ORDER);
 
-        boolean isExistInPlaylist = playlistService.isExist(user.getId(), music.getId());
+        boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());
 
         if (isExistInPlaylist) {
             request.setAttribute(EXIST_IN_PLAYLIST, true);
         } else {
             musicOrderService.confirmMusicOrder(musicOrder, user, music);
 
-            request.getSession(false).setAttribute(USER, user);
-            request.getSession(false).setAttribute(MUSIC_ORDER, musicOrder);
+            request.getSession().setAttribute(USER, user);
+            request.getSession().setAttribute(MUSIC_ORDER, musicOrder);
             request.setAttribute(PAYED, true);
         }
 

@@ -21,6 +21,7 @@ public class PlaylistMapper implements Mapper{
         Long userId = resultSet.getLong(USER_ID);
         Long musicId = resultSet.getLong(MUSIC_ID);
         Music music = musicMapper.map(resultSet);
+        music.setId(musicId);
 
         return new Playlist(id, userId, musicId, music);
     }

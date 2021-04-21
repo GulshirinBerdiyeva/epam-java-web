@@ -9,7 +9,7 @@
 <fmt:message bundle="${local}" key="local.placeholder.search.musicByArtist" var="musicByArtist"/>
 <fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
 <fmt:message bundle="${local}" key="local.error.message.musicIsAbsent" var="musicIsAbsent" />
-<fmt:message bundle="${local}" key="local.error.message.enterParameters" var="enterParameters" />
+<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
 <fmt:message bundle="${local}" key="local.error.message.musicRemoved" var="musicRemoved" />
 
 <html>
@@ -33,11 +33,11 @@
 
     <div class="search-wrapper">
         <form action="${pageContext.request.contextPath}/controller?command=searchMusic" method="post" >
-            <div id="search-by-artist" class="search-input-button-wrapper" >
+            <div id="left-search" class="search-input-button-wrapper" >
                 <input type="text" name="artist" placeholder="${musicByArtist}" />
                 <button type="submit">${buttonSearch}</button>
             </div>
-            <div id="search-by-title" class="search-input-button-wrapper" >
+            <div id="right-search" class="search-input-button-wrapper" >
                 <input type="text" name="title" placeholder="${musicByTitle}" />
                 <button type="submit">${buttonSearch}</button>
             </div>
@@ -46,17 +46,17 @@
 
     <c:if test="${requestScope.musicIsAbsent}" >
         <br/>
-        <h2>${musicIsAbsent}</h2>
+        <h2 id="error-message-editPrice">${musicIsAbsent}</h2>
     </c:if>
 
-    <c:if test="${requestScope.emptyParameters}" >
+    <c:if test="${requestScope.emptyInputParameters}" >
         <br/>
-        <h2>${enterParameters}</h2>
+        <h2 id="error-message-editPrice">${enterInputParameters}</h2>
     </c:if>
 
     <c:if test="${requestScope.musicRemoved}" >
         <br/>
-        <h2>${musicRemoved}</h2>
+        <h2 id="error-message-editPrice">${musicRemoved}</h2>
     </c:if>
 
 </main>

@@ -41,13 +41,13 @@ public class ChangeLanguageCommand implements Command{
                 session.setAttribute(LOCAL, ENGLISH_LOCAL);
         }
 
-        Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
+        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
         if (music != null) {
             String local = (String) session.getAttribute(LOCAL);
 
             CurrencyConverter currencyConverter = new CurrencyConverter();
             BigDecimal convertedPrice = currencyConverter.convertPrice(local, music.getPrice());
-            request.getSession(false).setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+            request.getSession().setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
         }
 
         String page = (String) session.getAttribute(CURRENT_PAGE);

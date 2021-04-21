@@ -49,7 +49,7 @@
         </div>
     </c:if>
 
-    <c:if test="${sessionScope.user != null}" >
+    <c:if test="${(sessionScope.user != null) || (sessionScope.currentPage eq '/WEB-INF/view/registration.jsp')}" >
         <div class="logout">
             <form action="${pageContext.request.contextPath}/controller?command=logout" method="post" >
                 <button type="submit">${buttonLogout}</button>

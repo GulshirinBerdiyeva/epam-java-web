@@ -5,11 +5,13 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
-<fmt:message bundle="${local}" key="local.button.submit" var="buttonSubmit" />
+<fmt:message bundle="${local}" key="local.menu.createAlbum" var="createAlbum" />
+<fmt:message bundle="${local}" key="local.button.createAlbum" var="buttonCreateAlbum" />
 <fmt:message bundle="${local}" key="local.placeholder.albumTitle" var="albumTitle" />
 <fmt:message bundle="${local}" key="local.artist" var="artist" />
 <fmt:message bundle="${local}" key="local.title" var="title" />
 <fmt:message bundle="${local}" key="local.add" var="add" />
+<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
 
 <html>
 
@@ -29,7 +31,22 @@
 </nav>
 
 <main>
-    <form action="${pageContext.request.contextPath}/controller?command=submitAlbum" method="post" >
+    <form action="${pageContext.request.contextPath}/controller?command=addAlbum" method="post" >
+        <div class="albumTitle-button-wrapper" >
+            <h1 id="album-title">${createAlbum}</h1>
+
+            <c:if test="${requestScope.emptyInputParameters}" >
+                <br/>
+                <h2 id="error-message-addAlbum">${enterInputParameters}</h2>
+                <br/>
+            </c:if>
+
+            <div class="create-album-input-button">
+                <input type="text" name="albumTitle" placeholder="${albumTitle}">
+                <button type="submit">${buttonCreateAlbum}</button>
+            </div>
+        </div>
+
         <table id="table">
             <thead>
             <tr>
@@ -50,10 +67,6 @@
             </c:forEach>
             </tbody>
         </table>
-        <div class="albumTitle-button-wrapper" >
-            <input type="text" name="albumTitle" placeholder="${albumTitle}">
-            <button type="submit">${buttonSubmit}</button>
-        </div>
     </form>
 </main>
 </body>

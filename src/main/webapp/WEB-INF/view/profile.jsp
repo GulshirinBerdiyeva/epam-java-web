@@ -10,8 +10,9 @@
 <fmt:message bundle="${local}" key="local.profile.musicAmount" var="musicAmount" />
 <fmt:message bundle="${local}" key="local.profile.bonus" var="bonus" />
 <fmt:message bundle="${local}" key="local.profile.balance" var="balance" />
-<fmt:message bundle="${local}" key="local.placeholder.topUpAmount" var="topUpAmount" />
-<fmt:message bundle="${local}" key="local.profile.topUpBalance" var="topUpBalance" />
+<fmt:message bundle="${local}" key="local.placeholder.amount" var="amount" />
+<fmt:message bundle="${local}" key="local.profile.fillBalance" var="fillBalance" />
+<fmt:message bundle="${local}" key="local.error.message.invalidNumberFormat" var="invalidNumberFormat" />
 
 <html>
 
@@ -33,6 +34,7 @@
 <main>
     <div class="profile-wrapper" >
         <h1>${myProfile}</h1>
+        <hr/>
 
         <div class="profile-left" >
             <h2>${username}:</h2>
@@ -54,10 +56,15 @@
             <h3>${sessionScope.user.cash}</h3>
         </div>
 
-        <form action="${pageContext.request.contextPath}/controller?command=topUpBalance" method="post" >
+        <c:if test="${requestScope.invalidNumberFormat}" >
+            <br/>
+            <h2 id="error-message-editPrice">${invalidNumberFormat}</h2>
+        </c:if>
+
+        <form action="${pageContext.request.contextPath}/controller?command=fillBalance" method="post" >
            <div class="profile-input-button-wrapper" >
-               <input type="text" name="cashValue" placeholder="${topUpBalance}" />
-               <button type="submit">${topUpBalance}</button>
+               <input type="text" name="cashValue" placeholder="${amount}" />
+               <button type="submit">${fillBalance}</button>
            </div>
         </form>
 

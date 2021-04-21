@@ -35,14 +35,14 @@ public class SelectMusicCommand implements Command{
 
         if (optionalMusic.isPresent()) {
             Music music = optionalMusic.get();
-            request.getSession(false).setAttribute(SELECTED_MUSIC, music);
+            request.getSession().setAttribute(SELECTED_MUSIC, music);
 
-            String local = (String) request.getSession(false).getAttribute(LOCAL);
+            String local = (String) request.getSession().getAttribute(LOCAL);
             CurrencyConverter currencyConverter = new CurrencyConverter();
             BigDecimal convertedPrice = currencyConverter.convertPrice(local, music.getPrice());
 
-            request.getSession(false).setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
-            return CommandResult.redirect(request.getRequestURI() + COMMENTS_COMMAND);
+            request.getSession().setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+            return CommandResult.redirect(COMMENTS_COMMAND);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);
             return CommandResult.forward(SEARCH_PAGE);

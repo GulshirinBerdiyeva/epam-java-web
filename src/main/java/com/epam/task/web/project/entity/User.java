@@ -21,7 +21,6 @@ public class User implements Entity{
 
     private User(Long id, String username, String password,
                  BigDecimal cash, int musicAmount,int discount, Role role) {
-
         this.id = id;
         this.username = username;
         this.password = password;
@@ -33,7 +32,6 @@ public class User implements Entity{
 
     private User(String username, String password,
                  BigDecimal cash, int musicAmount,int discount, Role role) {
-
         this.username = username;
         this.password = password;
         this.cash = cash;
@@ -42,19 +40,17 @@ public class User implements Entity{
         this.role = role;
     }
 
-    public static User getAdmin(Long id, String username, String password) {
+    public static User createAdmin(Long id, String username, String password) {
         return new User(id, username, password, Role.ADMIN);
     }
 
-    public static User getClient(Long id, String username, String password,
-                                 BigDecimal cash, int musicAmount, int discount) {
-
+    public static User createClient(Long id, String username, String password,
+                                    BigDecimal cash, int musicAmount, int discount) {
         return new User(id, username, password, cash, musicAmount, discount, Role.CLIENT);
     }
 
-    public static User getClient(String username, String password,
-                                 BigDecimal cash, int musicAmount, int discount) {
-
+    public static User createClient(String username, String password,
+                                    BigDecimal cash, int musicAmount, int discount) {
         return new User(username, password, cash, musicAmount, discount, Role.CLIENT);
     }
 

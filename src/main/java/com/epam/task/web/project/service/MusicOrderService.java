@@ -8,6 +8,7 @@ import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.SQLException;
 
 public class MusicOrderService {
 
@@ -37,8 +38,9 @@ public class MusicOrderService {
             musicOrderDao.save(musicOrder);
             playlistDao.save(playlist);
 
-            daoHelper.commit();
-        } catch (Exception e) {
+            daoHelper.endTransaction();
+
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -55,37 +57,19 @@ public class MusicOrderService {
             MusicOrderDao musicOrderDao = daoHelper.createMusicOrderDao();
 
             musicOrderDao.save(musicOrder);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public MusicOrder createOrder(User user, Music music) {
-        int musicAmount = user.getMusicAmount();
-        int discount = getDiscount(musicAmount);
-
+        int discount = user.getDiscount();
         BigDecimal musicPrice = music.getPrice();
-        BigDecimal finalPrice = getFinalPrice(discount, musicPrice);
+
+        BigDecimal percentageAmount = BigDecimal.valueOf(discount).multiply(musicPrice.divide(BigDecimal.valueOf(100)));
+        BigDecimal finalPrice = musicPrice.subtract(percentageAmount).setScale(2, RoundingMode.HALF_UP);
 
         return new MusicOrder(user.getId(), music.getId(), discount, finalPrice, false);
-    }
-
-    private BigDecimal getFinalPrice(int discount, BigDecimal musicPrice) {
-        BigDecimal percentageAmount = BigDecimal.valueOf(discount).multiply(musicPrice.divide(BigDecimal.valueOf(100)));
-        return musicPrice.subtract(percentageAmount).setScale(2, RoundingMode.HALF_UP);
-    }
-
-    private int getDiscount(int musicAmount) {
-        switch (musicAmount) {
-            case 3:
-                return 20;
-            case 7:
-                return 30;
-            case 9:
-                return 50;
-            default:
-                return 0;
-        }
     }
 
 }

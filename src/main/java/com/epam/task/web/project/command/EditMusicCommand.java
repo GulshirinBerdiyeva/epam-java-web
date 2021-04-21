@@ -16,7 +16,7 @@ public class EditMusicCommand implements Command {
     private static final String CAN_EDIT = "canEdit";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
 
-    private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
 
     public EditMusicCommand(MusicService musicService) {
@@ -25,7 +25,7 @@ public class EditMusicCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
+        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
         Long musicId = music.getId();
 
         Optional<Music> optionalMusic = musicService.getMusicById(musicId);

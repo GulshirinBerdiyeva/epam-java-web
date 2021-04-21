@@ -20,6 +20,7 @@ public class AlbumMapper implements Mapper<Album> {
         Long musicId = resultSet.getLong(MUSIC_ID);
         String albumTitle = resultSet.getString(ALBUM_TITLE);
         Music music = musicMapper.map(resultSet);
+        music.setId(musicId);
 
         return new Album(id, musicId, albumTitle, music);
     }

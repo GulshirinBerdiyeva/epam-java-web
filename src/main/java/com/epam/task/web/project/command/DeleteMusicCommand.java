@@ -29,7 +29,7 @@ public class DeleteMusicCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
+        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
         Long musicId = music.getId();
 
         Optional<Music> optionalMusic = musicService.getMusicById(musicId);

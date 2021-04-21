@@ -14,7 +14,7 @@ public class CancelPurchaseCommand implements Command{
     private static final String MUSIC_ORDER = "musicOrder";
     private static final String PAID = "paid";
 
-    private static final String PURCHASE_PAGE = "/WEB-INF/view/fragments/purchase.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String COMMENTS_COMMAND = "?command=comments";
 
     public CancelPurchaseCommand(MusicOrderService musicOrderService) {
@@ -23,14 +23,14 @@ public class CancelPurchaseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        MusicOrder musicOrder = (MusicOrder) request.getSession(false).getAttribute(MUSIC_ORDER);
+        MusicOrder musicOrder = (MusicOrder) request.getSession().getAttribute(MUSIC_ORDER);
 
         if (musicOrder.isPayment()) {
             request.setAttribute(PAID, true);
             return CommandResult.forward(PURCHASE_PAGE);
         } else {
             musicOrderService.cancelMusicOrder(musicOrder);
-            return CommandResult.redirect(request.getRequestURI() + COMMENTS_COMMAND);
+            return CommandResult.redirect(COMMENTS_COMMAND);
         }
     }
 

@@ -26,8 +26,8 @@ public class PlaylistDao extends AbstractDao<Playlist> {
         return executeQuery(SELECT_BY_USER_ID, userId);
     }
 
-    public boolean isExist(Long userId, Long musicId) throws DaoException{
-        return isExistQuery(SELECT_EXISTS, userId, musicId);
+    public boolean exist(Long userId, Long musicId) throws DaoException{
+        return exist(SELECT_EXISTS, userId, musicId);
     }
 
     @Override

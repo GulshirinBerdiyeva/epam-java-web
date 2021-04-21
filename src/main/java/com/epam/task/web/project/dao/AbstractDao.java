@@ -73,7 +73,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
         }
     }
 
-    protected boolean isExistQuery(String query, Object... params) throws DaoException{
+    protected boolean exist(String query, Object... params) throws DaoException{
         try(PreparedStatement statement = createStatement(query, params);
             ResultSet resultSet = statement.executeQuery()) {
 

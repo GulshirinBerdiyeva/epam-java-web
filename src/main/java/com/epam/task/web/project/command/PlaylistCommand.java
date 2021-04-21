@@ -23,12 +23,12 @@ public class PlaylistCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession(false).getAttribute(USER);
+        User user = (User) request.getSession().getAttribute(USER);
         Long userId = user.getId();
 
         List<Playlist> playlists = playlistService.getAllMusicsByUserId(userId);
 
-        request.getSession(true).setAttribute(PLAYLISTS, playlists);
+        request.getSession().setAttribute(PLAYLISTS, playlists);
         return CommandResult.forward(PLAYLIST_PAGE);
     }
 

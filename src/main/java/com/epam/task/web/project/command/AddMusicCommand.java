@@ -1,6 +1,7 @@
 package com.epam.task.web.project.command;
 
 import com.epam.task.web.project.entity.Music;
+import com.epam.task.web.project.extractor.MusicExtractor;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
 import org.apache.commons.fileupload.FileItem;
@@ -27,10 +28,10 @@ public class AddMusicCommand implements Command {
         try {
             List<FileItem> data = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
-            Music extractedMusic = musicService.extractData(data);
+            MusicExtractor musicExtractor = new MusicExtractor();
+            Music extractedMusic = musicExtractor.extractData(data);
 
-            Optional<Music> optionalMusic = musicService.findMusicByArtistAndTitle(
-                                                extractedMusic.getArtist(), extractedMusic.getTitle());
+            Optional<Music> optionalMusic = musicService.findMusicByArtistAndTitle(extractedMusic.getArtist(), extractedMusic.getTitle());
             if (optionalMusic.isPresent()) {
                 Music music = optionalMusic.get();
                 musicService.updateMusic(music);
@@ -38,7 +39,7 @@ public class AddMusicCommand implements Command {
                 musicService.saveMusic(extractedMusic);
             }
 
-            return CommandResult.redirect(request.getRequestURI() + MAIN_COMMAND);
+            return CommandResult.redirect(MAIN_COMMAND);
         } catch (FileUploadException e) {
             throw new ServiceException(e);
         }

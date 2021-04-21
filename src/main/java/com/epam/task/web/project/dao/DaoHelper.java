@@ -67,11 +67,10 @@ public class DaoHelper implements AutoCloseable{
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws SQLException {
         proxyConnection.setAutoCommit(true);
         proxyConnection.close();
     }

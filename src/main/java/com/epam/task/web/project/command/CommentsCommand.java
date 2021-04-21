@@ -23,13 +23,13 @@ public class CommentsCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Music music = (Music) request.getSession(false).getAttribute(SELECTED_MUSIC);
+        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
 
         Long musicId = music.getId();
         List<Comment> comments = commentService.findCommentsByMusicId(musicId);
 
-        request.getSession(false).setAttribute(SELECTED_MUSIC_COMMENTS, comments);
-        return CommandResult.redirect(request.getRequestURI() + PURCHASE_PAGE_COMMAND);
+        request.getSession().setAttribute(SELECTED_MUSIC_COMMENTS, comments);
+        return CommandResult.redirect(PURCHASE_PAGE_COMMAND);
     }
 
 }

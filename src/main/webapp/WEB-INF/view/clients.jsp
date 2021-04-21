@@ -5,13 +5,14 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
-<fmt:message bundle="${local}" key="local.profile.id" var="id" />
+<fmt:message bundle="${local}" key="local.menu.clients" var="clients" />
 <fmt:message bundle="${local}" key="local.profile.username" var="username" />
 <fmt:message bundle="${local}" key="local.profile.musicAmount" var="musicAmount" />
 <fmt:message bundle="${local}" key="local.profile.discount" var="discount" />
 <fmt:message bundle="${local}" key="local.profile.bonus" var="bonus" />
 <fmt:message bundle="${local}" key="local.placeholder.discountValue" var="discountValue" />
 <fmt:message bundle="${local}" key="local.button.apply" var="buttonApply" />
+<fmt:message bundle="${local}" key="local.error.message.invalidNumberFormat" var="invalidNumberFormat" />
 
 <html>
 
@@ -31,11 +32,17 @@
 </nav>
 
 <main>
+    <h1 id="clients">${clients}</h1>
+
+    <c:if test="${requestScope.invalidNumberFormat}" >
+        <br/>
+        <h2 id="error-message-applyDiscount">${invalidNumberFormat}</h2>
+    </c:if>
+
     <table id="table" >
         <thead>
         <tr>
-            <th>№</th>
-            <th>${id}</th>
+            <th id="thead-number">№</th>
             <th>${username}</th>
             <th>${musicAmount}</th>
             <th>${discount}</th>
@@ -46,14 +53,15 @@
         <c:forEach items="${sessionScope.clients}" var="client" varStatus="i">
             <tr>
                 <th>${i.index+1}</th>
-                <th>${client.id}</th>
                 <th>${client.username}</th>
                 <th>${client.musicAmount}</th>
                 <th>${client.discount}</th>
-                <th>
+                <th id="table-column">
                     <form action="${pageContext.request.contextPath}/controller?command=applyDiscount" method="post" >
-                        <input type="text" name="discountValue" placeholder="${discountValue}" />
-                        <button name="clientId" value="${client.id}" type="submit">${buttonApply}</button>
+                        <div class="discount-wrapper-input-button" >
+                            <input type="text" name="discountValue" placeholder="${discountValue}" />
+                            <button name="clientId" value="${client.id}" type="submit">${buttonApply}</button>
+                        </div>
                     </form>
                 </th>
             </tr>

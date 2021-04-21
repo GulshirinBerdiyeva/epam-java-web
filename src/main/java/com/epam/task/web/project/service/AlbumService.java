@@ -4,6 +4,7 @@ import com.epam.task.web.project.dao.*;
 import com.epam.task.web.project.entity.Album;
 import com.epam.task.web.project.entity.Music;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ public class AlbumService {
             AlbumDao albumDao = daoHelper.createAlbumDao();
 
             return albumDao.getAll();
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -37,7 +38,7 @@ public class AlbumService {
                     .forEach(albumMusic -> musics.add(albumMusic.getMusic()));
 
             return musics;
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -53,17 +54,17 @@ public class AlbumService {
             for (Long musicId : musicsId) {
                 albumDao.save(new Album(musicId, albumTitle));
             }
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
 
-    public boolean isExist(String title) throws ServiceException {
+    public boolean exist(String title) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             AlbumDao albumDao = daoHelper.createAlbumDao();
 
-            return albumDao.isExist(title);
-        } catch (Exception e) {
+            return albumDao.exist(title);
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -72,8 +73,13 @@ public class AlbumService {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             AlbumDao albumDao = daoHelper.createAlbumDao();
 
-            albumDao.removeByTitle(title);
-        } catch (Exception e) {
+            List<Album> albumMusics = albumDao.getAllByAlbumTitle(title);
+            for (Album albumMusic : albumMusics) {
+                Long musicId = albumMusic.getMusicID();
+                albumDao.removeById(musicId);
+            }
+
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }

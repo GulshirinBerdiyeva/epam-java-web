@@ -12,8 +12,7 @@ public class UserDao extends AbstractDao<User> {
 
     private static final String TABLE_NAME = "user";
 
-    private static final String INSERT_USER = "INSERT INTO user (username, password, role, cash, music_amount, discount) " +
-                                                    "VALUES (?, MD5(?), ?, ?, ?, ?)";
+    private static final String INSERT_USER = "INSERT INTO user (username, password, role, cash, music_amount, discount) VALUES (?, MD5(?), ?, ?, ?, ?)";
     private static final String SELECT_ALL_CLIENTS = "SELECT * FROM user WHERE role = 'client'";
     private static final String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM user WHERE username = ? AND password = MD5(?)";
     private static final String SELECT_EXISTS = "SELECT EXISTS(SELECT * from user WHERE username = ? AND password = MD5(?))";
@@ -34,14 +33,14 @@ public class UserDao extends AbstractDao<User> {
         return executeQuery(SELECT_ALL_CLIENTS);
     }
 
-    public boolean isExist(String username, String password) throws DaoException {
-        return isExistQuery(SELECT_EXISTS, username, password);
+    public boolean exist(String username, String password) throws DaoException {
+        return exist(SELECT_EXISTS, username, password);
     }
 
     public void createNewUser(User user) throws DaoException {
         String role = String.valueOf(user.getRole());
         executeUpdate(INSERT_USER, user.getUsername(), user.getPassword(), role.toLowerCase(),
-                      user.getCash(), user.getMusicAmount(), user.getDiscount());
+                        user.getCash(), user.getMusicAmount(), user.getDiscount());
     }
 
     public void updateCashAndMusicAmountById(User item) throws DaoException {

@@ -23,7 +23,7 @@ public class ClientsCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<User> clients = userService.getAllClients();
 
-        request.getSession(false).setAttribute(CLIENTS, clients);
+        request.getSession().setAttribute(CLIENTS, clients);
         return CommandResult.forward(CLIENTS_PAGE);
     }
 

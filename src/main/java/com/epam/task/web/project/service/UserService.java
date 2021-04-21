@@ -1,5 +1,6 @@
 package com.epam.task.web.project.service;
 
+import com.epam.task.web.project.dao.DaoException;
 import com.epam.task.web.project.dao.DaoHelper;
 import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.dao.UserDao;
@@ -8,6 +9,7 @@ import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,17 +26,17 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             return userDao.findByUsernameAndPassword(username, password);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
 
-    public boolean isExist(String username, String password) throws ServiceException {
+    public boolean exist(String username, String password) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             UserDao userDao = daoHelper.createUserDao();
 
-            return userDao.isExist(username, password);
-        } catch (Exception e) {
+            return userDao.exist(username, password);
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -43,14 +45,11 @@ public class UserService {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             UserDao userDao = daoHelper.createUserDao();
 
-            if (!username.isEmpty() && !password.isEmpty()) {
-                User user = User.getClient(username, password, new BigDecimal("0"), 0, 0);
-                userDao.createNewUser(user);
-            }
+            User user = User.createClient(username, password, new BigDecimal("0"), 0, 0);
+            userDao.createNewUser(user);
 
-            Optional<User> optionalUser = userDao.findByUsernameAndPassword(username, password);
-            return optionalUser;
-        } catch (Exception e) {
+            return userDao.findByUsernameAndPassword(username, password);
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -70,7 +69,7 @@ public class UserService {
             BigDecimal newCash = currentCash.add(cash).setScale(2, RoundingMode.HALF_UP);
             userDao.updateCashById(user.getId(), newCash);
             user.setCash(newCash);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -80,17 +79,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             userDao.updateDiscountById(id, discount);
-        } catch (Exception e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public void updateMusicAmount(Long id, int musicAmount) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            UserDao userDao = daoHelper.createUserDao();
-
-            userDao.updateMusicAmountById(id, musicAmount);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -100,7 +89,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             return userDao.getAllClients();
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }

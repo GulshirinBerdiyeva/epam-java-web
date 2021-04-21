@@ -1,10 +1,12 @@
 package com.epam.task.web.project.service;
 
+import com.epam.task.web.project.dao.DaoException;
 import com.epam.task.web.project.dao.DaoHelper;
 import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.dao.PlaylistDao;
 import com.epam.task.web.project.entity.Playlist;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class PlaylistService {
@@ -20,17 +22,17 @@ public class PlaylistService {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
             return playlistDao.getAllMusicsByUserId(userId);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
 
-    public boolean isExist(Long userId, Long musicId) throws ServiceException {
+    public boolean exist(Long userId, Long musicId) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
-            return playlistDao.isExist(userId, musicId);
-        } catch (Exception e) {
+            return playlistDao.exist(userId, musicId);
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -40,7 +42,7 @@ public class PlaylistService {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
             playlistDao.save(item);
-        } catch (Exception e) {
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
     }
