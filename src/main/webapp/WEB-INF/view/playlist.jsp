@@ -28,10 +28,10 @@
             <c:forEach items="${sessionScope.playlists}" var="playlist" >
                 <div class="box">
                     <div class="image">
-                        <img src="${playlist.music.imagePath}" alt="">
+                        <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${playlist.music.imageFileName}" alt="">
                     </div>
                     <div class="music">
-                        <audio src="${playlist.music.audioPath}" controls />
+                        <audio src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${playlist.music.audioFileName}" controls />
                     </div>
                 </div>
             </c:forEach>

@@ -1,7 +1,6 @@
 package com.epam.task.web.project.entity;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Comment implements Entity{
 

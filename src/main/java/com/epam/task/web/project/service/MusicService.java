@@ -7,13 +7,18 @@ import com.epam.task.web.project.entity.User;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class MusicService {
 
     private final DaoHelperFactory daoHelperFactory;
 
+    private static final String TITLE = "title";
     private static final String ARTIST = "artist";
+    private static final String PRICE = "price";
+    private static final String IMAGE_FILE = "imageFile";
+    private static final String AUDIO_FILE = "audioFile";
 
     public MusicService(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
@@ -117,6 +122,18 @@ public class MusicService {
         } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    public Music createMusic(Map<String, String> musicValues) {
+        Music music = new Music();
+
+        music.setTitle(musicValues.get(TITLE));
+        music.setArtist(musicValues.get(ARTIST));
+        music.setPrice(new BigDecimal(musicValues.get(PRICE)));
+        music.setImageFileName(musicValues.get(IMAGE_FILE));
+        music.setAudioFileName(musicValues.get(AUDIO_FILE));
+
+        return music;
     }
 
 }

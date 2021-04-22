@@ -17,7 +17,7 @@
 <body>
 <main class="music-inform-wrapper">
 
-    <img src="${sessionScope.selectedMusic.imagePath}">
+    <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${sessionScope.selectedMusic.imageFileName}">
 
     <div class="music-text-inform">
         <h2>${sessionScope.selectedMusic.artist}</h2>

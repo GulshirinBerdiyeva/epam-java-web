@@ -22,6 +22,12 @@
     <jsp:include page="fragments/menu.jsp" />
 </nav>
 
+<div class="main-search">
+    <c:if test="${requestScope.showSearchingMusics}" >
+        <jsp:include page="fragments/searchPanel.jsp" />
+    </c:if>
+</div>
+
 <main>
     <jsp:include page="fragments/musicSlider.jsp" />
 </main>

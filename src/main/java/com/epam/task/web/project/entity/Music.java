@@ -7,19 +7,19 @@ public class Music implements Entity{
     private Long id;
     private String title;
     private String artist;
-    private String audioPath;
-    private String imagePath;
+    private String audioFileName;
+    private String imageFileName;
     private BigDecimal price;
 
     public Music() {}
 
     public Music(Long id, String title, String artist,
-                 String audioPath, String imagePath, BigDecimal price) {
+                 String audioFileName, String imageFileName, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.artist = artist;
-        this.audioPath = audioPath;
-        this.imagePath = imagePath;
+        this.audioFileName = audioFileName;
+        this.imageFileName = imageFileName;
         this.price = price;
     }
 
@@ -48,20 +48,20 @@ public class Music implements Entity{
         this.artist = artist;
     }
 
-    public String getAudioPath() {
-        return audioPath;
+    public String getAudioFileName() {
+        return audioFileName;
     }
 
-    public void setAudioPath(String audioPath) {
-        this.audioPath = audioPath;
+    public void setAudioFileName(String audioFileName) {
+        this.audioFileName = audioFileName;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     public BigDecimal getPrice() {

@@ -49,7 +49,7 @@
                     <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}" >
                         <br/>
                         <audio controls controlsList="nodownload">
-                            <source src="${sessionScope.selectedMusic.audioPath}" type="audio/mpeg">
+                            <source src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${sessionScope.selectedMusic.audioFileName}" type="audio/mpeg">
                         </audio>
 
                         <form action="${pageContext.request.contextPath}/controller?command=editMusic" method="post" >
@@ -88,17 +88,17 @@
 
                         <c:if test="${requestScope.existInPlaylist}" >
                             <br/>
-                            <h2>${existInPlaylist}</h2>
+                            <h2 id="error-message-editPrice">${existInPlaylist}</h2>
                         </c:if>
 
                         <c:if test="${requestScope.notEnoughMoney}" >
                             <br/>
-                            <h2>${notEnoughMoney}</h2>
+                            <h2 id="error-message-editPrice">${notEnoughMoney}</h2>
                         </c:if>
 
                         <c:if test="${requestScope.paid}" >
                             <br/>
-                            <h2>${paid}</h2>
+                            <h2 id="error-message-editPrice">${paid}</h2>
                         </c:if>
 
                         <c:if test="${requestScope.canBuy}">
@@ -120,7 +120,7 @@
                         <c:if test="${requestScope.payed}">
                             <br/>
                             <audio controls controlsList="nodownload">
-                                <source src="${sessionScope.selectedMusic.audioPath}" type="audio/mpeg">
+                                <source src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${sessionScope.selectedMusic.audioFileName}" type="audio/mpeg">
                             </audio>
                         </c:if>
 

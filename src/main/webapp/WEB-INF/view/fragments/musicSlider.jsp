@@ -35,14 +35,14 @@
 
     <c:forEach items="${musics}" var="music" >
         <div class="card">
-            <img src="${music.imagePath}" alt="">
+            <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${music.imageFileName}" alt="">
             <div class="description">
                 <h2><b>${music.artist}<br>${music.title}</b></h2>
                 <br>
 
                 <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}">
                     <audio controls controlsList="nodownload">
-                        <source src="${music.audioPath}" type="audio/mpeg">
+                        <source src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${music.audioFileName}" type="audio/mpeg">
                     </audio>
 
                     <br/>

@@ -12,6 +12,7 @@
 <fmt:message bundle="${local}" key="local.placeholder.image" var="image" />
 <fmt:message bundle="${local}" key="local.placeholder.audio" var="audio" />
 <fmt:message bundle="${local}" key="local.button.submit" var="buttonSubmit" />
+<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
 
 <html>
 
@@ -34,11 +35,17 @@
     <form action="${pageContext.request.contextPath}/controller?command=addMusic" method="post" enctype="multipart/form-data">
         <h1>${addNewMusic}</h1>
         <hr/>
+
+        <c:if test="${requestScope.emptyInputParameters}" >
+            <br/>
+            <h2 id="error-message-editPrice">${enterInputParameters}</h2>
+        </c:if>
+
         <input type="text" name="title" placeholder="${title}" />
         <input type="text" name="artist" placeholder="${artist}" />
         <input type="text" name="price" placeholder="${price}" />
-        <input type="file" name="imageFile" accept="image/*" placeholder="${image}" >
-        <input type="file" name="audioFile" accept="audio/*" placeholder="${audio}" >
+        <input type="file" name="imageFile" accept=".jpg" placeholder="${image}" >
+        <input type="file" name="audioFile" accept=".mp3" placeholder="${audio}" >
         <input id="submit" type="submit" value="${buttonSubmit}">
     </form>
 

@@ -52,12 +52,13 @@ public class SearchMusicCommand implements Command{
         if (musics.isEmpty()) {
             request.setAttribute(MUSIC_IS_ABSENT, true);
             return CommandResult.forward(SEARCH_PAGE);
+
+        } else {
+            request.setAttribute(SHOW_SEARCHING_MUSICS, true);
+            request.getSession().setAttribute(SEARCHING_MUSICS, musics);
+            return CommandResult.forward(MAIN_PAGE);
         }
 
-        request.setAttribute(SHOW_SEARCHING_MUSICS, true);
-        request.getSession().setAttribute(SEARCHING_MUSICS, musics);
-
-        return CommandResult.forward(MAIN_PAGE);
     }
 
 }

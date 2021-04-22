@@ -210,7 +210,7 @@ a:hover{
 /*musicSlider*/
 .col{
     padding-top: 60px;
-    padding-left: 200px;
+    padding-left: 150px;
 }
 
 .card{
@@ -430,10 +430,17 @@ a:hover{
 
 #left-search{
     float: left;
+    margin-left: 20px;
 }
 
 #right-search{
     float: right;
+    margin-right: 20px;
+}
+
+.main-search{
+    padding-left: 200px;
+    padding-top: 50px;
 }
 
 /*comments-page*/
@@ -617,7 +624,7 @@ a:hover{
 /*addNewMusic-page*/
 .add-nem-music form{
     width: 500px;
-    height: 600px;
+    height: 630px;
     top: 50%;
     left: 50%;
     margin: auto;

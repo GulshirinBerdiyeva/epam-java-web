@@ -42,6 +42,8 @@ public class CommandFactory {
                 return new LogoutCommand();
             case "main":
                 return new MainCommand(musicService);
+            case "getResource":
+                return new GetResourceCommand();
             case "search":
                 return new ShowPageCommand(SEARCH_PAGE);
             case "searchMusic":

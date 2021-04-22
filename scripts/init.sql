@@ -15,8 +15,8 @@ CREATE TABLE music (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50),
     artist VARCHAR(25),
-    audio_path VARCHAR(50),
-    image_path VARCHAR(50),
+    audio_file_name VARCHAR(50),
+    image_file_name VARCHAR(50),
     price DECIMAL(9,2)
 );
 

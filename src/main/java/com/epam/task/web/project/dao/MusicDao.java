@@ -12,11 +12,11 @@ public class MusicDao extends AbstractDao<Music>{
 
     private static final String TABLE_NAME = "music";
 
-    private static final String INSERT_MUSIC = "INSERT INTO music (title, artist, audio_path, image_path, price) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_MUSIC = "INSERT INTO music (title, artist, audio_file_name, image_file_name, price) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ARTIST = "SELECT * FROM music WHERE artist = ?";
     private static final String SELECT_BY_TITLE = "SELECT * FROM music WHERE title = ?";
     private static final String SELECT_BY_ARTIST_AND_TITLE = "SELECT * FROM music WHERE artist = ? AND title = ?";
-    private static final String UPDATE_MUSIC = "UPDATE music SET title = ?, artist = ?, audio_path = ?, image_path = ?, price = ? WHERE id = ?";
+    private static final String UPDATE_MUSIC = "UPDATE music SET title = ?, artist = ?, audio_file_name = ?, image_file_name = ?, price = ? WHERE id = ?";
     private static final String UPDATE_PRICE = "UPDATE music SET price = ? WHERE id = ?";
     private static final String REMOVE_BY_ID = "DELETE FROM music WHERE id = ?";
 
@@ -26,13 +26,13 @@ public class MusicDao extends AbstractDao<Music>{
 
     public void updateMusic(Music music) throws DaoException {
         executeUpdate(UPDATE_MUSIC, music.getTitle(), music.getArtist(),
-                        music.getAudioPath(), music.getImagePath(), music.getPrice(), music.getId());
+                        music.getAudioFileName(), music.getImageFileName(), music.getPrice(), music.getId());
     }
 
     @Override
     public void save(Music item) throws DaoException {
         executeUpdate(INSERT_MUSIC, item.getTitle(), item.getArtist(),
-                        item.getAudioPath(), item.getImagePath(), item.getPrice());
+                        item.getAudioFileName(), item.getImageFileName(), item.getPrice());
     }
 
     public Optional<Music> findMusicByArtistAndTitle(String artist, String title) throws DaoException {
