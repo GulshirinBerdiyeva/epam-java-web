@@ -7,6 +7,7 @@ import com.epam.task.web.project.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ConfirmPurchaseCommand implements Command{
 
@@ -28,9 +29,10 @@ public class ConfirmPurchaseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession().getAttribute(USER);
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
-        MusicOrder musicOrder = (MusicOrder) request.getSession().getAttribute(MUSIC_ORDER);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
+        MusicOrder musicOrder = (MusicOrder) session.getAttribute(MUSIC_ORDER);
 
         boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());
 
@@ -39,8 +41,8 @@ public class ConfirmPurchaseCommand implements Command{
         } else {
             musicOrderService.confirmMusicOrder(musicOrder, user, music);
 
-            request.getSession().setAttribute(USER, user);
-            request.getSession().setAttribute(MUSIC_ORDER, musicOrder);
+            session.setAttribute(USER, user);
+            session.setAttribute(MUSIC_ORDER, musicOrder);
             request.setAttribute(PAYED, true);
         }
 

@@ -7,6 +7,7 @@ import com.epam.task.web.project.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class PlaylistCommand implements Command {
@@ -15,6 +16,7 @@ public class PlaylistCommand implements Command {
 
     private static final String USER ="user";
     private static final String PLAYLISTS ="playlists";
+
     private static final String PLAYLIST_PAGE = "/WEB-INF/view/playlist.jsp";
 
     public PlaylistCommand(PlaylistService playlistService) {
@@ -23,12 +25,13 @@ public class PlaylistCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession().getAttribute(USER);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
         Long userId = user.getId();
 
         List<Playlist> playlists = playlistService.getAllMusicsByUserId(userId);
 
-        request.getSession().setAttribute(PLAYLISTS, playlists);
+        session.setAttribute(PLAYLISTS, playlists);
         return CommandResult.forward(PLAYLIST_PAGE);
     }
 

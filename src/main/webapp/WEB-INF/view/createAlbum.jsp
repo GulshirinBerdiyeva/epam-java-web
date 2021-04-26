@@ -47,26 +47,28 @@
             </div>
         </div>
 
-        <table id="table">
-            <thead>
-            <tr>
-                <th id="thead-number">№</th>
-                <th>${artist}</th>
-                <th>${title}</th>
-                <th>${add}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${sessionScope.musics}" var="music" varStatus="i">
+        <div class="table-wrapper" >
+            <table class="table">
+                <thead>
                 <tr>
-                    <th id="body-number">${i.index+1}</th>
-                    <th>${music.artist}</th>
-                    <th>${music.title}</th>
-                    <th> <input type="checkbox" name="albumElements" value="${music.id}"> </th>
+                    <th id="thead-number">№</th>
+                    <th>${artist}</th>
+                    <th>${title}</th>
+                    <th>${add}</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <c:forEach items="${sessionScope.musics}" var="music" varStatus="i">
+                    <tr>
+                        <th id="body-number">${i.index+1}</th>
+                        <th>${music.artist}</th>
+                        <th>${music.title}</th>
+                        <th id="checkbox-input"> <input type="checkbox" name="albumElements" value="${music.id}"> </th>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </form>
 </main>
 </body>

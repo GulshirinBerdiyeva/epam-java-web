@@ -4,7 +4,7 @@ import com.epam.task.web.project.entity.Comment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class CommentMapper implements Mapper<Comment>{
 
@@ -21,7 +21,9 @@ public class CommentMapper implements Mapper<Comment>{
         Long userId = resultSet.getLong(USER_ID);
         String username = resultSet.getString(USERNAME);
         Long musicId = resultSet.getLong(MUSIC_ID);
-        Timestamp date = resultSet.getTimestamp(DATE);
+        long time = resultSet.getTimestamp(DATE).getTime();
+        int datetemp = resultSet.getTimestamp(DATE).getDate();
+        LocalDateTime date = resultSet.getTimestamp(DATE).toLocalDateTime();
         String comment = resultSet.getString(COMMENT);
 
         return new Comment(id, userId, username, musicId, date, comment);

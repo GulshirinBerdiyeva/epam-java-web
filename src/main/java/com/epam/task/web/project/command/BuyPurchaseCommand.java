@@ -8,6 +8,7 @@ import com.epam.task.web.project.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
 public class BuyPurchaseCommand implements Command{
@@ -17,13 +18,13 @@ public class BuyPurchaseCommand implements Command{
     private final UserService userService;
 
     private  static final String USER = "user";
-    private  static final String LOCAL = "local";
     private  static final String SELECTED_MUSIC = "selectedMusic";
     private  static final String EXIST_IN_PLAYLIST = "existInPlaylist";
     private  static final String NOT_ENOUGH_MONEY = "notEnoughMoney";
     private  static final String CAN_BUY = "canBuy";
     private  static final String MUSIC_ORDER = "musicOrder";
     private  static final String FINAL_PRICE = "finalPrice";
+    private static final String LOCAL = "local";
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
 
@@ -37,8 +38,9 @@ public class BuyPurchaseCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession().getAttribute(USER);
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
 
         boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());
         if (isExistInPlaylist) {
@@ -53,14 +55,14 @@ public class BuyPurchaseCommand implements Command{
         }
 
         MusicOrder musicOrder = musicOrderService.createOrder(user, music);
+        BigDecimal finalPrice = musicOrder.getFinalPrice();
 
-        String local = (String) request.getSession().getAttribute(LOCAL);
-        CurrencyConverter currencyConverter = new CurrencyConverter();
-        BigDecimal convertedPrice = currencyConverter.convertPrice(local, musicOrder.getFinalPrice());
+        String local = (String) session.getAttribute(LOCAL);
+        BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, finalPrice);
 
         request.setAttribute(CAN_BUY, true);
-        request.getSession().setAttribute(FINAL_PRICE, convertedPrice);
-        request.getSession().setAttribute(MUSIC_ORDER, musicOrder);
+        session.setAttribute(FINAL_PRICE, convertedPrice);
+        session.setAttribute(MUSIC_ORDER, musicOrder);
 
         return CommandResult.forward(PURCHASE_PAGE);
     }

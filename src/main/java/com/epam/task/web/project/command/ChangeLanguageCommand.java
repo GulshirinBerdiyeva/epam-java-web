@@ -27,8 +27,8 @@ public class ChangeLanguageCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        HttpSession session = request.getSession();
         String language = request.getParameter(LANGUAGE);
-        HttpSession session = request.getSession(true);
 
         switch (language) {
             case FRANCE:
@@ -41,17 +41,18 @@ public class ChangeLanguageCommand implements Command{
                 session.setAttribute(LOCAL, ENGLISH_LOCAL);
         }
 
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         if (music != null) {
+            BigDecimal price = music.getPrice();
             String local = (String) session.getAttribute(LOCAL);
+            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, price);
 
-            CurrencyConverter currencyConverter = new CurrencyConverter();
-            BigDecimal convertedPrice = currencyConverter.convertPrice(local, music.getPrice());
-            request.getSession().setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+            session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
         }
 
         String page = (String) session.getAttribute(CURRENT_PAGE);
-        return page == null ? CommandResult.forward(LOGIN_PAGE) : CommandResult.forward(page);
+        return page != null ? CommandResult.forward(page) : CommandResult.forward(LOGIN_PAGE);
+
     }
 
 }

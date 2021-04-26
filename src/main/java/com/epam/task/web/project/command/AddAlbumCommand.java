@@ -29,7 +29,7 @@ public class AddAlbumCommand implements Command{
         String[] selectedMusicsId = request.getParameterValues(ALBUM_ELEMENTS);
 
         boolean isValid = inputParameterValidator.isValid(albumTitle);
-        if (!isValid || selectedMusicsId.length == 0) {
+        if (!isValid || selectedMusicsId == null) {
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(CREATE_ALBUM_PAGE);
         }
@@ -38,6 +38,7 @@ public class AddAlbumCommand implements Command{
         if (isExist) {
             albumService.removeByTitle(albumTitle);
         }
+
         albumService.saveAlbum(albumTitle, selectedMusicsId);
 
         return CommandResult.redirect(ALBUMS_PAGE_COMMAND);

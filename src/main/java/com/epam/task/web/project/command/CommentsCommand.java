@@ -7,9 +7,10 @@ import com.epam.task.web.project.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class CommentsCommand implements Command{
+public class CommentsCommand implements Command {
 
     private final CommentService commentService;
 
@@ -23,12 +24,13 @@ public class CommentsCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        HttpSession session = request.getSession();
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
 
         Long musicId = music.getId();
         List<Comment> comments = commentService.findCommentsByMusicId(musicId);
 
-        request.getSession().setAttribute(SELECTED_MUSIC_COMMENTS, comments);
+        session.setAttribute(SELECTED_MUSIC_COMMENTS, comments);
         return CommandResult.redirect(PURCHASE_PAGE_COMMAND);
     }
 

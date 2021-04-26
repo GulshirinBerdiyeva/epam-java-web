@@ -1,9 +1,9 @@
 package com.epam.task.web.project.connection;
 
-import com.epam.task.web.project.extractor.ExtractException;
-import com.epam.task.web.project.extractor.PropertiesExtractor;
 import com.mysql.cj.jdbc.Driver;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,14 +39,16 @@ public class ConnectionFactory {
     private void getProperties() {
         try {
             DriverManager.registerDriver(new Driver());
-            PropertiesExtractor propertiesExtractor = new PropertiesExtractor();
-            Properties properties = (Properties) propertiesExtractor.extract(FILE_NAME);
+
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+            Properties properties = new Properties();
+            properties.load(inputStream);
 
             url = properties.getProperty(URL);
             dataBase = properties.getProperty(DATA_BASE);
             user = properties.getProperty(USER);
             password = properties.getProperty(PASSWORD);
-        } catch (SQLException | ExtractException e) {
+        } catch (SQLException | IOException e) {
             throw new ConnectionException(e);
         }
     }

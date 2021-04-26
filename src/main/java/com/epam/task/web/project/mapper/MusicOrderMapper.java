@@ -5,7 +5,7 @@ import com.epam.task.web.project.entity.MusicOrder;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class MusicOrderMapper implements Mapper<MusicOrder> {
 
@@ -22,7 +22,7 @@ public class MusicOrderMapper implements Mapper<MusicOrder> {
         Long id = resultSet.getLong(ID);
         Long userId = resultSet.getLong(USER_ID);
         Long musicId = resultSet.getLong(MUSIC_ID);
-        Timestamp date = resultSet.getTimestamp(DATE);
+        LocalDateTime date = resultSet.getTimestamp(DATE).toLocalDateTime();
         int discount = resultSet.getInt(DISCOUNT);
         BigDecimal finalPrice = resultSet.getBigDecimal(FINAL_PRICE);
         boolean payment = resultSet.getBoolean(PAYMENT);

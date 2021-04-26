@@ -1,6 +1,6 @@
 package com.epam.task.web.project.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Comment implements Entity{
 
@@ -8,11 +8,11 @@ public class Comment implements Entity{
     private Long userId;
     private String username;
     private Long musicId;
-    private Timestamp date;
+    private LocalDateTime date;
     private String comment;
 
     public Comment(Long id, Long userId, String username,
-                   Long musicId, Timestamp date, String comment) {
+                   Long musicId, LocalDateTime date, String comment) {
         this.id = id;
         this.userId = userId;
         this.username = username;
@@ -44,7 +44,7 @@ public class Comment implements Entity{
         return musicId;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 

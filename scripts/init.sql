@@ -8,7 +8,7 @@ CREATE TABLE user (
     cash DECIMAL(9,2),
     music_amount INT,
     discount INT,
-    CHECK (discount>=0 AND discount<=100),
+    CHECK (discount>=0 AND discount<=100)
 );
 
 CREATE TABLE music (

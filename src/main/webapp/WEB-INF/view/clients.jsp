@@ -39,35 +39,37 @@
         <h2 id="error-message-applyDiscount">${invalidNumberFormat}</h2>
     </c:if>
 
-    <table id="table" >
-        <thead>
-        <tr>
-            <th id="thead-number">№</th>
-            <th>${username}</th>
-            <th>${musicAmount}</th>
-            <th>${discount}</th>
-            <th>${bonus}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${sessionScope.clients}" var="client" varStatus="i">
+    <div id="client-table" class="table-wrapper" >
+        <table class="table" >
+            <thead>
             <tr>
-                <th>${i.index+1}</th>
-                <th>${client.username}</th>
-                <th>${client.musicAmount}</th>
-                <th>${client.discount}</th>
-                <th id="table-column">
-                    <form action="${pageContext.request.contextPath}/controller?command=applyDiscount" method="post" >
-                        <div class="discount-wrapper-input-button" >
-                            <input type="text" name="discountValue" placeholder="${discountValue}" />
-                            <button name="clientId" value="${client.id}" type="submit">${buttonApply}</button>
-                        </div>
-                    </form>
-                </th>
+                <th id="thead-number">№</th>
+                <th>${username}</th>
+                <th>${musicAmount}</th>
+                <th>${discount}</th>
+                <th>${bonus}</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach items="${sessionScope.clients}" var="client" varStatus="i">
+                <tr>
+                    <th>${i.index+1}</th>
+                    <th>${client.username}</th>
+                    <th>${client.musicAmount}</th>
+                    <th>${client.discount}</th>
+                    <th id="table-column">
+                        <form action="${pageContext.request.contextPath}/controller?command=applyDiscount" method="post" >
+                            <div class="discount-wrapper-input-button" >
+                                <input type="text" name="discountValue" placeholder="${discountValue}" />
+                                <button name="clientId" value="${client.id}" type="submit">${buttonApply}</button>
+                            </div>
+                        </form>
+                    </th>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </main>
 
 </body>

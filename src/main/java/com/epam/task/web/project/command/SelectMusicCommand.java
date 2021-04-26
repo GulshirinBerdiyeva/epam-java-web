@@ -7,6 +7,7 @@ import com.epam.task.web.project.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -29,19 +30,21 @@ public class SelectMusicCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        HttpSession session = request.getSession();
         Long id = Long.valueOf(request.getParameter(SELECTED_MUSIC_ID));
 
         Optional<Music> optionalMusic = musicService.getMusicById(id);
 
         if (optionalMusic.isPresent()) {
             Music music = optionalMusic.get();
-            request.getSession().setAttribute(SELECTED_MUSIC, music);
+            BigDecimal price = music.getPrice();
 
-            String local = (String) request.getSession().getAttribute(LOCAL);
-            CurrencyConverter currencyConverter = new CurrencyConverter();
-            BigDecimal convertedPrice = currencyConverter.convertPrice(local, music.getPrice());
+            String local = (String) session.getAttribute(LOCAL);
+            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, price);
 
-            request.getSession().setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+            session.setAttribute(SELECTED_MUSIC, music);
+            session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+
             return CommandResult.redirect(COMMENTS_COMMAND);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);

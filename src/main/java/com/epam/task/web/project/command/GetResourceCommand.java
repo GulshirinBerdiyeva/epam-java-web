@@ -1,13 +1,12 @@
 package com.epam.task.web.project.command;
 
-import com.epam.task.web.project.extractor.ExtractException;
-import com.epam.task.web.project.extractor.PropertiesExtractor;
 import com.epam.task.web.project.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Properties;
 
@@ -20,16 +19,19 @@ public class GetResourceCommand implements Command{
     private static final String AUDIO_FILE_NAME = "audioFileName";
     private static final String IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String AUDIO_CONTENT_TYPE = "audio/mp3";
+    private static final String CURRENT_PAGE = "currentPage";
+
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-
         String imageFileName = request.getParameter(IMAGE_FILE_NAME);
         String audioFileName = request.getParameter(AUDIO_FILE_NAME);
 
         try {
-            PropertiesExtractor propertiesExtractor = new PropertiesExtractor();
-            Properties properties = (Properties) propertiesExtractor.extract(FILE_NAME);
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
             File file;
             String directory;
 
@@ -47,9 +49,9 @@ public class GetResourceCommand implements Command{
             response.setContentLength(fileContent.length);
             response.getOutputStream().write(fileContent);
 
-            String page = (String) request.getSession().getAttribute("currentPage");
+            String page = (String) request.getSession().getAttribute(CURRENT_PAGE);
             return CommandResult.forward(page);
-        } catch (ExtractException | IOException e) {
+        } catch (IOException e) {
             throw new ServiceException(e);
         }
 

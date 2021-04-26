@@ -32,9 +32,7 @@ public class ApplyDiscountCommand implements Command {
         if (isValid) {
             int discount = Integer.parseInt(discountValue);
             userService.updateDiscount(clientId, discount);
-
             return CommandResult.redirect(CLIENTS_PAGE_COMMAND);
-
         } else {
             request.setAttribute(INVALID_NUMBER_FORMAT, true);
             return CommandResult.forward(CLIENTS_PAGE);

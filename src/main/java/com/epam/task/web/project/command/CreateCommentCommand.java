@@ -8,6 +8,7 @@ import com.epam.task.web.project.validator.InputParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class CreateCommentCommand implements Command{
 
@@ -28,8 +29,9 @@ public class CreateCommentCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession().getAttribute(USER);
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         String commentValue = request.getParameter(NEW_COMMENT);
 
         boolean isValid = inputParameterValidator.isValid(commentValue);

@@ -31,6 +31,9 @@
                         <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${playlist.music.imageFileName}" alt="">
                     </div>
                     <div class="music">
+                        <h2>${playlist.music.artist}</h2>
+                        <h2>${playlist.music.title}</h2>
+                        <br/>
                         <audio src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${playlist.music.audioFileName}" controls />
                     </div>
                 </div>

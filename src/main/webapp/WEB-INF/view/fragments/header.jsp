@@ -43,7 +43,7 @@
 
     <c:if test="${sessionScope.user == null}" >
         <div class="signIn">
-            <form action="${pageContext.request.contextPath}/controller?command=signUp" method="post" >
+            <form action="${pageContext.request.contextPath}/controller?command=signUpPage" method="post" >
                 <button type="submit">${buttonSignUp}</button>
             </form>
         </div>

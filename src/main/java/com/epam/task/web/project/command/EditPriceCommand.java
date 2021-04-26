@@ -8,6 +8,7 @@ import com.epam.task.web.project.validator.NumberFormatValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Optional;
@@ -34,7 +35,8 @@ public class EditPriceCommand implements Command{
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        HttpSession session = request.getSession();
+        Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         String priceValue = request.getParameter(NEW_PRICE);
 
         boolean isValid = numberFormatValidator.isValid(priceValue);
@@ -47,16 +49,16 @@ public class EditPriceCommand implements Command{
         Optional<Music> optionalMusic = musicService.getMusicById(musicId);
 
         if (optionalMusic.isPresent()) {
-            BigDecimal price = new BigDecimal(priceValue).setScale(2, RoundingMode.HALF_UP);
-            musicService.updatePriceById(musicId, price);
-            music.setPrice(price);
+            BigDecimal newPrice = new BigDecimal(priceValue).setScale(2, RoundingMode.HALF_UP);
+            musicService.updatePriceById(musicId, newPrice);
+            music.setPrice(newPrice);
+            BigDecimal price = music.getPrice();
 
-            String local = (String) request.getSession().getAttribute(LOCAL);
-            CurrencyConverter currencyConverter = new CurrencyConverter();
-            BigDecimal convertedPrice = currencyConverter.convertPrice(local, music.getPrice());
+            String local = (String) session.getAttribute(LOCAL);
+            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, price);
 
-            request.getSession().setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
-            request.getSession().setAttribute(SELECTED_MUSIC, music);
+            session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
+            session.setAttribute(SELECTED_MUSIC, music);
 
             return CommandResult.redirect(PURCHASE_PAGE_COMMAND);
         } else {

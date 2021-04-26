@@ -6,6 +6,7 @@
 <fmt:setBundle basename="local" var="local" />
 
 <fmt:message bundle="${local}" key="local.title.error" var="titleError" />
+<fmt:message bundle="${local}" key="local.error.message.invalidCommand" var="invalidCommand" />
 
 <html>
 
@@ -19,7 +20,11 @@
 
 <div class="error-wrapper">
     <c:if test="${requestScope.error != null}">
-        <h2>${error}</h2>
+        <h2>${requestScope.error}</h2>
+    </c:if>
+
+    <c:if test="${requestScope.invalidCommand}">
+        <h2>${invalidCommand}</h2>
     </c:if>
 </div>
 

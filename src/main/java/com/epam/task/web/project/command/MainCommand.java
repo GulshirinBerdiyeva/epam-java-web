@@ -14,6 +14,7 @@ public class MainCommand implements Command {
 
     private static final String MUSICS = "musics";
     private static final String SHOW_MUSICS = "showMusics";
+
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     public MainCommand(MusicService musicService) {

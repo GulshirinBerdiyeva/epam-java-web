@@ -47,15 +47,11 @@ public class SignInCommand implements Command {
                 User user = optionalUser.get();
                 request.getSession(true).setAttribute(USER, user);
                 return CommandResult.redirect(MAIN_COMMAND);
-            } else {
-                request.setAttribute(ERROR_SIGN_IN, true);
-                return CommandResult.forward(REGISTRATION_PAGE);
             }
-
-        } else {
-            request.setAttribute(ERROR_SIGN_IN, true);
-            return CommandResult.forward(REGISTRATION_PAGE);
         }
+
+        request.setAttribute(ERROR_SIGN_IN, true);
+        return CommandResult.forward(REGISTRATION_PAGE);
 
     }
 

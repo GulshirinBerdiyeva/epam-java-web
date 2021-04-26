@@ -7,6 +7,7 @@ import com.epam.task.web.project.validator.NumberFormatValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
 public class FillBalanceCommand implements Command {
@@ -19,7 +20,7 @@ public class FillBalanceCommand implements Command {
     private static final String INVALID_NUMBER_FORMAT = "invalidNumberFormat";
 
     private static final String PROFILE_PAGE = "/WEB-INF/view/profile.jsp";
-    private static final String PROFILE_PAGE_COMMAND = "?command=profile";
+    private static final String PROFILE_PAGE_COMMAND = "?command=profilePage";
 
     public FillBalanceCommand(UserService userService) {
         this.userService = userService;
@@ -27,7 +28,8 @@ public class FillBalanceCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        User user = (User) request.getSession().getAttribute(USER);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
         String cashValue = request.getParameter(CASH_VALUE);
 
         boolean isValid = numberFormatValidator.isValid(cashValue);
@@ -40,7 +42,7 @@ public class FillBalanceCommand implements Command {
 
         userService.updateBalance(user, cash);
 
-        request.getSession().setAttribute(USER, user);
+        session.setAttribute(USER, user);
         return CommandResult.redirect(PROFILE_PAGE_COMMAND);
     }
 

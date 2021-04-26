@@ -29,22 +29,26 @@ public class CommandFactory {
     }
 
     public Command create(String type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Unknown parameter!");
+        }
+
         switch (type){
             case "changeLanguage":
                 return new ChangeLanguageCommand();
-            case "login":
-                return new LoginCommand(userService);
-            case "signUp":
+            case "signUpPage":
                 return new ShowPageCommand(REGISTRATION_PAGE);
             case "signIn":
                 return new SignInCommand(userService);
+            case "login":
+                return new LoginCommand(userService);
             case "logout":
                 return new LogoutCommand();
             case "main":
                 return new MainCommand(musicService);
             case "getResource":
                 return new GetResourceCommand();
-            case "search":
+            case "searchPage":
                 return new ShowPageCommand(SEARCH_PAGE);
             case "searchMusic":
                 return new SearchMusicCommand(musicService);
@@ -68,7 +72,7 @@ public class CommandFactory {
                 return new PlaylistCommand(playlistService);
             case "albums":
                 return new AlbumsCommand(albumService);
-            case "createAlbum":
+            case "createAlbumPage":
                 return new ShowPageCommand(CREATE_ALBUM_PAGE);
             case "albumMusics":
                 return new AlbumMusicsCommand(albumService);
@@ -76,13 +80,13 @@ public class CommandFactory {
                 return new AddAlbumCommand(albumService);
             case "addMusic":
                 return new AddMusicCommand(musicService);
-            case "addNewMusic":
+            case "addMusicPage":
                 return new ShowPageCommand(ADD_NEW_MUSIC_PAGE);
             case "comments":
                 return new CommentsCommand(commentService);
             case "createComment":
                 return new CreateCommentCommand(commentService);
-            case "profile":
+            case "profilePage":
                 return new ShowPageCommand(PROFILE_PAGE);
             case "fillBalance":
                 return new FillBalanceCommand(userService);
@@ -91,7 +95,7 @@ public class CommandFactory {
             case "applyDiscount":
                 return new ApplyDiscountCommand(userService);
             default:
-                throw new IllegalArgumentException("Unknown type of command!" + type);
+                throw new IllegalArgumentException("Unknown type of command! \"" + type + "\"");
         }
     }
 
