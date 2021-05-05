@@ -10,13 +10,11 @@ public class AlbumDao extends AbstractDao<Album> {
 
     private static final String TABLE_NAME = "album";
 
+    private static final String SELECT_BY_ALBUM_TITLE = "SELECT * FROM album INNER JOIN music ON album.music_id = music.id WHERE album.album_title = ?";
+    private static final String SELECT_BY_MUSIC_ID = "SELECT * FROM album INNER JOIN music ON album.music_id = music.id";
     private static final String INSERT_INTO_ALBUM = "INSERT INTO album (music_id, album_title) VALUES (?, ?)";
     private static final String SELECT_EXISTS = "SELECT EXISTS(SELECT * from album WHERE album_title = ?)";
     private static final String REMOVE_BY_MUSIC_ID = "DELETE FROM album WHERE music_id = ?";
-    private static final String SELECT_BY_MUSIC_ID = "SELECT * FROM album INNER JOIN music ON album.music_id = music.id";
-    private static final String SELECT_BY_ALBUM_TITLE = "SELECT * FROM album " +
-                                                              "INNER JOIN music ON album.music_id = music.id " +
-                                                                    "WHERE album.album_title = ?";
 
     public AlbumDao(ProxyConnection proxyConnection) {
         super(proxyConnection, new AlbumMapper(), TABLE_NAME);

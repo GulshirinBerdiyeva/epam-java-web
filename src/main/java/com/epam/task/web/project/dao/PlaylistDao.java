@@ -11,11 +11,9 @@ public class PlaylistDao extends AbstractDao<Playlist> {
 
     private static final String TABLE_NAME = "playlist";
 
-    private static final String INSERT_PLAYLIST = "INSERT INTO playlist (user_id, music_id) VALUES (?, ?)";
+    private static final String SELECT_BY_USER_ID = "SELECT * FROM playlist INNER JOIN music ON playlist.music_id = music.id WHERE user_id = ?";
     private static final String SELECT_EXISTS = "SELECT EXISTS(SELECT * from playlist WHERE user_id = ? AND music_id = ?)";
-    private static final String SELECT_BY_USER_ID = "SELECT * FROM playlist " +
-                                                        "INNER JOIN music ON playlist.music_id = music.id " +
-                                                            "WHERE user_id = ?";
+    private static final String INSERT_PLAYLIST = "INSERT INTO playlist (user_id, music_id) VALUES (?, ?)";
     private static final String REMOVE_BY_MUSIC_ID = "DELETE FROM playlist WHERE music_id = ?";
 
     public PlaylistDao(ProxyConnection proxyConnection) {

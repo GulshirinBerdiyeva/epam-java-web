@@ -2,13 +2,16 @@ package com.epam.task.web.project.validator;
 
 import java.util.regex.Pattern;
 
-public class NumberFormatValidator implements Validator{
+public class InputParameterValidator {
 
     private final String NUMBER_FORMAT = "\\d+\\.?\\d*";
 
-    @Override
-    public boolean isValid(String inputParameter) {
-        if (inputParameter == null || inputParameter.isEmpty()) {
+    public boolean isValidString(String inputParameter) {
+       return inputParameter != null && !inputParameter.trim().isEmpty();
+    }
+
+    public boolean isValidNumber(String inputParameter) {
+        if (inputParameter == null || inputParameter.trim().isEmpty()) {
             return false;
         }
 

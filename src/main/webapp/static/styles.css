@@ -1,19 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
 
-a:hover{
+a:hover {
     background-color: firebrick;
 }
 
 /*error-page*/
-.error-wrapper{
+.error-wrapper {
     width: 100%;
 }
 
-.error-wrapper h2{
+.error-wrapper h2 {
     font-size: 20px;
     color: darkred;
     text-align: center;
@@ -21,7 +21,7 @@ a:hover{
 
 /*index-page*/
 .login-form,
-.error-wrapper{
+.error-wrapper {
     width: 470px;
     height: 500px;
     top: 50%;
@@ -31,12 +31,12 @@ a:hover{
     transform: translate(-50%, -50%);
 }
 
-.login-form{
+.login-form {
     border-radius: 25px;
     background-color: black;
 }
 
-.login-form h1{
+.login-form h1 {
     margin: 40px 0;
     font-size: 40px;
     color: antiquewhite;
@@ -44,7 +44,7 @@ a:hover{
     text-transform: uppercase;
 }
 
-.login-form h2{
+.login-form h2 {
     font-size: 17px;
     color: red;
     text-align: center;
@@ -57,13 +57,13 @@ a:hover{
 .profile-input-button-wrapper input,
 .edit-price input,
 .albumTitle-button-wrapper input,
-.discount-wrapper-input-button input{
+.discount-wrapper-input-button input {
     outline: none;
     border: 2px solid antiquewhite;
 }
 
 .login-form input,
-.add-nem-music input{
+.add-nem-music input {
     padding: 15px 10px;
     width: 80%;
     margin-left: 2.4em;
@@ -83,7 +83,7 @@ a:hover{
 .discount-wrapper-input-button button,
 #edit-price,
 #delete,
-#submit{
+#submit {
     font-weight: bold;
     cursor: pointer;
     color: antiquewhite;
@@ -101,12 +101,12 @@ a:hover{
 .discount-wrapper-input-button button:hover,
 #edit-price:hover,
 #delete:hover,
-#submit:hover{
+#submit:hover {
     background-color: firebrick;
 }
 
 .login-form button,
-#submit{
+#submit {
     left: 50%;
     padding: 10px 15px;
     margin: 50px 0;
@@ -120,7 +120,7 @@ a:hover{
 }
 
 /*header*/
-.header-wrapper{
+.header-wrapper {
     width: 100%;
     height: 50px;
     display: block;
@@ -131,7 +131,7 @@ a:hover{
     background-color: black;
 }
 
-.header-wrapper h1{
+.header-wrapper h1 {
     padding-left: 20px;
     padding-block-start: 10px;
     font-size: 26px;
@@ -141,7 +141,7 @@ a:hover{
 
 .russian button,
 .france button,
-.english button{
+.english button {
     top: 20%;
     width: 30px;
     height: 25px;
@@ -150,26 +150,26 @@ a:hover{
     position: absolute;
 }
 
-.russian button{
+.russian button {
     right: 185px;
     background: url("https://cdn.countryflags.com/thumbs/russia/flag-400.png") no-repeat center;
     background-size: 30px;
 }
 
-.france button{
+.france button {
     right: 220px;
     background: url("https://cdn.countryflags.com/thumbs/france/flag-400.png") no-repeat center;
     background-size: 30px;
 }
 
-.english button{
+.english button {
     right: 255px;
     background: url("https://cdn.countryflags.com/thumbs/united-kingdom/flag-400.png") no-repeat center;
     background-size: 40px;
 }
 
 .logout button,
-.signIn button{
+.signIn button {
     top: 15%;
     right: 0;
     width: 180px;
@@ -181,7 +181,7 @@ a:hover{
 }
 
 /*menu*/
-.menu-wrapper{
+.menu-wrapper {
     height: 100%;
     width: 200px;
     position: fixed;
@@ -191,7 +191,7 @@ a:hover{
     background-color: #292929;
 }
 
-.menu-wrapper a{
+.menu-wrapper a {
     padding-top: 45px;
     padding-bottom: 45px;
     justify-content: center;
@@ -206,40 +206,45 @@ a:hover{
 /*main-page*/
 .main-body,
 .search-body,
-.playlist-body{
+.playlist-body {
     background-color: antiquewhite;
 }
 
 /*musicSlider*/
-.col{
-    padding-left: 150px;
+.slide-body {
+    padding-top: 230px;
+    padding-left: 200px;
 }
 
-.card{
+.slide-wrapper {
+    margin-top: 80px;
     width: 500px;
     height: 600px;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-30%, -50%);
+}
+
+.slide {
+    width: 90%;
+    height: 80%;
     position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 10px 10px 10px 80px;
     border: black 5px solid;
     border-radius: 10px;
     cursor: pointer;
-    z-index: 1;
     overflow: hidden;
-    align-items: center;
     text-align: center;
+    margin: auto;
 }
 
-.card img{
+.slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
+    border-radius: 5px;
 }
 
-.description{
+.description {
     position:absolute;
     top: 0;
     left:0;
@@ -247,97 +252,120 @@ a:hover{
     right:0;
     background:rgba(255,255,255, 0.7);
     display:none;
-    z-index: 1;
 }
 
-.description h2{
+.description h2 {
     padding-top: 200px;
     size: 20px;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.description button{
+.description button {
     width: 100px;
     height: 50px;
     border-radius: 10px;
     background-color: black;
 }
 
-.card:hover .description{
+.slide:hover .description {
     display: block;
 }
 
+.pagination {
+    height: 50px;
+    width: 80%;
+    background-color: lightcoral;
+    border-radius: 40px;
+    box-shadow: 2px 2px 7px rgba(0,0,0,0.2), -2px -2px 7px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.pagination a {
+    margin: 5px 10px 5px 20px;
+    display: flex;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+#current{
+    color: firebrick;
+}
+
+.pagination a:hover {
+    background-color: lightcoral;
+    color: firebrick;
+    font-size: 22px;
+}
+
 /*albums-page*/
-.create-album-input-button{
+.create-album-input-button {
     width: 50%;
     padding-top: 10px;
+    padding-left: 42%;
     transform: translate(-50px, 0px);
 }
 
-.table-wrapper{
+.table-wrapper {
     padding-top: 240px;
-    padding-left: 220px;
+    padding-left: 250px;
     width: 100%;
     height: 100%;
 }
 
-.table{
+.table {
     width: 80%;
     background-color: black;
     color: antiquewhite;
 }
 
-#client-table{
-    padding-top: 150px;
-}
-
-#album-title{
-    padding-top: 40px;
-}
-
-.table tbody{
+.table tbody {
     color: black;
 }
 
-#thead-number{
+#thead-number {
     width: 40px;
     height: 50px;
     align-self: center;
 }
 
-#body-number{
+#body-number {
     width: 50px;
     height: 50px;
     align-self: center;
 }
 
-.table tbody tr:nth-child(odd){
+.table tbody tr:nth-child(odd) {
     background: white;
     width: 80px;
     height: 80px;
 }
 
-.table tbody tr:nth-child(even){
+.table tbody tr:nth-child(even) {
     background: wheat;
     width: 80px;
     height: 80px;
 }
 
-#table-column{
+#table-column {
     width: 320px;
 }
 
-.discount-wrapper-input-button{
+.discount-wrapper-input-button {
     width: 80%;
 }
 
-.discount-wrapper-input-button input{
+.discount-wrapper-input-button input {
     border-color: black;
     width: 80%;
 }
 
-.discount-wrapper-input-button button{
+.discount-wrapper-input-button button {
     width: 60px;
     height: 50px;
     position: absolute;
@@ -347,9 +375,7 @@ a:hover{
     background-color: black;
 }
 
-.albumTitle-button-wrapper{
-    padding-top: 20px;
-    padding-left: 50%;
+.albumTitle-button-wrapper {
     width: 100%;
     height: 200px;
     position: fixed;
@@ -357,20 +383,20 @@ a:hover{
     z-index: 1;
 }
 
-.albumTitle-button-wrapper input{
+.albumTitle-button-wrapper input {
     width: 300px;
 }
 
-#checkbox-input{
+#checkbox-input {
     transform: scale(2);
 }
 
-.albums{
+.albums {
     width: 100%;
     height: 200px;
 }
 
-.albums button{
+.albums button {
     width: 100%;
     height: 100%;
     background-color: rosybrown;
@@ -382,12 +408,12 @@ a:hover{
 /*search-page*/
 .search-body,
 .add-nem-music,
-.album-main{
+.album-main {
     padding-top: 50px;
     padding-left: 200px;
 }
 
-.search-wrapper{
+.search-wrapper {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
@@ -396,16 +422,16 @@ a:hover{
     background-color: rosybrown;
 }
 
-.search-input-button-wrapper{
+.search-input-button-wrapper {
     width: 40%;
 }
 
-.search-input-button-wrapper input{
+.search-input-button-wrapper input {
     width: calc(100% - 70px);
     height: 50px;
 }
 
-.profile-input-button-wrapper{
+.profile-input-button-wrapper {
     width: 300px;
     height: 50px;
 }
@@ -414,7 +440,7 @@ a:hover{
 .profile-input-button-wrapper input,
 .edit-price input,
 .albumTitle-button-wrapper input,
-.discount-wrapper-input-button input{
+.discount-wrapper-input-button input {
     height: 50px;
     border-radius: 5px;
     font-size: 14px;
@@ -425,7 +451,7 @@ a:hover{
 .edit-price button,
 .albumTitle-button-wrapper button,
 #edit-price,
-#delete{
+#delete {
     width: 70px;
     height: 50px;
     position: absolute;
@@ -435,43 +461,43 @@ a:hover{
     background-color: black;
 }
 
-.search-main h2{
+.search-main h2 {
     text-align: center;
     size: 18px;
 }
 
-#left-search{
+#left-search {
     float: left;
     margin-left: 20px;
 }
 
-#right-search{
+#right-search {
     float: right;
     margin-right: 20px;
 }
 
-.main-search{
+.main-search {
     padding-left: 200px;
     padding-top: 50px;
 }
 
 /*comments-page*/
-.comments-wrapper{
+.comments-wrapper {
     padding-top: 110px;
     padding-left: 200px;
     height: 100%;
     background-color: darkgray;
 }
 
-.comments-wrapper form{
+.comments-wrapper form {
     width: calc(100% - 60px);
 }
 
-.comments-wrapper input{
+.comments-wrapper input {
     width: 90%;
 }
 
-.comments-wrapper button{
+.comments-wrapper button {
     width: 60px;
     height: 50px;
     position: absolute;
@@ -481,34 +507,34 @@ a:hover{
     background-color: black;
 }
 
-.comments-wrapper h1{
+.comments-wrapper h1 {
     padding-top: 10px;
     text-align: center;
     font-size: 20px;
 }
 
-.comments-wrapper h5{
+.comments-wrapper h5 {
     padding-top: 20px;
     font-size: 16px;
 }
 
-.comments-wrapper p{
+.comments-wrapper p {
     font-size: 18px;
 }
 
-.comments-wrapper hr{
+.comments-wrapper hr {
     width: 90%;
     margin: auto;
 }
 
 /*perform-page*/
-.music-inform-wrapper{
+.music-inform-wrapper {
     padding-top: 110px;
     height: 100%;
     background-color: rosybrown;
 }
 
-.music-inform-wrapper figure{
+.music-inform-wrapper figure {
     width: 250px;
     height: 250px;
     margin: 10px 10px 0;
@@ -516,47 +542,47 @@ a:hover{
     float: left;
 }
 
-.music-inform-wrapper img{
+.music-inform-wrapper img {
     width: 250px;
     height: 250px;
 }
 
-.music-inform-wrapper .music-text-inform{
+.music-inform-wrapper .music-text-inform {
     margin-top: 60px;
     text-align: center;
     font-size: 14px;
 }
 
 /*purchase-page*/
-.purchase-table{
+.purchase-table {
     width: 100%;
     height: 100%;
 }
 
-.purchase-table tr{
+.purchase-table tr {
     height: 100%;
 }
 
-#comment{
+#comment {
     width: 40%;
 }
 
-#purchase{
+#purchase {
     width: 30%;
 }
 
-#control{
+#control {
     width: 30%;
 }
 
-.purchase-buttons{
+.purchase-buttons {
     padding-top: 100px;
     width: 100%;
     height: 100%;
     background-color: darkgray;
 }
 
-.purchase-buttons button{
+.purchase-buttons button {
     margin-top: 20px;
     width: 140px;
     height: 50px;
@@ -566,43 +592,43 @@ a:hover{
 }
 
 .confirm-cancel,
-.editPrice-delete-wrapper{
+.editPrice-delete-wrapper {
     height: 50px;
     width: 100%;
     align-items: center;
 }
 
-.edit-price{
+.edit-price {
     float: left;
     width: 50%;
 }
 
-.delete-wrapper{
+.delete-wrapper {
     float: right;
     width: 50%;
 }
 
-.edit-price input{
+.edit-price input {
     margin-top: 20px;
     width: 80%;
 }
 
-#confirm{
+#confirm {
     float: left;
     margin-left: 40px;
 }
 
-#cancel{
+#cancel {
     float: right;
     margin-right: 40px
 }
 
 /*playlists-page*/
-.playlist-body{
+.playlist-body {
     box-sizing: border-box;
 }
 
-.container .music-container{
+.container .music-container {
     padding-top: 50px;
     padding-left: 150px;
     display: flex;
@@ -610,7 +636,7 @@ a:hover{
     flex-flow: column;
 }
 
-.container .music-container .box{
+.container .music-container .box {
     height: 15rem;
     width: 70%;
     display: flex;
@@ -622,33 +648,32 @@ a:hover{
     margin: 2rem;
 }
 
-.container .music-container .box .image{
+.container .music-container .box .image {
     height: 100%;
-    width: 20%;
+    width: 25%;
 }
 
-.container .music-container .box .image img{
+.container .music-container .box .image img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
 }
 
-.container .music-container .box .music{
+.container .music-container .box .music {
     width: 70%;
-    padding-left: 20px;
+    margin: auto;
 }
 
-.container .music-container .box .music audio{
+.container .music-container .box .music audio {
     width: 100%;
     outline: none;
 }
 
-.music h2{
+.music h2 {
     text-align: center;
 }
 
 /*addNewMusic-page*/
-.add-nem-music form{
+.add-nem-music form {
     width: 500px;
     height: 630px;
     top: 50%;
@@ -661,7 +686,7 @@ a:hover{
     background-color: rosybrown;
 }
 
-.add-nem-music h1{
+.add-nem-music h1 {
     text-align: center;
     margin: auto;
     color: black;
@@ -669,12 +694,12 @@ a:hover{
     padding: 10px;
 }
 
-.add-nem-music input{
+.add-nem-music input {
     margin-top: 20px;
 }
 
 /*profile-page*/
-.profile-wrapper{
+.profile-wrapper {
     width: 500px;
     height: 550px;
     padding-top: 30px;
@@ -687,19 +712,19 @@ a:hover{
     background-color: rosybrown;
 }
 
-.profile-left{
+.profile-left {
     float: left;
     width: 250px;
     height: 250px;
 }
 
-.profile-right{
+.profile-right {
     float: right;
     width: 250px;
     height: 250px;
 }
 
-.profile-wrapper h1{
+.profile-wrapper h1 {
     padding-bottom: 40px;
     font-size: 20px;
     text-align: center;
@@ -707,7 +732,7 @@ a:hover{
     text-transform: uppercase;
 }
 
-.profile-wrapper h2, h3{
+.profile-wrapper h2, h3 {
     padding-top: 20px;
     font-size: 16px;
     text-align: center;
@@ -715,52 +740,44 @@ a:hover{
     text-transform: uppercase;
 }
 
-.profile-input-button-wrapper{
+.profile-input-button-wrapper {
     margin: auto;
 }
 
-.profile-input-button-wrapper input{
+.profile-input-button-wrapper input {
     margin-top: 50px;
     width: 250px;
     height: 50px;
 }
 
-.profile-input-button-wrapper button{
+.profile-input-button-wrapper button {
     margin-top: 50px;
     width: 70px;
     height: 50px;
 }
 
-#clients{
-    padding-top: 70px;
-    padding-left: 200px;
+
+/*clients-page*/
+.clients-header {
     width: 100%;
-    height: 50px;
-    position: fixed;
-    transform: translate(-100px, 0px);
-    text-align: center;
-    background-color: rosybrown;
-    text-transform: uppercase;
+    height: 150px;
     z-index: 1;
+    position: fixed;
+    background-color: rosybrown;
 }
 
-#error-message-applyDiscount,
-#error-message-editPrice,
-#error-message-addAlbum{
+.clients-header h1,
+.albumTitle-button-wrapper h1{
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.clients-header h2,
+.albumTitle-button-wrapper h2,
+#error-message-editPrice {
     text-align: center;
     size: 18px;
     color: firebrick;
 }
 
-#error-message-applyDiscount{
-    padding-top: 120px;
-    padding-left: 200px;
-    width: 100%;
-    height: 50px;
-    position: fixed;
-    transform: translate(-100px, 0px);
-}
-
-#error-message-addAlbum{
-    position: fixed;
-}

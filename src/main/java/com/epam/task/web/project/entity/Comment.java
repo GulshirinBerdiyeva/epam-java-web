@@ -13,6 +13,7 @@ public class Comment implements Entity{
 
     public Comment(Long id, Long userId, String username,
                    Long musicId, LocalDateTime date, String comment) {
+
         this.id = id;
         this.userId = userId;
         this.username = username;

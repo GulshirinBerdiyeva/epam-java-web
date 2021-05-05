@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class PlaylistMapper implements Mapper{
 
-    private final MusicMapper musicMapper = new MusicMapper();
-
     private static final String ID = "id";
     private static final String USER_ID = "user_id";
     private static final String MUSIC_ID = "music_id";
+
+    private final MusicMapper musicMapper = new MusicMapper();
 
     @Override
     public Entity map(ResultSet resultSet) throws SQLException {

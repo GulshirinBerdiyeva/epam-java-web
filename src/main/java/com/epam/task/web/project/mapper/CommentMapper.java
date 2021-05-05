@@ -21,8 +21,6 @@ public class CommentMapper implements Mapper<Comment>{
         Long userId = resultSet.getLong(USER_ID);
         String username = resultSet.getString(USERNAME);
         Long musicId = resultSet.getLong(MUSIC_ID);
-        long time = resultSet.getTimestamp(DATE).getTime();
-        int datetemp = resultSet.getTimestamp(DATE).getDate();
         LocalDateTime date = resultSet.getTimestamp(DATE).toLocalDateTime();
         String comment = resultSet.getString(COMMENT);
 

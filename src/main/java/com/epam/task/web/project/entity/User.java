@@ -46,11 +46,13 @@ public class User implements Entity{
 
     public static User createClient(Long id, String username, String password,
                                     BigDecimal cash, int musicAmount, int discount) {
+
         return new User(id, username, password, cash, musicAmount, discount, Role.CLIENT);
     }
 
     public static User createClient(String username, String password,
                                     BigDecimal cash, int musicAmount, int discount) {
+
         return new User(username, password, cash, musicAmount, discount, Role.CLIENT);
     }
 

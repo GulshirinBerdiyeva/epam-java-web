@@ -32,7 +32,7 @@ public class ConnectionFactory {
             return connection;
 
         } catch (SQLException e) {
-            throw new ConnectionException("Couldn't get access to the database!", e);
+            throw new ConnectionException(e.getMessage(), e);
         }
     }
 
@@ -48,9 +48,11 @@ public class ConnectionFactory {
             dataBase = properties.getProperty(DATA_BASE);
             user = properties.getProperty(USER);
             password = properties.getProperty(PASSWORD);
+
         } catch (SQLException | IOException e) {
-            throw new ConnectionException(e);
+            throw new ConnectionException(e.getMessage(), e);
         }
+
     }
 
 }

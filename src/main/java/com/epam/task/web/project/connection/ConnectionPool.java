@@ -66,8 +66,11 @@ public class ConnectionPool {
             connectionsInUse.add(proxyConnection);
 
             return proxyConnection;
+
         } catch (InterruptedException e) {
+            //LOGGER.fatal(e.getMessage(), e);
             throw new ConnectionException(e);
+
         } finally {
             connectionsLock.unlock();
         }
@@ -80,6 +83,7 @@ public class ConnectionPool {
                 connectionsInUse.remove(proxyConnection);
                 availableConnections.add(proxyConnection);
             }
+
         } finally {
             connectionsLock.unlock();
             SEMAPHORE.release();

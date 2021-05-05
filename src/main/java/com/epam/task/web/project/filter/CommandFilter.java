@@ -14,6 +14,9 @@ import java.util.List;
 
 public class CommandFilter implements Filter {
 
+    private static final String USER = "user";
+    private static final String COMMAND = "command";
+
     private ImmutableMap<String, List<Role>> userCommands;
 
     @Override
@@ -25,6 +28,7 @@ public class CommandFilter implements Filter {
                 .put("login", Arrays.asList(Role.UNKNOWN))
                 .put("logout", Arrays.asList(Role.ADMIN, Role.CLIENT, Role.UNKNOWN))
                 .put("main", Arrays.asList(Role.ADMIN, Role.CLIENT))
+                .put("getMusic", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("getResource", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("searchPage", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("searchMusic", Arrays.asList(Role.ADMIN, Role.CLIENT))
@@ -57,11 +61,11 @@ public class CommandFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String command = request.getParameter("command");
+        String command = request.getParameter(COMMAND);
         boolean exist = userCommands.containsKey(command);
 
         if (exist) {
-            User user = (User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute(USER);
             Role userRole = user != null ? user.getRole() : Role.UNKNOWN;
 
             List<Role> roles = userCommands.get(command);
@@ -78,5 +82,7 @@ public class CommandFilter implements Filter {
 
     @Override
     public void destroy() {
+        userCommands.clear();
     }
+
 }

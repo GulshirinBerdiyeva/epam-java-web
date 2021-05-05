@@ -32,14 +32,18 @@
 </nav>
 
 <main>
-    <h1 id="clients">${clients}</h1>
+    <div  class="album-main">
+        <div class="clients-header" >
+            <h1>${clients}</h1>
 
-    <c:if test="${requestScope.invalidNumberFormat}" >
-        <br/>
-        <h2 id="error-message-applyDiscount">${invalidNumberFormat}</h2>
-    </c:if>
+            <c:if test="${requestScope.invalidNumberFormat}" >
+                <br/>
+                <h2>${invalidNumberFormat}</h2>
+            </c:if>
+        </div>
+    </div>
 
-    <div id="client-table" class="table-wrapper" >
+    <div class="table-wrapper" >
         <table class="table" >
             <thead>
             <tr>

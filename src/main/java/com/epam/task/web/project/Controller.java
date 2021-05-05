@@ -5,6 +5,7 @@ import com.epam.task.web.project.command.CommandFactory;
 import com.epam.task.web.project.command.CommandResult;
 
 import com.epam.task.web.project.dao.DaoHelperFactory;
+import com.epam.task.web.project.validator.InputParameterValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,14 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
     private static final String COMMAND = "command";
     private static final String CURRENT_PAGE = "currentPage";
     private static final String ERROR = "error";
     private static final String ERROR_PAGE = "/error.jsp";
 
-    private final CommandFactory commandFactory = new CommandFactory(new DaoHelperFactory());
+    private final CommandFactory commandFactory = new CommandFactory(new DaoHelperFactory(), new InputParameterValidator());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

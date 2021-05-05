@@ -1,16 +1,12 @@
 package com.epam.task.web.project.logic;
 
-import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CurrencyConverter {
 
-    private static final String LOCAL = "local";
-
     private static final String FRANCE_LOCAL = "FR";
     private static final String RUSSIAN_LOCAL = "RU";
-
     private static final BigDecimal EURO_EXCHANGE_RATE = new BigDecimal("0.85");
     private static final BigDecimal RUBLE_EXCHANGE_RATE = new BigDecimal("76.5");
 
@@ -27,6 +23,6 @@ public class CurrencyConverter {
             default:
                 return price;
         }
-
     }
+
 }

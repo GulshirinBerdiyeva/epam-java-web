@@ -13,13 +13,13 @@ public class UserDao extends AbstractDao<User> {
     private static final String TABLE_NAME = "user";
 
     private static final String INSERT_USER = "INSERT INTO user (username, password, role, cash, music_amount, discount) VALUES (?, MD5(?), ?, ?, ?, ?)";
-    private static final String SELECT_ALL_CLIENTS = "SELECT * FROM user WHERE role = 'client'";
     private static final String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM user WHERE username = ? AND password = MD5(?)";
     private static final String SELECT_EXISTS = "SELECT EXISTS(SELECT * from user WHERE username = ? AND password = MD5(?))";
     private static final String UPDATE_CASH_AND_MUSIC_AMOUNT = "UPDATE user SET cash = ?, music_amount = ? WHERE id = ?";
-    private static final String UPDATE_CASH = "UPDATE user SET cash = ? WHERE id = ?";
-    private static final String UPDATE_DISCOUNT = "UPDATE user SET discount = ? WHERE id = ?";
     private static final String UPDATE_MUSIC_AMOUNT = "UPDATE user SET music_amount = ? WHERE id = ?";
+    private static final String SELECT_ALL_CLIENTS = "SELECT * FROM user WHERE role = 'client'";
+    private static final String UPDATE_DISCOUNT = "UPDATE user SET discount = ? WHERE id = ?";
+    private static final String UPDATE_CASH = "UPDATE user SET cash = ? WHERE id = ?";
 
     public UserDao(ProxyConnection proxyConnection) {
         super(proxyConnection, new UserMapper(), TABLE_NAME);
@@ -39,8 +39,9 @@ public class UserDao extends AbstractDao<User> {
 
     public void createNewUser(User user) throws DaoException {
         String role = String.valueOf(user.getRole());
+
         executeUpdate(INSERT_USER, user.getUsername(), user.getPassword(), role.toLowerCase(),
-                        user.getCash(), user.getMusicAmount(), user.getDiscount());
+                      user.getCash(), user.getMusicAmount(), user.getDiscount());
     }
 
     public void updateCashAndMusicAmountById(User item) throws DaoException {

@@ -23,9 +23,7 @@
 </nav>
 
 <div class="main-search">
-    <c:if test="${requestScope.showSearchingMusics}" >
-        <jsp:include page="fragments/searchPanel.jsp" />
-    </c:if>
+    <jsp:include page="fragments/searchPanel.jsp" />
 </div>
 
 <main>

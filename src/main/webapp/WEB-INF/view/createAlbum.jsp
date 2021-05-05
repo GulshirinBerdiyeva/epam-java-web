@@ -32,18 +32,20 @@
 
 <main>
     <form action="${pageContext.request.contextPath}/controller?command=addAlbum" method="post" >
-        <div class="albumTitle-button-wrapper" >
-            <h1 id="album-title">${createAlbum}</h1>
+        <div class="album-main" >
+            <div class="albumTitle-button-wrapper" >
+                <h1>${createAlbum}</h1>
 
-            <c:if test="${requestScope.emptyInputParameters}" >
-                <br/>
-                <h2 id="error-message-addAlbum">${enterInputParameters}</h2>
-                <br/>
-            </c:if>
+                <c:if test="${requestScope.emptyInputParameters}" >
+                    <br/>
+                    <h2>${enterInputParameters}</h2>
+                    <br/>
+                </c:if>
 
-            <div class="create-album-input-button">
-                <input type="text" name="albumTitle" placeholder="${albumTitle}">
-                <button type="submit">${buttonCreateAlbum}</button>
+                <div class="create-album-input-button">
+                    <input type="text" name="albumTitle" placeholder="${albumTitle}">
+                    <button type="submit">${buttonCreateAlbum}</button>
+                </div>
             </div>
         </div>
 

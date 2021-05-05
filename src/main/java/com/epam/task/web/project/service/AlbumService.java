@@ -35,7 +35,7 @@ public class AlbumService {
             List<Album> album = albumDao.getAllByAlbumTitle(albumTitle);
             List<Music> musics = new ArrayList<>();
             album.stream()
-                    .forEach(albumMusic -> musics.add(albumMusic.getMusic()));
+                 .forEach(albumMusic -> musics.add(albumMusic.getMusic()));
 
             return musics;
         } catch (SQLException | DaoException e) {
@@ -54,6 +54,7 @@ public class AlbumService {
             for (Long musicId : musicsId) {
                 albumDao.save(new Album(musicId, albumTitle));
             }
+
         } catch (SQLException | DaoException e) {
             throw new ServiceException(e);
         }

@@ -10,10 +10,8 @@ public class CommentDao extends AbstractDao<Comment> {
 
     private static final String TABLE_NAME = "comment";
 
+    private static final String SELECT_BY_MUSIC_ID = "SELECT * FROM comment INNER JOIN user ON comment.user_id = user.id WHERE music_id = ?";
     private static final String INSERT_COMMENT = "INSERT INTO comment (user_id, music_id, comment) VALUES (?, ?, ?)";
-    private static final String SELECT_BY_MUSIC_ID = "SELECT * FROM comment " +
-                                                        "INNER JOIN user ON comment.user_id = user.id " +
-                                                            "WHERE music_id = ?";
     private static final String REMOVE_BY_MUSIC_ID = "DELETE FROM comment WHERE music_id = ?";
 
     public CommentDao(ProxyConnection proxyConnection) {

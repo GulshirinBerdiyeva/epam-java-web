@@ -8,11 +8,11 @@ import java.sql.SQLException;
 
 public class AlbumMapper implements Mapper<Album> {
 
-    private final MusicMapper musicMapper = new MusicMapper();
-
     private static final String ID = "id";
     private static final String MUSIC_ID = "music_id";
     private static final String ALBUM_TITLE = "album_title";
+
+    private final MusicMapper musicMapper = new MusicMapper();
 
     @Override
     public Album map(ResultSet resultSet) throws SQLException {

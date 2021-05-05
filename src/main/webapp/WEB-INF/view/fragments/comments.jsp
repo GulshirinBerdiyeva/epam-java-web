@@ -35,7 +35,7 @@
     </form>
 
     <c:forEach items="${sessionScope.selectedMusicComments}" var="comment">
-        <h5>${comment.username}    ${comment.date}</h5>
+        <h5>${comment.username}&nbsp;${comment.date}</h5>
         <br/>
         <p>${comment.comment}</p>
         <hr>

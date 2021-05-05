@@ -31,8 +31,7 @@ public class MusicOrderService {
 
             musicOrder.setPayment(true);
 
-            Long musicId = music.getId();
-            Playlist playlist = new Playlist(user.getId(), musicId);
+            Playlist playlist = new Playlist(user.getId(), music.getId());
 
             userDao.updateCashAndMusicAmountById(user);
             musicOrderDao.save(musicOrder);

@@ -15,6 +15,7 @@ public class Music implements Entity{
 
     public Music(Long id, String title, String artist,
                  String audioFileName, String imageFileName, BigDecimal price) {
+
         this.id = id;
         this.title = title;
         this.artist = artist;
