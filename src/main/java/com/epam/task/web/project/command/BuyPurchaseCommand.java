@@ -13,10 +13,6 @@ import java.math.BigDecimal;
 
 public class BuyPurchaseCommand implements Command{
 
-    private final PlaylistService playlistService;
-    private final MusicOrderService musicOrderService;
-    private final UserService userService;
-
     private  static final String USER = "user";
     private  static final String SELECTED_MUSIC = "selectedMusic";
     private  static final String EXIST_IN_PLAYLIST = "existInPlaylist";
@@ -28,9 +24,11 @@ public class BuyPurchaseCommand implements Command{
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
 
-    public BuyPurchaseCommand(UserService userService,
-                              MusicOrderService musicOrderService,
-                              PlaylistService playlistService) {
+    private final PlaylistService playlistService;
+    private final MusicOrderService musicOrderService;
+    private final UserService userService;
+
+    public BuyPurchaseCommand(UserService userService, MusicOrderService musicOrderService, PlaylistService playlistService) {
         this.userService = userService;
         this.musicOrderService = musicOrderService;
         this.playlistService = playlistService;
@@ -41,6 +39,10 @@ public class BuyPurchaseCommand implements Command{
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(USER);
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
+
+        if (music == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
 
         boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());
         if (isExistInPlaylist) {

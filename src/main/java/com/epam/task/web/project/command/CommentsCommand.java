@@ -12,11 +12,11 @@ import java.util.List;
 
 public class CommentsCommand implements Command {
 
-    private final CommentService commentService;
-
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String SELECTED_MUSIC_COMMENTS = "selectedMusicComments";
     private static final String PURCHASE_PAGE_COMMAND = "?command=purchasePage";
+
+    private final CommentService commentService;
 
     public CommentsCommand(CommentService commentService) {
         this.commentService = commentService;
@@ -26,6 +26,10 @@ public class CommentsCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
+
+        if (music == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
 
         Long musicId = music.getId();
         List<Comment> comments = commentService.findCommentsByMusicId(musicId);

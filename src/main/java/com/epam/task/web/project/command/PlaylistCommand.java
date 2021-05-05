@@ -12,12 +12,12 @@ import java.util.List;
 
 public class PlaylistCommand implements Command {
 
-    private final PlaylistService playlistService;
-
     private static final String USER ="user";
     private static final String PLAYLISTS ="playlists";
 
     private static final String PLAYLIST_PAGE = "/WEB-INF/view/playlist.jsp";
+
+    private final PlaylistService playlistService;
 
     public PlaylistCommand(PlaylistService playlistService) {
         this.playlistService = playlistService;
@@ -27,9 +27,8 @@ public class PlaylistCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(USER);
-        Long userId = user.getId();
 
-        List<Playlist> playlists = playlistService.getAllMusicsByUserId(userId);
+        List<Playlist> playlists = playlistService.getAllMusicsByUserId(user.getId());
 
         session.setAttribute(PLAYLISTS, playlists);
         return CommandResult.forward(PLAYLIST_PAGE);

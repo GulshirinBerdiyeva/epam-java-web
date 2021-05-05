@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
 
 public class CreateCommentCommand implements Command{
 
-    private final CommentService commentService;
-    private InputParameterValidator inputParameterValidator = new InputParameterValidator();
-
     private static final String USER = "user";
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String NEW_COMMENT = "newComment";
@@ -23,8 +20,12 @@ public class CreateCommentCommand implements Command{
     private static final String COMMENTS_COMMAND = "?command=comments";
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
 
-    public CreateCommentCommand(CommentService commentService) {
+    private final CommentService commentService;
+    private InputParameterValidator validator;
+
+    public CreateCommentCommand(CommentService commentService, InputParameterValidator validator) {
         this.commentService = commentService;
+        this.validator = validator;
     }
 
     @Override
@@ -34,8 +35,8 @@ public class CreateCommentCommand implements Command{
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         String commentValue = request.getParameter(NEW_COMMENT);
 
-        boolean isValid = inputParameterValidator.isValid(commentValue);
-        if (isValid) {
+        boolean isValid = validator.isValidString(commentValue);
+        if (isValid && music != null) {
             commentService.save(user, music, commentValue);
             return CommandResult.redirect(COMMENTS_COMMAND);
         } else {

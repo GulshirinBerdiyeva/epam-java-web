@@ -13,14 +13,14 @@ import java.util.Optional;
 
 public class DeleteMusicCommand implements Command {
 
-    private final MusicService musicService;
-    private final UserService userService;
-
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
     private static final String MUSIC_REMOVED = "musicRemoved";
 
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+
+    private final MusicService musicService;
+    private final UserService userService;
 
     public DeleteMusicCommand(MusicService musicService, UserService userService) {
         this.musicService = musicService;
@@ -30,8 +30,12 @@ public class DeleteMusicCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
-        Long musicId = music.getId();
 
+        if (music == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
+
+        Long musicId = music.getId();
         Optional<Music> optionalMusic = musicService.getMusicById(musicId);
         List<User> allClients = userService.getAllClients();
 

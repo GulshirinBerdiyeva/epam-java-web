@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CancelPurchaseCommand implements Command{
 
-    private final MusicOrderService musicOrderService;
-
     private static final String MUSIC_ORDER = "musicOrder";
     private static final String PAID = "paid";
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String COMMENTS_COMMAND = "?command=comments";
+
+    private final MusicOrderService musicOrderService;
 
     public CancelPurchaseCommand(MusicOrderService musicOrderService) {
         this.musicOrderService = musicOrderService;
@@ -25,6 +25,10 @@ public class CancelPurchaseCommand implements Command{
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         MusicOrder musicOrder = (MusicOrder) request.getSession().getAttribute(MUSIC_ORDER);
 
+        if (musicOrder == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
+
         if (musicOrder.isPayment()) {
             request.setAttribute(PAID, true);
             return CommandResult.forward(PURCHASE_PAGE);
@@ -32,6 +36,7 @@ public class CancelPurchaseCommand implements Command{
             musicOrderService.cancelMusicOrder(musicOrder);
             return CommandResult.redirect(COMMENTS_COMMAND);
         }
+
     }
 
 }

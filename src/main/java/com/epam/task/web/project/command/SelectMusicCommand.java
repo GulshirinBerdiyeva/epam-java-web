@@ -13,8 +13,6 @@ import java.util.Optional;
 
 public class SelectMusicCommand implements Command{
 
-    private final MusicService musicService;
-
     private static final String SELECTED_MUSIC_ID = "selectedMusicId";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
     private static final String SELECTED_MUSIC = "selectedMusic";
@@ -24,6 +22,8 @@ public class SelectMusicCommand implements Command{
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
     private static final String COMMENTS_COMMAND = "?command=comments";
 
+    private final MusicService musicService;
+
     public SelectMusicCommand(MusicService musicService) {
         this.musicService = musicService;
     }
@@ -31,8 +31,13 @@ public class SelectMusicCommand implements Command{
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
-        Long id = Long.valueOf(request.getParameter(SELECTED_MUSIC_ID));
+        String idValue = request.getParameter(SELECTED_MUSIC_ID);
 
+        if (idValue == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
+
+        Long id = Long.parseLong(idValue);
         Optional<Music> optionalMusic = musicService.getMusicById(id);
 
         if (optionalMusic.isPresent()) {

@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public class LoginCommand implements Command{
 
-    private final UserService userService;
-
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String USER = "user";
@@ -19,6 +17,8 @@ public class LoginCommand implements Command{
 
     private static final String LOGIN_PAGE = "/index.jsp";
     private static final String MAIN_COMMAND = "?command=main";
+
+    private final UserService userService;
 
     public LoginCommand(UserService userService) {
         this.userService = userService;
@@ -34,6 +34,7 @@ public class LoginCommand implements Command{
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
             request.getSession(true).setAttribute(USER, user);
+
             return CommandResult.redirect(MAIN_COMMAND);
         } else {
             request.setAttribute(ERROR_LOGIN, true);

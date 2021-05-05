@@ -4,7 +4,7 @@ import com.epam.task.web.project.entity.Music;
 import com.epam.task.web.project.logic.CurrencyConverter;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
-import com.epam.task.web.project.validator.NumberFormatValidator;
+import com.epam.task.web.project.validator.InputParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +14,6 @@ import java.math.RoundingMode;
 import java.util.Optional;
 
 public class EditPriceCommand implements Command{
-
-    private final MusicService musicService;
-    private NumberFormatValidator numberFormatValidator = new NumberFormatValidator();
 
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String NEW_PRICE = "newPrice";
@@ -29,8 +26,12 @@ public class EditPriceCommand implements Command{
     private static final String PURCHASE_PAGE_COMMAND = "?command=purchasePage";
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
 
-    public EditPriceCommand(MusicService musicService) {
+    private final MusicService musicService;
+    private InputParameterValidator validator;
+
+    public EditPriceCommand(MusicService musicService, InputParameterValidator validator) {
         this.musicService = musicService;
+        this.validator = validator;
     }
 
     @Override
@@ -39,7 +40,11 @@ public class EditPriceCommand implements Command{
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         String priceValue = request.getParameter(NEW_PRICE);
 
-        boolean isValid = numberFormatValidator.isValid(priceValue);
+        if (music == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
+
+        boolean isValid = validator.isValidNumber(priceValue);
         if (!isValid) {
             request.setAttribute(INVALID_NUMBER_FORMAT, true);
             return CommandResult.forward(PURCHASE_PAGE);
@@ -52,10 +57,9 @@ public class EditPriceCommand implements Command{
             BigDecimal newPrice = new BigDecimal(priceValue).setScale(2, RoundingMode.HALF_UP);
             musicService.updatePriceById(musicId, newPrice);
             music.setPrice(newPrice);
-            BigDecimal price = music.getPrice();
 
             String local = (String) session.getAttribute(LOCAL);
-            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, price);
+            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, music.getPrice());
 
             session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
             session.setAttribute(SELECTED_MUSIC, music);

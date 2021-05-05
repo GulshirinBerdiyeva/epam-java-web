@@ -10,14 +10,14 @@ import java.util.Optional;
 
 public class EditMusicCommand implements Command {
 
-    private final MusicService musicService;
-
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String CAN_EDIT = "canEdit";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+
+    private final MusicService musicService;
 
     public EditMusicCommand(MusicService musicService) {
         this.musicService = musicService;
@@ -26,9 +26,12 @@ public class EditMusicCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
-        Long musicId = music.getId();
 
-        Optional<Music> optionalMusic = musicService.getMusicById(musicId);
+        if (music == null) {
+            throw new NullPointerException("Parameter is NULL...");
+        }
+
+        Optional<Music> optionalMusic = musicService.getMusicById(music.getId());
 
         if (optionalMusic.isPresent()) {
             request.setAttribute(CAN_EDIT, true);
@@ -37,6 +40,7 @@ public class EditMusicCommand implements Command {
             request.setAttribute(MUSIC_IS_ABSENT, true);
             return CommandResult.forward(SEARCH_PAGE);
         }
+
     }
 
 }

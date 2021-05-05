@@ -1,6 +1,10 @@
 package com.epam.task.web.project.command;
 
+import com.epam.task.web.project.data.DataException;
+import com.epam.task.web.project.data.MusicFileWriter;
 import com.epam.task.web.project.entity.Music;
+import com.epam.task.web.project.parser.MusicParser;
+import com.epam.task.web.project.parser.ParserException;
 import com.epam.task.web.project.service.MusicService;
 import com.epam.task.web.project.service.ServiceException;
 import com.epam.task.web.project.validator.InputParameterValidator;
@@ -15,20 +19,27 @@ import java.util.*;
 
 public class AddMusicCommand implements Command {
 
-    private final MusicService musicService;
-    private InputParameterValidator inputParameterValidator = new InputParameterValidator();
-
     private static final String EMPTY_INPUT_PARAMETERS = "emptyInputParameters";
+    private static final String PRICE = "price";
+
     private static final String ADD_NEW_MUSIC_PAGE = "/WEB-INF/view/addNewMusic.jsp";
     private static final String MAIN_COMMAND = "?command=main";
 
-    public AddMusicCommand(MusicService musicService) {
+    private final MusicService musicService;
+    private InputParameterValidator validator;
+
+    public AddMusicCommand(MusicService musicService, InputParameterValidator validator) {
         this.musicService = musicService;
+        this.validator = validator;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         try {
+            if (request.getContentType() == null) {
+                throw new NullPointerException("Parameter is NULL...");
+            }
+
             List<FileItem> musicData = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
             boolean isValid = isValid(musicData);
@@ -37,8 +48,11 @@ public class AddMusicCommand implements Command {
                 return CommandResult.forward(ADD_NEW_MUSIC_PAGE);
             }
 
-            musicService.saveFiles(musicData);
-            Map<String, String> musicValues = musicService.extractInputParameters(musicData);
+            MusicFileWriter dataWriter = new MusicFileWriter();
+            dataWriter.write(musicData);
+
+            MusicParser parser = new MusicParser();
+            Map<String, String> musicValues = parser.extractInputParameters(musicData);
 
             Music music = musicService.createMusic(musicValues);
             String artist = music.getArtist();
@@ -53,25 +67,29 @@ public class AddMusicCommand implements Command {
             }
 
             return CommandResult.redirect(MAIN_COMMAND);
-        } catch (FileUploadException e) {
+        } catch (FileUploadException | DataException | ParserException e) {
             throw new ServiceException(e);
         }
     }
 
     private boolean isValid(List<FileItem> musicData) {
+        String inputParameter;
+        boolean isNumber;
         for (FileItem item : musicData) {
-            String inputParameter;
 
             if (item.isFormField()) {
                 inputParameter = item.getString();
+                isNumber = PRICE.equals(item.getFieldName());
             } else {
                 inputParameter = item.getName();
+                isNumber = false;
             }
 
-            boolean isValid = inputParameterValidator.isValid(inputParameter);
+            boolean isValid =   isNumber ? validator.isValidNumber(inputParameter) : validator.isValidString(inputParameter);
             if (!isValid) {
                 return false;
             }
+
         }
 
         return true;

@@ -11,10 +11,10 @@ import java.util.List;
 
 public class AlbumsCommand implements Command {
 
-    private final AlbumService albumsService;
-
     private static final String ALBUMS_TITLE = "albumsTitle";
     private static final String ALBUMS_PAGE = "/WEB-INF/view/albums.jsp";
+
+    private final AlbumService albumsService;
 
     public AlbumsCommand(AlbumService albumsService) {
         this.albumsService = albumsService;

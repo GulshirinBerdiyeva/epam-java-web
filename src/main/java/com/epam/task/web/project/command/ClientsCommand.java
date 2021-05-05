@@ -10,10 +10,10 @@ import java.util.List;
 
 public class ClientsCommand implements Command {
 
-    private final UserService userService;
-
     private static final String CLIENTS = "clients";
     private static final String CLIENTS_PAGE = "/WEB-INF/view/clients.jsp";
+
+    private final UserService userService;
 
     public ClientsCommand(UserService userService) {
         this.userService = userService;

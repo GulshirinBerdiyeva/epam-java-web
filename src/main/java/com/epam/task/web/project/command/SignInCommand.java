@@ -11,9 +11,6 @@ import java.util.Optional;
 
 public class SignInCommand implements Command {
 
-    private final UserService userService;
-    private InputParameterValidator inputParameterValidator = new InputParameterValidator();
-
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String USER = "user";
@@ -23,8 +20,12 @@ public class SignInCommand implements Command {
     private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
     private static final String MAIN_COMMAND = "?command=main";
 
-    public SignInCommand(UserService userService) {
+    private final UserService userService;
+    private InputParameterValidator validator;
+
+    public SignInCommand(UserService userService, InputParameterValidator validator) {
         this.userService = userService;
+        this.validator = validator;
     }
 
     @Override
@@ -32,8 +33,8 @@ public class SignInCommand implements Command {
         String username = request.getParameter(USERNAME);
         String password = request.getParameter(PASSWORD);
 
-        boolean isValidUsername = inputParameterValidator.isValid(username);
-        boolean isValidPassword = inputParameterValidator.isValid(password);
+        boolean isValidUsername = validator.isValidString(username);
+        boolean isValidPassword = validator.isValidString(password);
         if (!isValidUsername || !isValidPassword) {
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(REGISTRATION_PAGE);
