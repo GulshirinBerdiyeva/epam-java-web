@@ -26,8 +26,8 @@
 </nav>
 
 <main class="album-main">
-    <c:if test="${!empty requestScope.albumsTitle}" >
-        <c:forEach items="${requestScope.albumsTitle}" var="title"  >
+    <c:if test="${!empty sessionScope.albumsTitle}" >
+        <c:forEach items="${sessionScope.albumsTitle}" var="title"  >
             <div class="albums" >
                 <form action="${pageContext.request.contextPath}/controller?command=albumMusics" method="post" >
                     <button type="submit" name="selectedAlbumTitle" value="${title}">${title}</button>

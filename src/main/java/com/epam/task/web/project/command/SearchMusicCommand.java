@@ -22,7 +22,6 @@ public class SearchMusicCommand implements Command{
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
     private static final String SHOW_SEARCHING_MUSICS = "showSearchingMusics";
 
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     private final MusicService musicService;
@@ -39,11 +38,11 @@ public class SearchMusicCommand implements Command{
         String artistValue = request.getParameter(ARTIST);
         String titleValue = request.getParameter(TITLE);
 
-        boolean isValidArtistValue = validator.isValidString(artistValue);
-        boolean isValidTitleValue = validator.isValidString(titleValue);
+        boolean isValidArtistValue = validator.isStringValid(artistValue);
+        boolean isValidTitleValue = validator.isStringValid(titleValue);
         if (!isValidArtistValue && !isValidTitleValue) {
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
-            return CommandResult.forward(SEARCH_PAGE);
+            return CommandResult.forward(MAIN_PAGE);
         }
 
         List<Music> musics = new ArrayList<>();
@@ -60,12 +59,11 @@ public class SearchMusicCommand implements Command{
             session.setAttribute(SIZE, musics.size());
             request.setAttribute(MUSIC, musics.get(0));
 
-            return CommandResult.forward(MAIN_PAGE);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);
-            return CommandResult.forward(SEARCH_PAGE);
         }
 
+        return CommandResult.forward(MAIN_PAGE);
     }
 
 }

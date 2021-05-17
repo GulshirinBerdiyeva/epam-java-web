@@ -27,7 +27,7 @@ public class AlbumsCommand implements Command {
         HashSet<String> albumsTitle = new HashSet<>();
         albums.forEach(album -> albumsTitle.add(album.getAlbum_title()));
 
-        request.setAttribute(ALBUMS_TITLE, albumsTitle);
+        request.getSession().setAttribute(ALBUMS_TITLE, albumsTitle);
         return CommandResult.forward(ALBUMS_PAGE);
     }
 

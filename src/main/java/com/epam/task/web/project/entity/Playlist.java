@@ -35,4 +35,5 @@ public class Playlist implements Entity{
     public Music getMusic() {
         return music;
     }
+
 }

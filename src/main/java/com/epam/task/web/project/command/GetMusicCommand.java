@@ -33,7 +33,7 @@ public class GetMusicCommand implements Command {
         String pageValue = request.getParameter(PAGE);
 
         if (type == null || pageValue == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         List<Music> musics;

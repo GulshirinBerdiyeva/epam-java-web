@@ -20,7 +20,6 @@
 <body>
 
 <main class="comments-wrapper">
-
     <h1>${comments}</h1>
 
     <c:if test="${requestScope.emptyInputParameters}" >
@@ -34,13 +33,18 @@
         <button type="submit">${buttonComment}</button>
     </form>
 
-    <c:forEach items="${sessionScope.selectedMusicComments}" var="comment">
-        <h5>${comment.username}&nbsp;${comment.date}</h5>
-        <br/>
-        <p>${comment.comment}</p>
-        <hr>
-    </c:forEach>
 
+    <div class="comments" >
+        <c:forEach items="${sessionScope.selectedMusicComments}" var="comment">
+            <br/>
+            <h5>${comment.localeDateTime}</h5>
+            <h4>${comment.username.toUpperCase()}:</h4>
+            <h2>${comment.comment}</h2>
+            <hr/>
+        </c:forEach>
+    </div>
 </main>
+
 </body>
+
 </html>

@@ -6,13 +6,10 @@
 <fmt:setBundle basename="local" var="local" />
 
 <fmt:message bundle="${local}" key="local.profile.title.myProfile" var="myProfile" />
-<fmt:message bundle="${local}" key="local.profile.username" var="username" />
-<fmt:message bundle="${local}" key="local.profile.musicAmount" var="musicAmount" />
-<fmt:message bundle="${local}" key="local.profile.bonus" var="bonus" />
-<fmt:message bundle="${local}" key="local.profile.balance" var="balance" />
-<fmt:message bundle="${local}" key="local.placeholder.amount" var="amount" />
-<fmt:message bundle="${local}" key="local.profile.fillBalance" var="fillBalance" />
+<fmt:message bundle="${local}" key="local.placeholder.fillBalance" var="fillBalance" />
+<fmt:message bundle="${local}" key="local.profile.button.fillBalance" var="buttonFillBalance" />
 <fmt:message bundle="${local}" key="local.error.message.invalidNumberFormat" var="invalidNumberFormat" />
+<fmt:message bundle="${local}" key="local.currency.unit" var="currencyUnit" />
 
 <html>
 
@@ -36,25 +33,24 @@
         <h1>${myProfile}</h1>
         <hr/>
 
-        <div class="profile-left" >
-            <h2>${username}:</h2>
-
-            <h2>${musicAmount}:</h2>
-
-            <h2>${bonus}:</h2>
-
-            <h2>${balance}:</h2>
-        </div>
-
-        <div class="profile-right" >
-            <h3>${sessionScope.user.username}</h3>
-
-            <h3>${sessionScope.user.musicAmount}</h3>
-
-            <h3>${sessionScope.user.discount}</h3>
-
-            <h3>${sessionScope.user.cash}</h3>
-        </div>
+        <table id="profile" class="music-text-inform">
+            <tr>
+                <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=user.jpg" align="absmiddle" ></th>
+                <th><h2>${sessionScope.user.username}</h2></th>
+            </tr>
+            <tr>
+                <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=purchases.jpg" align="absmiddle" ></th>
+                <th><h2>${sessionScope.user.musicAmount}</h2></th>
+            </tr>
+            <tr>
+                <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=bonus.jpg" align="absmiddle" ></th>
+                <th><h2>${sessionScope.user.discount} %</h2></th>
+            </tr>
+            <tr>
+                <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=cash.jpg" align="absmiddle" ></th>
+                <th><h2>${currencyUnit} ${sessionScope.userCash}</h2></th>
+            </tr>
+        </table>
 
         <c:if test="${requestScope.invalidNumberFormat}" >
             <br/>
@@ -63,16 +59,14 @@
 
         <form action="${pageContext.request.contextPath}/controller?command=fillBalance" method="post" >
            <div class="profile-input-button-wrapper" >
-               <input type="text" name="cashValue" placeholder="${amount}" />
-               <button type="submit">${fillBalance}</button>
+               <input type="text" name="cashValue" placeholder="${fillBalance}" />
+               <button type="submit">${buttonFillBalance}</button>
            </div>
         </form>
 
     </div>
-
 </main>
 
 </body>
 
 </html>
-

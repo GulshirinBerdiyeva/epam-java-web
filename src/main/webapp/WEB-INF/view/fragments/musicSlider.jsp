@@ -22,7 +22,6 @@
 <body class="slide-body">
 
 <main class="slide-wrapper">
-
     <c:if test="${requestScope.showMusics}" >
         <c:set var="musics" value="${sessionScope.musics}" />
         <c:set var="description" value="musics" scope="session" />
@@ -48,13 +47,13 @@
 
     <c:if test="${sessionScope.size >= 1}" >
         <div class="slide">
-            <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${music.imageFileName}" alt="">
+            <img src="${pageContext.request.contextPath}/controller?command=getResource&type=image&fileName=${music.imageFileName}" alt="">
             <div class="description">
                 <h2><b>${music.artist}<br>${music.title}</b></h2>
                 <br>
                 <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}">
-                    <audio controls controlsList="nodownload">
-                        <source src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${music.audioFileName}" type="audio/mpeg">
+                    <audio controls>
+                        <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${music.audioFileName}" type="audio/mpeg">
                     </audio>
 
                     <br/>
@@ -77,7 +76,6 @@
             <pgnt:paginationTag totalPageCount="${sessionScope.size}" viewPageCount="3" action="${pageContext.request.contextPath}/controller?command=getMusic&type=${description}" />
         </div>
     </c:if>
-
 </main>
 
 </body>

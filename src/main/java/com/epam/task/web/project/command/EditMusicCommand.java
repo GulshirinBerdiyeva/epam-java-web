@@ -15,7 +15,7 @@ public class EditMusicCommand implements Command {
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     private final MusicService musicService;
 
@@ -28,7 +28,7 @@ public class EditMusicCommand implements Command {
         Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
 
         if (music == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         Optional<Music> optionalMusic = musicService.getMusicById(music.getId());
@@ -38,9 +38,8 @@ public class EditMusicCommand implements Command {
             return CommandResult.forward(PURCHASE_PAGE);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);
-            return CommandResult.forward(SEARCH_PAGE);
+            return CommandResult.forward(MAIN_PAGE);
         }
-
     }
 
 }

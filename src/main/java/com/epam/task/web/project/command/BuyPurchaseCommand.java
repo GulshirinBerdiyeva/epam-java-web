@@ -41,7 +41,7 @@ public class BuyPurchaseCommand implements Command{
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
 
         if (music == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());
@@ -60,7 +60,7 @@ public class BuyPurchaseCommand implements Command{
         BigDecimal finalPrice = musicOrder.getFinalPrice();
 
         String local = (String) session.getAttribute(LOCAL);
-        BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, finalPrice);
+        BigDecimal convertedPrice = CurrencyConverter.convertCurrency(local, finalPrice);
 
         request.setAttribute(CAN_BUY, true);
         session.setAttribute(FINAL_PRICE, convertedPrice);
@@ -70,4 +70,3 @@ public class BuyPurchaseCommand implements Command{
     }
 
 }
-

@@ -6,7 +6,6 @@ import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.dao.PlaylistDao;
 import com.epam.task.web.project.entity.Playlist;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class PlaylistService {
@@ -22,7 +21,7 @@ public class PlaylistService {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
             return playlistDao.getAllMusicsByUserId(userId);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -32,7 +31,7 @@ public class PlaylistService {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
             return playlistDao.exist(userId, musicId);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -42,7 +41,7 @@ public class PlaylistService {
             PlaylistDao playlistDao = daoHelper.createPlaylistDao();
 
             playlistDao.save(item);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

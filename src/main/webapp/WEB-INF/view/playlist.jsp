@@ -28,13 +28,16 @@
             <c:forEach items="${sessionScope.playlists}" var="playlist" >
                 <div class="box">
                     <div class="image">
-                        <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${playlist.music.imageFileName}" alt="">
+                        <img src="${pageContext.request.contextPath}/controller?command=getResource&type=image&fileName=${playlist.music.imageFileName}" alt="">
                     </div>
+
                     <div class="music">
                         <h2>${playlist.music.artist}</h2>
                         <h2>${playlist.music.title}</h2>
                         <br/>
-                        <audio src="${pageContext.request.contextPath}/controller?command=getResource&audioFileName=${playlist.music.audioFileName}" controls />
+                        <audio controls>
+                            <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${playlist.music.audioFileName}" type="audio/mpeg">
+                        </audio>
                     </div>
                 </div>
             </c:forEach>
@@ -45,5 +48,3 @@
 </body>
 
 </html>
-
-

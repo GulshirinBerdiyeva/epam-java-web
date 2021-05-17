@@ -29,7 +29,7 @@ public class AddAlbumCommand implements Command{
         String albumTitle = request.getParameter(ALBUM_TITLE);
         String[] selectedMusicsId = request.getParameterValues(ALBUM_ELEMENTS);
 
-        boolean isValid = validator.isValidString(albumTitle);
+        boolean isValid = validator.isStringValid(albumTitle);
         if (!isValid || selectedMusicsId == null) {
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(CREATE_ALBUM_PAGE);

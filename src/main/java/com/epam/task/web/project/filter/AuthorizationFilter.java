@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class CommandFilter implements Filter {
+public class AuthorizationFilter implements Filter {
 
     private static final String USER = "user";
     private static final String COMMAND = "command";
@@ -30,7 +29,6 @@ public class CommandFilter implements Filter {
                 .put("main", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("getMusic", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("getResource", Arrays.asList(Role.ADMIN, Role.CLIENT))
-                .put("searchPage", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("searchMusic", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("selectMusic", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("purchasePage", Arrays.asList(Role.ADMIN, Role.CLIENT))
@@ -40,6 +38,8 @@ public class CommandFilter implements Filter {
                 .put("editMusic", Arrays.asList(Role.ADMIN))
                 .put("editPrice", Arrays.asList(Role.ADMIN))
                 .put("deleteMusic", Arrays.asList(Role.ADMIN))
+                .put("cancelDelete", Arrays.asList(Role.ADMIN))
+                .put("confirmDelete", Arrays.asList(Role.ADMIN))
                 .put("playlist", Arrays.asList(Role.CLIENT))
                 .put("albums", Arrays.asList(Role.ADMIN, Role.CLIENT))
                 .put("createAlbumPage", Arrays.asList(Role.ADMIN))

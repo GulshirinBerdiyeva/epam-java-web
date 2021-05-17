@@ -40,7 +40,7 @@ public class DaoHelper implements AutoCloseable{
         try {
             proxyConnection.setAutoCommit(false);
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -49,7 +49,7 @@ public class DaoHelper implements AutoCloseable{
             proxyConnection.commit();
             proxyConnection.setAutoCommit(true);
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -57,7 +57,7 @@ public class DaoHelper implements AutoCloseable{
         try {
             proxyConnection.commit();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -65,14 +65,18 @@ public class DaoHelper implements AutoCloseable{
         try {
             proxyConnection.rollback();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
     @Override
-    public void close() throws SQLException {
-        proxyConnection.setAutoCommit(true);
-        proxyConnection.close();
+    public void close() throws DaoException {
+        try {
+            proxyConnection.setAutoCommit(true);
+            proxyConnection.close();
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        }
     }
 
 }

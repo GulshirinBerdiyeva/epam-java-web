@@ -15,19 +15,28 @@
 </head>
 
 <body>
-<main class="music-inform-wrapper">
 
+<main class="music-inform-wrapper">
     <figure>
-        <img src="${pageContext.request.contextPath}/controller?command=getResource&imageFileName=${sessionScope.selectedMusic.imageFileName}">
+        <img src="${pageContext.request.contextPath}/controller?command=getResource&type=image&fileName=${sessionScope.selectedMusic.imageFileName}">
     </figure>
 
-    <div class="music-text-inform">
-        <h2>${sessionScope.selectedMusic.artist}</h2>
-        <h2>${sessionScope.selectedMusic.title}</h2>
-        <h2>${currencyUnit} ${sessionScope.selectedMusicPrice}</h2>
-    </div>
-
+    <table class="music-text-inform">
+        <tr>
+            <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=singer.jpg" align="absmiddle" ></th>
+            <th><h2>${sessionScope.selectedMusic.artist}</h2></th>
+        </tr>
+        <tr>
+            <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=music-note.jpg" align="absmiddle" ></th>
+            <th><h2>${sessionScope.selectedMusic.title}</h2></th>
+        </tr>
+        <tr>
+            <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=cost.jpg" align="absmiddle" ></th>
+            <th><h2>${currencyUnit} ${sessionScope.selectedMusicPrice}</h2></th>
+        </tr>
+    </table>
 </main>
+
 </body>
 
 </html>

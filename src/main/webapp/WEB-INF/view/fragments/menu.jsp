@@ -7,7 +7,6 @@
 <fmt:setBundle basename="local" var="local" />
 
 <fmt:message bundle="${local}" key="local.menu.main" var="main" />
-<fmt:message bundle="${local}" key="local.menu.search" var="search" />
 <fmt:message bundle="${local}" key="local.menu.albums" var="albums" />
 <fmt:message bundle="${local}" key="local.menu.playlist" var="playlist" />
 <fmt:message bundle="${local}" key="local.menu.profile" var="profile" />
@@ -26,12 +25,13 @@
 
 <nav class="menu-wrapper">
     <a href="${pageContext.request.contextPath}/controller?command=main">${main}</a>
-    <a href="${pageContext.request.contextPath}/controller?command=searchPage">${search}</a>
     <a href="${pageContext.request.contextPath}/controller?command=albums">${albums}</a>
+
     <c:if test="${Role.CLIENT.equals(sessionScope.user.role)}" >
         <a href="${pageContext.request.contextPath}/controller?command=playlist">${playlist}</a>
         <a href="${pageContext.request.contextPath}/controller?command=profilePage">${profile}</a>
     </c:if>
+
     <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}" >
         <a href="${pageContext.request.contextPath}/controller?command=createAlbumPage">${createAlbum}</a>
         <a href="${pageContext.request.contextPath}/controller?command=addMusicPage">${addNewMusic}</a>

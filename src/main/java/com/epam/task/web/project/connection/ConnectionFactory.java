@@ -28,8 +28,7 @@ public class ConnectionFactory {
 
     public Connection create() throws ConnectionException{
         try {
-            Connection connection = DriverManager.getConnection(url + dataBase, user, password);
-            return connection;
+            return DriverManager.getConnection(url + dataBase, user, password);
 
         } catch (SQLException e) {
             throw new ConnectionException(e.getMessage(), e);
@@ -52,7 +51,6 @@ public class ConnectionFactory {
         } catch (SQLException | IOException e) {
             throw new ConnectionException(e.getMessage(), e);
         }
-
     }
 
 }

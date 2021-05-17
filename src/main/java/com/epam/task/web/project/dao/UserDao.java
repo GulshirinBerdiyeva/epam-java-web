@@ -37,13 +37,6 @@ public class UserDao extends AbstractDao<User> {
         return exist(SELECT_EXISTS, username, password);
     }
 
-    public void createNewUser(User user) throws DaoException {
-        String role = String.valueOf(user.getRole());
-
-        executeUpdate(INSERT_USER, user.getUsername(), user.getPassword(), role.toLowerCase(),
-                      user.getCash(), user.getMusicAmount(), user.getDiscount());
-    }
-
     public void updateCashAndMusicAmountById(User item) throws DaoException {
         executeUpdate(UPDATE_CASH_AND_MUSIC_AMOUNT, item.getCash(), item.getMusicAmount(), item.getId());
     }
@@ -58,6 +51,12 @@ public class UserDao extends AbstractDao<User> {
 
     public void updateMusicAmountById(Long id, int musicAmount) throws DaoException {
         executeUpdate(UPDATE_MUSIC_AMOUNT, musicAmount, id);
+    }
+
+    @Override
+    public void save(User item) throws DaoException {
+        String role = String.valueOf(item.getRole());
+        executeUpdate(INSERT_USER, item.getUsername(), item.getPassword(), role.toLowerCase(), item.getCash(), item.getMusicAmount(), item.getDiscount());
     }
 
 }

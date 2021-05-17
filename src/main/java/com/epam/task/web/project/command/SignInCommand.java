@@ -33,8 +33,8 @@ public class SignInCommand implements Command {
         String username = request.getParameter(USERNAME);
         String password = request.getParameter(PASSWORD);
 
-        boolean isValidUsername = validator.isValidString(username);
-        boolean isValidPassword = validator.isValidString(password);
+        boolean isValidUsername = validator.isStringValid(username);
+        boolean isValidPassword = validator.isStringValid(password);
         if (!isValidUsername || !isValidPassword) {
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(REGISTRATION_PAGE);
@@ -53,7 +53,6 @@ public class SignInCommand implements Command {
 
         request.setAttribute(ERROR_SIGN_IN, true);
         return CommandResult.forward(REGISTRATION_PAGE);
-
     }
 
 }

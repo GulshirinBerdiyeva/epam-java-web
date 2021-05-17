@@ -15,9 +15,14 @@ public class DeleteMusicCommand implements Command {
 
     private static final String SELECTED_MUSIC = "selectedMusic";
     private static final String MUSIC_IS_ABSENT = "musicIsAbsent";
+    private static final String DELETE_DIALOG = "deleteDialog";
+    private static final String CAN_EDIT = "canEdit";
+    private static final String CAN_DELETE = "canDelete";
+    private static final String DELETE = "delete";
     private static final String MUSIC_REMOVED = "musicRemoved";
 
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
+    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
 
     private final MusicService musicService;
     private final UserService userService;
@@ -30,23 +35,39 @@ public class DeleteMusicCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Music music = (Music) request.getSession().getAttribute(SELECTED_MUSIC);
+        String deleteDialogValue = request.getParameter(DELETE_DIALOG);
+        String deleteValue = request.getParameter(DELETE);
 
-        if (music == null) {
-            throw new NullPointerException("Parameter is NULL...");
+        if ((music == null || deleteDialogValue == null) && deleteValue == null) {
+            throw new NullPointerException("Parameter is NULL!");
         }
 
-        Long musicId = music.getId();
-        Optional<Music> optionalMusic = musicService.getMusicById(musicId);
-        List<User> allClients = userService.getAllClients();
+        boolean showDeleteDialog = Boolean.parseBoolean(deleteDialogValue);
+        if (showDeleteDialog) {
+            request.setAttribute(CAN_EDIT, true);
+            request.setAttribute(CAN_DELETE, true);
 
-        if (optionalMusic.isPresent()) {
-            musicService.removeMusicById(allClients, musicId);
-            request.setAttribute(MUSIC_REMOVED, true);
+            return CommandResult.forward(PURCHASE_PAGE);
+        }
+
+        boolean delete = Boolean.parseBoolean(deleteValue);
+        if (delete) {
+            Long musicId = music.getId();
+            Optional<Music> optionalMusic = musicService.getMusicById(musicId);
+            List<User> allClients = userService.getAllClients();
+
+            if (optionalMusic.isPresent()) {
+                musicService.removeMusicById(allClients, musicId);
+                request.setAttribute(MUSIC_REMOVED, true);
+            } else {
+                request.setAttribute(MUSIC_IS_ABSENT, true);
+            }
+
+            return CommandResult.forward(MAIN_PAGE);
         } else {
-            request.setAttribute(MUSIC_IS_ABSENT, true);
+            request.setAttribute(CAN_EDIT, true);
+            return CommandResult.forward(PURCHASE_PAGE);
         }
-
-        return CommandResult.forward(SEARCH_PAGE);
     }
 
 }

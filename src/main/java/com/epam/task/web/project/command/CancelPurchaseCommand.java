@@ -26,7 +26,7 @@ public class CancelPurchaseCommand implements Command{
         MusicOrder musicOrder = (MusicOrder) request.getSession().getAttribute(MUSIC_ORDER);
 
         if (musicOrder == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         if (musicOrder.isPayment()) {
@@ -36,7 +36,6 @@ public class CancelPurchaseCommand implements Command{
             musicOrderService.cancelMusicOrder(musicOrder);
             return CommandResult.redirect(COMMENTS_COMMAND);
         }
-
     }
 
 }

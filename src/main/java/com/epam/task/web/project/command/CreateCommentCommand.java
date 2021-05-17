@@ -35,7 +35,7 @@ public class CreateCommentCommand implements Command{
         Music music = (Music) session.getAttribute(SELECTED_MUSIC);
         String commentValue = request.getParameter(NEW_COMMENT);
 
-        boolean isValid = validator.isValidString(commentValue);
+        boolean isValid = validator.isStringValid(commentValue);
         if (isValid && music != null) {
             commentService.save(user, music, commentValue);
             return CommandResult.redirect(COMMENTS_COMMAND);
@@ -43,7 +43,6 @@ public class CreateCommentCommand implements Command{
             request.setAttribute(EMPTY_INPUT_PARAMETERS, true);
             return CommandResult.forward(PURCHASE_PAGE);
         }
-
     }
 
 }

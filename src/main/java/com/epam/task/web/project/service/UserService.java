@@ -9,7 +9,6 @@ import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +25,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             return userDao.findByUsernameAndPassword(username, password);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -36,7 +35,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             return userDao.exist(username, password);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -46,10 +45,10 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             User user = User.createClient(username, password, new BigDecimal("0"), 0, 0);
-            userDao.createNewUser(user);
+            userDao.save(user);
 
             return userDao.findByUsernameAndPassword(username, password);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -69,7 +68,7 @@ public class UserService {
             BigDecimal newCash = currentCash.add(cash).setScale(2, RoundingMode.HALF_UP);
             userDao.updateCashById(user.getId(), newCash);
             user.setCash(newCash);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -79,7 +78,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             userDao.updateDiscountById(id, discount);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -89,7 +88,7 @@ public class UserService {
             UserDao userDao = daoHelper.createUserDao();
 
             return userDao.getAllClients();
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

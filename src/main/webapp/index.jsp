@@ -11,6 +11,8 @@
 <fmt:message bundle="${local}" key="local.placeholder.password" var="password" />
 <fmt:message bundle="${local}" key="local.button.logIn" var="buttonLogin"/>
 <fmt:message bundle="${local}" key="local.error.message.errorLogin" var="errorLoginMessage" />
+<fmt:message bundle="${local}" key="local.create.new.account" var="createNewAccount" />
+<fmt:message bundle="${local}" key="local.button.signUp" var="buttonSignUp" />
 
 <html>
 
@@ -40,6 +42,9 @@
         <br/>
         <input type="password" name="password" placeholder="${password}" />
         <button type="submit">${buttonLogin}</button>
+        <div>
+            <a href="${pageContext.request.contextPath}/controller?command=signUpPage" >${createNewAccount}</a>
+        </div>
     </form>
 </main>
 

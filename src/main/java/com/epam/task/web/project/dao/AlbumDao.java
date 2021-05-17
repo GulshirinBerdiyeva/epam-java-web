@@ -20,6 +20,14 @@ public class AlbumDao extends AbstractDao<Album> {
         super(proxyConnection, new AlbumMapper(), TABLE_NAME);
     }
 
+    public boolean exist(String title) throws DaoException{
+        return exist(SELECT_EXISTS, title);
+    }
+
+    public List<Album> getAllByAlbumTitle(String albumTitle) throws DaoException {
+        return executeQuery(SELECT_BY_ALBUM_TITLE, albumTitle);
+    }
+
     @Override
     public List<Album> getAll() throws DaoException {
         return executeQuery(SELECT_BY_MUSIC_ID);
@@ -28,14 +36,6 @@ public class AlbumDao extends AbstractDao<Album> {
     @Override
     public void save(Album item) throws DaoException {
         executeUpdate(INSERT_INTO_ALBUM, item.getMusicID(), item.getAlbum_title());
-    }
-
-    public boolean exist(String title) throws DaoException{
-        return exist(SELECT_EXISTS, title);
-    }
-
-    public List<Album> getAllByAlbumTitle(String albumTitle) throws DaoException {
-        return executeQuery(SELECT_BY_ALBUM_TITLE, albumTitle);
     }
 
     @Override

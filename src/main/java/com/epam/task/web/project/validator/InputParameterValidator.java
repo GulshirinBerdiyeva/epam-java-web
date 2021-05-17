@@ -4,13 +4,13 @@ import java.util.regex.Pattern;
 
 public class InputParameterValidator {
 
-    private final String NUMBER_FORMAT = "\\d+\\.?\\d*";
+    private static final String NUMBER_FORMAT = "\\d+\\.?\\d*";
 
-    public boolean isValidString(String inputParameter) {
+    public boolean isStringValid(String inputParameter) {
        return inputParameter != null && !inputParameter.trim().isEmpty();
     }
 
-    public boolean isValidNumber(String inputParameter) {
+    public boolean isNumberValid(String inputParameter) {
         if (inputParameter == null || inputParameter.trim().isEmpty()) {
             return false;
         }

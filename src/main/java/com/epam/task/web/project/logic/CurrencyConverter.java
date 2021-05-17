@@ -5,20 +5,20 @@ import java.math.RoundingMode;
 
 public class CurrencyConverter {
 
-    private static final String FRANCE_LOCAL = "FR";
-    private static final String RUSSIAN_LOCAL = "RU";
+    private static final String FR = "fr";
+    private static final String RU = "ru";
     private static final BigDecimal EURO_EXCHANGE_RATE = new BigDecimal("0.85");
     private static final BigDecimal RUBLE_EXCHANGE_RATE = new BigDecimal("76.5");
 
-    public static BigDecimal convertPrice(String local, BigDecimal price) {
+    public static BigDecimal convertCurrency(String local, BigDecimal price) {
         if (local == null) {
             return price;
         }
 
         switch (local) {
-            case FRANCE_LOCAL:
+            case FR:
                 return price.multiply(EURO_EXCHANGE_RATE).setScale(2, RoundingMode.HALF_UP);
-            case RUSSIAN_LOCAL:
+            case RU:
                 return price.multiply(RUBLE_EXCHANGE_RATE).setScale(2, RoundingMode.HALF_UP);
             default:
                 return price;

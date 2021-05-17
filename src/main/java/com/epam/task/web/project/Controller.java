@@ -3,9 +3,6 @@ package com.epam.task.web.project;
 import com.epam.task.web.project.command.Command;
 import com.epam.task.web.project.command.CommandFactory;
 import com.epam.task.web.project.command.CommandResult;
-
-import com.epam.task.web.project.dao.DaoHelperFactory;
-import com.epam.task.web.project.validator.InputParameterValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,12 +14,14 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
+
     private static final String COMMAND = "command";
     private static final String CURRENT_PAGE = "currentPage";
     private static final String ERROR = "error";
     private static final String ERROR_PAGE = "/error.jsp";
 
-    private final CommandFactory commandFactory = new CommandFactory(new DaoHelperFactory(), new InputParameterValidator());
+    private final CommandFactory commandFactory = new CommandFactory();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +34,7 @@ public class Controller extends HttpServlet {
     }
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String page;
+        String page = "";
         boolean isRedirect = false;
 
         try {
@@ -48,6 +47,7 @@ public class Controller extends HttpServlet {
 
             request.getSession(true).setAttribute(CURRENT_PAGE, page);
         } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
             request.setAttribute(ERROR, e.getMessage());
             page = ERROR_PAGE;
         }
@@ -57,7 +57,6 @@ public class Controller extends HttpServlet {
         } else {
             response.sendRedirect(request.getRequestURI() + page);
         }
-
     }
 
 }

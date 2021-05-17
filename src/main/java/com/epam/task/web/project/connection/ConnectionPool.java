@@ -1,5 +1,8 @@
 package com.epam.task.web.project.connection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -13,6 +16,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private static final AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
     private static AtomicBoolean isInstanceCreated = new AtomicBoolean();
     private static final Lock INSTANCE_LOCK = new ReentrantLock();
@@ -22,7 +27,7 @@ public class ConnectionPool {
 
     private final Lock connectionsLock = new ReentrantLock();
     private static final int SEMAPHORE_SIZE = 10;
-    private static final Semaphore SEMAPHORE = new Semaphore(SEMAPHORE_SIZE);
+    private final Semaphore semaphore = new Semaphore(SEMAPHORE_SIZE);
 
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
     private static final int CONNECTIONS_AMOUNT = 10;
@@ -48,7 +53,7 @@ public class ConnectionPool {
                     INSTANCE.set(pool);
                     isInstanceCreated.set(true);
 
-                   //LOGGER.info("Created ConnectionPool instance");
+                   LOGGER.info("Created ConnectionPool instance!");
                 }
             } finally {
                 INSTANCE_LOCK.unlock();
@@ -59,7 +64,7 @@ public class ConnectionPool {
 
     public ProxyConnection getConnection() {
         try {
-            SEMAPHORE.acquire();
+            semaphore.acquire();
             connectionsLock.lock();
 
             ProxyConnection proxyConnection = availableConnections.remove();
@@ -68,8 +73,8 @@ public class ConnectionPool {
             return proxyConnection;
 
         } catch (InterruptedException e) {
-            //LOGGER.fatal(e.getMessage(), e);
-            throw new ConnectionException(e);
+            LOGGER.fatal(e.getMessage(), e);
+            throw new ConnectionException(e.getMessage(), e);
 
         } finally {
             connectionsLock.unlock();
@@ -86,7 +91,7 @@ public class ConnectionPool {
 
         } finally {
             connectionsLock.unlock();
-            SEMAPHORE.release();
+            semaphore.release();
         }
     }
 

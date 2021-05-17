@@ -13,6 +13,7 @@ public class LoginCommand implements Command{
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String USER = "user";
+    private static final String USER_CASH = "userCash";
     private static final String ERROR_LOGIN = "errorLogin";
 
     private static final String LOGIN_PAGE = "/index.jsp";
@@ -33,14 +34,14 @@ public class LoginCommand implements Command{
 
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
-            request.getSession(true).setAttribute(USER, user);
+            request.getSession().setAttribute(USER, user);
+            request.getSession().setAttribute(USER_CASH, user.getCash());
 
             return CommandResult.redirect(MAIN_COMMAND);
         } else {
             request.setAttribute(ERROR_LOGIN, true);
             return CommandResult.forward(LOGIN_PAGE);
         }
-
     }
 
 }

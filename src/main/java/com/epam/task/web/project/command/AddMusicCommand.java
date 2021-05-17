@@ -37,7 +37,7 @@ public class AddMusicCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         try {
             if (request.getContentType() == null) {
-                throw new NullPointerException("Parameter is NULL...");
+                throw new NullPointerException("Parameter is NULL!");
             }
 
             List<FileItem> musicData = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -76,7 +76,6 @@ public class AddMusicCommand implements Command {
         String inputParameter;
         boolean isNumber;
         for (FileItem item : musicData) {
-
             if (item.isFormField()) {
                 inputParameter = item.getString();
                 isNumber = PRICE.equals(item.getFieldName());
@@ -85,15 +84,13 @@ public class AddMusicCommand implements Command {
                 isNumber = false;
             }
 
-            boolean isValid =   isNumber ? validator.isValidNumber(inputParameter) : validator.isValidString(inputParameter);
+            boolean isValid =   isNumber ? validator.isNumberValid(inputParameter) : validator.isStringValid(inputParameter);
             if (!isValid) {
                 return false;
             }
-
         }
 
         return true;
     }
 
 }
-

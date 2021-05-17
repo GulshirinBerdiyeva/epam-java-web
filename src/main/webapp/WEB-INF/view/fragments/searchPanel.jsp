@@ -23,11 +23,11 @@
         <form action="${pageContext.request.contextPath}/controller?command=searchMusic" method="post" >
             <div id="left-search" class="search-input-button-wrapper" >
                 <input type="text" name="artist" placeholder="${musicByArtist}" />
-                <button type="submit">${buttonSearch}</button>
+                <button id="search-button" type="submit">${buttonSearch}</button>
             </div>
             <div id="right-search" class="search-input-button-wrapper" >
                 <input type="text" name="title" placeholder="${musicByTitle}" />
-                <button type="submit">${buttonSearch}</button>
+                <button id="search-button2" type="submit">${buttonSearch}</button>
             </div>
         </form>
     </div>

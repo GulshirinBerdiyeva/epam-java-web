@@ -17,8 +17,7 @@ public class MusicOrderDao extends AbstractDao<MusicOrder>{
 
     @Override
     public void save(MusicOrder item) throws DaoException {
-        executeUpdate(INSERT_MUSIC_ORDER, item.getUserId(), item.getMusicId(),
-                        item.getDiscount(), item.getFinalPrice(), item.isPayment());
+        executeUpdate(INSERT_MUSIC_ORDER, item.getUserId(), item.getMusicId(), item.getDiscount(), item.getFinalPrice(), item.isPayment());
     }
 
     @Override

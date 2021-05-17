@@ -8,7 +8,6 @@ import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.SQLException;
 
 public class MusicOrderService {
 
@@ -16,6 +15,16 @@ public class MusicOrderService {
 
     public MusicOrderService(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
+    }
+
+    public MusicOrder createOrder(User user, Music music) {
+        int discount = user.getDiscount();
+        BigDecimal musicPrice = music.getPrice();
+
+        BigDecimal percentageAmount = BigDecimal.valueOf(discount).multiply(musicPrice.divide(BigDecimal.valueOf(100)));
+        BigDecimal finalPrice = musicPrice.subtract(percentageAmount).setScale(2, RoundingMode.HALF_UP);
+
+        return new MusicOrder(user.getId(), music.getId(), discount, finalPrice, false);
     }
 
     public void confirmMusicOrder(MusicOrder musicOrder, User user, Music music) throws ServiceException{
@@ -38,8 +47,7 @@ public class MusicOrderService {
             playlistDao.save(playlist);
 
             daoHelper.endTransaction();
-
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -56,19 +64,9 @@ public class MusicOrderService {
             MusicOrderDao musicOrderDao = daoHelper.createMusicOrderDao();
 
             musicOrderDao.save(musicOrder);
-        } catch (SQLException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
-    }
-
-    public MusicOrder createOrder(User user, Music music) {
-        int discount = user.getDiscount();
-        BigDecimal musicPrice = music.getPrice();
-
-        BigDecimal percentageAmount = BigDecimal.valueOf(discount).multiply(musicPrice.divide(BigDecimal.valueOf(100)));
-        BigDecimal finalPrice = musicPrice.subtract(percentageAmount).setScale(2, RoundingMode.HALF_UP);
-
-        return new MusicOrder(user.getId(), music.getId(), discount, finalPrice, false);
     }
 
 }

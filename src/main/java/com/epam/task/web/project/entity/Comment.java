@@ -8,17 +8,16 @@ public class Comment implements Entity{
     private Long userId;
     private String username;
     private Long musicId;
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
+    private String localeDateTime;
     private String comment;
 
-    public Comment(Long id, Long userId, String username,
-                   Long musicId, LocalDateTime date, String comment) {
-
+    public Comment(Long id, Long userId, String username, Long musicId, LocalDateTime dateTime, String comment) {
         this.id = id;
         this.userId = userId;
         this.username = username;
         this.musicId = musicId;
-        this.date = date;
+        this.dateTime = dateTime;
         this.comment = comment;
     }
 
@@ -45,8 +44,16 @@ public class Comment implements Entity{
         return musicId;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getLocaleDateTime() {
+        return localeDateTime;
+    }
+
+    public void setLocaleDateTime(String localeDateTime) {
+        this.localeDateTime = localeDateTime;
     }
 
     public String getComment() {

@@ -31,21 +31,19 @@
     <jsp:include page="fragments/menu.jsp" />
 </nav>
 
-<main>
-    <div  class="album-main">
-        <div class="clients-header" >
-            <h1>${clients}</h1>
+<main class="album-main">
+    <div class="clients-header" >
+        <h1>${clients}</h1>
 
-            <c:if test="${requestScope.invalidNumberFormat}" >
-                <br/>
-                <h2>${invalidNumberFormat}</h2>
-            </c:if>
-        </div>
+        <c:if test="${requestScope.invalidNumberFormat}" >
+            <br/>
+            <h2>${invalidNumberFormat}</h2>
+        </c:if>
     </div>
 
     <div class="table-wrapper" >
         <table class="table" >
-            <thead>
+            <thead id="table-thead">
             <tr>
                 <th id="thead-number">№</th>
                 <th>${username}</th>
@@ -60,7 +58,7 @@
                     <th>${i.index+1}</th>
                     <th>${client.username}</th>
                     <th>${client.musicAmount}</th>
-                    <th>${client.discount}</th>
+                    <th>${client.discount} %</th>
                     <th id="table-column">
                         <form action="${pageContext.request.contextPath}/controller?command=applyDiscount" method="post" >
                             <div class="discount-wrapper-input-button" >
@@ -79,4 +77,3 @@
 </body>
 
 </html>
-

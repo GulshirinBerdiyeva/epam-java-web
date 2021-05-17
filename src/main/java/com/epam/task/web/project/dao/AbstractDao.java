@@ -3,6 +3,7 @@ package com.epam.task.web.project.dao;
 import com.epam.task.web.project.connection.ProxyConnection;
 import com.epam.task.web.project.entity.Entity;
 import com.epam.task.web.project.mapper.Mapper;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
             return entities;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -69,7 +70,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
         try(PreparedStatement statement = createStatement(query, params)) {
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -84,7 +85,7 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
 
             return result == 1;
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -99,11 +100,11 @@ public abstract class AbstractDao <T extends Entity> implements Dao<T>{
     }
 
     @Override
-    public void save(T item) throws DaoException {
-    }
+    public abstract void save(T item) throws DaoException;
 
     @Override
     public void removeById(Long id) throws DaoException {
+        throw new NotImplementedException();
     }
 
 }

@@ -34,7 +34,6 @@ public class UserMapper implements Mapper<User> {
 
             return User.createClient(id, username, password, cash, musicAmount, discount);
         }
-
     }
 
 }

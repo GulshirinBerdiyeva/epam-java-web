@@ -13,53 +13,53 @@ public class InputParameterValidatorTest {
     private static final boolean EXPECTED_TRUE = true;
     private static final boolean EXPECTED_FALSE = false;
 
-    private InputParameterValidator validator = new InputParameterValidator();
+    private final InputParameterValidator validator = new InputParameterValidator();
 
     @Test
-    public void isValidStringShouldReturnTrueWhenAppliedValidString() {
-        boolean actual = validator.isValidString(VALID_STRING);
+    public void isStringValidShouldReturnTrueWhenAppliedValidString() {
+        boolean actual = validator.isStringValid(VALID_STRING);
 
         Assert.assertEquals(EXPECTED_TRUE, actual);
     }
 
     @Test
-    public void isValidStringShouldReturnFalseWhenAppliedEmptyString() {
-        boolean actual = validator.isValidString(EMPTY);
+    public void isStringValidShouldReturnFalseWhenAppliedEmptyString() {
+        boolean actual = validator.isStringValid(EMPTY);
 
         Assert.assertEquals(EXPECTED_FALSE, actual);
     }
 
     @Test
-    public void isValidStringShouldReturnFalseWhenAppliedNull() {
-        boolean actual = validator.isValidString(NULL);
+    public void isStringValidShouldReturnFalseWhenAppliedNull() {
+        boolean actual = validator.isStringValid(NULL);
 
         Assert.assertEquals(EXPECTED_FALSE, actual);
     }
 
     @Test
-    public void isValidNumberShouldReturnTrueWhenAppliedValidNumber() {
-        boolean actual = validator.isValidNumber(VALID_NUMBER);
+    public void isNumberValidShouldReturnTrueWhenAppliedValidNumber() {
+        boolean actual = validator.isNumberValid(VALID_NUMBER);
 
         Assert.assertEquals(EXPECTED_TRUE, actual);
     }
 
     @Test
-    public void isValidNumberShouldReturnFalseWhenAppliedInvalidNumber() {
-        boolean actual = validator.isValidNumber(INVALID_NUMBER);
+    public void isNumberValidShouldReturnFalseWhenAppliedInvalidNumber() {
+        boolean actual = validator.isNumberValid(INVALID_NUMBER);
 
         Assert.assertEquals(EXPECTED_FALSE, actual);
     }
 
     @Test
-    public void isValidNumberShouldReturnFalseWhenAppliedEmptyString() {
-        boolean actual = validator.isValidNumber(EMPTY);
+    public void isNumberValidShouldReturnFalseWhenAppliedEmptyString() {
+        boolean actual = validator.isNumberValid(EMPTY);
 
         Assert.assertEquals(EXPECTED_FALSE, actual);
     }
 
     @Test
-    public void isValidNumberShouldReturnFalseWhenAppliedNull() {
-        boolean actual = validator.isValidNumber(NULL);
+    public void isNumberValidShouldReturnFalseWhenAppliedNull() {
+        boolean actual = validator.isNumberValid(NULL);
 
         Assert.assertEquals(EXPECTED_FALSE, actual);
     }

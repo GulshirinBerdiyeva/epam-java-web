@@ -25,11 +25,11 @@
   </filter-mapping>
 
   <filter>
-    <filter-name>command-filter</filter-name>
-    <filter-class>com.epam.task.web.project.filter.CommandFilter</filter-class>
+    <filter-name>authorization-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.AuthorizationFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>command-filter</filter-name>
+    <filter-name>authorization-filter</filter-name>
     <servlet-name>main</servlet-name>
   </filter-mapping>
 

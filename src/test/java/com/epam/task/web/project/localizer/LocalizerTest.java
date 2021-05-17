@@ -19,45 +19,57 @@ public class LocalizerTest {
     private static final String EXPECTED_FR_VALUE = "Commander de la musique";
     private static final String EXPECTED_RU_VALUE = "Заказ Музыки";
 
-    private HttpSession session = Mockito.mock(HttpSession.class);
+    private final HttpSession session = Mockito.mock(HttpSession.class);
     
     @Test
-    public void localizeShouldReturnUSStringValueWhenUSLocaleApplied() {
+    public void localizeShouldReturnUsStringValueWhenUsLocaleApplied() {
+        //given
         when(session.getAttribute(LOCAL)).thenReturn(US);
         Localizer localizer = new Localizer(session);
 
+        //when
         String actual = localizer.localize(KEY);
 
+        //then
         Assert.assertEquals(EXPECTED_US_VALUE, actual);
     }
 
     @Test
-    public void localizeShouldReturnFRStringValueWhenFRLocaleApplied() {
+    public void localizeShouldReturnFrStringValueWhenFrLocaleApplied() {
+        //given
         when(session.getAttribute(LOCAL)).thenReturn(FR);
         Localizer localizer = new Localizer(session);
 
+        //when
         String actual = localizer.localize(KEY);
 
+        //then
         Assert.assertEquals(EXPECTED_FR_VALUE, actual);
     }
 
     @Test
-    public void localizeShouldReturnRUStringValueWhenRULocaleApplied() {
+    public void localizeShouldReturnRuStringValueWhenRuLocaleApplied() {
+        //given
         when(session.getAttribute(LOCAL)).thenReturn(RU);
         Localizer localizer = new Localizer(session);
 
+        //when
         String actual = localizer.localize(KEY);
 
+        //then
         Assert.assertEquals(EXPECTED_RU_VALUE, actual);
     }
 
     @Test
-    public void localizeShouldReturnUSStringValueWhenNullApplied() {
+    public void localizeShouldReturnUsStringValueWhenNullApplied() {
+        //given
         when(session.getAttribute(LOCAL)).thenReturn(null);
         Localizer localizer = new Localizer(session);
 
+        //when
         String actual = localizer.localize(KEY);
 
+        //then
         Assert.assertEquals(EXPECTED_US_VALUE, actual);
     }
 

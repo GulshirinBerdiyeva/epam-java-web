@@ -41,14 +41,12 @@ public class MusicDao extends AbstractDao<Music>{
     }
 
     public void updateMusic(Music music) throws DaoException {
-        executeUpdate(UPDATE_MUSIC, music.getTitle(), music.getArtist(),
-                      music.getAudioFileName(), music.getImageFileName(), music.getPrice(), music.getId());
+        executeUpdate(UPDATE_MUSIC, music.getTitle(), music.getArtist(), music.getAudioFileName(), music.getImageFileName(), music.getPrice(), music.getId());
     }
 
     @Override
     public void save(Music item) throws DaoException {
-        executeUpdate(INSERT_MUSIC, item.getTitle(), item.getArtist(),
-                      item.getAudioFileName(), item.getImageFileName(), item.getPrice());
+        executeUpdate(INSERT_MUSIC, item.getTitle(), item.getArtist(), item.getAudioFileName(), item.getImageFileName(), item.getPrice());
     }
 
     @Override

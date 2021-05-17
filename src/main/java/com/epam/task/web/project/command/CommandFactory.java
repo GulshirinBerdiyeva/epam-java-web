@@ -4,31 +4,32 @@ import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.service.*;
 import com.epam.task.web.project.validator.InputParameterValidator;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class CommandFactory {
 
     private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
     private static final String PROFILE_PAGE = "/WEB-INF/view/profile.jsp";
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String ADD_NEW_MUSIC_PAGE = "/WEB-INF/view/addNewMusic.jsp";
     private static final String CREATE_ALBUM_PAGE = "/WEB-INF/view/createAlbum.jsp";
 
+    private final DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
+    private final InputParameterValidator validator = new InputParameterValidator();
     private final UserService userService;
     private final MusicService musicService;
     private final MusicOrderService musicOrderService;
     private final PlaylistService playlistService;
     private final AlbumService albumService;
     private final CommentService commentService;
-    private InputParameterValidator validator;
 
-    public CommandFactory(DaoHelperFactory daoHelperFactory, InputParameterValidator validator) {
+    public CommandFactory() {
         this.userService = new UserService(daoHelperFactory);
         this.musicService = new MusicService(daoHelperFactory);
         this.musicOrderService = new MusicOrderService(daoHelperFactory);
         this.playlistService = new PlaylistService(daoHelperFactory);
         this.albumService = new AlbumService(daoHelperFactory);
         this.commentService = new CommentService(daoHelperFactory);
-        this.validator = validator;
     }
 
     public Command create(String type) {
@@ -53,8 +54,6 @@ public class CommandFactory {
                 return new GetMusicCommand(musicService);
             case "getResource":
                 return new GetResourceCommand(validator);
-            case "searchPage":
-                return new ShowPageCommand(SEARCH_PAGE);
             case "searchMusic":
                 return new SearchMusicCommand(musicService, validator);
             case "selectMusic":
@@ -72,6 +71,8 @@ public class CommandFactory {
             case"editPrice":
                 return new EditPriceCommand(musicService, validator);
             case"deleteMusic":
+            case"confirmDelete":
+            case"cancelDelete":
                 return new DeleteMusicCommand(musicService, userService);
             case "playlist":
                 return new PlaylistCommand(playlistService);

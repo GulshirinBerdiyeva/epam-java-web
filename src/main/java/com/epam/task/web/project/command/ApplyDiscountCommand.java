@@ -29,19 +29,23 @@ public class ApplyDiscountCommand implements Command {
         String clientIdValue = request.getParameter(CLIENT_ID);
         String discountValue = request.getParameter(DISCOUNT_VALUE);
 
-        boolean isValidId = validator.isValidString(clientIdValue);
-        boolean isValidDiscount = validator.isValidNumber(discountValue);
+        boolean isValidId = validator.isStringValid(clientIdValue);
+        boolean isValidDiscount = validator.isNumberValid(discountValue);
         if (isValidId && isValidDiscount) {
             Long clientId = Long.parseLong(clientIdValue);
             int discount = Integer.parseInt(discountValue);
-            userService.updateDiscount(clientId, discount);
 
-            return CommandResult.redirect(CLIENTS_PAGE_COMMAND);
-        } else {
-            request.setAttribute(INVALID_NUMBER_FORMAT, true);
-            return CommandResult.forward(CLIENTS_PAGE);
+            try {
+                userService.updateDiscount(clientId, discount);
+                return CommandResult.redirect(CLIENTS_PAGE_COMMAND);
+            } catch (ServiceException e) {
+                request.setAttribute(INVALID_NUMBER_FORMAT, true);
+                return CommandResult.forward(CLIENTS_PAGE);
+            }
         }
 
+        request.setAttribute(INVALID_NUMBER_FORMAT, true);
+        return CommandResult.forward(CLIENTS_PAGE);
     }
 
 }

@@ -19,7 +19,7 @@ public class SelectMusicCommand implements Command{
     private static final String LOCAL = "local";
     private static final String SELECTED_MUSIC_PRICE = "selectedMusicPrice";
 
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String COMMENTS_COMMAND = "?command=comments";
 
     private final MusicService musicService;
@@ -34,7 +34,7 @@ public class SelectMusicCommand implements Command{
         String idValue = request.getParameter(SELECTED_MUSIC_ID);
 
         if (idValue == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         Long id = Long.parseLong(idValue);
@@ -45,7 +45,7 @@ public class SelectMusicCommand implements Command{
             BigDecimal price = music.getPrice();
 
             String local = (String) session.getAttribute(LOCAL);
-            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, price);
+            BigDecimal convertedPrice = CurrencyConverter.convertCurrency(local, price);
 
             session.setAttribute(SELECTED_MUSIC, music);
             session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
@@ -53,9 +53,8 @@ public class SelectMusicCommand implements Command{
             return CommandResult.redirect(COMMENTS_COMMAND);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);
-            return CommandResult.forward(SEARCH_PAGE);
+            return CommandResult.forward(MAIN_PAGE);
         }
-
     }
 
 }

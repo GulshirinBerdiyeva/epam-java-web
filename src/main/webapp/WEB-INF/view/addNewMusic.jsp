@@ -31,7 +31,7 @@
     <jsp:include page="fragments/menu.jsp" />
 </nav>
 
-<main class="add-nem-music">
+<main class="add-new-music">
     <form action="${pageContext.request.contextPath}/controller?command=addMusic" method="post" enctype="multipart/form-data">
         <h1>${addNewMusic}</h1>
         <hr/>
@@ -48,7 +48,6 @@
         <input type="file" name="audioFile" accept=".mp3" placeholder="${audio}" >
         <input id="submit" type="submit" value="${buttonSubmit}">
     </form>
-
 </main>
 
 </body>

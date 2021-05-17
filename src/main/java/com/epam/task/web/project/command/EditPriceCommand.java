@@ -24,7 +24,7 @@ public class EditPriceCommand implements Command{
 
     private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String PURCHASE_PAGE_COMMAND = "?command=purchasePage";
-    private static final String SEARCH_PAGE = "/WEB-INF/view/search.jsp";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     private final MusicService musicService;
     private InputParameterValidator validator;
@@ -41,10 +41,10 @@ public class EditPriceCommand implements Command{
         String priceValue = request.getParameter(NEW_PRICE);
 
         if (music == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
-        boolean isValid = validator.isValidNumber(priceValue);
+        boolean isValid = validator.isNumberValid(priceValue);
         if (!isValid) {
             request.setAttribute(INVALID_NUMBER_FORMAT, true);
             return CommandResult.forward(PURCHASE_PAGE);
@@ -59,7 +59,7 @@ public class EditPriceCommand implements Command{
             music.setPrice(newPrice);
 
             String local = (String) session.getAttribute(LOCAL);
-            BigDecimal convertedPrice = CurrencyConverter.convertPrice(local, music.getPrice());
+            BigDecimal convertedPrice = CurrencyConverter.convertCurrency(local, music.getPrice());
 
             session.setAttribute(SELECTED_MUSIC_PRICE, convertedPrice);
             session.setAttribute(SELECTED_MUSIC, music);
@@ -67,9 +67,8 @@ public class EditPriceCommand implements Command{
             return CommandResult.redirect(PURCHASE_PAGE_COMMAND);
         } else {
             request.setAttribute(MUSIC_IS_ABSENT, true);
-            return CommandResult.forward(SEARCH_PAGE);
+            return CommandResult.forward(MAIN_PAGE);
         }
-
     }
 
 }

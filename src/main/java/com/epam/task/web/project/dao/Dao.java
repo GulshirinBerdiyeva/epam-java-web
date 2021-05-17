@@ -44,5 +44,4 @@ public interface Dao <T extends Entity> {
      * @throws   DaoException if SQL query is invalid or some errors with database connection
      * */
     void removeById(Long id) throws DaoException;
-
 }

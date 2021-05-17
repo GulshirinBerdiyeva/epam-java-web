@@ -15,12 +15,11 @@ public class DateTimeLocalizerTest {
     private static final String EXPECTED_FR_DATE_TIME = "5 mai 2021 18:18:18";
     private static final String EXPECTED_RU_DATE_TIME = "05.05.2021 18:18:18";
 
-    private DateTimeLocalizer localizer;
-    private LocalDateTime dateTime = LocalDateTime.parse(DATE_TIME);
+    private final LocalDateTime dateTime = LocalDateTime.parse(DATE_TIME);
 
     @Test
-    public void localizeDateTimeShouldReturnUSDateTimeWhenUSLocaleApplied() {
-        localizer = new DateTimeLocalizer(US_LOCALE);
+    public void localizeDateTimeShouldReturnUsDateTimeWhenUsLocaleApplied() {
+        DateTimeLocalizer localizer = new DateTimeLocalizer(US_LOCALE);
 
         String actual = localizer.localizeDateTime(dateTime);
 
@@ -28,8 +27,8 @@ public class DateTimeLocalizerTest {
     }
 
     @Test
-    public void localizeDateTimeShouldReturnFRDateTimeWhenFRLocaleApplied() {
-        localizer = new DateTimeLocalizer(FR_LOCALE);
+    public void localizeDateTimeShouldReturnFrDateTimeWhenFrLocaleApplied() {
+        DateTimeLocalizer localizer = new DateTimeLocalizer(FR_LOCALE);
 
         String actual = localizer.localizeDateTime(dateTime);
 
@@ -37,8 +36,8 @@ public class DateTimeLocalizerTest {
     }
 
     @Test
-    public void localizeDateTimeShouldReturnRUDateTimeWhenRULocaleApplied() {
-        localizer = new DateTimeLocalizer(RU_LOCALE);
+    public void localizeDateTimeShouldReturnRuDateTimeWhenRuLocaleApplied() {
+        DateTimeLocalizer localizer = new DateTimeLocalizer(RU_LOCALE);
 
         String actual = localizer.localizeDateTime(dateTime);
 
@@ -46,8 +45,8 @@ public class DateTimeLocalizerTest {
     }
 
     @Test
-    public void localizeDateTimeShouldReturnUSDateTimeWhenNullApplied() {
-        localizer = new DateTimeLocalizer(null);
+    public void localizeDateTimeShouldReturnUsDateTimeWhenNullApplied() {
+        DateTimeLocalizer localizer = new DateTimeLocalizer(null);
 
         String actual = localizer.localizeDateTime(dateTime);
 

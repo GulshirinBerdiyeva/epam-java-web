@@ -14,14 +14,14 @@ public class CurrencyConverterTest {
     private static final BigDecimal EXPECTED_RUBLE = new BigDecimal("3213.00");
 
     @Test
-    public void convertCurrencyShouldReturnEuroWhenFRLocaleApplied() {
+    public void convertCurrencyShouldReturnEuroWhenFrLocaleApplied() {
         BigDecimal actual = CurrencyConverter.convertCurrency(FR, CURRENCY);
 
         Assert.assertEquals(EXPECTED_EURO, actual);
     }
 
     @Test
-    public void convertCurrencyShouldReturnRubleWhenRULocaleApplied() {
+    public void convertCurrencyShouldReturnRubleWhenRuLocaleApplied() {
         BigDecimal actual = CurrencyConverter.convertCurrency(RU, CURRENCY);
 
         Assert.assertEquals(EXPECTED_RUBLE, actual);

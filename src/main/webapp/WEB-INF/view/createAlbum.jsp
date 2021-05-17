@@ -30,28 +30,26 @@
     <jsp:include page="fragments/menu.jsp" />
 </nav>
 
-<main>
+<main class="album-main">
     <form action="${pageContext.request.contextPath}/controller?command=addAlbum" method="post" >
-        <div class="album-main" >
-            <div class="albumTitle-button-wrapper" >
-                <h1>${createAlbum}</h1>
+        <div class="albumTitle-button-wrapper" >
+            <h1>${createAlbum}</h1>
 
-                <c:if test="${requestScope.emptyInputParameters}" >
-                    <br/>
-                    <h2>${enterInputParameters}</h2>
-                    <br/>
-                </c:if>
+            <c:if test="${requestScope.emptyInputParameters}" >
+                <br/>
+                <h2>${enterInputParameters}</h2>
+                <br/>
+            </c:if>
 
-                <div class="create-album-input-button">
-                    <input type="text" name="albumTitle" placeholder="${albumTitle}">
-                    <button type="submit">${buttonCreateAlbum}</button>
-                </div>
+            <div class="create-album-input-button">
+                <input type="text" name="albumTitle" placeholder="${albumTitle}">
+                <button id="search-button" type="submit">${buttonCreateAlbum}</button>
             </div>
         </div>
 
         <div class="table-wrapper" >
             <table class="table">
-                <thead>
+                <thead id="table-thead">
                 <tr>
                     <th id="thead-number">№</th>
                     <th>${artist}</th>
@@ -73,5 +71,7 @@
         </div>
     </form>
 </main>
+
 </body>
+
 </html>

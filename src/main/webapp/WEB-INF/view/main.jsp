@@ -5,6 +5,13 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="local" var="local" />
 
+<fmt:message bundle="${local}" key="local.placeholder.search.musicByTitle" var="musicByTitle"/>
+<fmt:message bundle="${local}" key="local.placeholder.search.musicByArtist" var="musicByArtist"/>
+<fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
+<fmt:message bundle="${local}" key="local.error.message.musicIsAbsent" var="musicIsAbsent" />
+<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
+<fmt:message bundle="${local}" key="local.error.message.musicRemoved" var="musicRemoved" />
+
 <html>
 
 <head>
@@ -24,13 +31,29 @@
 
 <div class="main-search">
     <jsp:include page="fragments/searchPanel.jsp" />
+
+    <c:if test="${requestScope.musicIsAbsent}" >
+        <br/>
+        <h2 id="error-message-editPrice">${musicIsAbsent}</h2>
+    </c:if>
+
+    <c:if test="${requestScope.emptyInputParameters}" >
+        <br/>
+        <h2 id="error-message-editPrice">${enterInputParameters}</h2>
+    </c:if>
+
+    <c:if test="${requestScope.musicRemoved}" >
+        <br/>
+        <h2 id="error-message-editPrice">${musicRemoved}</h2>
+    </c:if>
 </div>
 
 <main>
-    <jsp:include page="fragments/musicSlider.jsp" />
+    <c:if test="${!requestScope.musicIsAbsent && !requestScope.musicRemoved}" >
+        <jsp:include page="fragments/musicSlider.jsp" />
+    </c:if>
 </main>
 
 </body>
 
 </html>
-

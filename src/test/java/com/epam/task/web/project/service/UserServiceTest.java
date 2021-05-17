@@ -41,12 +41,15 @@ public class UserServiceTest {
 
     @Test
     public void updateBalanceShouldUpdateUserBalance() throws DaoException, ServiceException {
+        //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
         when(daoHelper.createUserDao()).thenReturn(userDao);
         doNothing().when(userDao).updateCashById(VALID_CLIENT.getId(), NEW_CASH);
 
+        //when
         userService.updateBalance(VALID_CLIENT, CASH);
 
+        //then
         Assert.assertEquals(EXPECTED_CLIENT, VALID_CLIENT);
     }
 

@@ -35,7 +35,7 @@ public class ConfirmPurchaseCommand implements Command{
         MusicOrder musicOrder = (MusicOrder) session.getAttribute(MUSIC_ORDER);
 
         if (music == null || musicOrder == null) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         boolean isExistInPlaylist = playlistService.exist(user.getId(), music.getId());

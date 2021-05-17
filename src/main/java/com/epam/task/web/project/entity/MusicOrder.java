@@ -2,6 +2,7 @@ package com.epam.task.web.project.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class MusicOrder implements Entity{
 
@@ -13,9 +14,7 @@ public class MusicOrder implements Entity{
     private BigDecimal finalPrice;
     private boolean payment;
 
-    public MusicOrder(Long id, Long userId, Long musicId, LocalDateTime date,
-                      int discount, BigDecimal finalPrice, boolean payment) {
-
+    public MusicOrder(Long id, Long userId, Long musicId, LocalDateTime date, int discount, BigDecimal finalPrice, boolean payment) {
         this.id = id;
         this.userId = userId;
         this.musicId = musicId;
@@ -25,9 +24,7 @@ public class MusicOrder implements Entity{
         this.payment = payment;
     }
 
-    public MusicOrder(Long userId, Long musicId, int discount,
-                      BigDecimal finalPrice, boolean payment) {
-
+    public MusicOrder(Long userId, Long musicId, int discount, BigDecimal finalPrice, boolean payment) {
         this.userId = userId;
         this.musicId = musicId;
         this.discount = discount;
@@ -66,6 +63,27 @@ public class MusicOrder implements Entity{
 
     public void setPayment(boolean payment) {
         this.payment = payment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        MusicOrder that = (MusicOrder) o;
+
+        return discount == that.discount && payment == that.payment && Objects.equals(id, that.id) && Objects.equals(userId, that.userId) &&
+               Objects.equals(musicId, that.musicId) && Objects.equals(date, that.date) && Objects.equals(finalPrice, that.finalPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, musicId, date, discount, finalPrice, payment);
     }
 
 }

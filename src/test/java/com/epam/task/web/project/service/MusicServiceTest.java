@@ -27,7 +27,6 @@ public class MusicServiceTest {
     private static final User FIRST_CLIENT = User.createClient(1L, "Client", "client", new BigDecimal("10"), 10, 10);
     private static final User SECOND_CLIENT = User.createClient(2L, "Client", "client", new BigDecimal("10"), 10, 10);
     private static final int EXPECTED_FIRST_CLIENT_MUSIC_AMOUNT = FIRST_CLIENT.getMusicAmount() - 1;
-    private static final int EXPECTED_SECOND_CLIENT_MUSIC_AMOUNT = SECOND_CLIENT.getMusicAmount() - 1;
     private static final List<User> USERS = Arrays.asList(FIRST_CLIENT, SECOND_CLIENT);
 
     private final DaoHelperFactory daoHelperFactory = Mockito.mock(DaoHelperFactory.class);
@@ -96,9 +95,8 @@ public class MusicServiceTest {
         when(daoHelper.createPlaylistDao()).thenReturn(playlistDao);
         doNothing().when(daoHelper).startTransaction();
         doNothing().when(daoHelper).endTransaction();
-        when(playlistDao.exist(FIRST_CLIENT.getId(), FIRST_MUSIC.getId())).thenReturn(true);
+        when(playlistDao.exist(FIRST_CLIENT.getId(), FIRST_MUSIC.getId())).thenReturn(false);
         when(playlistDao.exist(SECOND_CLIENT.getId(), FIRST_MUSIC.getId())).thenReturn(false);
-        doNothing().when(userDao).updateMusicAmountById(FIRST_CLIENT.getId(), EXPECTED_FIRST_CLIENT_MUSIC_AMOUNT);
         doThrow(ServiceException.class).when(musicDao).removeById(FIRST_MUSIC.getId());
 
         //when

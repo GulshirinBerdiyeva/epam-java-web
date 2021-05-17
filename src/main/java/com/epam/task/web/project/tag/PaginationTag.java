@@ -85,7 +85,6 @@ public class PaginationTag extends TagSupport {
             }
 
             out.flush();
-
         } catch (IOException e) {
             throw new JspException(e.getMessage(), e);
         }

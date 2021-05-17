@@ -33,9 +33,9 @@ public class AlbumMusicsCommand implements Command {
         HttpSession session = request.getSession();
         String albumTitle = request.getParameter(SELECTED_ALBUM_TITLE);
 
-        boolean isValid = validator.isValidString(albumTitle);
+        boolean isValid = validator.isStringValid(albumTitle);
         if (!isValid) {
-            throw new NullPointerException("Parameter is NULL...");
+            throw new NullPointerException("Parameter is NULL!");
         }
 
         List<Music> musics = albumService.getAllMusicsByAlbumTitle(albumTitle);
