@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>main</servlet-name>
-    <servlet-class>com.epam.task.web.project.Controller</servlet-class>
+    <servlet-class>com.epam.task.web.project.controller.Controller</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>main</servlet-name>
@@ -16,11 +16,56 @@
   </servlet-mapping>
 
   <filter>
+    <filter-name>xss-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.XssFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>xss-filter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
     <filter-name>encoding-filter</filter-name>
     <filter-class>com.epam.task.web.project.filter.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>encoding-filter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>localization-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.LocalizationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>localization-filter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>cookieFlagRemover-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.CookieFlagRemoverFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>cookieFlagRemover-filter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>previousQuery-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.PreviousQueryFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>previousQuery-filter</filter-name>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>authentication-filter</filter-name>
+    <filter-class>com.epam.task.web.project.filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>authentication-filter</filter-name>
     <servlet-name>main</servlet-name>
   </filter-mapping>
 

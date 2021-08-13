@@ -8,39 +8,31 @@ import com.epam.task.web.project.entity.Playlist;
 
 import java.util.List;
 
-public class PlaylistService {
-
-    private final DaoHelperFactory daoHelperFactory;
+public class PlaylistService extends AbstractService<Playlist> {
 
     public PlaylistService(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, Playlist.getTableName());
     }
 
     public List<Playlist> getAllMusicsByUserId(Long userId) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            PlaylistDao playlistDao = daoHelper.createPlaylistDao();
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
+
+            PlaylistDao playlistDao = (PlaylistDao) daoHelper.createDao(getDaoType());
 
             return playlistDao.getAllMusicsByUserId(userId);
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public boolean exist(Long userId, Long musicId) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            PlaylistDao playlistDao = daoHelper.createPlaylistDao();
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
+
+            PlaylistDao playlistDao = (PlaylistDao) daoHelper.createDao(getDaoType());
 
             return playlistDao.exist(userId, musicId);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
 
-    public void save(Playlist item) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            PlaylistDao playlistDao = daoHelper.createPlaylistDao();
-
-            playlistDao.save(item);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

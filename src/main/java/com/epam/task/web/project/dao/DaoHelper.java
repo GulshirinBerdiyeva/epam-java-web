@@ -4,7 +4,14 @@ import com.epam.task.web.project.connection.ProxyConnection;
 
 import java.sql.SQLException;
 
-public class DaoHelper implements AutoCloseable{
+public class DaoHelper implements AutoCloseable {
+
+    private static final String USER = "user";
+    private static final String MUSIC = "music";
+    private static final String MUSIC_ORDER = "music_order";
+    private static final String PLAYLIST = "playlist";
+    private static final String ALBUM = "album";
+    private static final String COMMENT = "comment";
 
     private final ProxyConnection proxyConnection;
 
@@ -12,33 +19,78 @@ public class DaoHelper implements AutoCloseable{
         this.proxyConnection = proxyConnection;
     }
 
-    public UserDao createUserDao() {
-        return new UserDao(proxyConnection);
+    public Dao createDao(String type) throws DaoException {
+        switch (type) {
+            case USER:
+                return createUserDao();
+            case MUSIC:
+                return createMusicDao();
+            case MUSIC_ORDER:
+                return createMusicOrderDao();
+            case PLAYLIST:
+                return createPlaylistDao();
+            case ALBUM:
+                return createAlbumDao();
+            case COMMENT:
+                return createCommentDao();
+            default:
+                throw new DaoException("Unknown type of Dao! \"" + type + "\"");
+        }
     }
 
-    public MusicDao createMusicDao() {
-        return new MusicDao(proxyConnection);
+    private UserDao createUserDao() {
+        UserDao userDao = UserDao.getInstance();
+
+        userDao.setProxyConnection(proxyConnection);
+
+        return userDao;
     }
 
-    public MusicOrderDao createMusicOrderDao() {
-        return new MusicOrderDao(proxyConnection);
+    private MusicDao createMusicDao() {
+        MusicDao musicDao = MusicDao.getInstance();
+
+        musicDao.setProxyConnection(proxyConnection);
+
+        return musicDao;
     }
 
-    public PlaylistDao createPlaylistDao() {
-        return new PlaylistDao(proxyConnection);
+    private MusicOrderDao createMusicOrderDao() {
+        MusicOrderDao musicOrderDao = MusicOrderDao.getInstance();
+
+        musicOrderDao.setProxyConnection(proxyConnection);
+
+        return musicOrderDao;
     }
 
-    public CommentDao createCommentDao() {
-        return new CommentDao(proxyConnection);
+    private PlaylistDao createPlaylistDao() {
+        PlaylistDao playlistDao = PlaylistDao.getInstance();
+
+        playlistDao.setProxyConnection(proxyConnection);
+
+        return playlistDao;
     }
 
-    public AlbumDao createAlbumDao() {
-        return new AlbumDao(proxyConnection);
+    private AlbumDao createAlbumDao() {
+        AlbumDao albumDao = AlbumDao.getInstance();
+
+        albumDao.setProxyConnection(proxyConnection);
+
+        return albumDao;
     }
+
+    private CommentDao createCommentDao() {
+        CommentDao commentDao = CommentDao.getInstance();
+
+        commentDao.setProxyConnection(proxyConnection);
+
+        return commentDao;
+    }
+
 
     public void startTransaction() throws DaoException {
         try {
             proxyConnection.setAutoCommit(false);
+
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
@@ -48,14 +100,7 @@ public class DaoHelper implements AutoCloseable{
         try {
             proxyConnection.commit();
             proxyConnection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new DaoException(e.getMessage(), e);
-        }
-    }
 
-    public void commit() throws DaoException {
-        try {
-            proxyConnection.commit();
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
@@ -64,6 +109,7 @@ public class DaoHelper implements AutoCloseable{
     public void rollback() throws DaoException {
         try {
             proxyConnection.rollback();
+
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
@@ -74,6 +120,7 @@ public class DaoHelper implements AutoCloseable{
         try {
             proxyConnection.setAutoCommit(true);
             proxyConnection.close();
+
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }

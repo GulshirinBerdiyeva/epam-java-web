@@ -2,15 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.placeholder.search.musicByTitle" var="musicByTitle"/>
-<fmt:message bundle="${local}" key="local.placeholder.search.musicByArtist" var="musicByArtist"/>
-<fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
-<fmt:message bundle="${local}" key="local.error.message.musicIsAbsent" var="musicIsAbsent" />
-<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
-<fmt:message bundle="${local}" key="local.error.message.musicRemoved" var="musicRemoved" />
+<fmt:message bundle="${locale}" key="locale.error.message.musicIsAbsent" var="musicIsAbsent" />
+<fmt:message bundle="${locale}" key="locale.error.message.enterInputParameters" var="enterInputParameters" />
+<fmt:message bundle="${locale}" key="locale.error.message.musicRemoved" var="musicRemoved" />
+<fmt:message bundle="${locale}" key="locale.no.musics" var="noMusics" />
+<fmt:message bundle="${locale}" key="locale.error.invalidParameter" var="invalidParameter" />
+<fmt:message bundle="${locale}" key="locale.error.couldNotLoadResources" var="couldNotLoadResources" />
 
 <html>
 
@@ -32,24 +32,41 @@
 <div class="main-search">
     <jsp:include page="fragments/searchPanel.jsp" />
 
-    <c:if test="${requestScope.musicIsAbsent}" >
+    <c:if test="${requestScope.noMusics}" >
         <br/>
-        <h2 id="error-message-editPrice">${musicIsAbsent}</h2>
+        <h2 id="error-message-editPrice">${noMusics}</h2>
     </c:if>
 
-    <c:if test="${requestScope.emptyInputParameters}" >
+     <c:if test="${requestScope.musicIsAbsent}" >
         <br/>
-        <h2 id="error-message-editPrice">${enterInputParameters}</h2>
+        <h2 id="error-message-editPrice">${musicIsAbsent}</h2>
     </c:if>
 
     <c:if test="${requestScope.musicRemoved}" >
         <br/>
         <h2 id="error-message-editPrice">${musicRemoved}</h2>
     </c:if>
+
+    <c:if test="${requestScope.couldNotLoadResources}" >
+        <br/>
+        <h2 id="error-message-editPrice">${couldNotLoadResources}</h2>
+    </c:if>
+
+    <c:if test="${cookie.get('emptyInputParameters').value != null}" >
+        <br/>
+        <h2 id="error-message-editPrice">${enterInputParameters}</h2>
+    </c:if>
+
+    <c:if test="${(requestScope.invalidParameter) || (cookie.get('invalidParameter').value != null)}" >
+        <br/>
+        <h2 id="error-message-editPrice">${invalidParameter}</h2>
+    </c:if>
+
+
 </div>
 
 <main>
-    <c:if test="${!requestScope.musicIsAbsent && !requestScope.musicRemoved}" >
+    <c:if test="${!requestScope.noMusics && !requestScope.musicIsAbsent && !requestScope.musicRemoved && !requestScope.couldNotLoadResources}" >
         <jsp:include page="fragments/musicSlider.jsp" />
     </c:if>
 </main>

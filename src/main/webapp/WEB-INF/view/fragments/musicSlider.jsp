@@ -5,12 +5,11 @@
 
 <%@ page import="com.epam.task.web.project.entity.Role" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.button.want.to.buy" var="buttonWantToBuy" />
-<fmt:message bundle="${local}" key="local.button.comments" var="buttonComments" />
-<fmt:message bundle="${local}" key="local.button.edit" var="buttonEdit" />
+<fmt:message bundle="${locale}" key="locale.button.want.to.buy" var="buttonWantToBuy" />
+<fmt:message bundle="${locale}" key="locale.button.edit" var="buttonEdit" />
 
 <html>
 
@@ -45,11 +44,11 @@
         <c:set var="music" value="${requestScope.music}" />
     </c:if>
 
-    <c:if test="${sessionScope.size >= 1}" >
+    <c:if test="${musics.size() >= 1}" >
         <div class="slide">
             <img src="${pageContext.request.contextPath}/controller?command=getResource&type=image&fileName=${music.imageFileName}" alt="">
             <div class="description">
-                <h2><b>${music.artist}<br>${music.title}</b></h2>
+                <h2><b><c:out value="${music.artist}" /><br><c:out value="${music.title}" /></b></h2>
                 <br>
                 <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}">
                     <audio controls>
@@ -73,7 +72,7 @@
 
         <br/>
         <div class="pagination" >
-            <pgnt:paginationTag totalPageCount="${sessionScope.size}" viewPageCount="3" action="${pageContext.request.contextPath}/controller?command=getMusic&type=${description}" />
+            <pgnt:paginationTag totalPageCount="${musics.size()}" viewPageCount="3" action="${pageContext.request.contextPath}/controller?command=getMusic&type=${description}" />
         </div>
     </c:if>
 </main>

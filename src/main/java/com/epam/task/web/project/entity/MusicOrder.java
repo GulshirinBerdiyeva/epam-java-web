@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class MusicOrder implements Entity{
 
+    private static final String TABLE_NAME = "music_order";
+
     private Long id;
     private Long userId;
     private Long musicId;
@@ -30,6 +32,10 @@ public class MusicOrder implements Entity{
         this.discount = discount;
         this.finalPrice = finalPrice;
         this.payment = payment;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override

@@ -5,35 +5,22 @@ import com.epam.task.web.project.dao.DaoException;
 import com.epam.task.web.project.dao.DaoHelper;
 import com.epam.task.web.project.dao.DaoHelperFactory;
 import com.epam.task.web.project.entity.Comment;
-import com.epam.task.web.project.entity.Music;
-import com.epam.task.web.project.entity.User;
 
 import java.util.List;
 
-public class CommentService {
-
-    private final DaoHelperFactory daoHelperFactory;
+public class CommentService extends AbstractService<Comment> {
 
     public CommentService(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, Comment.getTableName());
     }
 
-    public List<Comment> findCommentsByMusicId(Long id) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            CommentDao commentDao = daoHelper.createCommentDao();
+    public List<Comment> getCommentsByMusicId(Long id) throws ServiceException {
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
 
-            return commentDao.findCommentByMusicId(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
+            CommentDao commentDao = (CommentDao) daoHelper.createDao(getDaoType());
 
-    public void save(User user, Music music, String newComment) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            CommentDao commentDao = daoHelper.createCommentDao();
+            return commentDao.getCommentByMusicId(id);
 
-            Comment comment = new Comment(user.getId(), music.getId(), newComment);
-            commentDao.save(comment);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

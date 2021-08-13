@@ -2,6 +2,8 @@ package com.epam.task.web.project.entity;
 
 public class Playlist implements Entity{
 
+    private static final String TABLE_NAME = "playlist";
+
     private Long id;
     private Long userId;
     private Long musicId;
@@ -17,6 +19,10 @@ public class Playlist implements Entity{
     public Playlist(Long userId, Long musicId) {
         this.userId = userId;
         this.musicId = musicId;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override

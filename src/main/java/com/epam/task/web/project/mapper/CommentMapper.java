@@ -17,6 +17,7 @@ public class CommentMapper implements Mapper<Comment>{
 
     @Override
     public Comment map(ResultSet resultSet) throws SQLException {
+
         Long id = resultSet.getLong(ID);
         Long userId = resultSet.getLong(USER_ID);
         String username = resultSet.getString(USERNAME);

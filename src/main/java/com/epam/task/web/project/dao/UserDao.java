@@ -1,19 +1,26 @@
 package com.epam.task.web.project.dao;
 
-import com.epam.task.web.project.connection.ProxyConnection;
 import com.epam.task.web.project.entity.User;
 import com.epam.task.web.project.mapper.UserMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class UserDao extends AbstractDao<User> {
 
-    private static final String TABLE_NAME = "user";
+    private static final Logger LOGGER = LogManager.getLogger(UserDao.class);
 
-    private static final String INSERT_USER = "INSERT INTO user (username, password, role, cash, music_amount, discount) VALUES (?, MD5(?), ?, ?, ?, ?)";
-    private static final String FIND_BY_USERNAME_AND_PASSWORD = "SELECT * FROM user WHERE username = ? AND password = MD5(?)";
+    private static final String INSERT_USER = "INSERT INTO user " +
+                                              "(username, password, role, cash, music_amount, discount) " +
+                                              "VALUES (?, MD5(?), ?, ?, ?, ?)";
+    private static final String GET_BY_USERNAME_AND_PASSWORD = "SELECT * FROM user WHERE username = ? AND password = MD5(?)";
     private static final String SELECT_EXISTS = "SELECT EXISTS(SELECT * from user WHERE username = ? AND password = MD5(?))";
     private static final String UPDATE_CASH_AND_MUSIC_AMOUNT = "UPDATE user SET cash = ?, music_amount = ? WHERE id = ?";
     private static final String UPDATE_MUSIC_AMOUNT = "UPDATE user SET music_amount = ? WHERE id = ?";
@@ -21,12 +28,38 @@ public class UserDao extends AbstractDao<User> {
     private static final String UPDATE_DISCOUNT = "UPDATE user SET discount = ? WHERE id = ?";
     private static final String UPDATE_CASH = "UPDATE user SET cash = ? WHERE id = ?";
 
-    public UserDao(ProxyConnection proxyConnection) {
-        super(proxyConnection, new UserMapper(), TABLE_NAME);
+    private static final AtomicReference<UserDao> INSTANCE = new AtomicReference<>();
+    private static final AtomicBoolean IS_INSTANCE_CREATED = new AtomicBoolean();
+    private static final Lock INSTANCE_LOCK = new ReentrantLock();
+
+    private UserDao() {
+        super(new UserMapper(), User.getTableName());
     }
 
-    public Optional<User> findByUsernameAndPassword(String username, String password) throws DaoException {
-        return executeForSingleResult(FIND_BY_USERNAME_AND_PASSWORD, username, password);
+    public static UserDao getInstance() {
+        if (!IS_INSTANCE_CREATED.get()) {
+
+            INSTANCE_LOCK.lock();
+            try {
+                if (!IS_INSTANCE_CREATED.get()) {
+                    UserDao userDao = new UserDao();
+
+                    INSTANCE.set(userDao);
+                    IS_INSTANCE_CREATED.set(true);
+
+                    LOGGER.info("Created UserDao instance");
+                }
+
+            } finally {
+                INSTANCE_LOCK.unlock();
+            }
+        }
+
+        return INSTANCE.get();
+    }
+
+    public Optional<User> getByUsernameAndPassword(String username, String password) throws DaoException {
+        return executeForSingleResult(GET_BY_USERNAME_AND_PASSWORD, username, password);
     }
 
     public List<User> getAllClients() throws DaoException {
@@ -56,7 +89,8 @@ public class UserDao extends AbstractDao<User> {
     @Override
     public void save(User item) throws DaoException {
         String role = String.valueOf(item.getRole());
-        executeUpdate(INSERT_USER, item.getUsername(), item.getPassword(), role.toLowerCase(), item.getCash(), item.getMusicAmount(), item.getDiscount());
+        executeUpdate(INSERT_USER, item.getUsername(), item.getPassword(),
+                      role.toLowerCase(), item.getCash(), item.getMusicAmount(), item.getDiscount());
     }
 
 }

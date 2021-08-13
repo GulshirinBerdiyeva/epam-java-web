@@ -19,6 +19,7 @@ public class UserMapper implements Mapper<User> {
 
     @Override
     public User map(ResultSet resultSet) throws SQLException {
+
         Long id = resultSet.getLong(ID);
         String username = resultSet.getString(USERNAME);
         String password = resultSet.getString(PASSWORD);
@@ -34,6 +35,7 @@ public class UserMapper implements Mapper<User> {
 
             return User.createClient(id, username, password, cash, musicAmount, discount);
         }
+
     }
 
 }

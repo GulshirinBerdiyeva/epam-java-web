@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class Comment implements Entity{
 
+    private static final String TABLE_NAME = "comment";
+
     private Long id;
     private Long userId;
     private String username;
@@ -25,6 +27,10 @@ public class Comment implements Entity{
         this.userId = userId;
         this.musicId = musicId;
         this.comment = comment;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override

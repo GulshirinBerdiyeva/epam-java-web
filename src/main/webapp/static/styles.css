@@ -173,11 +173,12 @@ a:hover {
     height: 500px;
 }
 
-.error-wrapper h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: darkred;
-    text-align: center;
+#error-form {
+width: 100%;
+}
+
+#error-link {
+    padding-top: 20%;
 }
 
 /*index-page*/
@@ -240,9 +241,9 @@ a:hover {
 }
 
 .header-wrapper h1 {
-    padding-left: 20px;
-    padding-block-start: 10px;
-    font-size: 26px;
+    padding-left: 185px;
+    padding-block-start: 5px;
+    font-size: 36px;
     font-weight: bold;
 }
 
@@ -539,7 +540,7 @@ a:hover {
 
 /*addNewMusic-page*/
 .add-new-music form {
-    width: 500px;
+    width: 600px;
     height: 650px;
     top: 50%;
     left: 50%;

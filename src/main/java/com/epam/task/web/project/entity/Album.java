@@ -2,21 +2,27 @@ package com.epam.task.web.project.entity;
 
 public class Album implements Entity {
 
+    private static final String TABLE_NAME = "album";
+
     private Long id;
     private Long musicID;
-    private String album_title;
+    private String albumTitle;
     private Music music;
 
-    public Album(Long id, Long musicID, String album_title, Music music) {
+    public Album(Long id, Long musicID, String albumTitle, Music music) {
         this.id = id;
         this.musicID = musicID;
-        this.album_title = album_title;
+        this.albumTitle = albumTitle;
         this.music = music;
     }
 
     public Album(Long musicID, String album_title) {
         this.musicID = musicID;
-        this.album_title = album_title;
+        this.albumTitle = album_title;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override
@@ -28,8 +34,8 @@ public class Album implements Entity {
         return musicID;
     }
 
-    public String getAlbum_title() {
-        return album_title;
+    public String getAlbumTitle() {
+        return albumTitle;
     }
 
     public Music getMusic() {

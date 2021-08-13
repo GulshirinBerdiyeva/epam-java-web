@@ -19,21 +19,22 @@ public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private static final AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
-    private static AtomicBoolean isInstanceCreated = new AtomicBoolean();
+    private static final AtomicBoolean IS_INSTANCE_CREATED = new AtomicBoolean();
     private static final Lock INSTANCE_LOCK = new ReentrantLock();
 
-    private Queue<ProxyConnection> availableConnections = new ArrayDeque<>();
-    private Queue<ProxyConnection> connectionsInUse = new ArrayDeque<>();
-
-    private final Lock connectionsLock = new ReentrantLock();
-    private static final int SEMAPHORE_SIZE = 10;
-    private final Semaphore semaphore = new Semaphore(SEMAPHORE_SIZE);
-
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
+
     private static final int CONNECTIONS_AMOUNT = 10;
+
+    private static final Queue<ProxyConnection> allConnections = new ArrayDeque<>();
+    private static final AtomicBoolean IS_EMPTY = new AtomicBoolean();
+
+    private final Semaphore semaphore = new Semaphore(CONNECTIONS_AMOUNT);
+    private final Lock connectionsLock = new ReentrantLock();
 
     private ConnectionPool() {
         List<ProxyConnection> connections = new ArrayList<>();
+
         for (int i = 0; i < CONNECTIONS_AMOUNT; i++) {
             Connection connection = connectionFactory.create();
 
@@ -41,24 +42,29 @@ public class ConnectionPool {
 
             connections.add(proxyConnection);
         }
-        availableConnections.addAll(connections);
+
+        allConnections.addAll(connections);
     }
 
     public static ConnectionPool getInstance() {
-        if (!isInstanceCreated.get()) {
+        if (!IS_INSTANCE_CREATED.get()) {
+
             INSTANCE_LOCK.lock();
             try {
-                if (!isInstanceCreated.get()) {
-                    ConnectionPool pool = new ConnectionPool();
-                    INSTANCE.set(pool);
-                    isInstanceCreated.set(true);
+                if (!IS_INSTANCE_CREATED.get()) {
+                    ConnectionPool connectionPool = new ConnectionPool();
 
-                   LOGGER.info("Created ConnectionPool instance!");
+                    INSTANCE.set(connectionPool);
+                    IS_INSTANCE_CREATED.set(true);
+
+                   LOGGER.info("Created ConnectionPool instance");
                 }
+
             } finally {
                 INSTANCE_LOCK.unlock();
             }
         }
+
         return INSTANCE.get();
     }
 
@@ -67,8 +73,9 @@ public class ConnectionPool {
             semaphore.acquire();
             connectionsLock.lock();
 
-            ProxyConnection proxyConnection = availableConnections.remove();
-            connectionsInUse.add(proxyConnection);
+            ProxyConnection proxyConnection = allConnections.remove();
+
+            IS_EMPTY.set(allConnections.isEmpty());
 
             return proxyConnection;
 
@@ -82,17 +89,20 @@ public class ConnectionPool {
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
-        connectionsLock.lock();
         try {
-            if (connectionsInUse.contains(proxyConnection)) {
-                connectionsInUse.remove(proxyConnection);
-                availableConnections.add(proxyConnection);
-            }
+            connectionsLock.lock();
+
+            allConnections.add(proxyConnection);
 
         } finally {
             connectionsLock.unlock();
             semaphore.release();
         }
+
+    }
+
+    public static AtomicBoolean getIsEmpty() {
+        return IS_EMPTY;
     }
 
 }

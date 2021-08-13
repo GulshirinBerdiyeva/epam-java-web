@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class Music implements Entity{
 
+    private static final String TABLE_NAME = "music";
+
     private Long id;
     private String title;
     private String artist;
@@ -20,6 +22,10 @@ public class Music implements Entity{
         this.audioFileName = audioFileName;
         this.imageFileName = imageFileName;
         this.price = price;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override

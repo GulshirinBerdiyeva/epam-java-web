@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class User implements Entity{
 
+    private static final String TABLE_NAME = "user";
+
     private Long id;
     private String username;
     private String password;
@@ -37,6 +39,10 @@ public class User implements Entity{
         this.musicAmount = musicAmount;
         this.discount = discount;
         this.role = role;
+    }
+
+    public static String getTableName() {
+        return TABLE_NAME;
     }
 
     public static User createAdmin(Long id, String username, String password) {

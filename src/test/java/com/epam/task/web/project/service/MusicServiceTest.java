@@ -37,28 +37,28 @@ public class MusicServiceTest {
     private final PlaylistDao playlistDao = Mockito.mock(PlaylistDao.class);
 
     @Test
-    public void findMusicsBySearchParameterShouldReturnListByArtistWhenSearchParameterArtist() throws DaoException, ServiceException {
+    public void getMusicsBySearchParameterShouldReturnListByArtistWhenSearchParameterArtist() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createMusicDao()).thenReturn(musicDao);
-        when(musicDao.findMusicsByArtist(ARTIST_VALUE)).thenReturn(MUSICS_BY_ARTIST);
+        when(daoHelper.createDao("music")).thenReturn(musicDao);
+        when(musicDao.getMusicsByArtist(ARTIST_VALUE)).thenReturn(MUSICS_BY_ARTIST);
 
         //when
-        List<Music> actual = musicService.findMusicsBySearchParameter(ARTIST, ARTIST_VALUE);
+        List<Music> actual = musicService.getMusicsBySearchParameter(ARTIST, ARTIST_VALUE);
 
         //then
         Assert.assertEquals(MUSICS_BY_ARTIST, actual);
     }
 
     @Test
-    public void findMusicsBySearchParameterShouldReturnListByTitleWhenSearchParameterTitle() throws DaoException, ServiceException {
+    public void getMusicsBySearchParameterShouldReturnListByTitleWhenSearchParameterTitle() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createMusicDao()).thenReturn(musicDao);
-        when(musicDao.findMusicsByTitle(TITLE_VALUE)).thenReturn(MUSICS_BY_TITLE);
+        when(daoHelper.createDao("music")).thenReturn(musicDao);
+        when(musicDao.getMusicsByTitle(TITLE_VALUE)).thenReturn(MUSICS_BY_TITLE);
 
         //when
-        List<Music> actual = musicService.findMusicsBySearchParameter(TITLE, TITLE_VALUE);
+        List<Music> actual = musicService.getMusicsBySearchParameter(TITLE, TITLE_VALUE);
 
         //then
         Assert.assertEquals(MUSICS_BY_TITLE, actual);
@@ -68,9 +68,9 @@ public class MusicServiceTest {
     public void removeMusicByIdShouldDecreaseUserMusicAmount() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createUserDao()).thenReturn(userDao);
-        when(daoHelper.createMusicDao()).thenReturn(musicDao);
-        when(daoHelper.createPlaylistDao()).thenReturn(playlistDao);
+        when(daoHelper.createDao("user")).thenReturn(userDao);
+        when(daoHelper.createDao("music")).thenReturn(musicDao);
+        when(daoHelper.createDao("playlist")).thenReturn(playlistDao);
         doNothing().when(daoHelper).startTransaction();
         doNothing().when(daoHelper).endTransaction();
         when(playlistDao.exist(FIRST_CLIENT.getId(), FIRST_MUSIC.getId())).thenReturn(true);
@@ -90,9 +90,9 @@ public class MusicServiceTest {
     public void removeMusicByIdShouldIncreaseUserMusicAmount() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createUserDao()).thenReturn(userDao);
-        when(daoHelper.createMusicDao()).thenReturn(musicDao);
-        when(daoHelper.createPlaylistDao()).thenReturn(playlistDao);
+        when(daoHelper.createDao("user")).thenReturn(userDao);
+        when(daoHelper.createDao("music")).thenReturn(musicDao);
+        when(daoHelper.createDao("playlist")).thenReturn(playlistDao);
         doNothing().when(daoHelper).startTransaction();
         doNothing().when(daoHelper).endTransaction();
         when(playlistDao.exist(FIRST_CLIENT.getId(), FIRST_MUSIC.getId())).thenReturn(false);

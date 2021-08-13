@@ -28,28 +28,28 @@ public class CommentServiceTest {
     private final CommentDao commentDao = Mockito.mock(CommentDao.class);
 
     @Test
-    public void findCommentsByMusicIdShouldReturnListWhenMusicIdApplied() throws DaoException, ServiceException {
+    public void getCommentByMusicIdShouldReturnListWhenMusicIdApplied() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createCommentDao()).thenReturn(commentDao);
-        when(commentDao.findCommentByMusicId(MUSIC_ID)).thenReturn(COMMENTS);
+        when(daoHelper.createDao("comment")).thenReturn(commentDao);
+        when(commentDao.getCommentByMusicId(MUSIC_ID)).thenReturn(COMMENTS);
 
         //when
-        List<Comment> actual = commentService.findCommentsByMusicId(MUSIC_ID);
+        List<Comment> actual = commentService.getCommentsByMusicId(MUSIC_ID);
 
         //then
         Assert.assertFalse(actual.isEmpty());
     }
 
     @Test(expected = ServiceException.class)
-    public void findCommentsByMusicIdShouldThrowServiceException() throws DaoException, ServiceException {
+    public void getCommentByMusicIdShouldThrowServiceException() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createCommentDao()).thenReturn(commentDao);
-        when(commentDao.findCommentByMusicId(MUSIC_ID)).thenThrow(new DaoException());
+        when(daoHelper.createDao("comment")).thenReturn(commentDao);
+        when(commentDao.getCommentByMusicId(MUSIC_ID)).thenThrow(new DaoException());
 
         //when
-        List<Comment> actual = commentService.findCommentsByMusicId(MUSIC_ID);
+        List<Comment> actual = commentService.getCommentsByMusicId(MUSIC_ID);
     }
 
 }

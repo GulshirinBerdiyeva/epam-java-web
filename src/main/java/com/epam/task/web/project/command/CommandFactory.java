@@ -1,105 +1,83 @@
 package com.epam.task.web.project.command;
 
-import com.epam.task.web.project.dao.DaoHelperFactory;
-import com.epam.task.web.project.service.*;
-import com.epam.task.web.project.validator.InputParameterValidator;
-
-import javax.servlet.http.HttpServletRequest;
-
 public class CommandFactory {
 
+    private static final String LOGIN_PAGE = "/index.jsp";
     private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
-    private static final String PROFILE_PAGE = "/WEB-INF/view/profile.jsp";
-    private static final String PURCHASE_PAGE = "/WEB-INF/view/purchase.jsp";
     private static final String ADD_NEW_MUSIC_PAGE = "/WEB-INF/view/addNewMusic.jsp";
-    private static final String CREATE_ALBUM_PAGE = "/WEB-INF/view/createAlbum.jsp";
 
-    private final DaoHelperFactory daoHelperFactory = new DaoHelperFactory();
-    private final InputParameterValidator validator = new InputParameterValidator();
-    private final UserService userService;
-    private final MusicService musicService;
-    private final MusicOrderService musicOrderService;
-    private final PlaylistService playlistService;
-    private final AlbumService albumService;
-    private final CommentService commentService;
-
-    public CommandFactory() {
-        this.userService = new UserService(daoHelperFactory);
-        this.musicService = new MusicService(daoHelperFactory);
-        this.musicOrderService = new MusicOrderService(daoHelperFactory);
-        this.playlistService = new PlaylistService(daoHelperFactory);
-        this.albumService = new AlbumService(daoHelperFactory);
-        this.commentService = new CommentService(daoHelperFactory);
-    }
-
-    public Command create(String type) {
+    public Command create(String type) throws CommandException {
         if (type == null) {
-            throw new IllegalArgumentException("Invalid command for this user!");
+            throw new NullPointerException();
         }
 
         switch (type){
             case "changeLanguage":
-                return new ChangeLanguageCommand(validator);
-            case "signUpPage":
-                return new ShowPageCommand(REGISTRATION_PAGE);
-            case "signIn":
-                return new SignInCommand(userService, validator);
+                return ChangeLanguageCommand.getInstance();
+            case "loginPage":
+                ShowPageCommand showPageCommand = ShowPageCommand.getInstance();
+                showPageCommand.setPage(LOGIN_PAGE);
+                return showPageCommand;
             case "login":
-                return new LoginCommand(userService);
+                return LoginCommand.getInstance();
             case "logout":
-                return new LogoutCommand();
-            case "main":
-                return new MainCommand(musicService);
+                return LogoutCommand.getInstance();
+            case "signUpPage":
+                showPageCommand = ShowPageCommand.getInstance();
+                showPageCommand.setPage(REGISTRATION_PAGE);
+                return showPageCommand;
+            case "signIn":
+                return SignInCommand.getInstance();
+            case "mainPage":
+                return MainCommand.getInstance();
+            case "playlistPage":
+                return PlaylistCommand.getInstance();
+            case "albumsPage":
+                return AlbumsCommand.getInstance();
+            case "createAlbumPage":
+                return CreateAlbumPageCommand.getInstance();
+            case "addMusicPage":
+                showPageCommand = ShowPageCommand.getInstance();
+                showPageCommand.setPage(ADD_NEW_MUSIC_PAGE);
+                return showPageCommand;
+            case "profilePage":
+                return ProfilePageCommand.getInstance();
+            case "clientsPage":
+                return ClientsCommand.getInstance();
             case "getMusic":
-                return new GetMusicCommand(musicService);
+                return GetMusicCommand.getInstance();
             case "getResource":
-                return new GetResourceCommand(validator);
+                return GetResourceCommand.getInstance();
             case "searchMusic":
-                return new SearchMusicCommand(musicService, validator);
+                return SearchMusicCommand.getInstance();
             case "selectMusic":
-                return new SelectMusicCommand(musicService);
+                return SelectMusicCommand.getInstance();
             case "purchasePage":
-                return new ShowPageCommand(PURCHASE_PAGE);
+                return PurchasePageCommand.getInstance();
             case "buy":
-                return new BuyPurchaseCommand(userService, musicOrderService, playlistService);
+                return BuyPurchaseCommand.getInstance();
             case "confirmPurchase":
-                return new ConfirmPurchaseCommand(musicOrderService, playlistService);
+                return ConfirmPurchaseCommand.getInstance();
             case "cancelPurchase":
-                return new CancelPurchaseCommand(musicOrderService);
-            case"editMusic":
-                return new EditMusicCommand(musicService);
+                return CancelPurchaseCommand.getInstance();
             case"editPrice":
-                return new EditPriceCommand(musicService, validator);
+                return EditPriceCommand.getInstance();
             case"deleteMusic":
             case"confirmDelete":
             case"cancelDelete":
-                return new DeleteMusicCommand(musicService, userService);
-            case "playlist":
-                return new PlaylistCommand(playlistService);
-            case "albums":
-                return new AlbumsCommand(albumService);
-            case "createAlbumPage":
-                return new ShowPageCommand(CREATE_ALBUM_PAGE);
+                return DeleteMusicCommand.getInstance();
             case "albumMusics":
-                return new AlbumMusicsCommand(albumService, validator);
+                return AlbumMusicsCommand.getInstance();
             case "addAlbum":
-                return new AddAlbumCommand(albumService, validator);
+                return AddAlbumCommand.getInstance();
             case "addMusic":
-                return new AddMusicCommand(musicService, validator);
-            case "addMusicPage":
-                return new ShowPageCommand(ADD_NEW_MUSIC_PAGE);
-            case "comments":
-                return new CommentsCommand(commentService);
+                return AddMusicCommand.getInstance();
             case "createComment":
-                return new CreateCommentCommand(commentService, validator);
-            case "profilePage":
-                return new ShowPageCommand(PROFILE_PAGE);
+                return CreateCommentCommand.getInstance();
             case "fillBalance":
-                return new FillBalanceCommand(userService, validator);
-            case "clients":
-                return new ClientsCommand(userService);
+                return FillBalanceCommand.getInstance();
             case "applyDiscount":
-                return new ApplyDiscountCommand(userService, validator);
+                return ApplyDiscountCommand.getInstance();
             default:
                 throw new IllegalArgumentException("Unknown type of command! \"" + type + "\"");
         }

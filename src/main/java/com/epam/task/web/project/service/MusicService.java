@@ -2,12 +2,13 @@ package com.epam.task.web.project.service;
 
 import com.epam.task.web.project.dao.*;
 import com.epam.task.web.project.entity.Music;
+import com.epam.task.web.project.entity.Playlist;
 import com.epam.task.web.project.entity.User;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-public class MusicService {
+public class MusicService extends AbstractService<Music> {
 
     private static final String TITLE = "title";
     private static final String ARTIST = "artist";
@@ -15,10 +16,8 @@ public class MusicService {
     private static final String IMAGE_FILE = "imageFile";
     private static final String AUDIO_FILE = "audioFile";
 
-    private final DaoHelperFactory daoHelperFactory;
-
     public MusicService(DaoHelperFactory daoHelperFactory) {
-        this.daoHelperFactory = daoHelperFactory;
+        super(daoHelperFactory, Music.getTableName());
     }
 
     public Music createMusic(Map<String, String> musicValues) {
@@ -33,85 +32,65 @@ public class MusicService {
         return music;
     }
 
-    public void saveMusic(Music music) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
+    public Optional<Music> getMusicByArtistAndTitle(String artist, String title) throws ServiceException {
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
 
-            musicDao.save(music);
+            MusicDao musicDao = (MusicDao) daoHelper.createDao(getDaoType());
+
+            return musicDao.getMusicByArtistAndTitle(artist, title);
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
-    public List<Music> getAllMusics() throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
+    public List<Music> getMusicsBySearchParameter(String searchParameter, String value) throws ServiceException {
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
 
-            return musicDao.getAll();
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public Optional<Music> getMusicById(Long id) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
-
-            return musicDao.getById(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public Optional<Music> findMusicByArtistAndTitle(String artist, String title) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
-
-            return musicDao.findMusicByArtistAndTitle(artist, title);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public List<Music> findMusicsBySearchParameter(String searchParameter, String value) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
+            MusicDao musicDao = (MusicDao) daoHelper.createDao(getDaoType());
 
             if (ARTIST.equals(searchParameter)) {
-                return musicDao.findMusicsByArtist(value);
+                return musicDao.getMusicsByArtist(value);
             } else {
-                return musicDao.findMusicsByTitle(value);
+                return musicDao.getMusicsByTitle(value);
             }
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public void updatePriceById(Long id, BigDecimal price) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
+
+            MusicDao musicDao = (MusicDao) daoHelper.createDao(getDaoType());
 
             musicDao.updatePriceById(id, price);
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public void updateMusic(Music music) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            MusicDao musicDao = daoHelper.createMusicDao();
+        try (DaoHelper daoHelper = getDaoHelperFactory().create()) {
+
+            MusicDao musicDao = (MusicDao) daoHelper.createDao(getDaoType());
 
             musicDao.updateMusic(music);
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public void removeMusicById(List<User> allClients, Long musicId) throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            UserDao userDao = daoHelper.createUserDao();
-            MusicDao musicDao = daoHelper.createMusicDao();
-            PlaylistDao playlistDao = daoHelper.createPlaylistDao();
+        DaoHelper daoHelper = getDaoHelperFactory().create();
+
+        try {
+            UserDao userDao = (UserDao) daoHelper.createDao(User.getTableName());
+            MusicDao musicDao = (MusicDao) daoHelper.createDao(getDaoType());
+            PlaylistDao playlistDao = (PlaylistDao) daoHelper.createDao(Playlist.getTableName());
 
             daoHelper.startTransaction();
 
@@ -120,16 +99,26 @@ public class MusicService {
                 int musicAmount = client.getMusicAmount();
 
                 boolean exist = playlistDao.exist(clientId, musicId);
+
                 if (exist) {
                     int newMusicAmount = musicAmount - 1;
                     client.setMusicAmount(newMusicAmount);
                     userDao.updateMusicAmountById(clientId, newMusicAmount);
                 }
             }
+
             musicDao.removeById(musicId);
 
             daoHelper.endTransaction();
+
         } catch (DaoException e) {
+
+            try {
+                daoHelper.rollback();
+            } catch (DaoException daoException) {
+                throw new ServiceException(daoException);
+            }
+
             throw new ServiceException(e);
         }
     }

@@ -1,28 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.epam.task.web.project.entity.Role" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.button.edit" var="buttonEdit" />
-<fmt:message bundle="${local}" key="local.button.buy" var="buttonBuy" />
-<fmt:message bundle="${local}" key="local.error.message.existInPlaylist" var="existInPlaylist" />
-<fmt:message bundle="${local}" key="local.error.message.notEnoughMoney" var="notEnoughMoney" />
-<fmt:message bundle="${local}" key="local.error.message.paid" var="paid" />
-<fmt:message bundle="${local}" key="local.currency.unit" var="currencyUnit" />
-<fmt:message bundle="${local}" key="local.button.confirm" var="buttonConfirm" />
-<fmt:message bundle="${local}" key="local.button.cancel" var="buttonCancel" />
-<fmt:message bundle="${local}" key="local.placeholder.price" var="price" />
-<fmt:message bundle="${local}" key="local.button.editPrice" var="buttonEditPrice" />
-<fmt:message bundle="${local}" key="local.button.delete" var="buttonDelete" />
-<fmt:message bundle="${local}" key="local.error.message.invalidNumberFormat" var="invalidNumberFormat" />
-<fmt:message bundle="${local}" key="local.delete.dialog.theme" var="deleteDialogTheme" />
-<fmt:message bundle="${local}" key="local.delete.dialog.body" var="deleteDialogBody" />
-<fmt:message bundle="${local}" key="local.delete.dialog.button.cancel" var="deleteDialogButtonCancel" />
-<fmt:message bundle="${local}" key="local.delete.dialog.button.delete" var="deleteDialogButtonDelete" />
+<fmt:message bundle="${locale}" key="locale.button.edit" var="buttonEdit" />
+<fmt:message bundle="${locale}" key="locale.button.buy" var="buttonBuy" />
+<fmt:message bundle="${locale}" key="locale.error.message.existInPlaylist" var="existInPlaylist" />
+<fmt:message bundle="${locale}" key="locale.error.message.notEnoughMoney" var="notEnoughMoney" />
+<fmt:message bundle="${locale}" key="locale.currency.unit" var="currencyUnit" />
+<fmt:message bundle="${locale}" key="locale.button.confirm" var="buttonConfirm" />
+<fmt:message bundle="${locale}" key="locale.button.cancel" var="buttonCancel" />
+<fmt:message bundle="${locale}" key="locale.placeholder.price" var="price" />
+<fmt:message bundle="${locale}" key="locale.button.editPrice" var="buttonEditPrice" />
+<fmt:message bundle="${locale}" key="locale.button.delete" var="buttonDelete" />
+<fmt:message bundle="${locale}" key="locale.error.message.invalidNumberFormat" var="invalidNumberFormat" />
+<fmt:message bundle="${locale}" key="locale.delete.dialog.theme" var="deleteDialogTheme" />
+<fmt:message bundle="${locale}" key="locale.delete.dialog.body" var="deleteDialogBody" />
+<fmt:message bundle="${locale}" key="locale.delete.dialog.button.cancel" var="deleteDialogButtonCancel" />
+<fmt:message bundle="${locale}" key="locale.delete.dialog.button.delete" var="deleteDialogButtonDelete" />
+<fmt:message bundle="${locale}" key="locale.title.money" var="titleMoney" />
 
 <html>
 
@@ -42,66 +41,68 @@
 </nav>
 
 <main>
-    <c:if test="${sessionScope.selectedMusic != null}" >
+    <c:if test="${requestScope.music != null}" >
         <div class="purchase-wrapper" >
             <div id="purchase" >
                 <jsp:include page="fragments/perform.jsp" />
             </div>
+
             <div id="control" >
                 <div class="purchase-buttons">
+
                     <c:if test="${Role.ADMIN.equals(sessionScope.user.role)}" >
                         <br/>
                         <audio controls>
-                            <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${sessionScope.selectedMusic.audioFileName}" type="audio/mpeg">
+                            <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${requestScope.music.audioFileName}" type="audio/mpeg">
                         </audio>
 
-                        <form action="${pageContext.request.contextPath}/controller?command=editMusic" method="post" >
-                            <button type="submit">${buttonEdit}</button>
-                        </form>
-
-                        <c:if test="${requestScope.invalidNumberFormat}" >
+                        <c:if test="${cookie.get('invalidNumberFormat') != null}" >
                             <br/>
                             <h2 id="error-message-editPrice">${invalidNumberFormat}</h2>
                         </c:if>
 
-                        <c:if test="${requestScope.canEdit}" >
-                            <div class="editPrice-delete-wrapper">
-                                <form action="${pageContext.request.contextPath}/controller?command=editPrice" method="post" >
-                                    <div class="edit-price" >
-                                        <input type="text" name="newPrice" placeholder="${price}">
-                                        <button id="edit-price" type="submit">${buttonEditPrice}</button>
-                                    </div>
-                                </form>
+                        <div class="editPrice-delete-wrapper">
+                            <form action="${pageContext.request.contextPath}/controller?command=editPrice" method="post" >
+                                <div class="edit-price" >
+                                    <input type="text" name="newPrice" placeholder="${price}" min="1" max="6"
+                                           pattern="(([1-9]|[1-9][0-9])(\.\d{1,2})?)|100(\.0{1,2})?"
+                                           title="${titleMoney}" required>
+                                    <button id="edit-price" type="submit">${buttonEditPrice}</button>
+                                </div>
+                            </form>
 
-                                <form action="${pageContext.request.contextPath}/controller?command=deleteMusic&deleteDialog=true" method="post" >
-                                    <div class="delete-wrapper" >
-                                        <button id="delete" type="submit">${buttonDelete}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </c:if>
+                            <form action="${pageContext.request.contextPath}/controller?command=deleteMusic&deleteDialog=true" method="post" >
+                                <div class="delete-wrapper" >
+                                    <button id="delete" type="submit">${buttonDelete}</button>
+                                </div>
+                            </form>
+                        </div>
                     </c:if>
 
+
                     <c:if test="${Role.CLIENT.equals(sessionScope.user.role)}" >
-                        <c:if test="${!requestScope.payed}" >
+
+                        <c:if test="${!requestScope.payed && !requestScope.canBuy}" >
                             <form action="${pageContext.request.contextPath}/controller?command=buy" method="post" >
                                 <button type="submit">${buttonBuy}</button>
                             </form>
                         </c:if>
 
-                        <c:if test="${requestScope.existInPlaylist}" >
+                        <c:if test="${requestScope.payed}">
+                            <br/>
+                            <audio controls>
+                                <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${requestScope.music.audioFileName}" type="audio/mpeg">
+                            </audio>
+                        </c:if>
+
+                        <c:if test="${cookie.get('existInPlaylist').value != null}" >
                             <br/>
                             <h2 id="error-message-editPrice">${existInPlaylist}</h2>
                         </c:if>
 
-                        <c:if test="${requestScope.notEnoughMoney}" >
+                        <c:if test="${cookie.get('notEnoughMoney').value != null}" >
                             <br/>
                             <h2 id="error-message-editPrice">${notEnoughMoney}</h2>
-                        </c:if>
-
-                        <c:if test="${requestScope.paid}" >
-                            <br/>
-                            <h2 id="error-message-editPrice">${paid}</h2>
                         </c:if>
 
                         <c:if test="${requestScope.canBuy}">
@@ -110,11 +111,11 @@
                                 <table class="music-text-inform">
                                     <tr>
                                         <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=discount.jpg" align="absmiddle" ></th>
-                                        <th><h2>${sessionScope.musicOrder.discount}</h2></th>
+                                        <th><h2><c:out value="${requestScope.discount} %" /></h2></th>
                                     </tr>
                                     <tr>
                                         <th><img src="${pageContext.request.contextPath}/controller?command=getResource&type=icon&fileName=cost.jpg" align="absmiddle" ></th>
-                                        <th><h2>${currencyUnit} ${sessionScope.finalPrice}</h2></th>
+                                        <th><h2><c:out value="${currencyUnit} ${requestScope.finalPrice}" /></h2></th>
                                     </tr>
                                 </table>
                             </div>
@@ -129,19 +130,11 @@
                                 </form>
                             </div>
                         </c:if>
-
-                        <c:if test="${requestScope.payed}">
-                            <br/>
-                            <audio controls>
-                                <source src="${pageContext.request.contextPath}/controller?command=getResource&type=music&fileName=${sessionScope.selectedMusic.audioFileName}" type="audio/mpeg">
-                            </audio>
-                        </c:if>
-
                     </c:if>
                 </div>
             </div>
 
-            <c:if test="${requestScope.canDelete}" >
+            <c:if test="${cookie.get('canDelete').value != null}" >
                 <div class="delete-dialog">
                     <h1>${deleteDialogTheme}</h1>
                     <br/>

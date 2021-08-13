@@ -40,9 +40,9 @@ public class MusicOrderServiceTest {
     public void confirmMusicOrderShouldReturnTrueAfterPaymentTransactionWhenParametersApplied() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createUserDao()).thenReturn(userDao);
-        when(daoHelper.createMusicOrderDao()).thenReturn(musicOrderDao);
-        when(daoHelper.createPlaylistDao()).thenReturn(playlistDao);
+        when(daoHelper.createDao("user")).thenReturn(userDao);
+        when(daoHelper.createDao("music_order")).thenReturn(musicOrderDao);
+        when(daoHelper.createDao("playlist")).thenReturn(playlistDao);
         doNothing().when(daoHelper).startTransaction();
         doNothing().when(daoHelper).endTransaction();
         doNothing().when(userDao).updateCashAndMusicAmountById(CLIENT);
@@ -61,9 +61,9 @@ public class MusicOrderServiceTest {
     public void confirmMusicOrderShouldThrowServiceException() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createUserDao()).thenReturn(userDao);
-        when(daoHelper.createMusicOrderDao()).thenReturn(musicOrderDao);
-        when(daoHelper.createPlaylistDao()).thenReturn(playlistDao);
+        when(daoHelper.createDao("user")).thenReturn(userDao);
+        when(daoHelper.createDao("music_order")).thenReturn(musicOrderDao);
+        when(daoHelper.createDao("playlist")).thenReturn(playlistDao);
         doNothing().when(daoHelper).startTransaction();
         doNothing().when(daoHelper).endTransaction();
         doNothing().when(userDao).updateCashAndMusicAmountById(CLIENT);

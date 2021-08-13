@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.title.order.music" var="orderMusic" />
-<fmt:message bundle="${local}" key="local.heading.music" var="music" />
-<fmt:message bundle="${local}" key="local.button.logout" var="buttonLogout"/>
+<fmt:message bundle="${locale}" key="locale.title.order.music" var="orderMusic" />
+<fmt:message bundle="${locale}" key="locale.heading.music" var="music" />
+<fmt:message bundle="${locale}" key="locale.button.logout" var="buttonLogout"/>
 
 <html>
 
@@ -22,51 +22,32 @@
 <div class="header-wrapper">
     <h1>${music}</h1>
 
-    <c:if test="${(sessionScope.user == null) && (sessionScope.currentPage ne '/WEB-INF/view/registration.jsp')}" >
-        <div class="russian">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button style="right: 0px" name="language" value="russian" type="submit" />
-            </form>
-        </div>
-
-        <div class="france">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button style="right: 35px" name="language" value="france" type="submit" />
-            </form>
-        </div>
-
-        <div class="english">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button style="right: 70px" name="language" value="english" type="submit" />
-            </form>
-        </div>
-    </c:if>
-
-    <c:if test="${(sessionScope.user != null) || (sessionScope.currentPage eq '/WEB-INF/view/registration.jsp')}" >
+    <c:if test="${sessionScope.user != null}" >
         <div class="logout">
             <form action="${pageContext.request.contextPath}/controller?command=logout" method="post" >
                 <button type="submit">${buttonLogout}</button>
             </form>
         </div>
-
-        <div class="russian">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button name="language" value="russian" type="submit" />
-            </form>
-        </div>
-
-        <div class="france">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button  name="language" value="france" type="submit" />
-            </form>
-        </div>
-
-        <div class="english">
-            <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
-                <button name="language" value="english" type="submit" />
-            </form>
-        </div>
     </c:if>
+
+    <div class="russian">
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button name="locale" value="ru" type="submit" />
+        </form>
+    </div>
+
+    <div class="france">
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button  name="locale" value="fr" type="submit" />
+        </form>
+    </div>
+
+    <div class="english">
+        <form action="${pageContext.request.contextPath}/controller?command=changeLanguage" method="post" >
+            <button name="locale" value="en" type="submit" />
+        </form>
+    </div>
+
 </div>
 
 </body>

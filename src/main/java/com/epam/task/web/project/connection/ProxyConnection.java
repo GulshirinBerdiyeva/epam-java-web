@@ -8,16 +8,11 @@ import java.util.concurrent.Executor;
 public class ProxyConnection implements Connection {
 
     private Connection connection;
-    private ConnectionPool pool;
+    private final ConnectionPool pool;
 
     public ProxyConnection(Connection connection, ConnectionPool pool) {
         this.connection = connection;
         this.pool = pool;
-    }
-
-    @Override
-    public Statement createStatement() throws SQLException {
-        return connection.createStatement();
     }
 
     @Override
@@ -46,6 +41,22 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
+    public boolean isClosed() throws SQLException {
+        return connection.isClosed();
+    }
+
+    public void close(boolean close) throws SQLException {
+        if (close && connection != null) {
+            connection.close();
+        }
+    }
+
+    @Override
+    public Statement createStatement() throws SQLException {
+        return connection.createStatement();
+    }
+
+    @Override
     public CallableStatement prepareCall(String sql) throws SQLException {
         return connection.prepareCall(sql);
     }
@@ -58,11 +69,6 @@ public class ProxyConnection implements Connection {
     @Override
     public boolean getAutoCommit() throws SQLException {
         return connection.getAutoCommit();
-    }
-
-    @Override
-    public boolean isClosed() throws SQLException {
-        return connection.isClosed();
     }
 
     @Override

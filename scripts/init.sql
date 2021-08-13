@@ -2,7 +2,7 @@ CREATE DATABASE order_music;
 
 CREATE TABLE user (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(25),
+    username VARCHAR(30),
     password VARCHAR(32),
     role ENUM('admin', 'client'),
     cash DECIMAL(9,2),
@@ -13,8 +13,8 @@ CREATE TABLE user (
 
 CREATE TABLE music (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(50),
-    artist VARCHAR(25),
+    title VARCHAR(40),
+    artist VARCHAR(30),
     audio_file_name VARCHAR(50),
     image_file_name VARCHAR(50),
     price DECIMAL(9,2)
@@ -45,7 +45,7 @@ CREATE TABLE album (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     music_id BIGINT,
     FOREIGN KEY(music_id) REFERENCES music(id) ON DELETE CASCADE,
-    album_title VARCHAR(25)
+    album_title VARCHAR(40)
 );
 
 CREATE TABLE comment (

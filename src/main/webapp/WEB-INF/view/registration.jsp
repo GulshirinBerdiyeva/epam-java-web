@@ -2,17 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.title.order.music" var="orderMusic" />
-<fmt:message bundle="${local}" key="local.placeholder.username" var="username" />
-<fmt:message bundle="${local}" key="local.placeholder.password" var="password" />
-<fmt:message bundle="${local}" key="local.signUp" var="signUp" />
-<fmt:message bundle="${local}" key="local.button.signIn" var="buttonSignIn" />
-<fmt:message bundle="${local}" key="local.error.message.errorSignIn" var="errorSignIn" />
-<fmt:message bundle="${local}" key="local.error.message.enterInputParameters" var="enterInputParameters" />
-
+<fmt:message bundle="${locale}" key="locale.placeholder.username" var="username" />
+<fmt:message bundle="${locale}" key="locale.placeholder.password" var="password" />
+<fmt:message bundle="${locale}" key="locale.signUp" var="signUp" />
+<fmt:message bundle="${locale}" key="locale.button.signIn" var="buttonSignIn" />
+<fmt:message bundle="${locale}" key="locale.error.message.errorSignIn" var="errorSignIn" />
+<fmt:message bundle="${locale}" key="locale.error.message.enterInputParameters" var="enterInputParameters" />
+<fmt:message bundle="${locale}" key="locale.login.page" var="loginPage" />
+<fmt:message bundle="${locale}" key="locale.title.name" var="titleName" />
+<fmt:message bundle="${locale}" key="locale.title.password" var="titlePassword" />
 <html>
 
 <head>
@@ -41,12 +42,23 @@
         </c:if>
 
         <br/>
-        <input type="text" name="username" placeholder="${username}" />
+        <input type="text" name="username" placeholder="${username}" min="2" max="61"
+               pattern="[A-ZА-ЯЁ][a-zа-яё]{1,30}( [A-ZА-ЯЁ][a-zа-яё]{1,30})?"
+               title="${titleName}" required />
         <br/>
         <br/>
-        <input type="password" name="password" placeholder="${password}" />
+        <input type="password" name="password" placeholder="${password}" min="8" max="20"
+               pattern="(?=.*[A-ZА-ЯЁ])(?=.*[a-zа-яё])(?=.*\d)[\wА-Яа-яЁё]{8,20}"
+               title="${titlePassword}" required />
+
         <button type="submit">${buttonSignIn}</button>
+
+        <div>
+            <a href="${pageContext.request.contextPath}/controller?command=logout" >${loginPage}</a>
+        </div>
     </form>
+
+
 </main>
 
 </body>

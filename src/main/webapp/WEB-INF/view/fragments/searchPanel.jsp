@@ -2,12 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="local" var="local" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="locale" var="locale" />
 
-<fmt:message bundle="${local}" key="local.placeholder.search.musicByTitle" var="musicByTitle"/>
-<fmt:message bundle="${local}" key="local.placeholder.search.musicByArtist" var="musicByArtist"/>
-<fmt:message bundle="${local}" key="local.button.search" var="buttonSearch" />
+<fmt:message bundle="${locale}" key="locale.placeholder.search.musicByTitle" var="musicByTitle"/>
+<fmt:message bundle="${locale}" key="locale.placeholder.search.musicByArtist" var="musicByArtist"/>
+<fmt:message bundle="${locale}" key="locale.button.search" var="buttonSearch" />
+<fmt:message bundle="${locale}" key="locale.title.musicTitle" var="musicTitle" />
+<fmt:message bundle="${locale}" key="locale.title.name" var="titleName" />
 
 <html>
 
@@ -22,11 +24,19 @@
     <div class="search-wrapper">
         <form action="${pageContext.request.contextPath}/controller?command=searchMusic" method="post" >
             <div id="left-search" class="search-input-button-wrapper" >
-                <input type="text" name="artist" placeholder="${musicByArtist}" />
-                <button id="search-button" type="submit">${buttonSearch}</button>
+                <input type="text" name="artist" placeholder="${musicByArtist}" min="2" max="61"
+                       pattern="[A-ZА-ЯЁ][a-zа-яё]{1,30}( [A-ZА-ЯЁ][a-zа-яё]{1,30})?"
+                       title="${titleName}" required />
+
+                <button id="search-button" type="submit" >${buttonSearch}</button>
             </div>
+        </form>
+        <form action="${pageContext.request.contextPath}/controller?command=searchMusic" method="post" >
             <div id="right-search" class="search-input-button-wrapper" >
-                <input type="text" name="title" placeholder="${musicByTitle}" />
+                <input type="text" name="title" placeholder="${musicByTitle}" min="3" max="40"
+                       pattern="(?=.*[A-Za-zА-Яа-яЁё])(?=.*[A-Za-zА-Яа-яЁё])[\wА-Яа-яЁё ']{3,40}"
+                       title="${musicTitle}" required />
+
                 <button id="search-button2" type="submit">${buttonSearch}</button>
             </div>
         </form>

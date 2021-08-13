@@ -21,7 +21,6 @@ public class AlbumServiceTest {
     private static final Album FIRST_ALBUM_MUSIC = new Album(1L, FIRST_MUSIC.getId(), ALBUM_TITLE, FIRST_MUSIC);
     private static final Album SECOND_ALBUM_MUSIC = new Album(2L, SECOND_MUSIC.getId(), ALBUM_TITLE, SECOND_MUSIC);
     private static final List<Album> ALBUMS = Arrays.asList(FIRST_ALBUM_MUSIC, SECOND_ALBUM_MUSIC);
-    private static final List<Music> MUSICS = Arrays.asList(FIRST_MUSIC, SECOND_MUSIC);
 
     private final DaoHelperFactory daoHelperFactory = Mockito.mock(DaoHelperFactory.class);
     private final AlbumService albumService = new AlbumService(daoHelperFactory);
@@ -29,28 +28,28 @@ public class AlbumServiceTest {
     private final AlbumDao albumDao = Mockito.mock(AlbumDao.class);
 
     @Test
-    public void getAllMusicsByAlbumTitleShouldReturnListWhenMusicIdApplied() throws DaoException, ServiceException {
+    public void getAllByAlbumTitleShouldReturnListWhenAlbumTitleApplied() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createAlbumDao()).thenReturn(albumDao);
+        when(daoHelper.createDao("album")).thenReturn(albumDao);
         when(albumDao.getAllByAlbumTitle(ALBUM_TITLE)).thenReturn(ALBUMS);
 
         //when
-        List<Music> actual = albumService.getAllMusicsByAlbumTitle(ALBUM_TITLE);
+        List<Album> actual = albumService.getAllMusicsByAlbumTitle(ALBUM_TITLE);
 
         //then
-        Assert.assertEquals(MUSICS, actual);
+        Assert.assertEquals(ALBUMS, actual);
     }
 
     @Test(expected = ServiceException.class)
-    public void findCommentsByMusicIdShouldThrowServiceException() throws DaoException, ServiceException {
+    public void getAllByAlbumTitleShouldThrowServiceException() throws DaoException, ServiceException {
         //given
         when(daoHelperFactory.create()).thenReturn(daoHelper);
-        when(daoHelper.createAlbumDao()).thenReturn(albumDao);
+        when(daoHelper.createDao("album")).thenReturn(albumDao);
         when(albumDao.getAllByAlbumTitle(ALBUM_TITLE)).thenThrow(new DaoException());
 
         //when
-        List<Music> actual = albumService.getAllMusicsByAlbumTitle(ALBUM_TITLE);
+        List<Album> actual = albumService.getAllMusicsByAlbumTitle(ALBUM_TITLE);
     }
 
 }
