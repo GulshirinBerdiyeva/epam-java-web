@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/orangery"
+        xmlns:tns="http://www.example.com/orangery"
+        elementFormDefault="qualified">
+
+
+    <element name="plant" type="tns:Plant" />
+    <element name="rosacea" type="tns:Rosacea" substitutionGroup="tns:plant" />
+
+
+    <element name="orangery">
+            <complexType>
+                    <sequence>
+                        <element ref="tns:plant" minOccurs="2" maxOccurs="unbounded" />
+                    </sequence>
+            </complexType>
+    </element>
+
+
+    <complexType name="Plant">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="visual-parameters" type="tns:PlantVisualParameters" />
+        </sequence>
+        <attribute name="id" use="required">
+            <simpleType>
+                <restriction base="ID">
+                    <pattern value="[pr]\d{1,2}" />
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+
+
+    <complexType name="PlantVisualParameters">
+        <sequence>
+            <element name="color" type="string" />
+            <element name="floral-parts" type="positiveInteger" />
+            <element name="length" type="positiveInteger" />
+        </sequence>
+    </complexType>
+
+    
+    <complexType name="Rosacea">
+        <complexContent>
+            <extension base="tns:Plant">
+                <attribute name="thorns" type="boolean" use="optional" default="false" />
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+</schema>

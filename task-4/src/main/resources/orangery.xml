@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<orangery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.example.com/orangery"
+          xsi:schemaLocation="http://www.example.com/orangery orangery.xsd">
+
+
+    <plant id="p01">
+        <name>tulip</name>
+        <visual-parameters>
+            <color>yellow</color>
+            <floral-parts>1</floral-parts>
+            <length>20</length>
+        </visual-parameters>
+    </plant>
+
+    <plant id="p02">
+        <name>chamomile</name>
+        <visual-parameters>
+            <color>blue</color>
+            <floral-parts>7</floral-parts>
+            <length>15</length>
+        </visual-parameters>
+    </plant>
+
+    <rosacea id="r01" thorns="true">
+        <name>rose</name>
+        <visual-parameters>
+            <color>red</color>
+            <floral-parts>5</floral-parts>
+            <length>50</length>
+        </visual-parameters>
+    </rosacea>
+
+    <rosacea id="r02">
+        <name>spirea</name>
+        <visual-parameters>
+            <color>white</color>
+            <floral-parts>7</floral-parts>
+            <length>100</length>
+        </visual-parameters>
+    </rosacea>
+
+</orangery>
