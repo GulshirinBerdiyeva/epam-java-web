@@ -1,0 +1,904 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+a {
+    color: #eefbfb;
+}
+
+a:hover {
+    background-color: firebrick;
+}
+
+.main-body,
+.search-body,
+.playlist-body {
+    background-color: #12232e;
+    color: #eefbfb;
+}
+
+.clients-header h2,
+.albumTitle-button-wrapper h2,
+#error-message-editPrice {
+    text-align: center;
+    font-size: 20px;
+    color: red;
+}
+
+.login-form input,
+.search-input-button-wrapper input,
+.comments-wrapper input,
+.add-new-music input,
+.profile-input-button-wrapper input,
+.edit-price input,
+.albumTitle-button-wrapper input,
+.discount-wrapper-input-button input {
+    outline: none;
+    border: 2px solid #eefbfb;
+}
+
+.login-form input,
+.add-new-music input {
+    padding: 15px 10px;
+    width: 80%;
+    margin-left: 2.4em;
+    font-size: 24px;
+    border-radius: 20px;
+}
+
+.login-form button,
+.logout button,
+.signIn button,
+.description button,
+.search-wrapper button,
+.purchase-buttons button,
+.comments-wrapper button,
+.profile-input-button-wrapper button,
+.albums button,
+.albumTitle-button-wrapper button,
+.discount-wrapper-input-button button,
+#edit-price,
+#delete,
+#cancel-delete,
+#confirm-delete,
+#submit {
+    font-weight: bold;
+    cursor: pointer;
+    color: #eefbfb;
+}
+
+.login-form button:hover,
+.logout button:hover,
+.signIn button:hover,
+.description button:hover,
+.search-wrapper button:hover,
+.purchase-buttons button:hover,
+.comments-wrapper button:hover,
+.profile-input-button-wrapper button:hover,
+.albums button:hover,
+.albumTitle-button-wrapper button:hover,
+.discount-wrapper-input-button button:hover,
+#edit-price:hover,
+#delete:hover,
+#cancel-delete:hover,
+#confirm-delete:hover,
+#submit:hover {
+    background-color: firebrick;
+}
+
+.login-form button,
+#submit {
+    margin-top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: relative;
+    width: 55%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 22px;
+    background-color: #4da8da;
+}
+
+.logout button,
+.signIn button {
+    top: 15%;
+    right: 0;
+    width: 180px;
+    height: 30px;
+    position: absolute;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #12232e;
+}
+
+.purchase-wrapper,
+.search-body,
+.add-new-music,
+.album-main {
+    padding-top: 50px;
+    padding-left: 200px;
+}
+
+.comments-wrapper input,
+.profile-input-button-wrapper input,
+.edit-price input,
+.albumTitle-button-wrapper input,
+.discount-wrapper-input-button input {
+    height: 50px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-wrapper button,
+.profile-input-button-wrapper button,
+.edit-price button,
+.albumTitle-button-wrapper button,
+#edit-price,
+#delete,
+#cancel-delete,
+#confirm-delete {
+    width: 70px;
+    height: 50px;
+    position: absolute;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 10px;
+    background-color: #12232e;
+}
+
+.clients-header h1,
+.albumTitle-button-wrapper h1{
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.profile-wrapper hr,
+.add-new-music hr {
+    background-color: #12232e;
+    height: 10px;
+}
+
+/*error-page*/
+.error-wrapper {
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 500px;
+}
+
+#error-form {
+width: 100%;
+}
+
+#error-link {
+    padding-top: 20%;
+}
+
+/*index-page*/
+.login-form {
+    width: 470px;
+    height: 520px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.login-form {
+    border-radius: 25px;
+    background-color: #203647;
+}
+
+.login-form h1 {
+    margin: 40px 0;
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.login-form h2 {
+    font-size: 20px;
+    color: red;
+    text-align: center;
+}
+
+.login-form div {
+    top: 50px;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.login-form a {
+    color: #4da8da;
+}
+
+.login-form a:hover {
+    background-color: #203647;
+    color: #eefbfb;
+}
+
+/*header-page*/
+.header-wrapper {
+    width: 100%;
+    height: 50px;
+    display: block;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #007cc7;
+}
+
+.header-wrapper h1 {
+    padding-left: 185px;
+    padding-block-start: 5px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.russian button,
+.france button,
+.english button {
+    top: 20%;
+    width: 30px;
+    height: 25px;
+    border: 20px;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.russian button {
+    right: 185px;
+    background: url("https://cdn.countryflags.com/thumbs/russia/flag-400.png") no-repeat center;
+    background-size: 30px;
+}
+
+.france button {
+    right: 220px;
+    background: url("https://cdn.countryflags.com/thumbs/france/flag-400.png") no-repeat center;
+    background-size: 30px;
+}
+
+.english button {
+    right: 255px;
+    background: url("https://cdn.countryflags.com/thumbs/united-kingdom/flag-400.png") no-repeat center;
+    background-size: 40px;
+}
+
+/*menu-page*/
+.menu-wrapper {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 2;
+    top: 50px;
+    left: 0;
+    background-color: #203647;
+}
+
+.menu-wrapper a {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/*musicSlider-page*/
+.slide-body {
+    padding-top: 230px;
+    padding-left: 200px;
+}
+
+.slide-wrapper {
+    margin-top: 110px;
+    width: 500px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-30%, -50%);
+}
+
+.slide {
+    width: 90%;
+    height: 80%;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    margin: auto;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.description {
+    position:absolute;
+    top: 0;
+    left:0;
+    bottom:0;
+    right:0;
+    color: #007cc7;
+    background:rgba(255,255,255, 0.7);
+    display:none;
+}
+
+.description h2 {
+    padding-top: 40%;
+    size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.description button {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #007cc7;
+    font-size: 18px;
+}
+
+.slide:hover .description {
+    display: block;
+}
+
+.pagination {
+    height: 50px;
+    width: 80%;
+    background-color: #4da8da;
+    border-radius: 40px;
+    box-shadow: 2px 2px 7px rgba(0,0,0,0.2), -2px -2px 7px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.pagination a {
+    margin: 5px 10px 5px 20px;
+    display: flex;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#current{
+    color: firebrick;
+}
+
+.pagination a:hover {
+    background-color: #4da8da;
+    color: firebrick;
+    font-size: 22px;
+}
+
+/*perform-page*/
+.music-inform-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #4da8da;
+}
+
+.music-inform-wrapper figure {
+    width: 100%;
+    height: 63%;
+}
+
+.music-inform-wrapper img {
+    width: 100%;
+    height: 100%;
+    margin-top: 2%;
+    object-fit: contain;
+}
+
+.music-inform-wrapper .music-text-inform {
+    margin-top: 2%;
+    margin-left: 4%;
+    height: 33%;
+}
+
+.music-text-inform img,
+.currency-selection img {
+    width: 50px;
+    height: 50px;
+}
+
+/*comments-page*/
+.comments-wrapper {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #4da8da;
+}
+
+.comments-wrapper form {
+    width: 100%;
+    margin-left: 13%;
+}
+
+.comments-wrapper input {
+    width: 65%;
+    font-size: 20px;
+}
+
+.comments-wrapper button {
+    width: 60px;
+    height: 50px;
+    position: absolute;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 10px;
+    background-color: #12232e;
+}
+
+.comments-wrapper h1 {
+    padding-top: 2%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.comments {
+    width: 95%;
+    height: 40%;
+    margin-top: 10px;
+    margin-left: 2%;
+    overflow-y: scroll;
+}
+
+.comments-wrapper h5 {
+    text-transform: lowercase;
+}
+
+.comments-wrapper h4 {
+    text-transform: uppercase;
+    margin-top: 5px;
+    color: #203647;
+}
+
+.comments-wrapper h2 {
+    font-weight: bold;
+    text-align: center;
+    color: #12232e;
+}
+
+.comments-wrapper hr {
+    width: 90%;
+    margin: auto;
+}
+
+/*searchPanel-page*/
+.search-wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    background-color: #4da8da;
+}
+
+.search-input-button-wrapper {
+    width: 40%;
+}
+
+.search-input-button-wrapper input {
+    width: calc(100% - 70px);
+    height: 50px;
+    font-size: 16px;
+}
+
+#search-button,
+#search-button2 {
+    font-size: 13px;
+}
+
+.profile-input-button-wrapper {
+    width: 100%;
+    height: 50px;
+    margin-top: 5%;
+    margin-left: 6%;
+}
+
+.search-main h2 {
+    text-align: center;
+    size: 18px;
+}
+
+#left-search {
+    float: left;
+    margin-left: 20px;
+}
+
+#right-search {
+    float: right;
+    margin-right: 20px;
+}
+
+.main-search {
+    padding-left: 200px;
+    padding-top: 50px;
+}
+
+/*addNewMusic-page*/
+.add-new-music form {
+    width: 600px;
+    height: 650px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-30%, -45%);
+    border-radius: 25px;
+    background-color: #4da8da;
+}
+
+.add-new-music h1 {
+    text-align: center;
+    margin: auto;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+.add-new-music input {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#submit {
+    margin: auto;
+    margin-top: 50px;
+    background-color: #12232e;
+}
+
+/*albums-page*/
+.create-album-input-button {
+    width: calc(100% - 70px);
+    padding-top: 10px;
+    text-align: center;
+}
+
+.table-wrapper {
+    padding-top: 240px;
+    width: 100%;
+    height: 100%;
+    text-align: -webkit-center;
+}
+
+.table {
+    width: 95%;
+    background-color: #203647;
+    color: black;
+}
+
+#table-thead {
+    color: #eefbfb;
+}
+
+#thead-number {
+    width: 40px;
+    height: 50px;
+    align-self: center;
+}
+
+#body-number {
+    width: 50px;
+    height: 50px;
+    align-self: center;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #eefbfb;
+    width: 80px;
+    height: 80px;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #4da8da;
+    width: 80px;
+    height: 80px;
+}
+
+#table-column {
+    width: 320px;
+}
+
+.discount-wrapper-input-button {
+    width: 75%;
+}
+
+.discount-wrapper-input-button input {
+    border-color: #12232e;
+    width: 85%;
+}
+
+.discount-wrapper-input-button button {
+    width: 60px;
+    height: 50px;
+    position: absolute;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 10px;
+    background-color: #12232e;
+}
+
+.albumTitle-button-wrapper {
+    width: calc(100% - 200px);
+    height: 200px;
+    position: fixed;
+    background: #4da8da;
+    z-index: 1;
+}
+
+.albumTitle-button-wrapper input {
+    width: 300px;
+    font-size: 18px;
+}
+
+#checkbox-input {
+    transform: scale(2);
+}
+
+.albums {
+    width: calc(100% - 200px);
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.albums button {
+    width: 100%;
+    height: 100%;
+    background-color: #4da8da;
+    border-width: 10px;
+    border-radius: 100px;
+    border-color: #203647;
+    font-size: 50px;
+}
+
+/*clients-page*/
+.clients-header {
+    width: calc(100% - 200px);
+    height: 150px;
+    z-index: 1;
+    position: fixed;
+    background-color: #4da8da;
+}
+
+/*playlist-page*/
+.playlist-body {
+    box-sizing: border-box;
+}
+
+.container .music-container {
+    padding-top: 50px;
+    padding-left: 150px;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.container .music-container .box {
+    height: 15rem;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background: #4da8da;
+    border-radius: 1rem;
+    box-shadow: 0 .5rem 1rem #000;
+    overflow: hidden;
+    margin: 2rem;
+}
+
+.container .music-container .box .image {
+    height: 100%;
+    width: 25%;
+}
+
+.container .music-container .box .image img {
+    height: 100%;
+    width: 100%;
+}
+
+.container .music-container .box .music {
+    width: 70%;
+    margin: auto;
+}
+
+.container .music-container .box .music audio {
+    width: 100%;
+    outline: none;
+}
+
+.music h2 {
+    text-align: center;
+}
+
+/*profile-page*/
+.profile-wrapper {
+    width: 500px;
+    height: 550px;
+    padding-top: 30px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-30%, -50%);
+    border-radius: 25px;
+    background-color: #4da8da;
+}
+
+.profile-wrapper h1 {
+    padding-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.profile-wrapper table {
+    width: 100%;
+    margin-top: 5%;
+}
+
+#profile img {
+    margin-bottom: 20px;
+}
+
+.profile-input-button-wrapper input {
+    width: 70%;
+    height: 50px;
+    font-size: 16px;
+}
+
+.profile-input-button-wrapper button {
+    width: 18%;
+    height: 50px;
+    font-size: 12px;
+}
+
+/*purchase-page*/
+.purchase-wrapper{
+    width: calc(100% - 200px);
+    height: calc(100% - 50px);
+}
+
+#purchase {
+    height: 70%;
+    width: 40%;
+    float: left;
+    margin-top: 2%;
+    margin-left: 8%;
+}
+
+#control {
+    height: 70%;
+    width: 40%;
+    float: right;
+    margin-top: 2%;
+    margin-right: 8%;
+}
+
+.delete-dialog {
+    width: 40%;
+    height: 28%;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -45%);
+    border-radius: 10px;
+    position: absolute;
+    text-align: center;
+    background-color: #203647;
+}
+
+.delete-dialog h1 {
+    margin-top: 20px;
+}
+
+#comment {
+    width: 84%;
+    height: 45%;
+    float: left;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 8%;
+}
+
+.purchase-buttons {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #4da8da;
+}
+
+.purchase-table {
+    text-align: -webkit-center;
+}
+
+.purchase-buttons audio {
+    width: 80%;
+}
+
+.purchase-buttons button {
+    width: 140px;
+    height: 50px;
+    margin-top: 2%;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #12232e;
+}
+
+.confirm-cancel,
+.editPrice-delete-wrapper {
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.edit-price {
+    float: left;
+    width: 34%;
+}
+
+#edit-price,
+#delete {
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+#delete,
+#cancel-delete,
+#confirm-delete {
+    border-radius: 10px;
+}
+
+#cancel-delete {
+    margin-left: -120px;
+    width: 100px;
+    font-size: 14px;
+}
+
+#confirm-delete {
+    margin-left: 20px;
+    width: 100px;
+    font-size: 14px;
+}
+
+.delete-wrapper {
+    float: right;
+    width: 66%;
+}
+
+.edit-price input {
+    margin-top: 20px;
+    width: 85%;
+    font-size: 18px;
+}
+
+#confirm {
+    float: left;
+    margin-left: 40px;
+}
+
+#cancel {
+    float: right;
+    margin-right: 40px
+}
